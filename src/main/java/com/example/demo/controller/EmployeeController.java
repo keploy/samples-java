@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +38,7 @@ public class EmployeeController {
     //save employee
     @PostMapping("employees")
     public Employee createEmployee(@RequestBody Employee employee) {
+        employee.setTimestamp(Instant.now().getEpochSecond());
         return this.employeeRepository.save(employee);
     }
 
@@ -46,6 +50,7 @@ public class EmployeeController {
         employee.setEmail(employeeDetails.getEmail());
         employee.setFirstName(employeeDetails.getFirstName());
         employee.setLastName(employeeDetails.getLastName());
+        employee.setTimestamp(Instant.now().getEpochSecond());
 
         return ResponseEntity.ok(this.employeeRepository.save(employee));
     }

@@ -1,6 +1,9 @@
 package com.example.demo.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "employees")
@@ -16,16 +19,19 @@ public class Employee {
     private String lastName;
     @Column(name = "email")
     private String email;
+    @Column(name = "timestamp")
+    private long timestamp;
 
     public Employee() {
         super();
     }
 
-    public Employee(String firstName, String lastName, String email) {
+    public Employee(String firstName, String lastName, String email, long timestamp) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.timestamp = timestamp;
     }
 
     public long getId() {
@@ -58,5 +64,13 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
