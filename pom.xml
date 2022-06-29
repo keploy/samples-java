@@ -19,11 +19,11 @@
     <dependencies>
 
         <!--        Sample POC -->
-<!--                <dependency>-->
-<!--                    <groupId>com.gkrosx</groupId>-->
-<!--                    <artifactId>filter_dependency</artifactId>-->
-<!--                    <version>0.0.1-SNAPSHOT</version>-->
-<!--                </dependency>-->
+        <!--                <dependency>-->
+        <!--                    <groupId>com.gkrosx</groupId>-->
+        <!--                    <artifactId>filter_dependency</artifactId>-->
+        <!--                    <version>0.0.1-SNAPSHOT</version>-->
+        <!--                </dependency>-->
 
         <!--        Sample POC-->
         <!--Might delete later-->
@@ -87,24 +87,30 @@
         <!--            <version>1.0.0-SNAPSHOT</version>-->
         <!--            <scope>compile</scope>-->
         <!--        </dependency>-->
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>java-dotenv</artifactId>
+            <version>5.2.2</version>
+        </dependency>
 
-                <dependency>
-                    <groupId>io.keploy</groupId>
-                    <artifactId>java-sdk-core</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
-                </dependency>
+        <dependency>
+            <groupId>io.keploy</groupId>
+            <artifactId>java-sdk-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
 
-                <dependency>
-                    <groupId>io.keploy</groupId>
-                    <artifactId>java-sdk-api</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
-                </dependency>
+        <dependency>
+            <groupId>io.keploy</groupId>
+            <artifactId>java-sdk-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
 
-                <dependency>
-                    <groupId>io.keploy</groupId>
-                    <artifactId>java-sdk-integration</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
-                </dependency>
+        <dependency>
+            <groupId>io.keploy</groupId>
+            <artifactId>java-sdk-integration</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

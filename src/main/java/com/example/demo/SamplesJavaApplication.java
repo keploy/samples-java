@@ -1,17 +1,15 @@
 package com.example.demo;
-//import io.keploy.regression.KeployInstance;
-//import io.keploy.regression.keploy.AppConfig;
-//import io.keploy.regression.keploy.Config;
-//import io.keploy.regression.keploy.Keploy;
-//import io.keploy.regression.keploy.ServerConfig;
-//import io.keploy.servlet.middleware;
+
 //import com.gkrosx.filter_dependency.middleware;
 
+import io.github.cdimascio.dotenv.Dotenv;
+import io.keploy.grpc.GrpcClient;
 import io.keploy.regression.KeployInstance;
 import io.keploy.regression.keploy.AppConfig;
 import io.keploy.regression.keploy.Config;
 import io.keploy.regression.keploy.Keploy;
 import io.keploy.regression.keploy.ServerConfig;
+import io.keploy.regression.mode;
 import io.keploy.servlet.middleware;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,10 +31,21 @@ public class SamplesJavaApplication {
         cfg.setServer(serverConfig);
         kp.setCfg(cfg);
         ki.setKeploy(kp);
-        middleware md = new middleware();
 
+        GrpcClient grpcClient = new GrpcClient();
 
+        Dotenv dotenv = Dotenv.load();
         SpringApplication.run(SamplesJavaApplication.class, args);
+
+        if (kp != null && dotenv.get("KEPLOY_MODE") != null && (dotenv.get("KEPLOY_MODE")).equals(new mode().getMode().MODE_TEST.getTypeName())) {
+            try {
+                grpcClient.Test();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
     }
 
 }
