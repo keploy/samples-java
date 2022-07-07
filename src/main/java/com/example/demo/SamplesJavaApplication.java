@@ -32,21 +32,19 @@ public class SamplesJavaApplication {
         kp.setCfg(cfg);
         ki.setKeploy(kp);
 
-        GrpcClient grpcClient = new GrpcClient();
-
-        Dotenv dotenv = Dotenv.load();
         SpringApplication.run(SamplesJavaApplication.class, args);
 
-        if (kp != null && dotenv.get("KEPLOY_MODE") != null && (dotenv.get("KEPLOY_MODE")).equals(new mode().getMode().MODE_TEST.getTypeName())) {
+        GrpcClient grpcClient = new GrpcClient();
+        Dotenv dotenv = Dotenv.load();
+
+        if (kp != null && dotenv.get("KEPLOY_MODE") != null && (dotenv.get("KEPLOY_MODE")).equals(mode.ModeType.MODE_TEST.getTypeName())) {
             try {
                 grpcClient.Test();
             } catch (Exception e) {
+                System.out.println("can not run test mode");
                 throw new RuntimeException(e);
             }
         }
-
-
     }
-
 }
 
