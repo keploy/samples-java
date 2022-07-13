@@ -111,6 +111,11 @@
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.keploy</groupId>
+            <artifactId>java-sdk-models</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -141,6 +146,14 @@
             <scope>provided</scope>
             <type>zip</type>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.5</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -149,27 +162,28 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${project.parent.version}</version>
-<!--            </plugin>    -->
-<!--                <configuration>-->
-<!--                    <jvmArguments>${argLine}</jvmArguments>-->
-<!--                </configuration>-->
-                <executions>
-                    <execution>
-                        <id>start-spring-boot</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop-spring-boot</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
+            <!--                comment -->
+            <!--                <configuration>-->
+            <!--                    <jvmArguments>${argLine}</jvmArguments>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>start-spring-boot</id>-->
+            <!--                        <phase>pre-integration-test</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>start</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                    <execution>-->
+            <!--                        <id>stop-spring-boot</id>-->
+            <!--                        <phase>post-integration-test</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>stop</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -195,21 +209,20 @@
                     </execution>
                 </executions>
             </plugin>
-<!--        Added jacoco plugin for coverage-->
+            <!--        Added jacoco plugin for coverage-->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.5</version>
                 <executions>
                     <execution>
-                        <id>default-prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>default-report</id>
-                        <phase>verify</phase>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
