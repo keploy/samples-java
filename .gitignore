@@ -174,7 +174,9 @@ Temporary Items
 # Ignore all local history of files
 .history
 .ionide
-
+.env
+target/springbootapp-0.0.1-SNAPSHOT.jar
+target/springbootapp-0.0.1-SNAPSHOT.jar.original
 # Support for Project snippet scope
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,jetbrains,visualstudiocode
