@@ -33,7 +33,7 @@
         <dependency>
             <groupId>io.keploy</groupId>
             <artifactId>keploy-sdk</artifactId>
-            <version>0.0.12</version>
+            <version>1.0.12</version>
         </dependency>
 
         <!--        deployed-->
