@@ -9,14 +9,14 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Getter @Setter
-
+@Getter
+@Setter
 @Table(name = "employees")
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private long id;
+    private long id;
 
     @Column(name = "first_name")
     private String firstName;
