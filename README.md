@@ -102,6 +102,7 @@ If not present, you can add ``SampleJavaApplication_Test.java`` in the test modu
                   public void TestKeploy() throws InterruptedException {
 
                      CountDownLatch countDownLatch = HaltThread.getInstance().getCountDownLatch();
+                     mode.setTestMode();
 
                      new Thread(() -> {
                          SamplesJavaApplication.main(new String[]{""});

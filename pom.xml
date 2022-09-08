@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.3.22</version>
+            <version>5.3.19</version>
         </dependency>
 
         <dependency>
@@ -30,12 +30,18 @@
         </dependency>
 
         <!--        local-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.keploy</groupId>-->
+        <!--            <artifactId>keploy-sdk</artifactId>-->
+        <!--            <version>0.0.1-SNAPSHOT</version>-->
+        <!--        </dependency>-->
+
+        <!--        deployed-->
         <dependency>
             <groupId>io.keploy</groupId>
             <artifactId>keploy-sdk</artifactId>
             <version>1.0.12</version>
         </dependency>
-
 
 
         <dependency>
@@ -61,12 +67,6 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.newrelic.agent.java</groupId>
             <artifactId>newrelic-java</artifactId>
             <version>7.7.0</version>
@@ -76,9 +76,14 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>5.3.22</version>
+            <version>5.3.21</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -161,6 +166,63 @@
                     </execution>
                 </executions>
             </plugin>
+
+
+            <!--            2nd plugin  (baeldung)  -->
+            <!--            <plugin>-->
+            <!--                <groupId>org.jacoco</groupId>-->
+            <!--                <artifactId>jacoco-maven-plugin</artifactId>-->
+            <!--                <version>0.8.5</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <goals>-->
+            <!--                            <goal>prepare-agent</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                    <execution>-->
+            <!--                        <id>report</id>-->
+            <!--                        <phase>prepare-package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>report</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+
+
+            <!--            3rd plugin-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.jacoco</groupId>-->
+            <!--                <artifactId>jacoco-maven-plugin</artifactId>-->
+            <!--                <version>0.8.5</version>-->
+            <!--                <configuration>-->
+            <!--                    <address>localhost</address>-->
+            <!--                    <destFile>home/gouravkumar/IdeaProjects/Demo-App-Java/target/jacoco.exec</destFile>-->
+            <!--                    <port>6300</port>-->
+            <!--                    <reset>false</reset>-->
+            <!--                    <append>true</append>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <phase>post-integration-test</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>dump</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                    <execution>-->
+            <!--                        <id>jacoco-report</id>-->
+            <!--                        <phase>verify</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>report</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <dataFile>home/gouravkumar/IdeaProjects/Demo-App-Java/target/jacoco.exec</dataFile>-->
+            <!--                            <outputDirectory>home/gouravkumar/IdeaProjects/Demo-App-Java/target/my-report-->
+            <!--                            </outputDirectory>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
         </plugins>
 
     </build>
