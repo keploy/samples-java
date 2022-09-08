@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.3.19</version>
+            <version>5.3.22</version>
         </dependency>
 
         <dependency>
@@ -30,11 +30,11 @@
         </dependency>
 
         <!--        local-->
-        <!--        <dependency>-->
-        <!--            <groupId>io.keploy</groupId>-->
-        <!--            <artifactId>keploy-sdk</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--        </dependency>-->
+<!--                <dependency>-->
+<!--                    <groupId>io.keploy</groupId>-->
+<!--                    <artifactId>keploy-sdk</artifactId>-->
+<!--                    <version>0.0.1-SNAPSHOT</version>-->
+<!--                </dependency>-->
 
         <!--        deployed-->
         <dependency>
@@ -47,24 +47,29 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>42.5.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${project.parent.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.newrelic.agent.java</groupId>
@@ -73,10 +78,12 @@
             <scope>provided</scope>
             <type>zip</type>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>5.3.21</version>
+            <version>5.3.22</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -166,63 +173,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
-            <!--            2nd plugin  (baeldung)  -->
-            <!--            <plugin>-->
-            <!--                <groupId>org.jacoco</groupId>-->
-            <!--                <artifactId>jacoco-maven-plugin</artifactId>-->
-            <!--                <version>0.8.5</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <goals>-->
-            <!--                            <goal>prepare-agent</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                    <execution>-->
-            <!--                        <id>report</id>-->
-            <!--                        <phase>prepare-package</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>report</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
-
-
-            <!--            3rd plugin-->
-            <!--            <plugin>-->
-            <!--                <groupId>org.jacoco</groupId>-->
-            <!--                <artifactId>jacoco-maven-plugin</artifactId>-->
-            <!--                <version>0.8.5</version>-->
-            <!--                <configuration>-->
-            <!--                    <address>localhost</address>-->
-            <!--                    <destFile>home/gouravkumar/IdeaProjects/Demo-App-Java/target/jacoco.exec</destFile>-->
-            <!--                    <port>6300</port>-->
-            <!--                    <reset>false</reset>-->
-            <!--                    <append>true</append>-->
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <phase>post-integration-test</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>dump</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                    <execution>-->
-            <!--                        <id>jacoco-report</id>-->
-            <!--                        <phase>verify</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>report</goal>-->
-            <!--                        </goals>-->
-            <!--                        <configuration>-->
-            <!--                            <dataFile>home/gouravkumar/IdeaProjects/Demo-App-Java/target/jacoco.exec</dataFile>-->
-            <!--                            <outputDirectory>home/gouravkumar/IdeaProjects/Demo-App-Java/target/my-report-->
-            <!--                            </outputDirectory>-->
-            <!--                        </configuration>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
         </plugins>
 
     </build>
