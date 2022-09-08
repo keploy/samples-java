@@ -13,13 +13,6 @@ values (4, 'Shashank', 'Pandey', 'sp@gmail.com', 1661500960);
 insert into employees
 values (5, 'Akshit', 'Taneja', 'at@gmail.com', 1661501190);
 
-insert into freshers
-values (1, 2022, 'GouravKumar');
-insert into freshers
-values (3, 2023, 'Nitin');
-insert into freshers
-values (5, 2022, 'Raj');
 
 
 SELECT pg_catalog.setval(pg_get_serial_sequence('employees', 'id'), MAX(id)) FROM employees;
-SELECT pg_catalog.setval(pg_get_serial_sequence('freshers', 'id'), MAX(id)) FROM freshers;
