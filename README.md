@@ -88,8 +88,8 @@ Now, let's see the magic! 🪄💫
 
 There are 2 ways to test the application with Keploy.
 
-1. [Unit Test File](/docs/java/run-your-first-app-tutorial#testing-using-unit-test-file)
-2. [KEPLOY_MODE environment variable](/docs/java/run-your-first-app-tutorial#testing-using-keploy_mode-env-variable)
+1. [Unit Test File](https://docs.keploy.io/docs/java/run-your-first-app-tutorial#testing-using-unit-test-file)
+2. [KEPLOY_MODE environment variable](https://docs.keploy.io/docs/java/run-your-first-app-tutorial#testing-using-keploy_mode-env-variable)
 
 ### Testing using Unit Test File
 
@@ -200,7 +200,7 @@ export KEPLOY_MODE=test
 Now simply run the application either by ide or using command:
 
 ```shell
-mvn spring-boot:run 
+mvn test
 ```
 
 Keploy will run all the captures test-cases, compare and show the results on the console.
