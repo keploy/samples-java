@@ -1,6 +1,6 @@
 
 delete from employees;
-delete from freshers;
+
 
 insert into employees
 values (1, 'Gourav', 'Kumar', 'gkrosx@gmail.com', 1661500330);
