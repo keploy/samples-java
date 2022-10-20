@@ -1,5 +1,5 @@
 import com.example.demo.SamplesJavaApplication;
-import io.keploy.regression.mode;
+import io.keploy.regression.Mode;
 import io.keploy.utils.HaltThread;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ public class SamplesJavaApplication_Test {
     public void TestKeploy() throws InterruptedException {
 
         CountDownLatch countDownLatch = HaltThread.getInstance().getCountDownLatch();
-        mode.setTestMode();
+        Mode.setTestMode();
 
         new Thread(() -> {
             SamplesJavaApplication.main(new String[]{""});
