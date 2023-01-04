@@ -8,12 +8,22 @@ A sample Employee-Manager app to test Keploy integration capabilities using [Spr
 
 ## Installation
 
-### Start keploy server
+### Start keploy server (macOS)
 
 ```shell
-git clone https://github.com/keploy/keploy.git && cd keploy
-docker-compose up
+curl --silent --location "https://github.com/keploy/keploy/releases/latest/download/keploy_darwin_all.tar.gz" | tar xz -C /tmp
+
+sudo mv /tmp/keploy /usr/local/bin && keploy
 ```
+### Start keploy server (Linux)
+
+```shell
+curl --silent --location "https://github.com/keploy/keploy/releases/latest/download/keploy_linux_amd64.tar.gz" | tar xz -C /tmp
+
+
+sudo mv /tmp/keploy /usr/local/bin && keploy
+```
+
 
 ### Setup Employee-Manager App
 
@@ -118,7 +128,7 @@ To automatically download and run the captured test-cases. Let's run the test-fi
 
 2. To get test coverage, in addition to above follow below instructions.
 
-           3. Add maven-surefire-plugin to your *pom.xml*.
+3. Add maven-surefire-plugin to your *pom.xml*.
 
               ```xml 
                    <plugin>
@@ -136,7 +146,8 @@ To automatically download and run the captured test-cases. Let's run the test-fi
                        </configuration>
                    </plugin>
               ```  
-         - 4. Add Jacoco plugin to your *pom.xml*.
+4. Add Jacoco plugin to your *pom.xml*.
+
                ```xml
                     <plugin>
                        <groupId>org.jacoco</groupId>
@@ -173,7 +184,8 @@ To automatically download and run the captured test-cases. Let's run the test-fi
                        </executions>
                    </plugin>
                ```
-           5. Run your tests using command : `mvn test`.
+
+5. Run your tests using command : `mvn test`.
 
 It will create .html files as test-reports which can be found in your target folder !!
 
