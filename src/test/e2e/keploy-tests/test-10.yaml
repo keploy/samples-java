@@ -1,0 +1,36 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-10
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate, br
+            cache-control: no-cache
+            connection: keep-alive
+            content-length: "103"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: PostmanRuntime/7.29.2
+        body: "{\n    \"firstName\": \"Trent\",\n    \"lastName\": \"Boult\",  \n    \"email\": \"mt@gmail.com\",\n    \"timestamp\":1\n}"
+    resp:
+        status_code: 200
+        header: {}
+        body: '{"id":8,"firstName":"Trent","lastName":"Boult","email":"mt@gmail.com","timestamp":1671974006}'
+        status_message: OK
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - test-10-0
+    assertions:
+        noise:
+            - body.timestamp
+    created: 1671974006
