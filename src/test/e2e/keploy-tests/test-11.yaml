@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-11
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate, br
+            cache-control: no-cache
+            connection: keep-alive
+            content-length: "103"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: PostmanRuntime/7.29.2
+        body: ""
+    resp:
+        status_code: 200
+        header: {}
+        body: '[{"id":1,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671896801},{"id":2,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671896805},{"id":3,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671897026},{"id":4,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671897029},{"id":5,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671897896},{"id":6,"firstName":"Tom","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671898758},{"id":7,"firstName":"mom","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671901970},{"id":8,"firstName":"Trent","lastName":"Boult","email":"mt@gmail.com","timestamp":1671974006}]'
+        status_message: OK
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - test-11-0
+    assertions:
+        noise: []
+    created: 1671974030

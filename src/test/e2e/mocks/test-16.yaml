@@ -1,0 +1,17 @@
+version: api.keploy.io/v1beta1
+kind: SQL
+name: test-16-0
+spec:
+    metadata:
+        getColumnCount: "5"
+        method: close()
+    type: TABLE
+    table:
+        cols:
+            - name: id
+              type: Long
+              precision: 1
+              scale: 5
+        rows:
+            - '[`12`]'
+    int: 0

@@ -30,20 +30,17 @@
         </dependency>
 
         <!--        local-->
-<!--                <dependency>-->
-<!--                    <groupId>io.keploy</groupId>-->
-<!--                    <artifactId>keploy-sdk</artifactId>-->
-<!--                    <version>0.0.1-SNAPSHOT</version>-->
-<!--                </dependency>-->
-
-        <!--        deployed-->
         <dependency>
             <groupId>io.keploy</groupId>
             <artifactId>keploy-sdk</artifactId>
-            <version>1.1.1</version>
+            <version>1.2.2</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.7.1</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -90,6 +87,12 @@
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc5</artifactId>
+            <version>11.2.0.4</version>
         </dependency>
     </dependencies>
 
