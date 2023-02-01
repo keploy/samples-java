@@ -90,7 +90,7 @@ If you're using Keploy cloud, open [this](https://app.keploy.io/testlist).
 
 You should be seeing an app named `myApp` with the test cases we just captured.
 
-![testcases](https://raw.githubusercontent.com/keploy/samples-java/main/src/main/resources/TEstCases.png)
+![testcases](https://i.imgur.com/rhNndcF.png)
 
 Now, let's see the magic! 🪄💫
 
@@ -198,7 +198,7 @@ Go to the Keploy Console TestRuns Page to get deeper insights on what testcases 
 
 ![testruns](https://raw.githubusercontent.com/keploy/samples-java/blob/main/src/main/resources/AllTestPass_outer.png "Recent testruns")
 
-![testruns](https://raw.githubusercontent.com/keploy/samples-java/main/src/main/resources/AllTestPass_inner.png "Summary")
+![testruns](https://i.imgur.com/tg6OT0n.png "Summary")
 
 
 ### Testing using `KEPLOY_MODE` Env Variable
@@ -263,6 +263,6 @@ You'll notice the failed test-case in the output.
 
 To deep dive the problem go to [test runs](http://localhost:8081/testruns)
 
-![testruns](https://raw.githubusercontent.com/keploy/samples-java/main/src/main/resources/OneFail-1.png "Recent testruns")
+![testruns](https://i.imgur.com/qwP8r4d.png "Recent testruns")
 
-![testruns](https://raw.githubusercontent.com/keploy/samples-java/main/src/main/resources/OneFail-3.png "Detail")
+
