@@ -110,8 +110,8 @@ Now, let's see the magic! 🪄💫
 
 There are 2 ways to test the application with Keploy.
 
-1. [Unit Test File](https://docs.keploy.io/docs/java/run-your-first-app-tutorial#testing-using-unit-test-file)
-2. [KEPLOY_MODE environment variable](https://docs.keploy.io/docs/java/run-your-first-app-tutorial#testing-using-keploy_mode-env-variable)
+1. [Unit Test File](/README.md#testing-using-unit-test-file)
+2. [KEPLOY_MODE environment variable](/README.md#testing-using-keploy_mode-env-variable)
 
 ### Testing using Unit Test File
 
