@@ -6,44 +6,57 @@ A sample Employee-Manager app to test Keploy integration capabilities using [Spr
 
 - [Java 8+](https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.installing)
 
-## Installation
+## Installation Setup
 
-### Start keploy server (macOS)
+Note that Testcases are exported as files in the local repository by default
+
+<details>
+<summary>Mac</summary>
 
 ```shell
 curl --silent --location "https://github.com/keploy/keploy/releases/latest/download/keploy_darwin_all.tar.gz" | tar xz -C /tmp
 
-sudo mv /tmp/keploy /usr/local/bin && keploy
+sudo mv /tmp/keploy /usr/local/bin
+
+# start keploy with default settings
+keploy
 ```
-### Start keploy server (Linux)
+
+</details>
+
+<details>
+<summary>Linux</summary>
 
 ```shell
 curl --silent --location "https://github.com/keploy/keploy/releases/latest/download/keploy_linux_amd64.tar.gz" | tar xz -C /tmp
 
+sudo mv /tmp/keploy /usr/local/bin 
 
-sudo mv /tmp/keploy /usr/local/bin && keploy
+# start keploy with default settings
+keploy
 ```
 
+</details>
 
-### Setup Employee-Manager App
+
+
+
+## Setup Employee-Manager App
 
 ```bash
-git clone https://github.com/keploy/samples-java 
-```
+git clone https://github.com/keploy/samples-java && cd samples-java
 
-### Start PostgreSQL instance
-```bash
+# Start PostgreSQL instance
 docker-compose up -d
-```
 
-### Maven clean install
-```shell
+# Maven clean install
 mvn clean install 
-```
-### Run the application
 
-```shell
+# Run the application
 mvn spring-boot:run 
+
+# run the sample app in record mode
+export KEPLOY_MODE=record && mvn spring-boot:run 
 ```
 
 
@@ -51,7 +64,7 @@ mvn spring-boot:run
 
 To generate testcases we just need to **make some API calls.** You can use [Postman](https://www.postman.com/), [Hoppscotch](https://hoppscotch.io/), or simply `curl`
 
-### 1. Make an employee entry
+- ### Make an employee entry
 
 ```bash
 curl --location --request POST 'http://localhost:8080/api/employees' \
@@ -76,21 +89,20 @@ this will return the resonse or an entry . The timestamp would automatically be 
 }
 ```
 
-### 2. Fetch recorded info about employees
+- ### Fetch recorded info about employees
 
+1. By using Curl Command
 ```bash
 curl --location --request GET 'http://localhost:8080/api/employees/1'
-
 ```
 
-or by querying through the browser `http://localhost:8080/api/employees/1`
+2. Or by querying through the browser `http://localhost:8080/api/employees/1`
 
-Now both these API calls were captured as a testcase and should be visible on the [Keploy console](http://localhost:8081/testlist).
-If you're using Keploy cloud, open [this](https://app.keploy.io/testlist).
-
-You should be seeing an app named `myApp` with the test cases we just captured.
+Now both these API calls were captured as **editable** testcases and written to `test/e2e/keploy-tests` folder. The keploy directory would also have `mocks` folder. 
 
 ![testcases](https://i.imgur.com/rhNndcF.png)
+
+
 
 Now, let's see the magic! 🪄💫
 
@@ -108,89 +120,87 @@ Now that we have our testcase captured, run the unit test file (``SampleJavaAppl
 If not present, you can add ``SampleJavaApplication_Test.java`` in the test module of your sample application.
 
 ```java
-                  @Test
-                  public void TestKeploy() throws InterruptedException {
+    @Test
+    public void TestKeploy() throws InterruptedException {
+        CountDownLatch countDownLatch = HaltThread.getInstance().getCountDownLatch();
+        mode.setTestMode();
 
-                     CountDownLatch countDownLatch = HaltThread.getInstance().getCountDownLatch();
-                     mode.setTestMode();
+        new Thread(() -> {
+            SamplesJavaApplication.main(new String[]{""});
+            countDownLatch.countDown();
+        }).start();
 
-                     new Thread(() -> {
-                         SamplesJavaApplication.main(new String[]{""});
-                         countDownLatch.countDown();
-                     }).start();
-
-                     countDownLatch.await();
-                  }
+        countDownLatch.await();
+    }
 
 ```
 
 To automatically download and run the captured test-cases. Let's run the test-file.
 
-2. To get test coverage, in addition to above follow below instructions.
+To get test coverage, in addition to above follow below instructions.
 
-3. Add maven-surefire-plugin to your *pom.xml*.
+1. Add maven-surefire-plugin to your *pom.xml*.
 
-              ```xml 
-                   <plugin>
-                       <groupId>org.apache.maven.plugins</groupId>
-                       <artifactId>maven-surefire-plugin</artifactId>
-                       <version>2.22.2</version>
-                       <configuration>
+```xml 
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.22.2</version>
+            <configuration>
 
-                   <!-- <skipTests>true</skipTests> -->
+            <!-- <skipTests>true</skipTests> -->
 
-                           <systemPropertyVariables>
-                               <jacoco-agent.destfile>target/jacoco.exec
-                               </jacoco-agent.destfile>
-                           </systemPropertyVariables>
-                       </configuration>
-                   </plugin>
-              ```  
-4. Add Jacoco plugin to your *pom.xml*.
+                <systemPropertyVariables>
+                    <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+                </systemPropertyVariables>
+            </configuration>
+        </plugin>
+```  
+2. Add Jacoco plugin to your *pom.xml*.
 
-               ```xml
-                    <plugin>
-                       <groupId>org.jacoco</groupId>
-                       <artifactId>jacoco-maven-plugin</artifactId>
-                       <version>0.8.5</version>
-                       <executions>
-                           <execution>
-                               <id>prepare-agent</id>
-                               <goals>
-                                   <goal>prepare-agent</goal>
-                               </goals>
-                           </execution>
-                           <execution>
-                               <id>report</id>
-                               <phase>prepare-package</phase>
-                               <goals>
-                                   <goal>report</goal>
-                               </goals>
-                           </execution>
-                           <execution>
-                               <id>post-unit-test</id>
-                               <phase>test</phase>
-                               <goals>
-                                   <goal>report</goal>
-                               </goals>
-                               <configuration>
-                                   <!-- Sets the path to the file which contains the execution data. -->
+```xml
+        <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.5</version>
+            <executions>
+                <execution>
+                    <id>prepare-agent</id>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>report</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>post-unit-test</id>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                    <configuration>
+                        <!-- Sets the path to the file which contains the execution data. -->
 
-                                   <dataFile>target/jacoco.exec</dataFile>
-                                   <!-- Sets the output directory for the code coverage report. -->
-                                   <outputDirectory>target/my-reports</outputDirectory>
-                               </configuration>
-                           </execution>
-                       </executions>
-                   </plugin>
-               ```
+                        <dataFile>target/jacoco.exec</dataFile>
+                        <!-- Sets the output directory for the code coverage report. -->
+                        <outputDirectory>target/my-reports</outputDirectory>
+                    </configuration>
+                </execution>
+           </executions>
+        </plugin>
+```
 
-5. Run your tests using command : `mvn test`.
+3. Run your tests using command : `mvn test`.
 
 It will create .html files as test-reports which can be found in your target folder !!
 
 
-**We got 75.3% without writing any testcases. 🎉 **
+**_We got 75.3% without writing any testcases. 🎉_**
 
 
 
@@ -201,7 +211,9 @@ Go to the Keploy Console TestRuns Page to get deeper insights on what testcases 
 ![testruns](https://i.imgur.com/tg6OT0n.png "Summary")
 
 
-### Testing using `KEPLOY_MODE` Env Variable
+
+
+### Testing using **KEPLOY_MODE** Env Variable
 
 To test using `KEPLOY_MODE` env variable, set the same to `test` mode.
 
@@ -243,14 +255,15 @@ Hibernate: select employee0_.id as id1_0_, employee0_.email as email2_0_, employ
 Now let's introduce a bug! Let's try changing something like adding some extra headers in controllers  `./EmployeeController.java` on line 35 like :
 
 ```java
-    ...
-     return ResponseEntity.ok().header("MyNewHeader","abc").body(employee);
-	...
+return ResponseEntity.ok().header("MyNewHeader","abc").body(employee);
 ```
 
 Let's run the test-file to see if Keploy catches the regression introduced.
 
-`mvn test`
+
+```shell
+mvn test
+```
 
 You'll notice the failed test-case in the output.
 
@@ -261,7 +274,7 @@ You'll notice the failed test-case in the output.
 2022-08-26 13:10:10.312  INFO 70155 --- [       Thread-1] io.keploy.service.GrpcService            : || passed overall: FALSE ||
 ```
 
-To deep dive the problem go to [test runs](http://localhost:8081/testruns)
+To deep dive the problem go to [test runs](http://localhost:6789/testruns)
 
 ![testruns](https://i.imgur.com/qwP8r4d.png "Recent testruns")
 
