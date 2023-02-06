@@ -204,9 +204,6 @@ It will create .html files as test-reports which can be found in your target fol
 
 
 
-Go to the Keploy Console TestRuns Page to get deeper insights on what testcases ran, what failed.
-
-![testruns](https://raw.githubusercontent.com/keploy/samples-java/blob/main/src/main/resources/AllTestPass_outer.png "Recent testruns")
 
 ![testruns](https://i.imgur.com/tg6OT0n.png "Summary")
 
