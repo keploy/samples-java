@@ -2,27 +2,21 @@
 
 A sample Employee-Manager app to test Keploy integration capabilities using [SpringBoot](https://spring.io) and PostgreSQL.
 
-### Pre-requisites
+## Pre-requisites
 
 - [Java 8+](https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.installing)
 
-## Installation Setup
+## Quick Installation 
 
-Note that Testcases are exported as files in the local repository by default
-
-<details>
-<summary>Mac</summary>
+### **MacOS** 
 
 ```shell
 curl --silent --location "https://github.com/keploy/keploy/releases/latest/download/keploy_darwin_all.tar.gz" | tar xz -C /tmp
 
-sudo mv /tmp/keploy /usr/local/bin
-
-# start keploy with default settings
-keploy
+sudo mv /tmp/keploy /usr/local/bin && keploy
 ```
 
-</details>
+### **Linux**
 
 <details>
 <summary>Linux</summary>
@@ -30,33 +24,110 @@ keploy
 ```shell
 curl --silent --location "https://github.com/keploy/keploy/releases/latest/download/keploy_linux_amd64.tar.gz" | tar xz -C /tmp
 
-sudo mv /tmp/keploy /usr/local/bin 
-
-# start keploy with default settings
-keploy
+sudo mv /tmp/keploy /usr/local/bin && keploy
 ```
+</details>
+
+<details>
+<summary>Linux ARM</summary>
+
+```shell
+curl --silent --location "https://github.com/keploy/keploy/releases/latest/download/keploy_linux_arm64.tar.gz" | tar xz -C /tmp
+
+sudo mv /tmp/keploy /usr/local/bin && keploy
+```
+
+The UI can be accessed at http://localhost:6789
+</details>
+
+### **Windows**
+
+<details>
+<summary>Windows</summary>
+
+
+- Download the [Keploy Windows AMD64](https://github.com/keploy/keploy/releases/latest/download/keploy_windows_amd64.tar.gz), and extract the files from the zip folder.
+
+- Run the `keploy.exe` file.
 
 </details>
 
+<details>
+<summary>Windows ARM</summary>
 
+- Download the [Keploy Windows ARM64](https://github.com/keploy/keploy/releases/latest/download/keploy_windows_arm64.tar.gz), and extract the files from the zip folder.
 
+- Run the `keploy.exe` file.
+
+</details>
+
+## Build configuration
+
+[Find the latest release](https://search.maven.org/artifact/io.keploy/keploy-sdk) of the Keploy Java SDK at maven
+central.
+
+Add *keploy-sdk* as a dependency to your *pom.xml*:
+
+    <dependency>
+      <groupId>io.keploy</groupId>
+      <artifactId>keploy-sdk</artifactId>
+      <version>N.N.N</version> (eg: 1.2.5)
+    </dependency>
+
+or to *build.gradle*:
+
+    implementation 'io.keploy:keploy-sdk:N.N.N' (eg: 1.2.5)
+
+## Usage
+
+- **For Spring based application**
+
+    Add `@Import(KeployMiddleware.class)` below `@SpringBootApplication`  in your main class.
+
+- **Run along with agent to mock external calls of your API 🤩🔥**
+
+    - Download the latest - Download the latest agent jar
+      from [here](https://search.maven.org/artifact/io.keploy/keploy-sdk/1.2.5/jar)  (eg: 1.2.5)
+
+    - Prefix `-javaagent:` with absolute classpath of agent jar (eg: `-javaagent:<your full path to agent jar>/agent-1.2.5.jar`) is possible through 3 ways:-
+
+        1. **Using Intellij :** Go to Edit Configuration-> add VM options -> paste _java agent_ edited above.
+
+        2. **Using Command Line :** 
+            ```
+            export JAVA_OPTS="$JAVA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.5.jar"
+            ```
+
+        3. **Running via Tomcat Server :** 
+            ```
+            export CATALINA_OPTS="$CATALINA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.5.jar"
+            ```
 
 ## Setup Employee-Manager App
 
 ```bash
-git clone https://github.com/keploy/samples-java && cd samples-java
+git clone https://github.com/keploy/samples-java 
+```
 
-# Start PostgreSQL instance
+### Start PostgreSQL instance
+```bash
 docker-compose up -d
+```
 
-# Maven clean install
+### Maven clean install
+```shell
 mvn clean install 
+```
+### Set KEPLOY_MODE to record 
 
-# Run the application
+```
+To record testcases use `KEPLOY_MODE` env variable and set the same to `record` mode.
+```
+
+### Run the application
+
+```shell
 mvn spring-boot:run 
-
-# run the sample app in record mode
-export KEPLOY_MODE=record && mvn spring-boot:run 
 ```
 
 
@@ -64,7 +135,7 @@ export KEPLOY_MODE=record && mvn spring-boot:run
 
 To generate testcases we just need to **make some API calls.** You can use [Postman](https://www.postman.com/), [Hoppscotch](https://hoppscotch.io/), or simply `curl`
 
-- ### Make an employee entry
+### 1. Make an employee entry
 
 ```bash
 curl --location --request POST 'http://localhost:8080/api/employees' \
@@ -77,7 +148,7 @@ curl --location --request POST 'http://localhost:8080/api/employees' \
 }'
 ```
 
-this will return the resonse or an entry . The timestamp would automatically be ignored during testing because it'll always be different.
+this will return the resonse or an entry. The timestamp would automatically be ignored during testing because it'll always be different.
 
 ```
 {
@@ -89,19 +160,17 @@ this will return the resonse or an entry . The timestamp would automatically be 
 }
 ```
 
-- ### Fetch recorded info about employees
+### 2. Fetch recorded info about employees
 
-1. By using Curl Command
 ```bash
 curl --location --request GET 'http://localhost:8080/api/employees/1'
 ```
 
-2. Or by querying through the browser `http://localhost:8080/api/employees/1`
+or by querying through the browser `http://localhost:8080/api/employees/1`
 
 Now both these API calls were captured as **editable** testcases and written to `test/e2e/keploy-tests` folder. The keploy directory would also have `mocks` folder. 
 
 ![testcases](https://i.imgur.com/rhNndcF.png)
-
 
 
 Now, let's see the magic! 🪄💫
@@ -110,10 +179,10 @@ Now, let's see the magic! 🪄💫
 
 There are 2 ways to test the application with Keploy.
 
-1. [Unit Test File](https://docs.keploy.io/docs/java/run-your-first-app-tutorial#testing-using-unit-test-file)
-2. [KEPLOY_MODE environment variable](https://docs.keploy.io/docs/java/run-your-first-app-tutorial#testing-using-keploy_mode-env-variable)
+1. [Unit Test File](/README.md#testing-using-unit-test-file)
+2. [KEPLOY_MODE environment variable](/README.md#testing-using-keploy_mode-env-variable)
 
-### Testing using Unit Test File
+### **Testing using Unit Test File**
 
 Now that we have our testcase captured, run the unit test file (``SampleJavaApplication_Test.java`) already present in the sample app repo.
 
@@ -135,11 +204,11 @@ If not present, you can add ``SampleJavaApplication_Test.java`` in the test modu
 
 ```
 
-To automatically download and run the captured test-cases. Let's run the test-file.
+1. To automatically download and run the captured test-cases. Let's run the test-file.
 
-To get test coverage, in addition to above follow below instructions.
+2. To get test coverage, in addition to above follow below instructions.
 
-1. Add maven-surefire-plugin to your *pom.xml*.
+3. Add maven-surefire-plugin to your *pom.xml*.
 
 ```xml 
         <plugin>
@@ -156,7 +225,7 @@ To get test coverage, in addition to above follow below instructions.
             </configuration>
         </plugin>
 ```  
-2. Add Jacoco plugin to your *pom.xml*.
+4. Add Jacoco plugin to your *pom.xml*.
 
 ```xml
         <plugin>
@@ -195,7 +264,7 @@ To get test coverage, in addition to above follow below instructions.
         </plugin>
 ```
 
-3. Run your tests using command : `mvn test`.
+5. Run your tests using command : `mvn test`.
 
 It will create .html files as test-reports which can be found in your target folder !!
 
@@ -206,14 +275,14 @@ It will create .html files as test-reports which can be found in your target fol
 
 Go to the Keploy Console TestRuns Page to get deeper insights on what testcases ran, what failed.
 
-![testruns](https://raw.githubusercontent.com/keploy/samples-java/blob/main/src/main/resources/AllTestPass_outer.png "Recent testruns")
+
 
 ![testruns](https://i.imgur.com/tg6OT0n.png "Summary")
 
 
 
 
-### Testing using **KEPLOY_MODE** Env Variable
+### **Testing using **KEPLOY_MODE** Env Variable**
 
 To test using `KEPLOY_MODE` env variable, set the same to `test` mode.
 
@@ -279,3 +348,6 @@ To deep dive the problem go to [test runs](http://localhost:6789/testruns)
 ![testruns](https://i.imgur.com/qwP8r4d.png "Recent testruns")
 
 
+**In case of any query, refer to video below,**
+
+[![java-sample](/src/main/resources/Video.png)](https://youtu.be/Ssm4TnTkbLs)
