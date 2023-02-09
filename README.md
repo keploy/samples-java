@@ -350,4 +350,5 @@ To deep dive the problem go to [test runs](http://localhost:6789/testruns)
 
 **In case of any query, refer to video below,**
 
-[![java-sample](/src/main/resources/Video.png)](https://youtu.be/Ssm4TnTkbLs)
+[![java-sample](https://user-images.githubusercontent.com/74777863/217864311-94a3dc0c-90bc-4551-aca2-87e82e3d24cb.png)](https://youtu.be/Ssm4TnTkbLs)
+
