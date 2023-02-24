@@ -264,7 +264,7 @@ If not present, you can add ``SampleJavaApplication_Test.java`` in the test modu
         </plugin>
 ```
 
-5. Run your tests using command : `mvn test`.
+5. Run your tests using command : `mvn test -DargLine="-javaagent:full/path/to/javaagent.jar"`.
 
 It will create .html files as test-reports which can be found in your target folder !!
 
@@ -293,7 +293,7 @@ export KEPLOY_MODE=test
 Now simply run the application either by ide or using command:
 
 ```shell
-mvn test
+mvn test -DargLine="-javaagent:full/path/to/javaagent.jar"
 ```
 
 Keploy will run all the captures test-cases, compare and show the results on the console.
@@ -331,7 +331,7 @@ Let's run the test-file to see if Keploy catches the regression introduced.
 
 
 ```shell
-mvn test
+mvn test -DargLine="-javaagent:full/path/to/javaagent.jar"
 ```
 
 You'll notice the failed test-case in the output.
