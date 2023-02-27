@@ -70,7 +70,7 @@ Add *keploy-sdk* as a dependency to your *pom.xml*:
     `<dependency>`
       `<groupId>`io.keploy `</groupId>`
       `<artifactId>`keploy-sdk `</artifactId>`
-      `<version>`N.N.N `</version>` (eg: 1.2.6)
+      `<version>`N.N.N `</version>` (eg: 1.2.8)
     `</dependency>`
 
 or to *build.gradle*:
@@ -85,19 +85,21 @@ or to *build.gradle*:
 - **Run along with agent to mock external calls of your API 🤩🔥**
 
   - Download the latest - Download the latest agent jar
-    from [here](https://search.maven.org/artifact/io.keploy/agent/1.2.6/jar)  (eg: 1.2.6)
-  - Prefix `-javaagent:` with absolute classpath of agent jar (eg: `-javaagent:<your full path to agent jar>/agent-1.2.6.jar`) is possible through 3 ways:-
+    from [here](https://search.maven.org/remotecontent?filepath=io/keploy/agent/1.2.8/agent-1.2.8.jar)  (eg: 1.2.8)
+
+    *Note: you can find all agent jars from [here](https://search.maven.org/artifact/io.keploy/agent/1.2.7/jar).*
+  - Prefix `-javaagent:` with absolute classpath of agent jar (eg: `-javaagent:<your full path to agent jar>/agent-1.2.8.jar`) is possible through 3 ways:-
 
     1. **Using Intellij :** Go to Edit Configuration-> add VM options -> paste _java agent_ edited above.
     2. **Using Command Line :**
 
        ```
-       export JAVA_OPTS="$JAVA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.6.jar"
+       export JAVA_OPTS="$JAVA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.8.jar"
        ```
     3. **Running via Tomcat Server :**
 
        ```
-       export CATALINA_OPTS="$CATALINA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.6.jar"
+       export CATALINA_OPTS="$CATALINA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.8.jar"
        ```
 
 ## Setup Employee-Manager App
