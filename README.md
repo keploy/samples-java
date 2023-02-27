@@ -6,9 +6,9 @@ A sample Employee-Manager app to test Keploy integration capabilities using [Spr
 
 - [Java 8+](https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.installing)
 
-## Quick Installation 
+## Quick Installation
 
-### **MacOS** 
+### **MacOS**
 
 ```shell
 curl --silent --location "https://github.com/keploy/keploy/releases/latest/download/keploy_darwin_all.tar.gz" | tar xz -C /tmp
@@ -26,6 +26,7 @@ curl --silent --location "https://github.com/keploy/keploy/releases/latest/downl
 
 sudo mv /tmp/keploy /usr/local/bin && keploy
 ```
+
 </details>
 
 <details>
@@ -38,6 +39,7 @@ sudo mv /tmp/keploy /usr/local/bin && keploy
 ```
 
 The UI can be accessed at http://localhost:6789
+
 </details>
 
 ### **Windows**
@@ -45,9 +47,7 @@ The UI can be accessed at http://localhost:6789
 <details>
 <summary>Windows</summary>
 
-
 - Download the [Keploy Windows AMD64](https://github.com/keploy/keploy/releases/latest/download/keploy_windows_amd64.tar.gz), and extract the files from the zip folder.
-
 - Run the `keploy.exe` file.
 
 </details>
@@ -56,7 +56,6 @@ The UI can be accessed at http://localhost:6789
 <summary>Windows ARM</summary>
 
 - Download the [Keploy Windows ARM64](https://github.com/keploy/keploy/releases/latest/download/keploy_windows_arm64.tar.gz), and extract the files from the zip folder.
-
 - Run the `keploy.exe` file.
 
 </details>
@@ -68,11 +67,11 @@ central.
 
 Add *keploy-sdk* as a dependency to your *pom.xml*:
 
-    <dependency>
-      <groupId>io.keploy</groupId>
-      <artifactId>keploy-sdk</artifactId>
-      <version>N.N.N</version> (eg: 1.2.6)
-    </dependency>
+    `<dependency>`
+      `<groupId>`io.keploy `</groupId>`
+      `<artifactId>`keploy-sdk `</artifactId>`
+      `<version>`N.N.N `</version>` (eg: 1.2.8)
+    `</dependency>`
 
 or to *build.gradle*:
 
@@ -82,26 +81,26 @@ or to *build.gradle*:
 
 - **For Spring based application**
 
-    Add `@Import(KeployMiddleware.class)` below `@SpringBootApplication`  in your main class.
-
+  Add `@Import(KeployMiddleware.class)` below `@SpringBootApplication`  in your main class.
 - **Run along with agent to mock external calls of your API 🤩🔥**
 
-    - Download the latest - Download the latest agent jar
-      from [here](https://search.maven.org/artifact/io.keploy/keploy-sdk/1.2.6/jar)  (eg: 1.2.6)
+  - Download the latest - Download the latest agent jar
+    from [here](https://search.maven.org/remotecontent?filepath=io/keploy/agent/1.2.8/agent-1.2.8.jar)  (eg: 1.2.8)
 
-    - Prefix `-javaagent:` with absolute classpath of agent jar (eg: `-javaagent:<your full path to agent jar>/agent-1.2.6.jar`) is possible through 3 ways:-
+    *Note: you can find all agent jars from [here](https://search.maven.org/artifact/io.keploy/agent/1.2.7/jar).*
+  - Prefix `-javaagent:` with absolute classpath of agent jar (eg: `-javaagent:<your full path to agent jar>/agent-1.2.8.jar`) is possible through 3 ways:-
 
-        1. **Using Intellij :** Go to Edit Configuration-> add VM options -> paste _java agent_ edited above.
+    1. **Using Intellij :** Go to Edit Configuration-> add VM options -> paste _java agent_ edited above.
+    2. **Using Command Line :**
 
-        2. **Using Command Line :** 
-            ```
-            export JAVA_OPTS="$JAVA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.6.jar"
-            ```
+       ```
+       export JAVA_OPTS="$JAVA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.8.jar"
+       ```
+    3. **Running via Tomcat Server :**
 
-        3. **Running via Tomcat Server :** 
-            ```
-            export CATALINA_OPTS="$CATALINA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.6.jar"
-            ```
+       ```
+       export CATALINA_OPTS="$CATALINA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.8.jar"
+       ```
 
 ## Setup Employee-Manager App
 
@@ -110,15 +109,18 @@ git clone https://github.com/keploy/samples-java
 ```
 
 ### Start PostgreSQL instance
+
 ```bash
 docker-compose up -d
 ```
 
 ### Maven clean install
+
 ```shell
 mvn clean install 
 ```
-### Set KEPLOY_MODE to record 
+
+### Set KEPLOY_MODE to record
 
 ```
 To record testcases use `KEPLOY_MODE` env variable and set the same to `record` mode.
@@ -129,7 +131,6 @@ To record testcases use `KEPLOY_MODE` env variable and set the same to `record` 
 ```shell
 mvn spring-boot:run 
 ```
-
 
 ## Generate testcases
 
@@ -168,10 +169,9 @@ curl --location --request GET 'http://localhost:8080/api/employees/1'
 
 or by querying through the browser `http://localhost:8080/api/employees/1`
 
-Now both these API calls were captured as **editable** testcases and written to `test/e2e/keploy-tests` folder. The keploy directory would also have `mocks` folder. 
+Now both these API calls were captured as **editable** testcases and written to `test/e2e/keploy-tests` folder. The keploy directory would also have `mocks` folder.
 
 ![testcases](https://i.imgur.com/rhNndcF.png)
-
 
 Now, let's see the magic! 🪄💫
 
@@ -205,12 +205,10 @@ If not present, you can add ``SampleJavaApplication_Test.java`` in the test modu
 ```
 
 1. To automatically download and run the captured test-cases. Let's run the test-file.
-
 2. To get test coverage, in addition to above follow below instructions.
-
 3. Add maven-surefire-plugin to your *pom.xml*.
 
-```xml 
+```xml
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
@@ -224,7 +222,8 @@ If not present, you can add ``SampleJavaApplication_Test.java`` in the test modu
                 </systemPropertyVariables>
             </configuration>
         </plugin>
-```  
+```
+
 4. Add Jacoco plugin to your *pom.xml*.
 
 ```xml
@@ -268,19 +267,11 @@ If not present, you can add ``SampleJavaApplication_Test.java`` in the test modu
 
 It will create .html files as test-reports which can be found in your target folder !!
 
-
 **_We got 75.3% without writing any testcases. 🎉_**
-
-
 
 Go to the Keploy Console TestRuns Page to get deeper insights on what testcases ran, what failed.
 
-
-
 ![testruns](https://i.imgur.com/tg6OT0n.png "Summary")
-
-
-
 
 ### **Testing using **KEPLOY_MODE** Env Variable**
 
@@ -297,6 +288,7 @@ mvn test
 ```
 
 Keploy will run all the captures test-cases, compare and show the results on the console.
+
 ```shell
 10b3ddd5-42fa-48e7-b98a-b47257272e39 total tests: 3
 2022-08-26 14:13:08.993  INFO 11560 --- [       Thread-4] io.keploy.service.GrpcService            : testing 1 of 3 testcase id: [ae4a6c91-712a-4566-bf0d-97d708f94b2d]
@@ -317,6 +309,7 @@ Hibernate: select employee0_.id as id1_0_, employee0_.email as email2_0_, employ
 2022-08-26 14:13:19.410  INFO 11560 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2022-08-26 14:13:19.414  INFO 11560 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 ```
+
 > **Note** : With this method coverage will not be calculated.
 
 ## Let's add a Bug in the App
@@ -328,7 +321,6 @@ return ResponseEntity.ok().header("MyNewHeader","abc").body(employee);
 ```
 
 Let's run the test-file to see if Keploy catches the regression introduced.
-
 
 ```shell
 mvn test
@@ -347,8 +339,6 @@ To deep dive the problem go to [test runs](http://localhost:6789/testruns)
 
 ![testruns](https://i.imgur.com/qwP8r4d.png "Recent testruns")
 
-
 **In case of any query, refer to video below,**
 
 [![java-sample](https://user-images.githubusercontent.com/74777863/217864311-94a3dc0c-90bc-4551-aca2-87e82e3d24cb.png)](https://youtu.be/Ssm4TnTkbLs)
-
