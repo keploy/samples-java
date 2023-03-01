@@ -1,6 +1,6 @@
 version: api.keploy.io/v1beta1
 kind: SQL
-name: test-17-0
+name: mock-1-0
 spec:
     metadata:
         getColumnCount: "5"
@@ -13,5 +13,6 @@ spec:
               precision: 0
               scale: 0
         rows:
-            - '[`13`]'
-    int: 0
+            - '[`1`]'
+    int: 1
+    error: []
