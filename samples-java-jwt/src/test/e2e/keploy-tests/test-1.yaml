@@ -10,6 +10,7 @@ spec:
         url: /login
         header:
             accept: '*/*'
+<<<<<<< HEAD:samples-java-jwt/src/test/e2e/keploy-tests/test-1.yaml
             accept-encoding: gzip, deflate, br
             cache-control: no-cache
             connection: keep-alive
@@ -19,11 +20,28 @@ spec:
             postman-token: ce6cfc32-230d-4dd0-a56f-b49aaf60d2b8
             user-agent: PostmanRuntime/7.31.1
         body: "{\r\n    \"username\": \"Reem\",\r\n    \"password\": \"keploy\"\r\n} "
+=======
+            content-length: "100"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: curl/7.86.0
+        body: |-
+            {
+                "firstName": "Myke",
+                "lastName": "Tyson",
+                "email": "mt@gmail.com",
+                "timestamp":1
+            }
+>>>>>>> a4fd12c... docs: update instructions to use java-sdk with sample application:src/test/e2e/keploy-tests/test-1.yaml
         body_type: utf-8
     resp:
         status_code: 200
         header: {}
+<<<<<<< HEAD:samples-java-jwt/src/test/e2e/keploy-tests/test-1.yaml
         body: '{"jwt":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSZWVtIiwiZXhwIjoxNjc3ODY5NzYwLCJpYXQiOjE2Nzc4MzM3NjB9.sLk-8egFc2dU9KOQlOSxlwVBRrmNUYV0ZPmxtv8QCTE"}'
+=======
+        body: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1677672085}'
+>>>>>>> a4fd12c... docs: update instructions to use java-sdk with sample application:src/test/e2e/keploy-tests/test-1.yaml
         body_type: utf-8
         status_message: OK
         proto_major: 1
@@ -31,7 +49,16 @@ spec:
     objects:
         - type: error
           data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+<<<<<<< HEAD:samples-java-jwt/src/test/e2e/keploy-tests/test-1.yaml
     assertions:
         noise:
             - body.jwt
     created: 1677833760
+=======
+    mocks:
+        - mock-1-0
+    assertions:
+        noise:
+            - body.timestamp
+    created: 1677672085
+>>>>>>> a4fd12c... docs: update instructions to use java-sdk with sample application:src/test/e2e/keploy-tests/test-1.yaml
