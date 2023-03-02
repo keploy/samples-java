@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  googleMap:
+    container_name: googleMap
+    ports:
+      - "8080:8080"
+    environment:
+      - GOOGLE_MAPS_API_KEY=your_api_key_here
