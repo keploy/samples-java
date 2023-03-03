@@ -1,0 +1,42 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-2
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /hello
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate, br
+            authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSZWVtIiwiZXhwIjoxNjc3ODY5NzYwLCJpYXQiOjE2Nzc4MzM3NjB9.sLk-8egFc2dU9KOQlOSxlwVBRrmNUYV0ZPmxtv8QCTE
+            cache-control: no-cache
+            connection: keep-alive
+            host: localhost:8080
+            postman-token: 856473b2-d341-4def-bf88-3f2152505385
+            user-agent: PostmanRuntime/7.31.1
+        body: ""
+        body_type: utf-8
+    resp:
+        status_code: 200
+        header:
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Expires: "0"
+            Pragma: no-cache
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-XSS-Protection: 1; mode=block
+        body: Welcome to Keploy!
+        body_type: utf-8
+        status_message: OK
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise:
+            - header.Cache-Control
+    created: 1677833773
