@@ -1,0 +1,37 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-1
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /login
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate, br
+            cache-control: no-cache
+            connection: keep-alive
+            content-length: "56"
+            content-type: application/json
+            host: localhost:8080
+            postman-token: ce6cfc32-230d-4dd0-a56f-b49aaf60d2b8
+            user-agent: PostmanRuntime/7.31.1
+        body: "{\r\n    \"username\": \"Reem\",\r\n    \"password\": \"keploy\"\r\n} "
+        body_type: utf-8
+    resp:
+        status_code: 200
+        header: {}
+        body: '{"jwt":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSZWVtIiwiZXhwIjoxNjc3ODY5NzYwLCJpYXQiOjE2Nzc4MzM3NjB9.sLk-8egFc2dU9KOQlOSxlwVBRrmNUYV0ZPmxtv8QCTE"}'
+        body_type: utf-8
+        status_message: OK
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise:
+            - body.jwt
+    created: 1677833760
