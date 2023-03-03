@@ -83,7 +83,7 @@ or to *build.gradle*:
 ## Usage
 - Refer [this](https://github.com/keploy/java-sdk#usage).
 
-## Setup Authintication App
+## Setup Authentication App
 
 ```bash
 git clone https://github.com/keploy/samples-java 
