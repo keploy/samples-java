@@ -22,11 +22,11 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Build samples-java-sql with Maven
       run: |
         cd ./samples-java-sql
         mvn clean install -DskipTests
-    - name: Build with Maven
+    - name: Build samples-java-jwt with Maven
       run: |
         cd ./samples-java-jwt
         mvn clean install -DskipTests
