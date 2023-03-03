@@ -1,0 +1,18 @@
+version: api.keploy.io/v1beta1
+kind: SQL
+name: mock-3-0
+spec:
+    metadata:
+        getColumnCount: "6"
+        method: close()
+    type: TABLE
+    table:
+        cols:
+            - name: id
+              type: Long
+              precision: 0
+              scale: 0
+        rows:
+            - '[`19`]'
+    int: 1
+    error: []
