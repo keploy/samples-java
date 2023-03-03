@@ -1,12 +1,13 @@
 # Example Employee-Manager App
 
-A sample Employee-Manager app to test Keploy integration capabilities using [SpringBoot](https://spring.io) and PostgreSQL.
+A sample Employee-Manager app to test Keploy integration capabilities using [SpringBoot](https://spring.io) and
+PostgreSQL.
 
 ## Pre-requisites
 
 - [Java 8+](https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.installing)
 
-## Quick Installation
+## Quick Installation of "KEPLOY" server
 
 ### **MacOS**
 
@@ -38,7 +39,6 @@ curl --silent --location "https://github.com/keploy/keploy/releases/latest/downl
 sudo mv /tmp/keploy /usr/local/bin && keploy
 ```
 
-The UI can be accessed at http://localhost:6789
 
 </details>
 
@@ -47,7 +47,9 @@ The UI can be accessed at http://localhost:6789
 <details>
 <summary>Windows</summary>
 
-- Download the [Keploy Windows AMD64](https://github.com/keploy/keploy/releases/latest/download/keploy_windows_amd64.tar.gz), and extract the files from the zip folder.
+- Download
+  the [Keploy Windows AMD64](https://github.com/keploy/keploy/releases/latest/download/keploy_windows_amd64.tar.gz), and
+  extract the files from the zip folder.
 - Run the `keploy.exe` file.
 
 </details>
@@ -55,7 +57,9 @@ The UI can be accessed at http://localhost:6789
 <details>
 <summary>Windows ARM</summary>
 
-- Download the [Keploy Windows ARM64](https://github.com/keploy/keploy/releases/latest/download/keploy_windows_arm64.tar.gz), and extract the files from the zip folder.
+- Download
+  the [Keploy Windows ARM64](https://github.com/keploy/keploy/releases/latest/download/keploy_windows_arm64.tar.gz), and
+  extract the files from the zip folder.
 - Run the `keploy.exe` file.
 
 </details>
@@ -70,35 +74,15 @@ Add *keploy-sdk* as a dependency to your *pom.xml*:
     `<dependency>`
       `<groupId>`io.keploy `</groupId>`
       `<artifactId>`keploy-sdk `</artifactId>`
-      `<version>`N.N.N `</version>` (eg: 1.2.6)
+      `<version>`N.N.N `</version>` (eg: 1.2.8)
     `</dependency>`
 
 or to *build.gradle*:
 
-    implementation 'io.keploy:keploy-sdk:N.N.N' (eg: 1.2.6)
+    implementation 'io.keploy:keploy-sdk:N.N.N' (eg: 1.2.8)
 
 ## Usage
-
-- **For Spring based application**
-
-  Add `@Import(KeployMiddleware.class)` below `@SpringBootApplication`  in your main class.
-- **Run along with agent to mock external calls of your API 🤩🔥**
-
-  - Download the latest - Download the latest agent jar
-    from [here](https://search.maven.org/artifact/io.keploy/agent/1.2.6/jar)  (eg: 1.2.6)
-  - Prefix `-javaagent:` with absolute classpath of agent jar (eg: `-javaagent:<your full path to agent jar>/agent-1.2.6.jar`) is possible through 3 ways:-
-
-    1. **Using Intellij :** Go to Edit Configuration-> add VM options -> paste _java agent_ edited above.
-    2. **Using Command Line :**
-
-       ```
-       export JAVA_OPTS="$JAVA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.6.jar"
-       ```
-    3. **Running via Tomcat Server :**
-
-       ```
-       export CATALINA_OPTS="$CATALINA_OPTS -javaagent:<your full path to agent jar>/agent-1.2.6.jar"
-       ```
+- Refer [this](https://github.com/gouravkrosx/java-sdk#usage).
 
 ## Setup Employee-Manager App
 
@@ -115,24 +99,17 @@ docker-compose up -d
 ### Maven clean install
 
 ```shell
-mvn clean install 
+mvn clean install -Dmaven.test.skip=true 
 ```
 
 ### Set KEPLOY_MODE to record
 
-```
-To record testcases use `KEPLOY_MODE` env variable and set the same to `record` mode.
-```
-
-### Run the application
-
-```shell
-mvn spring-boot:run 
-```
+- To record testcases use `KEPLOY_MODE` env variable and set the same to `record` mode.
 
 ## Generate testcases
 
-To generate testcases we just need to **make some API calls.** You can use [Postman](https://www.postman.com/), [Hoppscotch](https://hoppscotch.io/), or simply `curl`
+To generate testcases we just need to **make some API calls.** You can use [Postman](https://www.postman.com/)
+, [Hoppscotch](https://hoppscotch.io/), or simply `curl`
 
 ### 1. Make an employee entry
 
@@ -147,7 +124,8 @@ curl --location --request POST 'http://localhost:8080/api/employees' \
 }'
 ```
 
-this will return the resonse or an entry. The timestamp would automatically be ignored during testing because it'll always be different.
+this will return the response or an entry. The timestamp would automatically be ignored during testing because it'll
+always be different.
 
 ```
 {
@@ -167,7 +145,8 @@ curl --location --request GET 'http://localhost:8080/api/employees/1'
 
 or by querying through the browser `http://localhost:8080/api/employees/1`
 
-Now both these API calls were captured as **editable** testcases and written to `test/e2e/keploy-tests` folder. The keploy directory would also have `mocks` folder.
+Now both these API calls were captured as **editable** testcases and written to `test/e2e/keploy-tests` folder. The
+keploy directory would also have `mocks` folder.
 
 ![testcases](https://i.imgur.com/rhNndcF.png)
 
@@ -178,100 +157,116 @@ Now, let's see the magic! 🪄💫
 There are 2 ways to test the application with Keploy.
 
 1. [Unit Test File](/README.md#testing-using-unit-test-file)
-2. [KEPLOY_MODE environment variable](/README.md#testing-using-keploy_mode-env-variable)
+2. [Without Unit Test File](/README.md#testing-without-using-unit-test-file)
 
 ### **Testing using Unit Test File**
 
-Now that we have our testcase captured, run the unit test file (``SampleJavaApplication_Test.java`) already present in the sample app repo.
+ 
+- Set `KEPLOY_MODE = test` (default "off")
 
-If not present, you can add ``SampleJavaApplication_Test.java`` in the test module of your sample application.
+_NOTE: You will be required to set the `javaagent` again in your test profile just like below._
+
+![run_configuration](./src/main/resources/Run_Configuration.png "Run_Configuration")
+
+- Now that we have our testcase captured, run the unit test file (`SampleJavaApplication_Test.java`) already present in
+the sample app repo.
+
+- If not present, you can make and add below code in `SampleJavaApplication_Test.java` in the test module of your sample application.
 
 ```java
-    @Test
-    public void TestKeploy() throws InterruptedException {
-        CountDownLatch countDownLatch = HaltThread.getInstance().getCountDownLatch();
-        mode.setTestMode();
+   @Test
+   public void TestKeploy() throws InterruptedException {
 
-        new Thread(() -> {
-            SamplesJavaApplication.main(new String[]{""});
-            countDownLatch.countDown();
-        }).start();
+       CountDownLatch countDownLatch = HaltThread.getInstance().getCountDownLatch();
+       Mode.setTestMode();
 
-        countDownLatch.await();
-    }
+       new Thread(() -> {
+           <Your Application Class>.main(new String[]{""});
+           countDownLatch.countDown();
+       }).start();
 
+       countDownLatch.await();
+       assertTrue(AssertKTests.result(), "Keploy Test Result");
+   }
 ```
+- **Using IDE:**  _(for local use-case we prefer running tests via IDE)_
+  1. Run your application.
+  2. You can also run the application with coverage to see the test coverage.
 
-1. To automatically download and run the captured test-cases. Let's run the test-file.
-2. To get test coverage, in addition to above follow below instructions.
-3. Add maven-surefire-plugin to your *pom.xml*.
+- **Using command line**
+  1. Add maven-surefire-plugin to your *pom.xml*. In `<argLine> </argLine>` don't add jacoco agent if you don't want coverage report.
 
-```xml
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.22.2</version>
-            <configuration>
+   ```xml 
+         <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-surefire-plugin</artifactId>
+             <version>2.22.2</version>
+             <configuration>
 
-            <!-- <skipTests>true</skipTests> -->
+         <!-- <skipTests>true</skipTests> -->
+             <argLine>
+                -javaagent:<your full path to agent jar>.jar
+                -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=target/jacoco.exec-->
+             </argLine>
 
-                <systemPropertyVariables>
-                    <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-                </systemPropertyVariables>
-            </configuration>
-        </plugin>
-```
+                 <systemPropertyVariables>
+                     <jacoco-agent.destfile>target/jacoco.exec
+                     </jacoco-agent.destfile>
+                 </systemPropertyVariables>
+             </configuration>
+         </plugin>
+   ```  
 
-4. Add Jacoco plugin to your *pom.xml*.
-
-```xml
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.5</version>
-            <executions>
-                <execution>
-                    <id>prepare-agent</id>
-                    <goals>
+  2. If you want coverage report also add Jacoco plugin to your *pom.xml*.
+ 
+   ```xml
+         <plugin>
+             <groupId>org.jacoco</groupId>
+             <artifactId>jacoco-maven-plugin</artifactId>
+             <version>0.8.5</version>
+             <executions>
+                  <execution>
+                      <id>prepare-agent</id>
+                      <goals>
                         <goal>prepare-agent</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>report</id>
-                    <phase>prepare-package</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>post-unit-test</id>
-                    <phase>test</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                    <configuration>
-                        <!-- Sets the path to the file which contains the execution data. -->
+                      </goals>
+                  </execution>
+                  <execution>
+                      <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                             <goal>report</goal>
+                        </goals>
+                  </execution>
+                  <execution>
+                       <id>post-unit-test</id>
+                         <phase>test</phase>
+                         <goals>
+                             <goal>report</goal>
+                         </goals>
+                         <configuration>
+                             <!-- Sets the path to the file which contains the execution data. -->
 
-                        <dataFile>target/jacoco.exec</dataFile>
-                        <!-- Sets the output directory for the code coverage report. -->
-                        <outputDirectory>target/my-reports</outputDirectory>
-                    </configuration>
-                </execution>
-           </executions>
-        </plugin>
-```
+                             <dataFile>target/jacoco.exec</dataFile>
+                             <!-- Sets the output directory for the code coverage report. -->
+                             <outputDirectory>target/my-reports</outputDirectory>
+                         </configuration>
+                  </execution>
+             </executions>
+         </plugin>
+   ```               
+   3. Run your tests using command : `mvn test`.
 
-5. Run your tests using command : `mvn test`.
 
 It will create .html files as test-reports which can be found in your target folder !!
 
-**_We got 75.3% without writing any testcases. 🎉_**
+**_We got 53% without writing any testcases. 🎉_**
 
 Go to the Keploy Console TestRuns Page to get deeper insights on what testcases ran, what failed.
 
 ![testruns](https://i.imgur.com/tg6OT0n.png "Summary")
 
-### **Testing using **KEPLOY_MODE** Env Variable**
+### **Testing without using Unit Test File**
 
 To test using `KEPLOY_MODE` env variable, set the same to `test` mode.
 
@@ -282,7 +277,7 @@ export KEPLOY_MODE=test
 Now simply run the application either by ide or using command:
 
 ```shell
-mvn test
+java -javaagent:<your full path to agent jar>.jar -jar <your full path to appliation jar>.jar
 ```
 
 Keploy will run all the captures test-cases, compare and show the results on the console.
@@ -308,11 +303,10 @@ Hibernate: select employee0_.id as id1_0_, employee0_.email as email2_0_, employ
 2022-08-26 14:13:19.414  INFO 11560 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 ```
 
-> **Note** : With this method coverage will not be calculated.
-
 ## Let's add a Bug in the App
 
-Now let's introduce a bug! Let's try changing something like adding some extra headers in controllers  `./EmployeeController.java` on line 35 like :
+Now let's introduce a bug! Let's try changing something like adding some extra headers in
+controllers  `./EmployeeController.java` on line 35 like :
 
 ```java
 return ResponseEntity.ok().header("MyNewHeader","abc").body(employee);
