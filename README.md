@@ -13,15 +13,6 @@
 # Keploy Java SDK Samples
 This repo contains the sample for [Keploy's](https://keploy.io) Java SDK. Please feel free to contribute if you'd like to submit a sample for another use-case or library.
 
-## Quick Start
-The fastest way to start with Keploy is the Gitpod-hosted version. When you're ready, you can install locally or host yourself.
-
-One-click deploy sample URL Shortener application sample with Keploy using Gitpod 
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer)
-
-Then, you can begin with [Generating These Test Cases](https://github.com/keploy/samples-java/tree/main/samples-java-sql#example-employee-manager-app)
-
 ## Sample Apps with Keploy Java SDK
 
 1. [samples-java-SQL](https://github.com/keploy/samples-java/tree/main/samples-java-sql)
