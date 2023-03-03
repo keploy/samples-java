@@ -10,6 +10,7 @@ spec:
         url: /api/employees
         header:
             accept: '*/*'
+<<<<<<< HEAD:samples-java-sql/src/test/e2e/keploy-tests/test-3.yaml
             accept-encoding: gzip, deflate, br
             cache-control: no-cache
             connection: keep-alive
@@ -19,11 +20,28 @@ spec:
             postman-token: 50844561-4513-4857-8760-791fade0a5ff
             user-agent: PostmanRuntime/7.31.1
         body: "{\r\n    \"firstName\": \"Myke\",\r\n    \"lastName\": \"Tyson\",\r\n    \"email\": \"mt@gmail.com\",\r\n    \"timestamp\":1\r\n} "
+=======
+            content-length: "100"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: curl/7.86.0
+        body: |-
+            {
+                "firstName": "Myke",
+                "lastName": "Tyson",
+                "email": "mt@gmail.com",
+                "timestamp":1
+            }
+>>>>>>> 69f35b9... jwt with keploy done sign off:src/test/e2e/keploy-tests/test-1.yaml
         body_type: utf-8
     resp:
         status_code: 200
         header: {}
+<<<<<<< HEAD:samples-java-sql/src/test/e2e/keploy-tests/test-3.yaml
         body: '{"id":19,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1677843312}'
+=======
+        body: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1677672085}'
+>>>>>>> 69f35b9... jwt with keploy done sign off:src/test/e2e/keploy-tests/test-1.yaml
         body_type: utf-8
         status_message: OK
         proto_major: 1
@@ -32,8 +50,16 @@ spec:
         - type: error
           data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
     mocks:
+<<<<<<< HEAD:samples-java-sql/src/test/e2e/keploy-tests/test-3.yaml
         - mock-3-0
     assertions:
         noise:
             - body.timestamp
     created: 1677843312
+=======
+        - mock-1-0
+    assertions:
+        noise:
+            - body.timestamp
+    created: 1677672085
+>>>>>>> 69f35b9... jwt with keploy done sign off:src/test/e2e/keploy-tests/test-1.yaml
