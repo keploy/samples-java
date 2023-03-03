@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:10.5
+    restart: always
+    environment:
+      - POSTGRES_DB=keploy-test
+      - POSTGRES_USER=keploy-user
+      - POSTGRES_PASSWORD=keploy
+    ports:
+      - '5439:5432'
+    volumes:
+      # - ./postgres-data:/var/lib/postgresql/data
+      # copy the sql script to create tables
+      - ./src/main/resources/data.sql:/docker-entrypoint-datadb.d/data.sql
