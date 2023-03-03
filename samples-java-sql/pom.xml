@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>springbootapp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>samples_java</name>
+    <name>samples-java-sql</name>
     <description>Spring Boot PostgreSQL JPA, Hibernate CRUD Restful API example</description>
     <properties>
         <java.version>1.8</java.version>
