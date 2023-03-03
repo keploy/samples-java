@@ -11,9 +11,12 @@ spec:
         header:
             accept: '*/*'
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:samples-java-sql/src/test/e2e/keploy-tests/test-3.yaml
 =======
 >>>>>>> 1e76b95... generalize samples-java
+=======
+>>>>>>> 9bca8e0c4558455ee23106507374971db3fc86bf
             accept-encoding: gzip, deflate, br
             cache-control: no-cache
             connection: keep-alive
@@ -23,6 +26,7 @@ spec:
             postman-token: 50844561-4513-4857-8760-791fade0a5ff
             user-agent: PostmanRuntime/7.31.1
         body: "{\r\n    \"firstName\": \"Myke\",\r\n    \"lastName\": \"Tyson\",\r\n    \"email\": \"mt@gmail.com\",\r\n    \"timestamp\":1\r\n} "
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
             content-length: "100"
@@ -39,10 +43,13 @@ spec:
 >>>>>>> 69f35b9... jwt with keploy done sign off:src/test/e2e/keploy-tests/test-1.yaml
 =======
 >>>>>>> 1e76b95... generalize samples-java
+=======
+>>>>>>> 9bca8e0c4558455ee23106507374971db3fc86bf
         body_type: utf-8
     resp:
         status_code: 200
         header: {}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD:samples-java-sql/src/test/e2e/keploy-tests/test-3.yaml
         body: '{"id":19,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1677843312}'
@@ -52,6 +59,9 @@ spec:
 =======
         body: '{"id":19,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1677843312}'
 >>>>>>> 1e76b95... generalize samples-java
+=======
+        body: '{"id":19,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1677843312}'
+>>>>>>> 9bca8e0c4558455ee23106507374971db3fc86bf
         body_type: utf-8
         status_message: OK
         proto_major: 1
@@ -61,14 +71,18 @@ spec:
           data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
     mocks:
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:samples-java-sql/src/test/e2e/keploy-tests/test-3.yaml
 =======
 >>>>>>> 1e76b95... generalize samples-java
+=======
+>>>>>>> 9bca8e0c4558455ee23106507374971db3fc86bf
         - mock-3-0
     assertions:
         noise:
             - body.timestamp
     created: 1677843312
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         - mock-1-0
@@ -79,3 +93,5 @@ spec:
 >>>>>>> 69f35b9... jwt with keploy done sign off:src/test/e2e/keploy-tests/test-1.yaml
 =======
 >>>>>>> 1e76b95... generalize samples-java
+=======
+>>>>>>> 9bca8e0c4558455ee23106507374971db3fc86bf
