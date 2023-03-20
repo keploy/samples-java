@@ -1,7 +1,7 @@
 # Example Employee-Manager App
 
 A sample Employee-Manager app to test Keploy integration capabilities using [SpringBoot](https://spring.io) and
-PostgreSQL.
+[PostgreSQL](https://www.postgresql.org/).
 
 ## Pre-requisites
 
@@ -71,11 +71,11 @@ central.
 
 Add *keploy-sdk* as a dependency to your *pom.xml*:
 
-    `<dependency>`
-      `<groupId>`io.keploy `</groupId>`
-      `<artifactId>`keploy-sdk `</artifactId>`
-      `<version>`N.N.N `</version>` (eg: 1.2.8)
-    `</dependency>`
+    <dependency>
+      <groupId> io.keploy </groupId>
+      <artifactId> keploy-sdk </artifactId>
+      <version> N.N.N </version> (eg: 1.2.8)
+    </dependency>
 
 or to *build.gradle*:
 
@@ -148,7 +148,7 @@ or by querying through the browser `http://localhost:8080/api/employees/1`
 Now both these API calls were captured as **editable** testcases and written to `test/e2e/keploy-tests` folder. The
 keploy directory would also have `mocks` folder.
 
-![testcases](https://i.imgur.com/rhNndcF.png)
+![testcases](/src/main/resources/test-cases.png "Recorded Test cases and mocks")
 
 Now, let's see the magic! 🪄💫
 
@@ -206,7 +206,7 @@ the sample app repo.
          <!-- <skipTests>true</skipTests> -->
              <argLine>
                 -javaagent:<your full path to agent jar>.jar
-                -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=target/jacoco.exec-->
+                -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=target/jacoco.exec
              </argLine>
 
                  <systemPropertyVariables>
@@ -223,7 +223,7 @@ the sample app repo.
          <plugin>
              <groupId>org.jacoco</groupId>
              <artifactId>jacoco-maven-plugin</artifactId>
-             <version>0.8.5</version>
+             <version>0.8.7</version>
              <executions>
                   <execution>
                       <id>prepare-agent</id>
@@ -283,10 +283,9 @@ java -javaagent:<your full path to agent jar>.jar -jar <your full path to applia
 Keploy will run all the captures test-cases, compare and show the results on the console.
 
 ```shell
-10b3ddd5-42fa-48e7-b98a-b47257272e39 total tests: 3
-2022-08-26 14:13:08.993  INFO 11560 --- [       Thread-4] io.keploy.service.GrpcService            : testing 1 of 3 testcase id: [ae4a6c91-712a-4566-bf0d-97d708f94b2d]
-2022-08-26 14:13:08.994  INFO 11560 --- [       Thread-4] io.keploy.service.GrpcService            : testing 2 of 3 testcase id: [4843e03e-76a8-4194-99cb-f62740978d15]
-2022-08-26 14:13:08.994  INFO 11560 --- [       Thread-4] io.keploy.service.GrpcService            : testing 3 of 3 testcase id: [e5231248-de1d-4c8b-8f15-8dcaf63f45c6]
+10b3ddd5-42fa-48e7-b98a-b47257272e39 total tests: 2
+2022-08-26 14:13:08.993  INFO 11560 --- [       Thread-4] io.keploy.service.GrpcService            : testing 1 of 2 testcase id: [ae4a6c91-712a-4566-bf0d-97d708f94b2d]
+2022-08-26 14:13:08.994  INFO 11560 --- [       Thread-4] io.keploy.service.GrpcService            : testing 2 of 2 testcase id: [4843e03e-76a8-4194-99cb-f62740978d15]
 2022-08-26 14:13:09.061  INFO 11560 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2022-08-26 14:13:09.061  INFO 11560 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2022-08-26 14:13:09.062  INFO 11560 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
@@ -294,14 +293,14 @@ Hibernate: insert into employees (email, first_name, last_name, timestamp) value
 2022-08-26 14:13:09.247  INFO 11560 --- [pool-3-thread-1] io.keploy.service.GrpcService            : result : testcase id: [ae4a6c91-712a-4566-bf0d-97d708f94b2d]  passed: true
 Hibernate: select employee0_.id as id1_0_0_, employee0_.email as email2_0_0_, employee0_.first_name as first_na3_0_0_, employee0_.last_name as last_nam4_0_0_, employee0_.timestamp as timestam5_0_0_ from employees employee0_ where employee0_.id=?
 2022-08-26 14:13:09.291  INFO 11560 --- [pool-3-thread-1] io.keploy.service.GrpcService            : result : testcase id: [4843e03e-76a8-4194-99cb-f62740978d15]  passed: true
-Hibernate: select employee0_.id as id1_0_, employee0_.email as email2_0_, employee0_.first_name as first_na3_0_, employee0_.last_name as last_nam4_0_, employee0_.timestamp as timestam5_0_ from employees employee0_
-2022-08-26 14:13:09.383  INFO 11560 --- [pool-3-thread-1] io.keploy.service.GrpcService            : result : testcase id: [e5231248-de1d-4c8b-8f15-8dcaf63f45c6]  passed: true
-2022-08-26 14:13:09.388  INFO 11560 --- [       Thread-4] io.keploy.service.GrpcService            : test run completed with run id [10b3ddd5-42fa-48e7-b98a-b47257272e39]
+2022-08-26 14:13:09.388  INFO 11560 --- [       Thread-4] io.keploy.service.GrpcService            : test run completed with run id [1e81233d-e3be-4a4a-afda-a800902ad965]
 2022-08-26 14:13:09.388  INFO 11560 --- [       Thread-4] io.keploy.service.GrpcService            : || passed overall: TRUE ||
 2022-08-26 14:13:19.408  INFO 11560 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2022-08-26 14:13:19.410  INFO 11560 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2022-08-26 14:13:19.414  INFO 11560 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 ```
+
+![testruns](/src/main/resources/test-runs-success.png "Recent testruns")
 
 ## Let's add a Bug in the App
 
@@ -322,15 +321,17 @@ You'll notice the failed test-case in the output.
 
 ```shell
 2022-08-26 13:10:10.289 TRACE 70155 --- [nio-8080-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [1]
-2022-08-26 13:10:10.307  INFO 70155 --- [pool-3-thread-1] io.keploy.service.GrpcService            : result : testcase id: [6aae7f37-798c-42d1-ac8a-c5446880fefc]  passed: false
-2022-08-26 13:10:10.312  INFO 70155 --- [       Thread-1] io.keploy.service.GrpcService            : test run completed with run id [a443f2e9-58c9-4c86-8101-7b3e30ef79ff]
+2022-08-26 13:10:10.307  INFO 70155 --- [pool-3-thread-1] io.keploy.service.GrpcService            : result : testcase id: [d42a3724-2c78-4f42-8dc6-d25a9b611c7c]  passed: false
+2022-08-26 13:10:10.312  INFO 70155 --- [       Thread-1] io.keploy.service.GrpcService            : test run completed with run id [fcb61332-1025-463f-854e-6f406bce870d]
 2022-08-26 13:10:10.312  INFO 70155 --- [       Thread-1] io.keploy.service.GrpcService            : || passed overall: FALSE ||
 ```
 
 To deep dive the problem go to [test runs](http://localhost:6789/testruns)
 
-![testruns](https://i.imgur.com/qwP8r4d.png "Recent testruns")
+![testruns](/src/main/resources/test-runs-fail.png "Recent testruns")
+
 
 **In case of any query, refer to video below,**
 
 [![java-sample](https://user-images.githubusercontent.com/74777863/217864311-94a3dc0c-90bc-4551-aca2-87e82e3d24cb.png)](https://youtu.be/Ssm4TnTkbLs)
+
