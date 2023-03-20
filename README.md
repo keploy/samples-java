@@ -223,7 +223,7 @@ the sample app repo.
          <plugin>
              <groupId>org.jacoco</groupId>
              <artifactId>jacoco-maven-plugin</artifactId>
-             <version>0.8.5</version>
+             <version>0.8.7</version>
              <executions>
                   <execution>
                       <id>prepare-agent</id>
