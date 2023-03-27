@@ -108,9 +108,7 @@ mvn clean install -Dmaven.test.skip=true
 
 ### Set KEPLOY_MODE to record
 
-- To record testcases use `KEPLOY_MODE` and `DENOISE` as env variables. Set `KEPLOY` to `record` mode and mark `DENOISE` as `true`. Also add 
-
-`-javaagent:path of agent jar` like this 👇.
+- To record testcases use `KEPLOY_MODE` and `DENOISE` as env variables. Set `KEPLOY` to `record` mode and mark `DENOISE` as `true`. Also add `-javaagent:path of agent jar` like this 👇.
 
 
 ![Edit_configurations](/src/main/resources/Edit-configurations.png "Edit configurations")
