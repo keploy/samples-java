@@ -13,11 +13,16 @@ A sample Employee-Manager app to test Keploy integration capabilities using [Spr
 
 ### **MacOS**
 
+<details>
+<summary>MacOS</summary>
+
 ```shell
 curl --silent --location "https://github.com/keploy/keploy/releases/latest/download/keploy_darwin_all.tar.gz" | tar xz -C /tmp
 
 sudo mkdir -p /usr/local/bin && sudo mv /tmp/keploy /usr/local/bin && keploy
 ```
+
+</details>
 
 ### **Linux**
 
