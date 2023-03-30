@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-430
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/-1266515550
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "1407"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 013a31eaa299425ea2683dffe4e8a157
+        body: '{"email": ";0\ud957\udd9fS7A", "firstName": "E~", "lastName": "\u009eb\u0004\u00c4\udb5e\udf55\u00dc", "(h\u00c3\uda58\ude17": {"\u00fd\u00ff\u00a9\udaed\udddf\u00ee\uda72\udc30\u0092^\uda4d\udec6\u00a9": [{"%\u00fe,": {"u": null}}, {"\u001dD\u0089@\u00b10\u00f4\u00f5\ud95e\udc77\u00fa%": " \r\u001a\udace\uddf5\u001b\uda04\udda5", "\udb7f\udca1\udb49\udf8a\u009a": "q", "\u00ab\u00fb\u0005\u00ad\ud920\udc85\u00f8Z\ud8b1\udf6e''": null}], "Z\u00a6w\u0004}Z\ud9c1\udd92\u00d3\ud806\udfdb\u000e\uda6f\udd87\uda22\udd684M?v\u008e\ud91c\udf01": {"\u00d4|\u001e": true, "\u00fe\u00d7\ud972\udc32\uc7e5\u00c9\u00d0\u00ea": [29226, 0.0], "\u00ee\udb7a\udec4\u008da": -1.9}, "\udb18\ude69''": {"\u0005\u0096\u001drZ\ud82c\udf68\u00eb6,\uda03\udf1c\"\u00b2\u00af\u0092)": "R", "\udb4a\udf5c\u0006?\udbdc\udcfb\u00d8\u008628`\u0003\u0012": -603947277}}, "A\udacc\udf19\u0086\ud94c\udd28": {"t\ud839\udde2\u00e8C\u00d1:\u00ec\u00c0)z\u00b8hh": [-1.7976931348623157e+308, null], "\ud808\udc6e\u00ee3\u00f2": [-14375, 3.95656846257086e+122, -3.402823466e+38]}, "\udb9b\udf21\u00ae\udbf9\ude5a\u0003\u00cf": [{}, [-5134052633178031071, [["", "\u0004,R\ud841\udd64G\\\uda01\udc1aI>\ud928\uddf1\u00e6\u0093O\u009e"], {"\u00f9\u0098y.\u00e6\ud8c7\udd15W6\u00df\u00a5\ud847\udd1e": 429, "!\udabe\udee8\u00c7\u00c6\u0083p\ud9b7\udeca": -32154, "\u00a0\u0015": 1.7976931348623157e+308}, [-2.2203910858796066e-306]], []], null]}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168894

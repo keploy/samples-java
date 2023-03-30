@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-155
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "420"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: bcf7c79cb7c04d73974ac1e6ff074bbb
+        body: '{"email": "A\u00af\ud99e\udd6a\u00e0\u00da\udb1c\udce1k <", "firstName": "\u00d3^P\u00861\u00ecG\u00c9\u00a3C\u00a4''\u00a5\u00a1", "lastName": "\u00bd\ud9d0\udc8c\u00ed\u00eb\ud92e\udd68\b\u00de\u0090nNhw\u00b07", "\u00ca": [{"\u0091\u009d\u0002\ud91c\uddadJ-P\u0093\u00c1\u00c6\ud8ff\udf1c\u009ae\u009f\u00f9(\udb6c\udfe9": {}, "\u00e2\u000b": 16968, "fy\udbb3\udf03\u00c0\u00eb\u00bd\ud9ba\udf03|\u0001": {}}, [], {}]}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168885

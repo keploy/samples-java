@@ -1,0 +1,36 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-414
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/-1522395626
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 0d7ce37b4ed348c8bae79f0dde352d9e
+        body: ""
+        body_type: utf-8
+    resp:
+        status_code: 404
+        header: {}
+        body: '{"timestamp":"2023-03-30T09:34:54.366+00:00","message":"Employee not found for this id :: -1522395626","details":"uri=/api/employees/-1522395626"}'
+        body_type: utf-8
+        status_message: Not Found
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - mock-414-0
+    assertions:
+        noise:
+            - body.timestamp
+    created: 1680168894

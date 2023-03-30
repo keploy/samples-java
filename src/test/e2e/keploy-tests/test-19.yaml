@@ -1,36 +1,35 @@
-version: api.keploy.io/v1beta1
+version: api.keploy.io/v1beta2
 kind: Http
 name: test-19
 spec:
     metadata: {}
     req:
-        method: POST
+        method: PUT
         proto_major: 1
         proto_minor: 1
-        url: /api/employees
+        url: /api/employees/2
         header:
             accept: '*/*'
-            accept-encoding: gzip, deflate, br
-            cache-control: no-cache
+            accept-encoding: gzip, deflate
             connection: keep-alive
-            content-length: "104"
+            content-length: "162"
             content-type: application/json
             host: localhost:8080
-            user-agent: PostmanRuntime/7.29.2
-        body: "{\n    \"firstName\": \"David\",\n    \"lastName\": \"Warner\",  \n    \"email\": \"mt@gmail.com\",\n    \"timestamp\":1\n}"
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: c887f5880ff94c919c797fc21ba2885c
+        body: '{"email": "\u00cf\udbae\udec9x\u5f01", "firstName": "1", "lastName": "1\u1901\u00da", "": {"": 5.960464477539063e-08}, "\u0204\t\u00b7\udbf4\udf3a\u00f0": [null]}'
+        body_type: utf-8
     resp:
-        status_code: 200
+        status_code: 400
         header: {}
-        body: '{"id":14,"firstName":"David","lastName":"Warner","email":"mt@gmail.com","timestamp":1672042895}'
-        status_message: OK
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
         proto_major: 1
         proto_minor: 1
     objects:
         - type: error
           data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
-    mocks:
-        - test-19-0
     assertions:
-        noise:
-            - body.timestamp
-    created: 1672042895
+        noise: []
+    created: 1680168889

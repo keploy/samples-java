@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-429
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/-13940
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "4521"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 1b1e6028a2cf41e5bb11341a7159f89c
+        body: '{"email": "~\udbb5\udd16L\u00b1\f\u50a2", "firstName": "\u00cd\u0096|G\u00a8\udb86\udc0d\u00d8''\u0081", "lastName": "\u00f8\u008dro\u0091\u00cc+\ud8d5\uddbb\ue7e3\ud8f5\udd78-", ">\u0017\u000e\udab5\ude8d\u00c5\udb49\udc42": [{";": null}], "\uda52\udfe8I$\u009a\u00f8": [null, {}], "\u0014=\u8fabA": [{}, [2735851133983196180], {}], "{\u00c1\u00de\u00a8": [{"\u00fc\u00c9r\u00b8\u00fb\u00a9\u00a3\ud85b\udcf5\u009e\udb65\udcc6\u00e14s\uda68\ude90K\u009cX\u000e\u00a4\ud913\udca3\ud825\ude34\ud932\udde7\u00f1\u00c7\u0014\u0089\u00e3\ud80b\udc44": null, "\u00c1\u00cf\udbb4\udc1f\u0004": 99}, null, null], "-\ud8ac\udfd2L\u007f\u0089": {"\u0003\\\n\ud9a8\udffe\u001e\u00d0\udadc\ude34:\ud9d9\udcc9\u00f4Ms\u0004a\ud99d\udde5\u00a2": [], "\u00c5|%1o\ud85c\uddc2\u00ad": {}, "": [[{"\u00a2": "\udbf9\udc6ds", "": false}], {"*b": null, "\u00eb\ud85f\udc4d\n\u00ba\u00a7\\\u00cc\u00dd\u00a4\u001a\u00be\u00ec\u00a9\udb62\udf506\uda1b\udf61\u00fe\u0004\u00007\u0006f1": -22363, "\ud9d1\udd0e\ud82f\udd98)j": 51}]}, "U": {"\u0091": [], "\u00f5": null, "\udb52\udd2e\u0011\u001b\u00e2\udb57\ude5a\u00a9\u00b2\u00e5\u0013\u00b4%\u00a7\u0019G\u9b3c": [-31805, -1.7976931348623157e+308, false]}, "\ud90b\udf7c\uda99\udf88r\u00d0\u00e6\u0081)": [{"x\ud8f7\ude8a": true, "": -28551, "S\u00e0\u001a\u0007": 1.175494351e-38}, {"\ub0c3\u00bf": [], "\u00e1U": {"\u00b6~\u157e\udacc\ude60\u00b3\u00a7M\u00c8\u00ba\u00af\u00c4\u00d0\u00d8\u0002\r\ud801\udcf1": -2104608649}, "\u00ce": [0.3333333333333333, false, null]}, {"\u00fd": {"!\u00c9\u0001>": true, "\u0099\uda70\udc08\u00d1\u00db": false}, "\u009b\u008f|\u00d2\ud982\udfebc\udb5f\udcb3\u00f3\u00e8(\udac5\udf3a": {"\u00ef\u00e2": ["ch[\u00bc", null, 4557], "\u00f4B\u00ad\ud989\udd01g\u00ed\u77a0\ud9df\ude379H": {"": 3.0190244804750944e+16}}, "8\u00dd": 67}], "=''\u009c\"": [[], ["P\u00c8\u009f\u00f7\ud9bd\udd38e\ud868\udf3b\u00f8\ud910\ude7clM"]], "\u0000\u00bd\udbae\udfd6\u00d3\ud8ce\udd8a\u001d\u00fe2": [-30581], "Z`\u00b76\u008fK\uda7d\udd03^\u00ff\u001d\u008b\u000ba\uda2c\udd0ab\u00c7-\u00e6\udae1\ude57\ud8c1\udf66(\uda5d\udf3dT\u00d7\u001e\u00af\ud991\udd40St\u0002\t4\ud8e9\udce8\uda47\udd6a\udbeb\ude54\u0014z\u00930": [[true, "\udbcf\udeb5\u00a6\u00fd<\u00d6\u00b8\u00d9\u00a9\u00e8\ud953\ude0d"]], "[\u00c5": {"\u009e\u0083\u0097(": false, "F": -32}, "\u001f\n": [], "\ud8e0\ude11Xw": [[], [], {"!#\uda0d\udea3\u00cd\u00a3\u00de\u0089f": {}, "": {}, "\u001cW\u00a1\ud95a\udc68\ud938\udd69\uda29\uddf2\u008c\ud932\udde5\u00f3\u00cd\u00dc\u00b1\u0000\u00d0": {"\u0014\u009e\u00a1$5\u00f28": ["", -2.2250738585e-313, "\u00a6=\u00c1\u00a2"], "\u00f8Q\u00c6\u00c0>\ud8fa\udda6": [1.1754943508222875e-38, null]}}], "\u001a\u00bf \u008f": {"": [], "\u00b4\ud9dc\udd20\u00cfn\uda42\udfd9B\ud933\udf54\u00ed\u00f4": [], "\u009c": false}, "\u0003": {"\u00e4\u00cb\u0099\u00c8\\\u00c0\u00e2\u00fb\u007f\u0086\u00fc": {"\udba0\udf9c\ud857\udf06": false, "\ud926\ude67|\u00b3\u00fe\u0092\u0017\ud307\u00df\u00fc0\u001a\udb8e\uddf6d\udaf6\ude4b\u0092k\u009a\u00a3\u00a5\u00dc\u00a4[\u0094": "", "\u00fek\u00f8\udb5d\udddf\\\t": "Y\u0007\ud811\udd6e\udbac\ude24"}, "": {"6O\u00f4\u00c8\ud87d\udfbb\"": -3}, "Ox\u00f0\u00c6_\u00f2\ud8aa\udc9a\u00aa": [[null, [5948754486722971278, "\u00f3\u00ac\ud90a\udd66\u00ea\udac7\udfa1\u00f5\u00fd\u00d8\u00d6;\ud9ff\udfb9", true]], {";d\u001a": null, "\u00d9\u00a2\u00e4<\u00996C\u008fW\u009a\u00ee\u0083n\u0083": {"\udb8d\ude40\u0085`": false}, "+": [""]}]}, " \u00a3\u00a2\u00dcS\u0097(Y\u0081\u00a2\u00f1\ud80a\udcdb)#\u00b0\ud900\ude27\u00f5\ud8ae\udec4": [{"\u00c0": false, "\u0081\ud897\udc68": true}, "\u00e3\ud8db\uddea"], "\u00f8\ud8c2\udc78\u0092\u00bb\u0091\u0082\u00a3\ud855\udf0d\udade\udfd0wr\u0082Kd\u00edw\u00c2M\u00ea": "", "W": [[-388105622, -1.192092896e-07, 1421759808478484718], {"": true, ":\u00d3u)": "\u00a2", "\u00aa\u00ae": -6014}], "\u009e\u00a2\u0002": false, "\u00d8\u00ed\u00ee\u00c9": {}, "U\u008f": {"": true, "\u00ff": ["", true, -2.225073858507e-311]}, "\u00bd\u001b\uda75\udc33\u000e\u0083\ud855\udf2f": [{"\u00a5E": 8057814101564832004, "$\u0088\u0005}\u00deX": true}], "\ud981\udc0e\u00ea\u00ea\u0002\u0089\u00f3G\u00e1\ud987\udc2c&i\u00bd\t\ud978\udcff\uda28\udfb3\u0087\u0014\uda8e\udc62\u00e2": [{}, [true], [{"\udb05\udf91\u00e3\u0087\ud98c\udc19\u00e7": "\u0080\u0095\u00c7\u00fdi\u0097\u001c\ud962\udc627\ud9f1\udd85\u0003\u00eb\u00b9\u00d3\uda2b\udd44E\ud9da\udc55", "+\u00fe": "\ud8b3\udc4e\u0091", "\u00bb": 1.9}]], "\u2d3cR\u0018R-\uda68\udf30\uda1a\udc88\u00f8\u00ff~F\u00dc\u00afj\u00c9": []}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168894

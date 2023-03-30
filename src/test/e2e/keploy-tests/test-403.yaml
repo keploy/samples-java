@@ -1,0 +1,36 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-403
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/-7719
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: c2023a5defb440cebb9c4c92fb8ac219
+        body: ""
+        body_type: utf-8
+    resp:
+        status_code: 404
+        header: {}
+        body: '{"timestamp":"2023-03-30T09:34:54.262+00:00","message":"Employee not found for this id :: -7719","details":"uri=/api/employees/-7719"}'
+        body_type: utf-8
+        status_message: Not Found
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - mock-403-0
+    assertions:
+        noise:
+            - body.timestamp
+    created: 1680168894

@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-218
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/1
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "1195"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 128a98b278304005ae3494875289e7b0
+        body: '{"email": "\u008c\u00a4\uda76\udd9c4>4VxK\u00ec", "firstName": "\u0017\udb82\ude08\u00e6\udbb6\udcfe\u00d5\u009b\u009d\udaeb\udc86e_\u00cc\f\udb42\ude8a\\Y\u0011\u001b\u00f0\ud901\udfdf\u008a~\uda6f\ude19L\ud8b0\udc22\ud8c9\udcc3S", "lastName": "\u00fe_\u00f7;\u00eaU\u0085", "\u00e8": {"\u81ce\u001e": {"": [3669, false, 1939]}, "\udaf8\udc90": 2.321536132526774e+197, "\u00b6\ud8bf\udf0a\udbf5\udd3c&\u007fu\u00c8(\u00e9\u00c3\u009e\u00f0\ud9e2\udf28\u0098": false}, "\u00a3`\u0004": {"!\u0005": [null], "\ud9c7\udee1\u0081\u00fd": [], "\u0010p\u00f8Oc\ud936\udce3\u00b4": {"\u008a\u00b5a \u0006": {"\u0097\u0012\u0095\udadd\udee1xr\u00d4}\u00e3\udae3\udc40\u00dc\udb57\udd0b/\u001d\u00f9\udb4c\uded3\u0004\u00c6\u008e\u00c8\u0093^\ud8d4\udd8e\u00d6": {}, "E\u0097": [], "\u00a9\u00fb": [1.192092896e-07, true, true]}}}, "*\u00d0\uda7a\udf1a\u00e8": {"": {"\ud90e\udec0\u00a1\u00afp": null, "\u00c7\u00a1V\u00e4": 2.00001}, "#A": -6416, "\u00c2\u000e/?": []}, "\u008b": [{}, [[true], {"\u00ed\u0018\u00b0+": -7277324718642770151, "\u00e3\u0017\u00fb\u00cc]\ud999\udc7b\u001e\ud9dd\uddce\u00cc": 17751, "@\u00ec": false}, []], {}], "aY\u009c\ud996\udf06X\ud9c5\udfb8\u00ecI\u00d2a\u0007": [{}]}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168889

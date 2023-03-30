@@ -1,0 +1,37 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-599
+spec:
+    metadata: {}
+    req:
+        method: DELETE
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/-127
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "0"
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 3b8587f8b9394d909e0c6adb50e54f8c
+        body: ""
+        body_type: utf-8
+    resp:
+        status_code: 404
+        header: {}
+        body: '{"timestamp":"2023-03-30T09:34:58.261+00:00","message":"Employee not found for this id :: -127","details":"uri=/api/employees/-127"}'
+        body_type: utf-8
+        status_message: Not Found
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - mock-599-0
+    assertions:
+        noise:
+            - body.timestamp
+    created: 1680168898

@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-222
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/1
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "1382"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: fb9c3a9343e84ff4a18bce0b8f71dd64
+        body: '{"email": "9", "firstName": "e\u00e6\u0002\u00bf\u001a3\u001f8\uda78\udd37\u0099\u0092f", "lastName": "\u008a\u0019\ud957\ude70y\u0018\tr\u0011", "": [], "\u00dc": [[[[35, true, null], ["%", -21341]]], true, [[-1.3513466099346836e+16]]], "\ud94a\udfa6\udacd\udc48\u09f3\n\ud993\udcb7\ud9dc\uddb7cg": {"\ud9f9\udf25\u0004\u0090\u00a9": "\udaf7\udf0d\u00d0h"}, "F\u008f]&\udbaf\udf0d\u0018\u00a8\u00a8`\u00acx": [{"$Q/\ud869\uddc6\udbe3\ude23\u0086\uda73\udfdd\u0011\u00e3\u0003\udaf4\udf50": {"o\u00f5\u00e0\u0005\ud8f7\udf00\u00b3\u00b6": null}, "\ud964\udefd\u00ee\u00914": {"\u009cuE": false, "\u00f5\u00f4p\u9247\u00b5\u009a": 26234, "": false}}, [{"<\udbe3\ude03\u00ba\ud80f\ude46": -2162}, true]], "^f": [], "\u008f\u00f8\udac9\udfc0\ud985\udf42\udaa0\udfddO\u00f2\u0084\u00f2\u00e6": {}, "\u00e7": [null], "|l": {"\u0086\u009c\u0082\ud9b9\udfb6\u00f0": {}, "\ud93e\udd9f": [[1e-05, 1.1, 1e-05], {"\n\u00d0P\udbf0\udf87\u00f0G\u001d": "\u00cf\u0099\u4c4e\u00d2\ud917\udccd2\u001e\ud9b8\udfbc\ud8c2\udf9b"}, {"\ud95e\udcda\u00fc\u00df": -2.220446049250313e-16, "v,": "\u0083", "\u00b5c\ud853\udec6\u001a4\u00a8\u00de\u00fe": true}], "\u00fc\u00a7": {"\u00b9;\ud8d6\ude71x\u00f9\u00acE\udb0d\udf40\u00f3": [-35, "", -1234913280], "\u0007z\u00e92\u0018q_\u00a0\ud8a8\udf07": [[null, true, -0.99999], 85]}}, "=j\ud959\uddc5\ud8fb\udd3f\u0003;": [], "\ud8c8\udfb2b\u00a4\u001a": []}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168889

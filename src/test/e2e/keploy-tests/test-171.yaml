@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-171
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/2
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "623"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 10768d2d693e49c6b12e43fd22a0b18c
+        body: '{"email": "P\udaee\ude62\ud8e7\udd7e!\ud943\udffd\u00e0\udaf7\udebe\r\u00bb", "firstName": "\u00c6L", "lastName": "\u0005\u00a8\ud804\ude85\udaac\udef40r", "A\u00fb": {"\u00e3\ud9e1\ude9f\u009a\u00cf\udad3\uddf1\u00ef\u00aayqK\u001b\u0084Qs\u00ea\u00f3j\u00efZ\u00f0": 12715, "": 50}, "": {}, "\u001cA\u001f": [[{"\u00f7": -29702, "\u00db\u00be\u0002\u00ac\ud892\uddb0": -2.6162711859798398e+147}, [{"\ud9ae\udf9f\udb37\udd93": 1855, "9\t\u0018": 1.95133434247092e+16, "\u0091$P": -0.5}, {}], {}]], "H\udbdb\udc20\u00bdu\uda4f\udd29*#": {"r": -84, "\udb21\ude7e\u00b3": 30128, "\u00ba\u00cb\uda85\udc18": -6.103515625e-05}}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168887

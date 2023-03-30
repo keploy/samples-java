@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-217
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/1
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "1276"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 2ad94ecfb3584b9b829f6bebe109d457
+        body: '{"email": "\ud803\udf01\ud842\ude00Y\u00f0\u00af\u00bc\u00c11\u00ed\u00050\ud8a5\uddeftn", "firstName": "\ud8c0\udfb3 %\u0000\u00b6\u00f0\ud9e0\udd57\u00b7i\ud9cc\udede\u0092\uce26\u00cb\ud9cf\udd6d\ud92e\udcdc5\u00d3\u00a9\t\u00dbn\u0018^\u00eai\u00b0\u000e\t%\u00a1\ud842\udd73\udaa8\udc16\u00e8\u00981\u008b\u00b1u", "lastName": "\ud9a6\uddb7\u0099\u00f6h\u00ea\u00d6P:27\u001b", "\u00fa>$\u00bd": [-23], "": [[[-10000000.0], {"\u008c": false, "\n\u0095\udb3f\udcf2\u008d\udb07\ude56": null, "\u00c6": true}], [], {}], "\u00f6L": {"\u001d\u0016f": {}, "\uda9f\udef2\u6bc6": [[4.493090276521494e+16, -2.225073858507e-311, null], [true, "8", -2433], {}], "": [null]}, "\ud9a0\ude28\u00e1\u0097\u0095@": {"\ud88d\udf8a\udb6b\udfc0\ud8e3\udf69": [true, {"*t~_@d\u009f": {}, "\u00d3\u000b": ["\uda38\udcdb\ud8f8\udfd9", 1.9], "\u00c3\u00bd\ud924\udfe3\ud95e\udf59\u00fc\udbf9\udd37\u0095?\u0096\u00d9\u0081\u00e7": true}], "]\u009e\u0013": {"\u0003\ud8e8\udfe6$\u0003\u008d\u000f\u00e5\udb67\udea5\u00a2C\u00e3bS\u00f7\u00a6\u00ee\udbb5\udc32\u00f5": "\u00d0k\u0085\u00be\u00da\u008d\u00fe9\u00e2\u00cf?Tw\u00d3W\u0096", "\u00ff\u00ac=\udb59\udc74\u00af": {}, "q": true}}, "\u009e\u00ce1": [], "\u00aa5\u00bd#\u00a5:\uda2d\udc95": {"5\u0097\udbfe\udc39\u0015z\ud972\udd17": []}}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168889

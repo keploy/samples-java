@@ -1,0 +1,36 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-314
+spec:
+    metadata: {}
+    req:
+        method: DELETE
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/3
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "0"
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 1f88f95c7f804a93af6c729d3517b619
+        body: ""
+        body_type: utf-8
+    resp:
+        status_code: 200
+        header: {}
+        body: '{"deleted":true}'
+        body_type: utf-8
+        status_message: OK
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - mock-314-0
+    assertions:
+        noise: []
+    created: 1680168893

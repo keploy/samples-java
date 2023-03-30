@@ -1,0 +1,37 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-92
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "49"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 29467be1442141afad6f7c903c437c4f
+        body: '{"email": "M", "firstName": "0", "lastName": "0"}'
+        body_type: utf-8
+    resp:
+        status_code: 200
+        header: {}
+        body: '{"id":2,"firstName":"0","lastName":"0","email":"M"}'
+        body_type: utf-8
+        status_message: OK
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - mock-92-0
+    assertions:
+        noise: []
+    created: 1680168884

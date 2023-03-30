@@ -1,35 +1,35 @@
-version: api.keploy.io/v1beta1
+version: api.keploy.io/v1beta2
 kind: Http
 name: test-14
 spec:
     metadata: {}
     req:
-        method: DELETE
+        method: PUT
         proto_major: 1
         proto_minor: 1
-        url: /api/employees/6
+        url: /api/employees/1
         header:
             accept: '*/*'
-            accept-encoding: gzip, deflate, br
-            cache-control: no-cache
+            accept-encoding: gzip, deflate
             connection: keep-alive
-            content-length: "103"
+            content-length: "369"
             content-type: application/json
             host: localhost:8080
-            user-agent: PostmanRuntime/7.29.2
-        body: ""
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: fe74da7729954b808b10b8bc5b791961
+        body: '{"email": "00A\u00fd\u00f5", "firstName": "\u00b4n\u0003\uda30\udd9c\u00c5\u0096\u0006c''W\u00c9\u00fe", "lastName": "\u00f7\u00c4\u00f5\u0099b\u00f0\u00bb%e\u00e3\udb72\udf797l\ud8e2\udc3a", "u\u00d7\ud996\udc0eU": [{"XT\u00ed\u00de\u00e5an1\u00d1}v": {"\u0099": null}, "\u00d7]": [-2.220446049250313e-16], "\ud9ad\udfc8\u00e3": 12381}, {}, []], "4\u0088''": [null, ""]}'
+        body_type: utf-8
     resp:
-        status_code: 200
+        status_code: 400
         header: {}
-        body: '{"deleted":true}'
-        status_message: OK
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
         proto_major: 1
         proto_minor: 1
     objects:
         - type: error
           data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
-    mocks:
-        - test-14-0
     assertions:
         noise: []
-    created: 1671974119
+    created: 1680168887

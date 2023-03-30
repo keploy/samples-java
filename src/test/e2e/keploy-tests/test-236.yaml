@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-236
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/1
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "1887"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: b7773b97ddf34a8cb1ee4a1d89821d63
+        body: '{"email": "u&^\u00e45\ud8d4\udf08W", "firstName": "\ud82c\udd28\u0089\uda04\udd89\u00ab2", "lastName": "\u00c1\u0090\no\u00da\u00d5\u00f3\u00131\uda27\udd9a", "\u00f6+\udba1\udd4a": {}, "\u00b4\udbc7\udd96": {"\u00d7\u00f2\udb8c\udfa0": {}, "\udbdc\udc2b\u0086": [], "": {"\ud835\udd70\udab6\ude15\u00b3\u009d\ud970\ude3e\u0083": -117091949460778367841014591167286110352, "\ud8a2\udef9": -106}}, "*\u00cf": {}, "\r\u001f": [], "\ud89e\udd1b\ud9fe\udcbd\uda9a\udd83\u00df\u00c9\u0019": {}, "\u00f6''\u00fa[s\b": {}, "": [[], []], "\u0015\u00d2Z\u0018\b\u00ce\u00dc\ud9be\udc65\ud859\udc99\ud84f\udf5a": {"\u00b6$": [0.0], "\u0005\u001fh\u00ad\u00c8R\u0082M`N\u0099\u00fb\u0083M\u00fb\u00d7w\u008d\u00ff\u008e\udb0b\udf43\u008c\u000e\u00d1/\u00ea\u008e%": []}, "\uda44\ude16\udb33\udc6e": {"\uda82\udf38\u00a5\ud98f\ude4a\u000b\u00b1\u00ec": {"\u00f3\u0095\u0099\udb57\udfe0\u0000\u9c96\udb08\ude01M\u0015\u00fa\u00fe": false}, "\u00ad\u00dd\u00cdx\ub8e0S": [{"&\u00fce": {"\u00f0\uda48\udf9c\ud8bc\udd39\udadf\ude734\uda48\udf56\u00f3": false}}]}, "\u0007\u00a6\ud8b0\uded5\u00e3\udbfd\udcad\ud844\udeb5\ud885\uded0\u0004\u00d4": {"G": []}, "\ud99e\udf9b5(\u009as\u00ac": [{"": 70, "\u00bef5\u00b3\u00d2": true, "\u0019\u000b": 1.7976931348623155e+308}], "\u00ed\udbce\ude7daW#\u008a": [{"k\u0016\u00ce\t": [-1.7976931348623157e+308, 3.402823466e+38]}, [], -14732], "\u00cb\u0084\u00a1": [{}], "\f#S\u00b4": {"+d`\u00e4\u00bccm\ud9a2\udfe1\ud85f\ude18dG\u00c1\u00f7k\u0099\udb61\udcef": -1.7976931348623157e+308}, "n\u00c9\u00dc%!%": [[2.225073858507e-311, null, 98]], "\u00b3h\u00bda\\\ud928\udefa\u001f\u0088": {"\u00f7 \u00ef2\ud918\ude9f\"?\u0093/": 9.461250721656832e-297, "": 5166717974380282258, "\udb35\udfcf\u00f3\u008b\u00ad": -18024}, "v\ud960\ude15[": [20753, 243153464, true], "\u009f": {}, "\u00ba\u009a\u00dc\udaeb\udcbb\u00de": [{"\u00a0H\u00e7": 1.175494351e-38}, [], 30]}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168890

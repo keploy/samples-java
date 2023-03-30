@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-179
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/2
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "663"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 31ef41bdc1eb4bd2a7a2bb457315c07b
+        body: '{"email": "E6", "firstName": "\u00956\u00c9m\u009d\u0080\ud9fb\udd21\u000bN\u0080", "lastName": "\u00f3\ud829\udeb3\ud931\udd181i\u001d\u00e0lx\u00f2P\u00bc", "": {}, "%<\u00ff\u00dc}tS\u00f9;": [false, 1540, -9793928527812718.0], "\ud899\udcb5}\u00b8y\u0096\u0013\u00ff\uda0c\udc6cFT": [[{"\u00faU\u001c0K\uda31\udc71\u00e1": -2.225073858507203e-309, "\u00ce": null}, [null, false, -1.175494351e-38], [null, null, null]], {"\u00c6\u0012": []}, []], "j\u00b6|0\\": {}, "3o\u00f1W\ud995\udc36\udb15\udf621\u00f5": [{}, 0.0], "\u00a5\u00b6\ud8c0\udc59w\u00b3+:\u00c1\ud924\udc9a\u00c4\uda71\udcd4\u009e\ud830\ude60\u00fc\u0006": {}, "q": {}, "\u009b": {"v": false}}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168887

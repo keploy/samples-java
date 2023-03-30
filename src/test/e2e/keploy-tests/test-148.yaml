@@ -1,0 +1,37 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-148
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/1
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "49"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: b908390bce4f430bb6e978e36769bb37
+        body: '{"email": "1", "firstName": "1", "lastName": "1"}'
+        body_type: utf-8
+    resp:
+        status_code: 200
+        header: {}
+        body: '{"id":1,"firstName":"1","lastName":"1","email":"1"}'
+        body_type: utf-8
+        status_message: OK
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - mock-148-0
+    assertions:
+        noise: []
+    created: 1680168889

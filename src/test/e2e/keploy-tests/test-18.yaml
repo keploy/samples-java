@@ -1,35 +1,35 @@
-version: api.keploy.io/v1beta1
+version: api.keploy.io/v1beta2
 kind: Http
 name: test-18
 spec:
     metadata: {}
     req:
-        method: GET
+        method: PUT
         proto_major: 1
         proto_minor: 1
-        url: /api/employees
+        url: /api/employees/2
         header:
             accept: '*/*'
-            accept-encoding: gzip, deflate, br
-            cache-control: no-cache
+            accept-encoding: gzip, deflate
             connection: keep-alive
-            content-length: "103"
+            content-length: "160"
             content-type: application/json
             host: localhost:8080
-            user-agent: PostmanRuntime/7.29.2
-        body: ""
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: d9efc3f2a18546568292e0e3e5bef23b
+        body: '{"email": "\u00cf\udbae\udec9x\u5f01", "firstName": "1", "lastName": "X1)H\uda7b\uddda", "": [[{"": 5.960464477539063e-08}, [null, "1", false]], {"001": null}]}'
+        body_type: utf-8
     resp:
-        status_code: 200
+        status_code: 400
         header: {}
-        body: '[{"id":1,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671896801},{"id":2,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671896805},{"id":3,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671897026},{"id":4,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671897029},{"id":5,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671897896},{"id":7,"firstName":"mom","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671901970},{"id":8,"firstName":"Trent","lastName":"Boult","email":"mt@gmail.com","timestamp":1671974006},{"id":9,"firstName":"Barry","lastName":"Brook","email":"mt@gmail.com","timestamp":1671974135},{"id":10,"firstName":"David","lastName":"Brook","email":"mt@gmail.com","timestamp":1672041183},{"id":11,"firstName":"David","lastName":"Brook","email":"mt@gmail.com","timestamp":1672041330},{"id":12,"firstName":"David","lastName":"Brook","email":"mt@gmail.com","timestamp":1672041591},{"id":13,"firstName":"David","lastName":"Brook","email":"mt@gmail.com","timestamp":1672042234}]'
-        status_message: OK
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
         proto_major: 1
         proto_minor: 1
     objects:
         - type: error
           data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
-    mocks:
-        - test-18-0
     assertions:
         noise: []
-    created: 1672042256
+    created: 1680168888

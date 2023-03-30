@@ -1,0 +1,37 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-53
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "49"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: b2e01e2452d44e3189db9dcf0db34962
+        body: '{"email": "0", "firstName": "0", "lastName": "0"}'
+        body_type: utf-8
+    resp:
+        status_code: 200
+        header: {}
+        body: '{"id":1,"firstName":"0","lastName":"0","email":"0"}'
+        body_type: utf-8
+        status_message: OK
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - mock-53-0
+    assertions:
+        noise: []
+    created: 1680168884

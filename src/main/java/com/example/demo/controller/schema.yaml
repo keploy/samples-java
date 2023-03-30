@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  title: Employee Controller API
+  version: 1.0.0
+  description: CRUD operations for Employee resource
+servers:
+  - url: http://localhost:8080/api/
+paths:
+  /employees:
+    get:
+      summary: Get all employees
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+    post:
+      summary: Create an employee
+      requestBody:
+        description: Employee object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+  /employees/{id}:
+    get:
+      summary: Get an employee by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the employee to get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '404':
+          description: Employee not found
+    put:
+      summary: Update an employee by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the employee to update
+      requestBody:
+        description: Employee object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '404':
+          description: Employee not found
+    delete:
+      summary: Delete an employee by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the employee to delete
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deleted:
+                    type: boolean
+    components:
+      schemas:
+        Employee:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Unique identifier of the employee
+            firstName:
+              type: string
+              description: First name of the employee
+            lastName:
+              type: string
+              description: Last name of the employee
+            email:
+              type: string
+              format: email
+              description: Email of the employee
+            timestamp:
+              type: integer
+              description: Timestamp of when the employee was created or last updated

@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-249
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/1
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "1603"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 3ae5c3425159486cbd7529e5d7fba357
+        body: '{"email": "\u00016\uda7f\udcce\u0090", "firstName": "\u00c5o\u00f4\udaf0\udd7eq\u00fb", "lastName": "Q\u0005\u00b1\ud977\ude7e\u00b2\uda5a\udf80{\u009fe", "\u00ff": {"(\u001d\u0005\u00db\udbe5\ude83": [[], true, [[]]]}, "\uda86\udc2d": {"\u00ce": {"3\ud994\udc0bB\u00b0\u0016": {"": [[]]}}, "\ud97f\uddc8.I\u00eb\u0015\udadf\udc62W\u0004\u008fr_`\uda64\udc67?": "\uf8c4", "\u00e8\udbe9\udd79\u0083\u0016>o\uda54\udfccs\uda70\udc4bW": {"\u0096\u00dc\u00fb\u00a1\u00ad\u00ea\u00ce\udb9c\udd74": "\u00b3\u00da`\udaa1\udfc4o\u008d\u00c8\u00d1\ud90a\ude3f)Q\u00e9\u00a5s\u0017T\u001d\ud864\ude36?\u00d9", "4\u00c6": {"\u00a0": {"\u008a\udbfd\ude54": -3.7760142969068264e+16, "\u0000\u00b6\u00cb\u00eb\u0085": 6060, "\u0088o\u009d\u00f5": 10000000.0}, "\u0012": {}, "\ud9d0\udfb0\u00ae\ud986\ude13\ud8c2\udebe\u00e9": false}, "\u00b1\uda9b\udff7\u00f8^n\u00aa": -75}}, "\u009a": {}, "\u00c71\uda19\udef1": {"\ud919\udd2e\u0083\u00e0s": [{"": -54, "l\u00d9": -8663, "\udbe3\udfd2\u00b2\uda15\udf69\ud807\udd7e\udafb\ude03\u00a1\u000f\u00bc\ud96e\uded8\u001a\u938e": null}], "\u0005\u00195,\u00d4z\u00ce\u00a7\u00b4\uda3c\udde4": [[[1.1754943508222875e-38, [null], null], {"\u00f1\u00d8\u00aaB": {"\uda37\udfb8\udad0\udd77''\ud944\udd93": -1.192092896e-07, "\\\ud99c\uddef\u00a1\u00f0": "\u0005\u00df\u00f1M\udb6f\udcf3J", "\u5ba3_\u00e4\u00a7/": "\u00fd\u00de\udbe6\udcb7\uada8\u00de&\uda73\udfdfj=\u00aai\uda10\udcc6"}}], {"\u0005": false, "\u00e0\u00db\u00aa\udad8\ude078pXw\u00df\u00c34\u009c\u00e1h\ud9e2\ude86\u008f\u00d5": -21519, "&\u0086\u008e\u00f2N\u00d8": 79508125}, {}]}, "\udb5f\udeb2\u0094": null}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168890

@@ -29,11 +29,23 @@
             <version>5.3.22</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.14.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+        </dependency>
+
         <!--        local-->
         <dependency>
             <groupId>io.keploy</groupId>
             <artifactId>keploy-sdk</artifactId>
-            <version>1.2.6</version>
+            <!--            <version>1.2.6</version>-->
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -44,6 +56,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
@@ -62,11 +79,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${project.parent.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.newrelic.agent.java</groupId>
@@ -133,19 +145,22 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <!--                    <skipTests>true</skipTests>-->
+                    <argLine>
+                        -javaagent:/Users/charankamarapu/Java-SDK/java-sdk/agent/target/agent-1.0.0-SNAPSHOT.jar
+                        -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=target/jacoco.exec
+                    </argLine>
                     <systemPropertyVariables>
                         <jacoco-agent.destfile>target/jacoco.exec
                         </jacoco-agent.destfile>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
-
             <!--        Added jacoco plugin for coverage-->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.7</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -168,7 +183,6 @@
                         </goals>
                         <configuration>
                             <!-- Sets the path to the file which contains the execution data. -->
-
                             <dataFile>target/jacoco.exec</dataFile>
                             <!-- Sets the output directory for the code coverage report. -->
                             <outputDirectory>target/my-reports</outputDirectory>

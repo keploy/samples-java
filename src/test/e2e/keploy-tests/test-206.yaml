@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-206
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/2
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "3351"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: e38049cdf09b47c888fb70fa37d5e27b
+        body: '{"email": "\u00d4\u00bcu\u00b4e\u00d1\uda45\ude8c\u00eb", "firstName": "o\u00a3u\u00b9\u00a5\u0013\u00f1\u00e3y\u0096", "lastName": "\uda16\uddfed\udb74\udf73]\u00fb~", "\u00d8\u0082\u008cW}\u00b4#\u00ffQ\u008a\u0015}": {"I^,\udb2d\udda4\u00b7\u00ab\u00f3\u00fcc\ud844\udfd8L\u0081\u00c5\u00cf8\u00c2\u00d0n\u00a1V\u00ba\u00d4\u00dfC\u0088\f\u00a0f#8\u0084\ud8d8\udd84A": []}, "T\ud911\udefa\u00fabi\u00d1A\udaa7\udc43F\u80bf\ud976\udfe2\u00fd": {"": {"\u009aO": "", "": null}, "\u00deC~": {"\u00fa": false}, "\n\u00bd\u00d3\udb76\udd13]\u00de\u001c": []}, "\u00a0\u008d\ud9c6\udd08\u0098\u0089": [[{}, [{"\u0098\u00d4": 94, "": 21165}, [32, -24371, -5e-324], -2.2250738585072014e-308], "\u00ca\u009bV%3~\u5cd2\u009a\t\u0015\u0011\u00a1\\\ud9f9\uddf7\u008f\u00d8\u00e2"], [], {"": [], "f\udbc7\udc53": null, "\ud8b7\udde69": [-19375, {"\ud978\udeb8\u00c6\u0006j\ud934\udf42\u00b3\ud8ed\udc87": "\u00da\b\u00f3", "\u00b7\ud9a0\udf51\u001c\u00b8\ud9f1\udc31\u00bcy\u00b1\u0002\uda45\udc55\u0005": null}, false]}], "\r\u0083\u00e6\u0004\u00a6": [{}, [[], null, []]], "#": [-1e-05, false, true], "\u0015\ud8ea\udd21\u0016\ud95c\udc59\u00dc\u007f\"@!#\u00ef\udb4d\udcc6\udbd2\ude6e\u0011[\ud8d7\udf02\uda0f\udd10": {"A\u00bd\u00f4\ud927\udf12": {"\u0005Z\udb47\ude75": false, "": [-1.9, "Wf\u00c8\u0091<\u00ed\u0019\u0088", true], "\uda2f\udc74\u00fc\u00fe\udaf2\udce0\u00b0": {}}, "": [], "\u00b3\uda7e\udd2d\u00eeEr\ud987\udf92%": "\u00dc=\ud914\udec1h\u0006\u00f4\u00b5\ud982\udf42\u00f4\u00a1"}, "U": {"\u00d9\u00816": {"\u0091p\u00e8\u0080\ud84e\udcdb;\u0015\u00a1\u0003>\u00b3": 111, "\u00cd\u00c4": -10245}, "\u00c9\u00b2\u00d6k\u0092\udb3d\udca2\udb5f\udf1c": "m\u00c1\ud9d9\udf5b\u007f\u0088\u0081\u00e9\u0084\u00a3\u0087\u00ac\udb98\udc15"}, "\u001a\u00be": [{"\ud86d\udde2\u0007Ck": {}, "f\u00cc\u009cf\ud8ba\udc12\u0096": "", "\u008c\uda34\udc45f": {"\ud9e2\udd37\u00fc\ud9b4\udddf ": null, "\u00a1\u00bd\u00f6": ""}}, []], "Y\u00c7\u00d5": [{}, [[30237, -1.9, null], [], {}], []], "$\u008a": {"\u00f39\u00ea\u00b6\u1875\u00cbsPvrm\u00fe\udb5b\udeb9": null, "\ud8dd\udfee": {"\u000f\n\u00043\u0018\u009b\u001c\u00ea\u000e5\u00e4\u00f4": {}}}, "\u009b": [], "x\u00d4\u00ca\udb2a\ude65\uc4b5\u00a0\ud94c\udca5\u00e3w": [true, "", [false, true, "\u00ab\u00f49\udb9c\ude23\u00b4"]], "\u0007": {"\u00fd\ud96c\udf8d\u00e5Z\u00d7Q\uda01\udf03\uda4f\udffbD\u00b8\u00a6\ud90f\udc322''\u0081\udaaa\udf7f9\uda65\udcab\ud992\ude22\u00ed\u00fa": "\ud88f\udd47\u00f8\udb1a\uddbc", "\u00ee?\u00eau": {"": [true]}, "\u0016\u00a1-\u00a3\u00cf\u00c7\ud8cf\udd0c\ud906\udf5e\u00a3\u00a6\ud8a2\udc1fK}\u00afZ\\\u00e2\ud9a7\udd15\uda79\uddb0": {"\u0011]0\ud9da\ude991\u00b8\u0007V\u008b\u00d7\u001b\u00f7o\u00c3Z\uda3b\udfb7\u00ba\u00c70": [[]], "\u0000\u007f6Y\u0097": 3.864413682257309e-57}}, "\u00dc\u0080\u0098\u0088K\u000f\udb1a\udd15": true, "\uf83b$\u00abB\udbac\udfb9\u00e7:": [], "\ud886\udef0\u0010\u00a6": [], "R\u00fa\u00cd\udba9\udc6e\u00f1\udbf8\udcd5": {"\u0015\u1997\u00e1": [{"\u39d8\u009c\u00d5)f\u00c2\u0003}\ud891\udd7b\\\u00bc\u00f9W\u00b7\ud9ac\udd42\u008f\u00b4\u00c9\ud8d5\udcd7\ud907\udd64\u00d8": 1160996378306588238, "\u007f\u0095\u00c7\ud90a\udc97": null, "": true}, []], "\u0098L\ud9cf\udf59\u00dc": []}, "d\u00ad\u00e0": {"\ue84f": {"s\u009e": 0.0}, "T\udb2a\udf08b\udb86\udf11": [[], true]}, "\u00af": -1.175494351e-38, "": [null, {}]}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168887

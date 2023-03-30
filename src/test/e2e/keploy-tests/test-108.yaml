@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-108
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "675"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: a7a1436ff17c4bb983d32abea0bb8f5a
+        body: '{"email": "\u00e9\u00bflO\u00d1\u00df\u00f9\u0005\u00f2\uda9f\udce0\u7439", "firstName": "\u0001\"<\ud99d\udc95\u009d\u0097zc\ud997\udecb0T\u0083\u00c2", "lastName": "\u00e9\u00bflv)e\u00f6\u001c", "\ud821\udff4k\u00da": [{"\uda9b\ude54\udbe7\udc00\u00c6\udaaf\udefcv": [-1.566871008010996e+16]}], "C": {"\u008d\udb97\udeb4": [null, false, -20664], "\u001f\ud836\udcf1-:\u00dfB\u0093r\u008c\uda10\udc2e\n\udbcf\udceb": [], "\u00b2\u00c6F\uda96\udd8f": {"=\udbf7\ude69\n\udb51\udc4d\u00d9G\u00d6\ud9c5\uddbd\u009a\uda46\udeeb\u00cd\u00a7": [], "uf\u0003\ud851\udf9f": {"": -0.5, "\u00a8": "\u00dfA\u00e1\ud8b8\udd61\ud965\udfb3\udb1d\udc6f\u00bez\u00ee\u00c8\u009b\u00a0("}}}}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168885

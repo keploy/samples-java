@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-251
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/1
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "3151"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 8c94ea0b9a3b4cc6a5e6d7bd5b1f747b
+        body: '{"email": "\u00b1\u00d6=\u00ab\ud883\udf57\u0007\u00ec\u00a9\u00c5\u00ea\u0000wmCDW", "firstName": " \u00b8rs\u0010<\u0087G\u008e\ud84d\udc5b3v\u0010\u00aa", "lastName": "yc\ud997\udc33 \u00ee\u00f6v\udb2b\udeb0\u00a1@\u00f8+\u0004\u001b86\ud941\udc47\ud8b6\udf9a\udab3\udc3e", "": true, "\u008c\ud91a\udcf1O\udbec\udf79\u00ad\n\u00dc\u00dd\udbc2\udd07\udbfd\udec6\u00a1\u00e2": [{"\udbe0\udf5bf\u0015:D\u00c6q\ud905\udc6d3\uda99\udee7,": null, "6\u00da\uda8f\udc1d\u0096\u00af\udb85\udd5a": null}, {"f\u0085\u0086h\uda13\ude3a\u0097[": {"\u00e7": 1.401298464324817e-45, "\u0004\u0017\u00e2": {}}, "": {}}], "\u001c": {}, "3\u0011\ud8e8\udf39\u00abM\u00f4": [], "K": {";\u0082\u0095\u00e7": -16571}, "\udaa9\uddc9\udb3b\udd04\ud825\udc2c": ["", null, -17517], "\uda19\udca5\u0010\u00ab\udb56\udf70\u00b6\u0095Y\u00cb": [], "\u00e9\u00e7\u0017\u00a4\u00ca\u00ea[-": {"\u00e3\u00c5j\u00a5": {"\u00ee#\u001c(\ud812\udcd9\u009d\u0001,\u0010": {"\f\u00b2;v;c\uda9c\udcc1": -1.7976931348623155e+308, "(;\udbf2\udf58\u00f1W''\u00d3": [-12228, 30848]}, "\u00f1t\ud88f\udeb2\u0019": []}, "\u00b6\ud815\udc0d \u001c\u00d6Y\ud90c\uddcd\ud8fc\udd7a\u00f9": {"": -113432073}, "\u00c6\udaf7\ude06": {"{e\ud845\udc17w\u0080s\ud960\udf54": "N\u00b8O\u001f\udb83\udcad"}}, "\ud89e\ude0f\u00e1\u0096\u00d7": [], "s": {}, "\u00a3\u00a7M\u00a9": [{"": {"": 102, "\u00ce\u0095\u0080r\ud9a3\udce7D\b\u0081\u00b6\udbb5\udd28\ud939\udcfbb\t": "\u0004Dh;", "\u00e3\u00ed": false}, "\u009d": {"": null, "\u00de\u00f6": "\u00a4\u009c\u00d0"}, "\u0014\u0085<": 1.5}, {}, {"\ud958\udf57": [], "": {"\u00ebd\u0016n\uda50\ude8d\u009d.\udac0\udc2e\udb59\uddb6\udbba\udef0N\u00de|\u00e6\u00d9\u00c1\uda3c\udf0a%\uda02\udf9c\u0098\u0001\u00d8\u00cbf\ud9e6\udc13\u00d4\ud835\udc88\u001aF\u00f6\ud818\udd6b": false}, "S\u0087": {}}], "j": {"": false, "{": ["A\u00b1\u00ee\u00b3F\u00b8\u00c6\ud8a7\udc0d\u0086\u00d0\u00af\udb9b\udd84\u00b1", 2.225073858507203e-309], "\ud9da\udc0d": {"\u0018": "\u00d2o\u0002\u00a1K\u00e6:\ud8e7\udf7e\u0082", "j\t\uda58\udfc8H\u0094F8\u00ee\u008a\udbaa\ude7c\u00d5\f&E": 1.7976931348623157e+308, "\udb36\udedf\ud997\udc05\u00bde\t": -1.192092896e-07}}, "\ud96d\udd57I": {"": {"d7E1g\u00c4\bX": -2.220446049250313e-16, "\r\u009e\u00eb\u00d8\u009f\u0093 ": true, "\u001b\u00e5": true}}, "\u00d7,\ud8a3\udcda5\udb2c\udfd6\ud89b\udef5y": [], "\u00af\u00bf\u00a6": [], "j\u001a)\u0019a\uefd1": {}, "[": {"": {"a\u00148\u00fc\u00dc\uda63\udc39": null, "\u00c3": "\ud801\udf80\uda55\udd28\udb94\udcc5\u00ff\u00bbj", "\u00ee3a\u00d1{\ud982\udf33\u00b0\"": false}, "I": {"q<:\u00a6\u0087<\uda64\udcb3\u00da\u00e7\u0094\ud9ce\udf99\u00d6\ud89e\udc85\u00c4W\u0083i\ud9b9\ude64\u0083\u0002#\udb0c\udd6b\n": {"\ud9ed\ude64": false, "\b\u008dr\u00ca\udbd6\udf48M+": 122, "z\ue251/\u00f7\u0084": [null, null, "\ud8d8\udd85/\ud981\udffb"]}, "": [{"\u009f\udb41\udfe1\u00ba": false, "\u0015": "(\u00abY4\u00c6%\u00c1\u00c3\u0087\udac8\udc55\u00cf\u00c6\udb0b\ude3bT", "$d\u00bd\u001e": "\u00e6\u00e3\u00a2\ud918\udec7\u00af\u00bf"}, false, false], "\uda17\udc8a\u0000k": [{}, [], 11252108064614347915657959272346742211]}}, "\u00b6Y\u00a6\\\n\udb96\udcab1": {"\u00e4": {}}}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168890

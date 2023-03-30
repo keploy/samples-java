@@ -1,0 +1,38 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-426
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/17100
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "49"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: c5ce3c09ebe647738f29aef28bf8d418
+        body: '{"email": "0", "firstName": "0", "lastName": "0"}'
+        body_type: utf-8
+    resp:
+        status_code: 404
+        header: {}
+        body: '{"timestamp":"2023-03-30T09:34:54.583+00:00","message":"Employee not found for this id :: 17100","details":"uri=/api/employees/17100"}'
+        body_type: utf-8
+        status_message: Not Found
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - mock-426-0
+    assertions:
+        noise:
+            - body.timestamp
+    created: 1680168894

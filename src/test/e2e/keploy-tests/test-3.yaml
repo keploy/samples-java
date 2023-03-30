@@ -1,35 +1,35 @@
-version: api.keploy.io/v1beta1
+version: api.keploy.io/v1beta2
 kind: Http
 name: test-3
 spec:
     metadata: {}
     req:
-        method: GET
+        method: POST
         proto_major: 1
         proto_minor: 1
         url: /api/employees
         header:
             accept: '*/*'
-            accept-encoding: gzip, deflate, br
-            cache-control: no-cache
+            accept-encoding: gzip, deflate
             connection: keep-alive
-            content-length: "101"
+            content-length: "580"
             content-type: application/json
             host: localhost:8080
-            user-agent: PostmanRuntime/7.29.2
-        body: ""
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: fb6d7b434cf6448f8aaa7afeae86d891
+        body: '{"email": "e6\u0000c\u00d5", "firstName": "2\u001c", "lastName": "\ud926\udf606\ud9a3\ude13\u00f0V\u00e3\u009b\u00fc\u00d9\ud901\udc47", "\u0703\ud987\udd35k\u00a1v\udb29\udd7dfa": [{"\u00b1\u0011\u00d6\u0000\ud964\udfbe\u00b2_": 35, "\u00a4bg\u00c3": null}, [[1.7976931348623157e+308], {"\ud801\udc8b\u00c02": [844923146544389.0, false, 9222356], "\ud942\ude05": {"": false, "\ud803\udf00\u00ec": -5931392, "7b": 0}}, null]], "\u00fem\uda27\udd05": {"\ud8ef\udd63\udb14\udfcb\u0099\u0016\u0004\u000e\u00cc\udb1a\udf13": [-2.225073858507e-311], "\u9a07\u0086": [3.402823466e+38]}}'
+        body_type: utf-8
     resp:
-        status_code: 200
+        status_code: 400
         header: {}
-        body: '[{"id":1,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671896801},{"id":2,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671896805},{"id":3,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671897026},{"id":4,"firstName":"Sam","lastName":"Tyson","email":"mt@gmail.com","timestamp":1671897029}]'
-        status_message: OK
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
         proto_major: 1
         proto_minor: 1
     objects:
         - type: error
           data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
-    mocks:
-        - test-3-0
     assertions:
         noise: []
-    created: 1671897170
+    created: 1680168885

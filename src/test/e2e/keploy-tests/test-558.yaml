@@ -1,0 +1,37 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-558
+spec:
+    metadata: {}
+    req:
+        method: DELETE
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/-2523
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "0"
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 299ab35055da41bf9783271673d375c0
+        body: ""
+        body_type: utf-8
+    resp:
+        status_code: 404
+        header: {}
+        body: '{"timestamp":"2023-03-30T09:34:57.861+00:00","message":"Employee not found for this id :: -2523","details":"uri=/api/employees/-2523"}'
+        body_type: utf-8
+        status_message: Not Found
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - mock-558-0
+    assertions:
+        noise:
+            - body.timestamp
+    created: 1680168897

@@ -1,0 +1,35 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-147
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: /api/employees/3
+        header:
+            accept: '*/*'
+            accept-encoding: gzip, deflate
+            connection: keep-alive
+            content-length: "282"
+            content-type: application/json
+            host: localhost:8080
+            user-agent: schemathesis/3.18.5
+            x-schemathesis-testcaseid: 10d76af98fb6417da2a78793e20821f3
+        body: '{"email": "\ud821\udd603\u0014\u0096\u00d9q\u00c7UP", "firstName": "\udacc\udd3c\u0082E\f\u0003\u009f\u009d\u00f0\u009f\u0089\u00fd\u00b1\ud862\udc56\u00a9\udaf4\udc90\udbc8\udcadS/\u00a4p0\u009fG\u00df\u00ae\u00b8U\u0098", "lastName": "\udb79\uddaek\ud93f\ude12\u00e5\ud940\udf32"}'
+        body_type: utf-8
+    resp:
+        status_code: 400
+        header: {}
+        body: ""
+        body_type: utf-8
+        status_message: Bad Request
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    assertions:
+        noise: []
+    created: 1680168888
