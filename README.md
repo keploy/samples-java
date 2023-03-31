@@ -3,6 +3,8 @@
 A sample Employee-Manager app to test Keploy integration capabilities using [SpringBoot](https://spring.io) and
 [PostgreSQL](https://www.postgresql.org/).
 
+**Note** :- Issue Creation is disabled on this Repository, please visit [here](https://github.com/keploy/keploy/issues/new/choose) to submit Issue.
+
 ## Pre-requisites
 
 - [Java 8+](https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.installing)
