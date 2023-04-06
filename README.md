@@ -97,8 +97,12 @@ or to *build.gradle*:
 git clone https://github.com/keploy/samples-java 
 ```
 
-### Start PostgreSQL instance
+## Agent-jar
+Download the latest version (1.2.8) of agent jar from [here](https://central.sonatype.com/artifact/io.keploy/agent/1.2.8) and add this jar to main directory.
 
+
+### Start PostgreSQL instance
+Download docker dekstop from [here](https://docs.docker.com/get-docker/).
 ```bash
 docker-compose up -d
 ```
@@ -111,7 +115,13 @@ mvn clean install -Dmaven.test.skip=true
 
 ### Set KEPLOY_MODE to record
 
-- To record testcases use `KEPLOY_MODE` env variable and set the same to `record` mode.
+- To record testcases use `KEPLOY_MODE` and `DENOISE` as env variables. Set `KEPLOY` to `record` mode and mark `DENOISE` as `true`. Also add  
+
+`-javaagent:path of agent jar` like this 👇.
+
+
+![Edit_configurations](/src/main/resources/Edit-configurations.png "Edit configurations")
+
 
 ## Generate testcases
 
