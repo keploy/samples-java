@@ -1,4 +1,3 @@
-import com.example.demo.SamplesJavaApplication;
 import com.example.demo.controller.EmployeeController;
 import com.example.demo.repository.EmployeeRepository;
 import io.keploy.regression.Mode;
@@ -11,7 +10,6 @@ import org.mockito.Mock;
 import java.util.concurrent.CountDownLatch;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 
 public class SamplesJavaApplication_Test {
 
