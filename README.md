@@ -1,6 +1,4 @@
-I've removed the Keploy-specific sections and updated the README accordingly, focusing on the Employee-Manager app using Spring Boot and PostgreSQL. Here's the updated README:
 
-```markdown
 # Employee-Manager App
 
 A sample Employee-Manager app using [Spring Boot](https://spring.io) and [PostgreSQL](https://www.postgresql.org).
