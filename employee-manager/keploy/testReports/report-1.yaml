@@ -1,0 +1,139 @@
+version: api.keploy.io/v1beta1
+name: report-1
+status: PASSED
+success: 2
+failure: 0
+total: 2
+tests:
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1698746142
+      completed: 1698746142
+      test_case_path: /home/gouravkumar.linux/gk_workspace/java_workspace/samples-java/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-1
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees
+        header:
+            Accept: '*/*'
+            Content-Length: "100"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: |-
+            {
+                "firstName": "Myke",
+                "lastName": "Tyson",
+                "email": "mt@gmail.com",
+                "timestamp":1
+            }
+        body_type: ""
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Tue, 31 Oct 2023 09:54:50 GMT
+        body: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1698746090}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+      noise:
+        - body.timestamp
+        - header.Date
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Tue, 31 Oct 2023 09:54:50 GMT
+              actual:
+                key: Date
+                value:
+                    - Tue, 31 Oct 2023 09:55:42 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1698746090}'
+              actual: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1698746142}'
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1698746142
+      completed: 1698746142
+      test_case_path: /home/gouravkumar.linux/gk_workspace/java_workspace/samples-java/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-2
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/1
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Tue, 31 Oct 2023 09:55:01 GMT
+        body: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1698746090}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+      noise:
+        - header.Date
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Tue, 31 Oct 2023 09:55:01 GMT
+              actual:
+                key: Date
+                value:
+                    - Tue, 31 Oct 2023 09:55:42 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1698746090}'
+              actual: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1698746090}'
+        dep_result: []
+test_set: test-set-1
