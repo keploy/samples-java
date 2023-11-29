@@ -23,4 +23,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn clean install -DskipTests
+      run: |
+        cd employee-manager
+        mvn clean install -DskipTests
