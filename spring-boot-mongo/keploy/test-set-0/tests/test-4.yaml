@@ -1,0 +1,39 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-4
+spec:
+    metadata: {}
+    req:
+        method: DELETE
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/potions/21fac58b-8c6c-4d4a-bef8-0034324bae29
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 2023-11-28T18:28:24.09510735+05:30
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Tue, 28 Nov 2023 12:58:24 GMT
+        body: '"OK"'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-11-28T18:28:27.678879794+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1701176307
+curl: |
+    curl --request DELETE \
+      --url http://localhost:8080/potions/21fac58b-8c6c-4d4a-bef8-0034324bae29 \
+      --header 'Accept: */*' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: curl/7.81.0' \

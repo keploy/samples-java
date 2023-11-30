@@ -1,0 +1,279 @@
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mocks
+spec:
+    metadata:
+        operation: '{ OpQuery flags: [], fullCollectionName: admin.$cmd, numberToSkip: 0, numberToReturn: -1, query: {"isMaster": {"$numberInt":"1"},"helloOk": true,"client": {"driver": {"name": "mongo-java-driver|sync|spring-boot","version": "4.9.1"},"os": {"type": "Linux","name": "Linux","architecture": "amd64","version": "6.2.0-35-generic"},"platform": "Java/Oracle Corporation/21.0.1+12-LTS-29"}}, returnFieldsSelector:  }'
+        type: config
+    requests:
+        - header:
+            length: 308
+            requestId: 2
+            responseTo: 0
+            Opcode: 2004
+          message:
+            flags: 0
+            collection_name: admin.$cmd
+            number_to_skip: 0
+            number_to_return: -1
+            query: '{"isMaster":{"$numberInt":"1"},"helloOk":true,"client":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.9.1"},"os":{"type":"Linux","name":"Linux","architecture":"amd64","version":"6.2.0-35-generic"},"platform":"Java/Oracle Corporation/21.0.1+12-LTS-29"}}'
+            return_fields_selector: ""
+    responses:
+        - header:
+            length: 329
+            requestId: 31
+            responseTo: 2
+            Opcode: 1
+          message:
+            response_flags: 8
+            cursor_id: 0
+            starting_from: 0
+            number_returned: 1
+            documents:
+                - '{"helloOk":true,"ismaster":true,"topologyVersion":{"processId":{"$oid":"6565df4efc463c1b8b542282"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1701175492459"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"4"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"21"},"readOnly":false,"ok":{"$numberDouble":"1.0"}}'
+          read_delay: 69873639
+    created: 1701175492
+    reqTimestampMock: 2023-11-28T18:14:52.392721073+05:30
+    resTimestampMock: 2023-11-28T18:14:52.463447382+05:30
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mocks
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"hello":{"$numberInt":"1"},"$db":"admin"} }], checksum: 0 }'
+        type: config
+    requests:
+        - header:
+            length: 52
+            requestId: 4
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"hello":{"$numberInt":"1"},"$db":"admin"} }'
+            checksum: 0
+          read_delay: 10009264303
+    responses:
+        - header:
+            length: 313
+            requestId: 32
+            responseTo: 4
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"isWritablePrimary":true,"topologyVersion":{"processId":{"$oid":"6565df4efc463c1b8b542282"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1701175502472"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"4"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"21"},"readOnly":false,"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 754714
+    created: 1701175502
+    reqTimestampMock: 2023-11-28T18:15:02.472177183+05:30
+    resTimestampMock: 2023-11-28T18:15:02.477144943+05:30
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mocks
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 65536, sections: [{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"topologyVersion":{"processId":{"$oid":"6565df4efc463c1b8b542282"},"counter":{"$numberLong":"0"}},"maxAwaitTimeMS":{"$numberLong":"10000"},"$db":"admin","$readPreference":{"mode":"primaryPreferred"}} }], checksum: 0 }'
+        type: config
+    requests:
+        - header:
+            length: 197
+            requestId: 3
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 65536
+            sections:
+                - '{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"topologyVersion":{"processId":{"$oid":"6565df4efc463c1b8b542282"},"counter":{"$numberLong":"0"}},"maxAwaitTimeMS":{"$numberLong":"10000"},"$db":"admin","$readPreference":{"mode":"primaryPreferred"}} }'
+            checksum: 0
+          read_delay: 12811131
+    responses:
+        - header:
+            length: 323
+            requestId: 33
+            responseTo: 3
+            Opcode: 2013
+          message:
+            flagBits: 2
+            sections:
+                - '{ SectionSingle msg: {"helloOk":true,"isWritablePrimary":true,"topologyVersion":{"processId":{"$oid":"6565df4efc463c1b8b542282"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1701175502484"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"5"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"21"},"readOnly":false,"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 10009928942
+    created: 1701175502
+    reqTimestampMock: 2023-11-28T18:14:52.475518345+05:30
+    resTimestampMock: 2023-11-28T18:15:02.485971613+05:30
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mocks
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"find":"PotionsDB","filter":{},"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"PtzVFH3oT/KR3q3lk2y+5w==","subType":"04"}}}} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 111
+            requestId: 78
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"find":"PotionsDB","filter":{},"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"PtzVFH3oT/KR3q3lk2y+5w==","subType":"04"}}}} }'
+            checksum: 0
+          read_delay: 12948947
+    responses:
+        - header:
+            length: 313
+            requestId: 186
+            responseTo: 78
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"cursor":{"firstBatch":[{"_id":{"$binary":{"base64":"W0LJya188mIAGiAmzabwkQ==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"}],"id":{"$numberLong":"0"},"ns":"Keploy.PotionsDB"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 25459163
+    created: 1701176230
+    reqTimestampMock: 2023-11-28T18:27:10.000095428+05:30
+    resTimestampMock: 2023-11-28T18:27:10.025755621+05:30
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mocks
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"PtzVFH3oT/KR3q3lk2y+5w==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 83
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"PtzVFH3oT/KR3q3lk2y+5w==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 38229495241
+    responses:
+        - header:
+            length: 120
+            requestId: 195
+            responseTo: 83
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 11976054
+    created: 1701176268
+    reqTimestampMock: 2023-11-28T18:27:48.255588234+05:30
+    resTimestampMock: 2023-11-28T18:27:48.267898306+05:30
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mocks
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"find":"PotionsDB","filter":{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}}},"limit":{"$numberInt":"1"},"singleBatch":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"PtzVFH3oT/KR3q3lk2y+5w==","subType":"04"}}}} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 162
+            requestId: 86
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"find":"PotionsDB","filter":{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}}},"limit":{"$numberInt":"1"},"singleBatch":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"PtzVFH3oT/KR3q3lk2y+5w==","subType":"04"}}}} }'
+            checksum: 0
+          read_delay: 23778941556
+    responses:
+        - header:
+            length: 313
+            requestId: 200
+            responseTo: 86
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"cursor":{"firstBatch":[{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"}],"id":{"$numberLong":"0"},"ns":"Keploy.PotionsDB"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 5027561
+    created: 1701176292
+    reqTimestampMock: 2023-11-28T18:28:12.046850384+05:30
+    resTimestampMock: 2023-11-28T18:28:12.052099227+05:30
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mocks
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"find":"PotionsDB","filter":{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}}},"limit":{"$numberInt":"1"},"singleBatch":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"PtzVFH3oT/KR3q3lk2y+5w==","subType":"04"}}}} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 162
+            requestId: 89
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"find":"PotionsDB","filter":{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}}},"limit":{"$numberInt":"1"},"singleBatch":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"PtzVFH3oT/KR3q3lk2y+5w==","subType":"04"}}}} }'
+            checksum: 0
+          read_delay: 12047390629
+    responses:
+        - header:
+            length: 313
+            requestId: 205
+            responseTo: 89
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"cursor":{"firstBatch":[{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"}],"id":{"$numberLong":"0"},"ns":"Keploy.PotionsDB"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 831507
+    created: 1701176304
+    reqTimestampMock: 2023-11-28T18:28:24.099601634+05:30
+    resTimestampMock: 2023-11-28T18:28:24.100756416+05:30
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mocks
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"delete":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"PtzVFH3oT/KR3q3lk2y+5w==","subType":"04"}}}} }, { SectionSingle identifier: deletes , msgs: [ {"q":{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}}},"limit":{"$numberInt":"1"}} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 173
+            requestId: 90
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"delete":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"PtzVFH3oT/KR3q3lk2y+5w==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: deletes , msgs: [ {"q":{"_id":{"$binary":{"base64":"Sk1sjIvF+iEprksyNAD4vg==","subType":"03"}}},"limit":{"$numberInt":"1"}} ] }'
+            checksum: 0
+          read_delay: 13817859
+    responses:
+        - header:
+            length: 45
+            requestId: 206
+            responseTo: 90
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 1532098
+    created: 1701176304
+    reqTimestampMock: 2023-11-28T18:28:24.114623918+05:30
+    resTimestampMock: 2023-11-28T18:28:24.116346769+05:30

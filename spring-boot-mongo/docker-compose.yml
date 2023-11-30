@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  spring-boot-mongo:
+    image: mongo:latest
+    container_name: spring-boot-mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
