@@ -40,7 +40,7 @@ Now let's run a few tests to capture some more scenarios:
 
 To generate testcases we just need to **make some API calls.** You can use [Postman](https://www.postman.com/), [Hoppscotch](https://hoppscotch.io/), or simply `curl`
 
-1. Make an user entry
+1. Make a user entry
 
 ```bash
 curl --location --request POST 'http://localhost:8081/api/user' \
@@ -53,7 +53,7 @@ curl --location --request POST 'http://localhost:8081/api/user' \
 }'
 ```
 
-this will return the response or an entry. The timestamp would automatically be ignored during testing because it'll always be different.
+this will return the response or an entry.
 
 ```
 {"id":1,"name":"Dan","age":23,"birthday":"2000-1-1"}
@@ -66,6 +66,31 @@ curl --location --request GET 'http://localhost:8081/api/user/1'
 ```
 
 or by querying through the browser `http://localhost:8081/api/user/1`
+
+3. Update user record
+
+```bash
+curl -X PUT -H "Content-Type: application/json" \
+-d '{
+    "id": 1,
+    "name": "Update DAN",
+    "age": "22",
+    "birthday": "2001-2-2"
+}' \
+'http://localhost:8081/api/user/1'
+```
+
+this will return the response or an entry.
+
+```
+{"id":1,"name":"Update DAN","age":22,"birthday":"2001-2-2"}
+```
+
+4. Delete user record
+
+```bash
+curl -X DELETE 'http://localhost:8081/api/user/1'
+```
 
 Now both these API calls were captured as **editable** testcases and written to `keploy/test` folder. The keploy directory would also have `mock.yml` file.
 
