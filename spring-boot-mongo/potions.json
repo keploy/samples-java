@@ -1,0 +1,64 @@
+{
+  "potions": [
+    {
+      "name": "Healing Potion",
+      "description": "Restores health to the drinker.",
+      "bottle": 10,
+      "quantity": 500
+    },
+    {
+      "name": "Invisibility Potion",
+      "description": "Makes the drinker invisible for a limited time.",
+      "bottle": 5,
+      "quantity": 250
+    },
+    {
+      "name": "Strength Potion",
+      "description": "Enhances the drinker's physical strength temporarily.",
+      "bottle": 3,
+      "quantity": 150
+    },
+    {
+      "name": "Poison Potion",
+      "description": "Inflicts damage upon the drinker.",
+      "bottle": 8,
+      "quantity": 400
+    },
+    {
+      "name": "Love Potion",
+      "description": "Creates feelings of affection and attraction.",
+      "bottle": 6,
+      "quantity": 300
+    },
+    {
+      "name": "Firebreath Potion",
+      "description": "Allows the drinker to breathe fire momentarily.",
+      "bottle": 4,
+      "quantity": 200
+    },
+    {
+      "name": "Flying Potion",
+      "description": "Grants the ability to fly for a limited time.",
+      "bottle": 7,
+      "quantity": 350
+    },
+    {
+      "name": "Sleeping Potion",
+      "description": "Induces a deep sleep in the drinker.",
+      "bottle": 9,
+      "quantity": 450
+    },
+    {
+      "name": "Growth Potion",
+      "description": "Causes the drinker to grow in size temporarily.",
+      "bottle": 2,
+      "quantity": 100
+    },
+    {
+      "name": "Invisibility Detection Potion",
+      "description": "Reveals invisible entities in the vicinity.",
+      "bottle": 5,
+      "quantity": 250
+    }
+  ]
+}
