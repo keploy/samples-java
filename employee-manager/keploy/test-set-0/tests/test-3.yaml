@@ -1,0 +1,40 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-3
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 2023-12-04T09:32:13.062492036Z
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Mon, 04 Dec 2023 09:32:13 GMT
+        body: '[{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700642324},{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650840},{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650845},{"id":4,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650846},{"id":5,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650870},{"id":6,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650871},{"id":7,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700668292},{"id":8,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701155376},{"id":9,"firstName":"GK","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701155441},{"id":10,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682065},{"id":11,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682066},{"id":12,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682068},{"id":13,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682327},{"id":14,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682329}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-04T09:32:16.06356756Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1701682336
+curl: |
+    curl --request GET \
+      --url http://localhost:8080/api/employees/ \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: curl/7.81.0' \
+      --header 'Accept: */*' \

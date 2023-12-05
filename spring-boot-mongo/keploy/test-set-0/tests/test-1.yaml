@@ -1,0 +1,40 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-1
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/potions
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 2023-11-28T18:27:09.657931672+05:30
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Tue, 28 Nov 2023 12:57:10 GMT
+        body: '[{"id":"62f27cad-c9c9-425b-91f0-a6cd26201a00","name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":3,"quantity":150}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-11-28T18:27:13.791686894+05:30
+    objects: []
+    assertions:
+        noise:
+            body.quantity: []
+            header.Date: []
+    created: 1701176233
+curl: |
+    curl --request GET \
+      --url http://localhost:8080/potions \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: curl/7.81.0' \
+      --header 'Accept: */*' \

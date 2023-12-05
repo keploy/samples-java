@@ -1,6 +1,6 @@
-version: api.keploy.io/v1beta2
+version: api.keploy.io/v1beta1
 kind: Http
-name: test-1
+name: test-2
 spec:
     metadata: {}
     req:
@@ -22,29 +22,31 @@ spec:
                 "timestamp":1
             }
         body_type: ""
+        timestamp: 2023-12-04T09:32:09.749962868Z
     resp:
         status_code: 200
         header:
             Content-Type: application/json
-            Date: Tue, 31 Oct 2023 09:54:50 GMT
-        body: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1698746090}'
+            Date: Mon, 04 Dec 2023 09:32:09 GMT
+        body: '{"id":14,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682329}'
         body_type: ""
         status_message: ""
         proto_major: 0
         proto_minor: 0
+        timestamp: 2023-12-04T09:32:12.761148746Z
     objects: []
     assertions:
         noise:
-            - body.timestamp
-            - header.Date
-    created: 1698746093
+            body.timestamp: []
+            header.Date: []
+    created: 1701682332
 curl: |-
     curl --request POST \
       --url http://localhost:8080/api/employees \
-      --header 'Accept: */*' \
-      --header 'Content-Type: application/json' \
       --header 'Host: localhost:8080' \
       --header 'User-Agent: curl/7.81.0' \
+      --header 'Accept: */*' \
+      --header 'Content-Type: application/json' \
       --data '{
         "firstName": "Myke",
         "lastName": "Tyson",

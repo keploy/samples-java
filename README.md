@@ -19,7 +19,8 @@ This repo contains the sample for [Keploy's](https://keploy.io) Java Application
 ## Sample Apps with Keploy
 
 1. [employee-manager](https://github.com/keploy/samples-java/tree/main/employee-manager)
-2. [user-manager](https://github.com/keploy/samples-java/tree/main/user-manager)
+2. [spring-boot-mongo](https://github.com/keploy/samples-java/tree/main/spring-boot-mongo)
+3. [user-manager](https://github.com/keploy/samples-java/tree/main/user-manager)
 
 ## Community Support ❤️
 
