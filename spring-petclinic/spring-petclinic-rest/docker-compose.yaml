@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  java-app:
+    build:
+      context: .
+    container_name: javaApp
+    depends_on:
+      - mypostgres
+    ports:
+      - "9966:9966"
+    networks:
+      - keploy-network
+
+  mypostgres:
+    image: "postgres:15.2"
+    container_name: mypostgres
+    ports:
+    - "5432:5432"
+    networks:
+      - keploy-network
+    volumes:
+      - ./src/main/resources/db/postgresql/initDB.sql:/docker-entrypoint-initdb.d/initDB.sql
+    environment:
+      POSTGRES_USER: petclinic
+      POSTGRES_PASSWORD: petclinic
+      POSTGRES_DB: petclinic
+
+networks:
+  keploy-network:
+    external: true
