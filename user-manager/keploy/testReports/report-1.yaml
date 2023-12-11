@@ -1,0 +1,148 @@
+version: api.keploy.io/v1beta1
+name: report-1
+status: PASSED
+success: 2
+failure: 0
+total: 2
+tests:
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1701277466
+      completed: 1701277466
+      test_case_path: /home/illtamer/Code/java/idea/github/samples-java/user-manager/keploy/test-set-0
+      mock_path: ""
+      test_case_id: test-1
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8081/api/user
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip
+            Content-Length: "79"
+            Content-Type: application/json
+            Host: localhost:8081
+            User-Agent: curl/8.4.0
+        body: |-
+            {
+                "id": 1,
+                "name": "Dan",
+                "age": "23",
+                "birthday": "2000-1-1"
+            }
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 29 Nov 2023 17:03:41 GMT
+        body: '{"id":1,"name":"Dan","age":23,"birthday":"2000-1-1"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        body.age: []
+        body.birthday: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Wed, 29 Nov 2023 17:03:41 GMT
+              actual:
+                key: Date
+                value:
+                    - Wed, 29 Nov 2023 17:04:26 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":1,"name":"Dan","age":23,"birthday":"2000-1-1"}'
+              actual: '{"id":1,"name":"Dan","age":23,"birthday":"2000-1-1"}'
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1701277466
+      completed: 1701277466
+      test_case_path: /home/illtamer/Code/java/idea/github/samples-java/user-manager/keploy/test-set-0
+      mock_path: ""
+      test_case_id: test-2
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8081/api/user/1
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip
+            Host: localhost:8081
+            User-Agent: curl/8.4.0
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 29 Nov 2023 17:03:51 GMT
+        body: '{"id":1,"name":"Dan","age":23,"birthday":"2000-1-1"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        body.age: []
+        body.birthday: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Wed, 29 Nov 2023 17:03:51 GMT
+              actual:
+                key: Date
+                value:
+                    - Wed, 29 Nov 2023 17:04:26 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":1,"name":"Dan","age":23,"birthday":"2000-1-1"}'
+              actual: '{"id":1,"name":"Dan","age":23,"birthday":"2000-1-1"}'
+        dep_result: []
+test_set: test-set-0

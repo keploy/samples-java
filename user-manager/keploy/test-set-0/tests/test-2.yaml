@@ -1,0 +1,43 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-2
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8081/api/user/1
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip
+            Host: localhost:8081
+            User-Agent: curl/8.4.0
+        body: ""
+        body_type: ""
+        timestamp: 2023-11-30T01:03:51.391502092+08:00
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 29 Nov 2023 17:03:51 GMT
+        body: '{"id":1,"name":"Dan","age":23,"birthday":"2000-1-1"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-11-30T01:03:55.298236898+08:00
+    objects: []
+    assertions:
+        noise:
+            body.age: []
+            body.birthday: []
+            header.Date: []
+    created: 1701277435
+curl: |
+    curl --request GET \
+      --url http://localhost:8081/api/user/1 \
+      --header 'Host: localhost:8081' \
+      --header 'User-Agent: curl/8.4.0' \
+      --header 'Accept: */*' \
+      --header 'Accept-Encoding: gzip' \
