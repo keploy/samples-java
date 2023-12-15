@@ -1,0 +1,464 @@
+version: api.keploy.io/v1beta1
+name: report-3
+status: FAILED
+success: 6
+failure: 1
+total: 7
+tests:
+    - kind: Http
+      name: report-3
+      status: FAILED
+      started: 1702632191
+      completed: 1702632192
+      test_case_path: /files/keploy/test-set-2
+      mock_path: ""
+      test_case_id: test-1
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://172.20.0.4:8080/api/employees
+        header:
+            Accept: '*/*'
+            Content-Length: "112"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: |-
+            {
+                "firstName": "Something",
+                "lastName": "Right",
+                "email": "something@gmail.com",
+                "timestamp":5
+            }
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 15 Dec 2023 09:19:00 GMT
+        body: '{"id":5,"firstName":"Something","lastName":"Right","email":"something@gmail.com","timestamp":1702631940}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:19:00 GMT
+              actual:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:23:12 GMT
+        body_result:
+            - normal: false
+              type: JSON
+              expected: '{"id":5,"firstName":"Something","lastName":"Right","email":"something@gmail.com","timestamp":1702631940}'
+              actual: '{"id":5,"firstName":"Something","lastName":"Right","email":"something@gmail.com","timestamp":1702632192}'
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1702632192
+      completed: 1702632192
+      test_case_path: /files/keploy/test-set-2
+      mock_path: ""
+      test_case_id: test-2
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://172.20.0.4:8080/api/employees
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 15 Dec 2023 09:19:10 GMT
+        body: '[{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631613},{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631794},{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631796},{"id":4,"firstName":"John","lastName":"Doe","email":"jd@gmail.com","timestamp":1702631823},{"id":5,"firstName":"Something","lastName":"Right","email":"something@gmail.com","timestamp":1702631940}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:19:10 GMT
+              actual:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:23:12 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631613},{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631794},{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631796},{"id":4,"firstName":"John","lastName":"Doe","email":"jd@gmail.com","timestamp":1702631823},{"id":5,"firstName":"Something","lastName":"Right","email":"something@gmail.com","timestamp":1702631940}]'
+              actual: '[{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631613},{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631794},{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631796},{"id":4,"firstName":"John","lastName":"Doe","email":"jd@gmail.com","timestamp":1702631823},{"id":5,"firstName":"Something","lastName":"Right","email":"something@gmail.com","timestamp":1702631940}]'
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1702632192
+      completed: 1702632192
+      test_case_path: /files/keploy/test-set-2
+      mock_path: ""
+      test_case_id: test-3
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://172.20.0.4:8080/api/employees/1
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 15 Dec 2023 09:19:13 GMT
+        body: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631613}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:19:13 GMT
+              actual:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:23:12 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631613}'
+              actual: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631613}'
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1702632192
+      completed: 1702632192
+      test_case_path: /files/keploy/test-set-2
+      mock_path: ""
+      test_case_id: test-4
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://172.20.0.4:8080/api/employees/2
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 15 Dec 2023 09:19:15 GMT
+        body: '{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631794}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:19:15 GMT
+              actual:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:23:12 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631794}'
+              actual: '{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631794}'
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1702632192
+      completed: 1702632192
+      test_case_path: /files/keploy/test-set-2
+      mock_path: ""
+      test_case_id: test-5
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://172.20.0.4:8080/api/employees/3
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 15 Dec 2023 09:19:17 GMT
+        body: '{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631796}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:19:17 GMT
+              actual:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:23:12 GMT
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631796}'
+              actual: '{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631796}'
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1702632192
+      completed: 1702632192
+      test_case_path: /files/keploy/test-set-2
+      mock_path: ""
+      test_case_id: test-6
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://172.20.0.4:8080/api/employees/4
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 15 Dec 2023 09:19:19 GMT
+        body: '{"id":4,"firstName":"John","lastName":"Doe","email":"jd@gmail.com","timestamp":1702631823}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:19:19 GMT
+              actual:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:23:12 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":4,"firstName":"John","lastName":"Doe","email":"jd@gmail.com","timestamp":1702631823}'
+              actual: '{"id":4,"firstName":"John","lastName":"Doe","email":"jd@gmail.com","timestamp":1702631823}'
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1702632192
+      completed: 1702632192
+      test_case_path: /files/keploy/test-set-2
+      mock_path: ""
+      test_case_id: test-7
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://172.20.0.4:8080/api/employees/5
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 15 Dec 2023 09:19:22 GMT
+        body: '{"id":5,"firstName":"Something","lastName":"Right","email":"something@gmail.com","timestamp":1702631940}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:19:22 GMT
+              actual:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 09:23:12 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":5,"firstName":"Something","lastName":"Right","email":"something@gmail.com","timestamp":1702631940}'
+              actual: '{"id":5,"firstName":"Something","lastName":"Right","email":"something@gmail.com","timestamp":1702631940}'
+        dep_result: []
+test_set: test-set-2

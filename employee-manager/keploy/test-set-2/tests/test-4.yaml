@@ -1,0 +1,40 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-4
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/2
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 2023-12-15T09:19:15.713278137Z
+        host: ""
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 15 Dec 2023 09:19:15 GMT
+        body: '{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631794}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-15T09:19:18.721384125Z
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1702631958
+curl: |
+    curl --request GET \
+      --url http://localhost:8080/api/employees/2 \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: curl/7.81.0' \
+      --header 'Accept: */*' \

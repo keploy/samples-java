@@ -22,24 +22,24 @@ spec:
                 "timestamp":1
             }
         body_type: ""
-        timestamp: 2023-12-04T09:32:09.749962868Z
+        timestamp: 2023-12-15T09:16:36.482549454Z
+        host: ""
     resp:
         status_code: 200
         header:
             Content-Type: application/json
-            Date: Mon, 04 Dec 2023 09:32:09 GMT
-        body: '{"id":14,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682329}'
+            Date: Fri, 15 Dec 2023 09:16:36 GMT
+        body: '{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631796}'
         body_type: ""
         status_message: ""
         proto_major: 0
         proto_minor: 0
-        timestamp: 2023-12-04T09:32:12.761148746Z
+        timestamp: 2023-12-15T09:16:39.492785627Z
     objects: []
     assertions:
         noise:
-            body.timestamp: []
             header.Date: []
-    created: 1701682332
+    created: 1702631799
 curl: |-
     curl --request POST \
       --url http://localhost:8080/api/employees \

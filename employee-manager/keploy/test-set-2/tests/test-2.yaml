@@ -1,0 +1,40 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-2
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        body_type: ""
+        timestamp: 2023-12-15T09:19:10.642515066Z
+        host: ""
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 15 Dec 2023 09:19:10 GMT
+        body: '[{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631613},{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631794},{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1702631796},{"id":4,"firstName":"John","lastName":"Doe","email":"jd@gmail.com","timestamp":1702631823},{"id":5,"firstName":"Something","lastName":"Right","email":"something@gmail.com","timestamp":1702631940}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-15T09:19:13.774246436Z
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1702631953
+curl: |
+    curl --request GET \
+      --url http://localhost:8080/api/employees \
+      --header 'User-Agent: curl/7.81.0' \
+      --header 'Accept: */*' \
+      --header 'Host: localhost:8080' \
