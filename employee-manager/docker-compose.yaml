@@ -1,8 +1,8 @@
 version: '3.7'
 services:
-  
+
   mypostgres:
-    image: postgres:latest
+    image: postgres:10.5
     restart: always
     environment:
       - POSTGRES_DB=keploy-test
