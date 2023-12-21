@@ -1,0 +1,1035 @@
+version: api.keploy.io/v1beta1
+name: report-3
+status: PASSED
+success: 7
+failure: 0
+total: 7
+tests:
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1703142374
+      completed: 1703142374
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-7
+      mock_path: ""
+      test_case_id: test-1
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/pettypes
+        header:
+            Accept: '*/*'
+            Host: localhost:9966
+            User-Agent: curl/8.1.2
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 404
+        header:
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Content-Length: "0"
+            Date: Thu, 21 Dec 2023 07:04:03 GMT
+            Expires: "0"
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: ""
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 404
+            actual: 404
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:04:03 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:06:14 GMT
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Content-Length
+                value:
+                    - "0"
+              actual:
+                key: Content-Length
+                value:
+                    - "0"
+        body_result:
+            - normal: true
+              type: PLAIN
+              expected: ""
+              actual: ""
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1703142374
+      completed: 1703142375
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-7
+      mock_path: ""
+      test_case_id: test-2
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/pettypes
+        header:
+            Accept: '*/*'
+            Content-Length: "24"
+            Content-Type: application/json
+            Host: localhost:9966
+            User-Agent: curl/8.1.2
+        body: |-
+            {
+                "name":"John Doe"}
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 201
+        header:
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Content-Type: application/json
+            Date: Thu, 21 Dec 2023 07:04:16 GMT
+            Expires: "0"
+            Location: /api/pettypes/1
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '{"name":"John Doe","id":1}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 201
+            actual: 201
+        headers_result:
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:04:16 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:06:14 GMT
+            - normal: true
+              expected:
+                key: Location
+                value:
+                    - /api/pettypes/1
+              actual:
+                key: Location
+                value:
+                    - /api/pettypes/1
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"name":"John Doe","id":1}'
+              actual: '{"name":"John Doe","id":1}'
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1703142375
+      completed: 1703142375
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-7
+      mock_path: ""
+      test_case_id: test-3
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/pettypes
+        header:
+            Accept: '*/*'
+            Host: localhost:9966
+            User-Agent: curl/8.1.2
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Content-Type: application/json
+            Date: Thu, 21 Dec 2023 07:04:36 GMT
+            Expires: "0"
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"name":"John Doe","id":1}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:04:36 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:06:14 GMT
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"name":"John Doe","id":1}]'
+              actual: '[{"name":"John Doe","id":1}]'
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1703142375
+      completed: 1703142375
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-7
+      mock_path: ""
+      test_case_id: test-4
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/pettypes
+        header:
+            Accept: '*/*'
+            Content-Length: "27"
+            Content-Type: application/json
+            Host: localhost:9966
+            User-Agent: curl/8.1.2
+        body: |-
+            {
+                "name":"Alice Green"}
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 201
+        header:
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Content-Type: application/json
+            Date: Thu, 21 Dec 2023 07:04:43 GMT
+            Expires: "0"
+            Location: /api/pettypes/2
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '{"name":"Alice Green","id":2}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 201
+            actual: 201
+        headers_result:
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:04:43 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:06:14 GMT
+            - normal: true
+              expected:
+                key: Location
+                value:
+                    - /api/pettypes/2
+              actual:
+                key: Location
+                value:
+                    - /api/pettypes/2
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"name":"Alice Green","id":2}'
+              actual: '{"name":"Alice Green","id":2}'
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1703142375
+      completed: 1703142375
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-7
+      mock_path: ""
+      test_case_id: test-5
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/pettypes
+        header:
+            Accept: '*/*'
+            Host: localhost:9966
+            User-Agent: curl/8.1.2
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Content-Type: application/json
+            Date: Thu, 21 Dec 2023 07:04:48 GMT
+            Expires: "0"
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"name":"John Doe","id":1},{"name":"Alice Green","id":2}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        body.name: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:04:48 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:06:14 GMT
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"name":"John Doe","id":1},{"name":"Alice Green","id":2}]'
+              actual: '[{"name":"John Doe","id":1},{"name":"Alice Green","id":2}]'
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1703142375
+      completed: 1703142375
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-7
+      mock_path: ""
+      test_case_id: test-6
+      req:
+        method: DELETE
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/pettypes/1
+        header:
+            Accept: '*/*'
+            Host: localhost:9966
+            User-Agent: curl/8.1.2
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 204
+        header:
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Date: Thu, 21 Dec 2023 07:04:54 GMT
+            Expires: "0"
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: ""
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 204
+            actual: 204
+        headers_result:
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:04:54 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:06:14 GMT
+        body_result:
+            - normal: true
+              type: PLAIN
+              expected: ""
+              actual: ""
+        dep_result: []
+    - kind: Http
+      name: report-3
+      status: PASSED
+      started: 1703142375
+      completed: 1703142375
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-7
+      mock_path: ""
+      test_case_id: test-7
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/pettypes
+        header:
+            Accept: '*/*'
+            Host: localhost:9966
+            User-Agent: curl/8.1.2
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Content-Type: application/json
+            Date: Thu, 21 Dec 2023 07:05:01 GMT
+            Expires: "0"
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"name":"Alice Green","id":2}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:05:01 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 21 Dec 2023 07:06:14 GMT
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"name":"Alice Green","id":2}]'
+              actual: '[{"name":"Alice Green","id":2}]'
+        dep_result: []
+test_set: test-set-7

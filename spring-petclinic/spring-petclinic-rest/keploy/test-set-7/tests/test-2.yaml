@@ -1,0 +1,55 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-2
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/pettypes
+        header:
+            Accept: '*/*'
+            Content-Length: "24"
+            Content-Type: application/json
+            Host: localhost:9966
+            User-Agent: curl/8.1.2
+        body: |-
+            {
+                "name":"John Doe"}
+        body_type: ""
+        timestamp: 2023-12-21T07:04:16.791103106Z
+        host: ""
+    resp:
+        status_code: 201
+        header:
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Content-Type: application/json
+            Date: Thu, 21 Dec 2023 07:04:16 GMT
+            Expires: "0"
+            Location: /api/pettypes/1
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '{"name":"John Doe","id":1}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-21T07:04:19.92436653Z
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1703142259
+curl: |-
+    curl --request POST \
+      --url http://localhost:9966/petclinic/api/pettypes \
+      --header 'User-Agent: curl/8.1.2' \
+      --header 'Accept: */*' \
+      --header 'Content-Type: application/json' \
+      --header 'Host: localhost:9966' \
+      --data '{
+        "name":"John Doe"}'

@@ -1,0 +1,47 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-7
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/pettypes
+        header:
+            Accept: '*/*'
+            Host: localhost:9966
+            User-Agent: curl/8.1.2
+        body: ""
+        body_type: ""
+        timestamp: 2023-12-21T07:05:01.640687293Z
+        host: ""
+    resp:
+        status_code: 200
+        header:
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Content-Type: application/json
+            Date: Thu, 21 Dec 2023 07:05:01 GMT
+            Expires: "0"
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"name":"Alice Green","id":2}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-21T07:05:04.658337951Z
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1703142304
+curl: |
+    curl --request GET \
+      --url http://localhost:9966/petclinic/api/pettypes \
+      --header 'User-Agent: curl/8.1.2' \
+      --header 'Accept: */*' \
+      --header 'Host: localhost:9966' \
