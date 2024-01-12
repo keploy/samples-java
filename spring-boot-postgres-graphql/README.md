@@ -151,7 +151,7 @@ You can experiment with the data you want to retrieve from the query by removing
 To test the app, start Keploy in test mode. In the root directory, run:
 
    ```bash
-      keploy test -c "./mvn spring-boot:run" --delay 15
+      keploy test -c "mvn spring-boot:run" --delay 15
    ```
 
    This will run the tests and generate the report in the `Keploy/reports` directory in the current working directory.
