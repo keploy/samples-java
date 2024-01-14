@@ -33,7 +33,7 @@ import org.springframework.samples.petclinic.util.EntityUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;

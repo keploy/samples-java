@@ -18,9 +18,9 @@ package org.springframework.samples.petclinic.repository.jpa;
 import java.util.Collection;
 import java.util.List;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessException;
