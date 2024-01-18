@@ -54,6 +54,7 @@ Now when you interact with the UI, the tests should start getting created in a f
 ```
 keploy test -c "java -jar target/<name-of-your-jar>" --delay 10
 ```
+Here delay is the time it takes for your application to get started, after which Keploy will start running the testcases. If your application takes longer than 10s to get started, you can change the delay accordingly.
 
 Hope this helps you out, if you still have any questions, reach out to us on our [Slack](https://join.slack.com/t/keploy/shared_invite/zt-12rfbvc01-o54cOG0X1G6eVJTuI_orSA)
 
