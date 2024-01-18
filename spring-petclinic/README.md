@@ -1,6 +1,6 @@
 ## Introduction
 
-This is a petclinic website where you can record testcases and mocks by interacting with the UI, and then test them using Keploy.
+This is a petclinic app where you can record testcases and mocks by interacting with the UI, and then test them using Keploy.
 This project has two parts - the frontend and backend, since Keploy is a backend testing platform, we need to start the backend part of the project
 using Keploy and run the frontend as it is.
 
@@ -47,12 +47,12 @@ mvn clean install -Dmaven.test.skip=true
 keploy record -c "java -jar target/<name-of-your-jar>"
 ```
 
-Now when you interact with the UI, the tests should start getting created in a folder called 'keploy' in the directory where you started the backend. When you are done recording the testcases and mocks, you can test them using keploy.
+Now when you interact with the UI, the tests should start getting created in a folder called 'keploy' in the directory where you started the backend. When you are done recording the testcases and mocks, you can run them using keploy.
 
-## Testing the testcases using Keploy
+## Running the testcases using Keploy
 
 ```
-keploy test -c "java -jar target/<name-of-your-jar>"
+keploy test -c "java -jar target/<name-of-your-jar>" --delay 10
 ```
 
 Hope this helps you out, if you still have any questions, reach out to us on our [Slack](https://join.slack.com/t/keploy/shared_invite/zt-12rfbvc01-o54cOG0X1G6eVJTuI_orSA)
