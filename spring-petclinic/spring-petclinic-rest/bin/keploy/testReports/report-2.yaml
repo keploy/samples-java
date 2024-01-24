@@ -1,0 +1,1601 @@
+version: api.keploy.io/v1beta1
+name: report-2
+status: PASSED
+success: 8
+failure: 0
+total: 8
+tests:
+    - kind: Http
+      name: report-2
+      status: PASSED
+      started: 1702107892
+      completed: 1702107892
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-1
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9967/petclinic/api/owners
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Host: localhost:9967
+            Origin: http://localhost:59555
+            Referer: http://localhost:59555/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+      resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Sat, 09 Dec 2023 06:32:33 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678","id":1,"pets":[]}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        body.city: []
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 06:32:33 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 07:44:52 GMT
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678","id":1,"pets":[]}]'
+              actual: '[{"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678","id":1,"pets":[]}]'
+        dep_result: []
+    - kind: Http
+      name: report-2
+      status: PASSED
+      started: 1702107892
+      completed: 1702107892
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-2
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9967/petclinic/api/owners
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Host: localhost:9967
+            Origin: http://localhost:59555
+            Referer: http://localhost:59555/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+      resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Sat, 09 Dec 2023 06:32:39 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678","id":1,"pets":[]}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        body.city: []
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 06:32:39 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 07:44:52 GMT
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678","id":1,"pets":[]}]'
+              actual: '[{"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678","id":1,"pets":[]}]'
+        dep_result: []
+    - kind: Http
+      name: report-2
+      status: PASSED
+      started: 1702107892
+      completed: 1702107892
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-3
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9967/petclinic/api/owners?lastName=John%20Doe
+        url_params:
+            lastName: John Doe
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Host: localhost:9967
+            Origin: http://localhost:59555
+            Referer: http://localhost:59555/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+      resp:
+        status_code: 404
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Length: "0"
+            Date: Sat, 09 Dec 2023 06:32:43 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: ""
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 404
+            actual: 404
+        headers_result:
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: Content-Length
+                value:
+                    - "0"
+              actual:
+                key: Content-Length
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 06:32:43 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 07:44:52 GMT
+        body_result:
+            - normal: true
+              type: PLAIN
+              expected: ""
+              actual: ""
+        dep_result: []
+    - kind: Http
+      name: report-2
+      status: PASSED
+      started: 1702107892
+      completed: 1702107893
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-4
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9967/petclinic/api/owners?lastName=John
+        url_params:
+            lastName: John
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Host: localhost:9967
+            Origin: http://localhost:59555
+            Referer: http://localhost:59555/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+      resp:
+        status_code: 404
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Length: "0"
+            Date: Sat, 09 Dec 2023 06:32:51 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: ""
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 404
+            actual: 404
+        headers_result:
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 06:32:51 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 07:44:52 GMT
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Content-Length
+                value:
+                    - "0"
+              actual:
+                key: Content-Length
+                value:
+                    - "0"
+        body_result:
+            - normal: true
+              type: PLAIN
+              expected: ""
+              actual: ""
+        dep_result: []
+    - kind: Http
+      name: report-2
+      status: PASSED
+      started: 1702107893
+      completed: 1702107893
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-5
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9967/petclinic/api/owners?lastName=Doe
+        url_params:
+            lastName: Doe
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Host: localhost:9967
+            Origin: http://localhost:59555
+            Referer: http://localhost:59555/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+      resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Sat, 09 Dec 2023 06:32:58 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678","id":1,"pets":[]}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        body.city: []
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 06:32:58 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 07:44:52 GMT
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678","id":1,"pets":[]}]'
+              actual: '[{"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678","id":1,"pets":[]}]'
+        dep_result: []
+    - kind: Http
+      name: report-2
+      status: PASSED
+      started: 1702107893
+      completed: 1702107893
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-6
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9967/petclinic/api/pettypes
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Host: localhost:9967
+            Origin: http://localhost:59555
+            Referer: http://localhost:59555/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+      resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Sat, 09 Dec 2023 06:33:50 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"name":"Cats","id":1}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 06:33:50 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 07:44:52 GMT
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"name":"Cats","id":1}]'
+              actual: '[{"name":"Cats","id":1}]'
+        dep_result: []
+    - kind: Http
+      name: report-2
+      status: PASSED
+      started: 1702107893
+      completed: 1702107893
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-7
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9967/petclinic/api/pettypes
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Content-Length: "25"
+            Content-Type: application/json
+            Host: localhost:9967
+            Origin: http://localhost:59555
+            Referer: http://localhost:59555/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: '{"id":null,"name":"Dogs"}'
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+      resp:
+        status_code: 201
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Sat, 09 Dec 2023 06:34:05 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Location: /api/pettypes/2
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '{"name":"Dogs","id":2}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 201
+            actual: 201
+        headers_result:
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: Location
+                value:
+                    - /api/pettypes/2
+              actual:
+                key: Location
+                value:
+                    - /api/pettypes/2
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 06:34:05 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 07:44:52 GMT
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"name":"Dogs","id":2}'
+              actual: '{"name":"Dogs","id":2}'
+        dep_result: []
+    - kind: Http
+      name: report-2
+      status: PASSED
+      started: 1702107893
+      completed: 1702107893
+      test_case_path: /home/pranshu.linux/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-8
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9967/petclinic/api/pettypes
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Content-Length: "26"
+            Content-Type: application/json
+            Host: localhost:9967
+            Origin: http://localhost:59555
+            Referer: http://localhost:59555/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: '{"id":null,"name":"Frogs"}'
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+      resp:
+        status_code: 201
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Sat, 09 Dec 2023 06:34:22 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Location: /api/pettypes/3
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '{"name":"Frogs","id":3}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 201
+            actual: 201
+        headers_result:
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Location
+                value:
+                    - /api/pettypes/3
+              actual:
+                key: Location
+                value:
+                    - /api/pettypes/3
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 06:34:22 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 09 Dec 2023 07:44:52 GMT
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"name":"Frogs","id":3}'
+              actual: '{"name":"Frogs","id":3}'
+        dep_result: []
+test_set: test-set-1

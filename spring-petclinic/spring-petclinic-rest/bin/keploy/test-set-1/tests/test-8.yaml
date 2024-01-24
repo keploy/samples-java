@@ -1,0 +1,78 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-8
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9967/petclinic/api/pettypes
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Content-Length: "26"
+            Content-Type: application/json
+            Host: localhost:9967
+            Origin: http://localhost:59555
+            Referer: http://localhost:59555/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: '{"id":null,"name":"Frogs"}'
+        body_type: ""
+        timestamp: 2023-12-09T06:34:22.693938344Z
+    resp:
+        status_code: 201
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Sat, 09 Dec 2023 06:34:22 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Location: /api/pettypes/3
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '{"name":"Frogs","id":3}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-09T06:34:24.70622838Z
+    objects: []
+    assertions:
+        noise:
+            header.Access-Control-Expose-Headers: []
+            header.Date: []
+    created: 1702103664
+curl: |-
+    curl --request POST \
+      --url http://localhost:9967/petclinic/api/pettypes \
+      --header 'Connection: keep-alive' \
+      --header 'Sec-Fetch-Mode: cors' \
+      --header 'Sec-Fetch-Site: same-site' \
+      --header 'Accept-Language: en-US,en;q=0.9' \
+      --header 'Sec-Ch-Ua-Mobile: ?0' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept: application/json, text/plain, */*' \
+      --header 'Referer: http://localhost:59555/' \
+      --header 'Sec-Ch-Ua: "Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"' \
+      --header 'Host: localhost:9967' \
+      --header 'Sec-Ch-Ua-Platform: "macOS"' \
+      --header 'Origin: http://localhost:59555' \
+      --header 'Sec-Fetch-Dest: empty' \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --data '{"id":null,"name":"Frogs"}'

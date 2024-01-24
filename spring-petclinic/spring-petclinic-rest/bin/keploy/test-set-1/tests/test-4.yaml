@@ -1,0 +1,75 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-4
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9967/petclinic/api/owners?lastName=John
+        url_params:
+            lastName: John
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Host: localhost:9967
+            Origin: http://localhost:59555
+            Referer: http://localhost:59555/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: ""
+        body_type: ""
+        timestamp: 2023-12-09T06:32:51.559909719Z
+    resp:
+        status_code: 404
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Length: "0"
+            Date: Sat, 09 Dec 2023 06:32:51 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: ""
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-09T06:32:55.477292923Z
+    objects: []
+    assertions:
+        noise:
+            header.Access-Control-Expose-Headers: []
+            header.Date: []
+    created: 1702103575
+curl: |
+    curl --request GET \
+      --url http://localhost:9967/petclinic/api/owners?lastName=John \
+      --header 'Accept-Language: en-US,en;q=0.9' \
+      --header 'Sec-Ch-Ua-Mobile: ?0' \
+      --header 'Sec-Ch-Ua-Platform: "macOS"' \
+      --header 'Origin: http://localhost:59555' \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Host: localhost:9967' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' \
+      --header 'Sec-Fetch-Dest: empty' \
+      --header 'Sec-Fetch-Mode: cors' \
+      --header 'Accept: application/json, text/plain, */*' \
+      --header 'Sec-Fetch-Site: same-site' \
+      --header 'Referer: http://localhost:59555/' \
+      --header 'Sec-Ch-Ua: "Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"' \
+      --header 'Connection: keep-alive' \

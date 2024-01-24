@@ -41,7 +41,7 @@ cd samples-java/spring-petclinic/spring-petclinic-rest
 mvn clean install -Dmaven.test.skip=true
 ```
 
-## Run the backend with Keploy
+## Run the backend with Keploy(binary)
 
 ```
 keploy record -c "java -jar target/<name-of-your-jar>"
@@ -49,10 +49,34 @@ keploy record -c "java -jar target/<name-of-your-jar>"
 
 Now when you interact with the UI, the tests should start getting created in a folder called 'keploy' in the directory where you started the backend. When you are done recording the testcases and mocks, you can run them using keploy.
 
-## Running the testcases using Keploy
+## Starting the backend with Keploy(docker)
+Starting the backend with keploy requires just a small change in the script used to run Keploy. The command will look something like this:
+
+### For docker on Linux
+
+```
+alias keploy='sudo docker run --pull always --name keploy-v2 -p 16789:16789 --privileged --pid=host -it -v "$(pwd)":/files -v /sys/fs/cgroup:/sys/fs/cgroup -v /sys/kernel/debug:/sys/kernel/debug -v /sys/fs/bpf:/sys/fs/bpf -v /var/run/docker.sock:/var/run/docker.sock -v '"$HOME"'/.keploy-config:/root/.keploy-config -v '"$HOME"'/.keploy:/root/.keploy --rm ghcr.io/keploy/keploy'
+```
+
+```
+alias keploy='sudo docker run --pull always --name keploy-v2 -p 16789:16789 --privileged --pid=host -it -v "$(pwd)":/files -v /sys/fs/cgroup:/sys/fs/cgroup -v /sys/kernel/debug:/sys/kernel/debug -v /sys/fs/bpf:/sys/fs/bpf -v /var/run/docker.sock:/var/run/docker.sock -v '"$HOME"'/.keploy-config:/root/.keploy-config -v '"$HOME"'/keploy-config:/root/keploy-config --rm ghcr.io/keploy/keploy'
+
+```
+
+```
+keploy record -c "docker compose up" --containerName javaApp --buildDelay 50s
+```
+
+## Running the testcases using Keploy(binary)
 
 ```
 keploy test -c "java -jar target/<name-of-your-jar>" --delay 10
+```
+
+## Running the testcases using Keploy(docker)
+
+```
+keploy test -c "docker compose up" --containerName javaApp --buildDelay 50s --delay 10
 ```
 Here `delay` is the time it takes for your application to get started, after which Keploy will start running the testcases. If your application takes longer than 10s to get started, you can change the `delay` accordingly.
 
