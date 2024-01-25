@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-117
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/14
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "586"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "_\u00b5h\u00a8\u00abp\u0087\u00df\u009b\ud801\udf59\u0011\u00e7\uda16\udc50\ud99d\udf05\u00bd\u0099h\u00bc\u0013\udafe\udd84\u0003\fH\u001bP\u00ec\uda40\udfdf\udba2\udc63\u009f\u00a4\u0097", "firstName": "_\u00b5h\u00a8\u00abp\u0087\u00df\u009b\ud801\udf59\u0011\u00e7\uda16\udc50\ud99d\udf05\u00bd\u0099h\u00bc\u0013\udafe\udd84\u0003\fH\u001bP\u00ec\uda40\udfdf\udba2\udc63\u009f\u00a4\u0097", "lastName": "\u00b0\u0018\u0007\u0081\uda42\ude7d4\u00dc'')\u00da;\u00e3\u00e5\u0087`\u0014\u0018!Q\u00f6\u00e4\u0017\uda3e\udd63\ud9c9\uddf7O\udacf\udf3a\u009d\ud9e3\ude4c\u00e9"}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:13.471861429Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:12 GMT
+        body: '{"timestamp":"2024-01-19T06:06:13.473+00:00","status":400,"error":"Bad Request","path":"/api/employees/14"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:13.582723803Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644375
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/14 \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --data '{"email": "_\u00b5h\u00a8\u00abp\u0087\u00df\u009b\ud801\udf59\u0011\u00e7\uda16\udc50\ud99d\udf05\u00bd\u0099h\u00bc\u0013\udafe\udd84\u0003\fH\u001bP\u00ec\uda40\udfdf\udba2\udc63\u009f\u00a4\u0097", "firstName": "_\u00b5h\u00a8\u00abp\u0087\u00df\u009b\ud801\udf59\u0011\u00e7\uda16\udc50\ud99d\udf05\u00bd\u0099h\u00bc\u0013\udafe\udd84\u0003\fH\u001bP\u00ec\uda40\udfdf\udba2\udc63\u009f\u00a4\u0097", "lastName": "\u00b0\u0018\u0007\u0081\uda42\ude7d4\u00dc')\u00da;\u00e3\u00e5\u0087`\u0014\u0018!Q\u00f6\u00e4\u0017\uda3e\udd63\ud9c9\uddf7O\udacf\udf3a\u009d\ud9e3\ude4c\u00e9"}'

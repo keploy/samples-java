@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-169
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/15
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "774"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\u00bc\udad2\udfa7h6\u00fbS\ud8e2\uddda\u00a4\udb26\udfd4", "firstName": "\udace\udeb0\ud8d1\udf46\u00e0\u0014)\u00dc\u000f\ud90b\udd69\u0007\u008a#\u00bb\udad9\udfb3W:\u00a8\u001fq\u00e0s\u00baz\ud9ac\udd8a\u00b7\u009f\u0081\u00f4\u00e0\u0012Jd\\\u00e4^fr?", "lastName": "I\u0092R\u0095\u00c1\u00f0\u00e2\u00d8\u00efC[vnJ\u00ecw", "W\ucb21@\u0094": [[]], "\u00de\u0010D6\u00cf*\u0086": [[]], "\u00a4k\u00e1\ud848\udceb=\u0003\ud97a\uded1\uda51\udc99''\u00b4j\udaa9\udcf5\u00e2\u0098q\u00ab\u00d6\uc014\u001d|\u0087\u0003<V\u00aa\u00da\udb9b\udf23\u00cbNx\u00c5\ud820\udc3f\u00c0\u001c": [62, [30164764689488984659854416626203751516, null, false], {"": {}, "\u00c0\uc641\u0018\u00b4": [false, -126, "\u00a2\udac0\udcd0"]}], "h\u00d9\u00bf\uda2a\udf4e\u0013": null}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:13.656750205Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:12 GMT
+        body: '{"timestamp":"2024-01-19T06:06:13.658+00:00","status":400,"error":"Bad Request","path":"/api/employees/15"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:18.868305251Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644385
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/15 \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --data '{"email": "\u00bc\udad2\udfa7h6\u00fbS\ud8e2\uddda\u00a4\udb26\udfd4", "firstName": "\udace\udeb0\ud8d1\udf46\u00e0\u0014)\u00dc\u000f\ud90b\udd69\u0007\u008a#\u00bb\udad9\udfb3W:\u00a8\u001fq\u00e0s\u00baz\ud9ac\udd8a\u00b7\u009f\u0081\u00f4\u00e0\u0012Jd\\\u00e4^fr?", "lastName": "I\u0092R\u0095\u00c1\u00f0\u00e2\u00d8\u00efC[vnJ\u00ecw", "W\ucb21@\u0094": [[]], "\u00de\u0010D6\u00cf*\u0086": [[]], "\u00a4k\u00e1\ud848\udceb=\u0003\ud97a\uded1\uda51\udc99'\u00b4j\udaa9\udcf5\u00e2\u0098q\u00ab\u00d6\uc014\u001d|\u0087\u0003<V\u00aa\u00da\udb9b\udf23\u00cbNx\u00c5\ud820\udc3f\u00c0\u001c": [62, [30164764689488984659854416626203751516, null, false], {"": {}, "\u00c0\uc641\u0018\u00b4": [false, -126, "\u00a2\udac0\udcd0"]}], "h\u00d9\u00bf\uda2a\udf4e\u0013": null}'

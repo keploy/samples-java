@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-159
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/15
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "95"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "x1\ud951\udd3f", "firstName": "f\u00c22\u00ebI\u0013", "lastName": "11\u00f4\u001f"}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:15.588673528Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:14 GMT
+        body: '{"timestamp":"2024-01-19T06:06:15.590+00:00","status":400,"error":"Bad Request","path":"/api/employees/15"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:19.053611509Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644383
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/15 \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --data '{"email": "x1\ud951\udd3f", "firstName": "f\u00c22\u00ebI\u0013", "lastName": "11\u00f4\u001f"}'

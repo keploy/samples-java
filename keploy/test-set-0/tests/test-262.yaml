@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-262
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/0
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "361"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "1\u5a01", "firstName": "1X\u00ceFG", "lastName": ":\u00b0\udbd2\udd378U\u009d\udbe7\udda7", "\uda09\udf2b\\\ud948\udd90\u00e2\ub8b8B\u009b": [], "rdc\u00ff\u0092": [null], "": {"L\u00cf": {}, "\u001e": false, "": {"\ud802\udd38\ud8c8\udedd\u6c2c\u00d6\udb2d\udfb9t\u008b\u00c8o;\udbcf\ude67\ud9a2\udfbf\rZ\u0019\u0005": [], "": [null, false, null]}}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:17.809127754Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:16 GMT
+        body: '{"timestamp":"2024-01-19T06:06:17.810+00:00","status":400,"error":"Bad Request","path":"/api/employees/0"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:34.009488282Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644405
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/0 \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --data '{"email": "1\u5a01", "firstName": "1X\u00ceFG", "lastName": ":\u00b0\udbd2\udd378U\u009d\udbe7\udda7", "\uda09\udf2b\\\ud948\udd90\u00e2\ub8b8B\u009b": [], "rdc\u00ff\u0092": [null], "": {"L\u00cf": {}, "\u001e": false, "": {"\ud802\udd38\ud8c8\udedd\u6c2c\u00d6\udb2d\udfb9t\u008b\u00c8o;\udbcf\ude67\ud9a2\udfbf\rZ\u0019\u0005": [], "": [null, false, null]}}}'

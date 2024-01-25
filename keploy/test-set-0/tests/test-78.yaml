@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-78
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/15
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "1343"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\u00d4+\u00aa\u00eb\u0010Q1#\u00fa", "firstName": "\ud994\ude05\ud9b9\ude07\u00c9\ud89c\udd8f\uda87\udfce\u00ca\u00a6\u008f\u00bd}j5)kV\u008d\u0084N\u00e9\ud902\udfb9Y9", "lastName": "\ud86f\udf58\u00ab\ud97b\udfc6\uda49\uddf7]G-!i\u0004\ud96d\ude88\u00d6v#\ud9a8\udf2e6\u5608", "": {"Z": {"\u001d\ud93e\udd72R;\u00ea\u00cc\u00c7A\u0090%\u008e\uda45\ude92\u00bc\u00dc\u0005\ud85f\udd9eG\u00be;qD\u0082Z\u009b+\u008a\ud9eb\ude30\u00f7!\ud862\udcc2\udb75\udee3\\\uda21\udcdf": null, "\uda63\udd5b\ud960\udff2\u0099\u00c3\u00fd": -2.225073858507203e-309, "l\u0010\u00ab''\u00e8=": -1.1754943508222875e-38}}, "\u0098\ud88f\udfb3j": [30557, {}, {}], "\ud9d2\udec7\u00ff": {"\u00caj\u00d1\\\u0019-\u00c3\u009e": {}}, "\u00cf": {}, "\u00b6\u00f1\u00fc": 1.1, "\u00a8T\u00b7\uda8e\ude8ef\u00af\u00a9\u00b3\u00f69\u0092\ud88e\udc1e+U\ud950\udd1c\u00b0": {}, "\u00dd": [{"6\ud89e\uddc6\udb9b\udc2d": true, "\u0099\ud962\uddb37\u000f#": null}, {"\ud8a7\udef9\u00a6\u00f4\udb44\udc81ybo\u0088\udb8a\udec5\u00e9\u00fc": ",\u00cb\u00cc\udbf8\udf4dI\udad4\udc4b\u0087\ud9d8\uddc2\u00d2\u00d6w\udaf6\ude71\u00e1\u00ad\u0083"}, [{"8`\udaa8\udce7\u00a2\ud83e\udc5b": null, "": []}]], "/": [], "1\u00f9\u0b34\u001a\u00b0N": {"\u00c6": "l", "": -0.3333333333333333, "\u0017y\u00a3\u00b3\u0098\u0016d\u00e8W\udbcb\udd62&,\u00dc": -1.401298464324817e-45}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:06.477865789Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:06 GMT
+        body: '{"timestamp":"2024-01-19T06:06:06.479+00:00","status":400,"error":"Bad Request","path":"/api/employees/15"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:07.096545258Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644370
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/15 \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --data '{"email": "\u00d4+\u00aa\u00eb\u0010Q1#\u00fa", "firstName": "\ud994\ude05\ud9b9\ude07\u00c9\ud89c\udd8f\uda87\udfce\u00ca\u00a6\u008f\u00bd}j5)kV\u008d\u0084N\u00e9\ud902\udfb9Y9", "lastName": "\ud86f\udf58\u00ab\ud97b\udfc6\uda49\uddf7]G-!i\u0004\ud96d\ude88\u00d6v#\ud9a8\udf2e6\u5608", "": {"Z": {"\u001d\ud93e\udd72R;\u00ea\u00cc\u00c7A\u0090%\u008e\uda45\ude92\u00bc\u00dc\u0005\ud85f\udd9eG\u00be;qD\u0082Z\u009b+\u008a\ud9eb\ude30\u00f7!\ud862\udcc2\udb75\udee3\\\uda21\udcdf": null, "\uda63\udd5b\ud960\udff2\u0099\u00c3\u00fd": -2.225073858507203e-309, "l\u0010\u00ab'\u00e8=": -1.1754943508222875e-38}}, "\u0098\ud88f\udfb3j": [30557, {}, {}], "\ud9d2\udec7\u00ff": {"\u00caj\u00d1\\\u0019-\u00c3\u009e": {}}, "\u00cf": {}, "\u00b6\u00f1\u00fc": 1.1, "\u00a8T\u00b7\uda8e\ude8ef\u00af\u00a9\u00b3\u00f69\u0092\ud88e\udc1e+U\ud950\udd1c\u00b0": {}, "\u00dd": [{"6\ud89e\uddc6\udb9b\udc2d": true, "\u0099\ud962\uddb37\u000f#": null}, {"\ud8a7\udef9\u00a6\u00f4\udb44\udc81ybo\u0088\udb8a\udec5\u00e9\u00fc": ",\u00cb\u00cc\udbf8\udf4dI\udad4\udc4b\u0087\ud9d8\uddc2\u00d2\u00d6w\udaf6\ude71\u00e1\u00ad\u0083"}, [{"8`\udaa8\udce7\u00a2\ud83e\udc5b": null, "": []}]], "/": [], "1\u00f9\u0b34\u001a\u00b0N": {"\u00c6": "l", "": -0.3333333333333333, "\u0017y\u00a3\u00b3\u0098\u0016d\u00e8W\udbcb\udd62&,\u00dc": -1.401298464324817e-45}}'

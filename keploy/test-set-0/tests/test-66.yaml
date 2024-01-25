@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-66
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/15
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "459"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\ud802\ude043", "firstName": "51\ud842\uddba\u0089\udbee\udfce0", "lastName": "\u00d2\u00b8\u001e\u0015S", ")\u001d\u001e6\u0089K\u0007\uda2b\udf30\u00035\u00b1\u00b7fL": {"%\u00fcq": {}}, "\ud829\udf9ae\uda7d\ude43": [{"": ")\u001a"}, [-1.7976931348623157e+308, -9007199254740992.0, true], {}], "\uda28\udcb5": null, "": [{"\u0010": true}], "w\ud950\udddd@\u00d6y\u0087": [], "\ud802\udd01\ud805\udee2\udb0e\ude8d\ud8d2\uddab\r\u00b2\u001e": true}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:05.423968422Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:05 GMT
+        body: '{"timestamp":"2024-01-19T06:06:05.425+00:00","status":400,"error":"Bad Request","path":"/api/employees/15"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:05.570462371Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644367
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/15 \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --data '{"email": "\ud802\ude043", "firstName": "51\ud842\uddba\u0089\udbee\udfce0", "lastName": "\u00d2\u00b8\u001e\u0015S", ")\u001d\u001e6\u0089K\u0007\uda2b\udf30\u00035\u00b1\u00b7fL": {"%\u00fcq": {}}, "\ud829\udf9ae\uda7d\ude43": [{"": ")\u001a"}, [-1.7976931348623157e+308, -9007199254740992.0, true], {}], "\uda28\udcb5": null, "": [{"\u0010": true}], "w\ud950\udddd@\u00d6y\u0087": [], "\ud802\udd01\ud805\udee2\udb0e\ude8d\ud8d2\uddab\r\u00b2\u001e": true}'

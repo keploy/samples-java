@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-134
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/14
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "2319"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "e\u00dd\ud8fa\uddceC\u0086\u00bb\udb56\udcbd\u00f8\u00c1G\ud9dc\ude94", "firstName": "\b\u0018\u00cb\u0087y\u0095\u00fdk\u00cd\udbe9\udd8a\u008b", "lastName": "\u008b\ud904\udf7a\u00af\u00ae\uda06\udf5f\u00cd^L\u00c2E\u00dd2\u0007w\u009fy\udb4b\ude93\u00c8\u00c8\udbb1\udf6dB?", "\ud903\udee6\u0083\u00a4\u00f6W\u00b6]": [{"0\u001b\udbe8\udc90\u0002": {"": "\u0006R\u00d8\u0091ZL\u00edu^\ud88e\udec1\u0092\u0080\u0005\u0013\u009c\u00b0", "V\ud9ce\udc4c\u0081\u0018\ud9d1\udffa\uda0d\udf7ax": 1.192092896e-07, "\u0089\u000eX\u00bc\u001aT\ud808\udee3\u0095\ud873\ude0d\u00d0\u0016\uda87\udc39\udb41\udc8c\uda7e\udd62\u00ac\udbea\udcc6Ah\udabd\udc34\u000e\ud955\ude44f\u0096\u0004\u00ea\uda60\ude9b&\u00bf\u00e8z\ud979\udf70\u0013": -11504}, "\u00bf\u001a\ufabb\u00e1\u0004\u00af0\udb46\ude57Y": {"\u007f": "\udb0b\ude27"}, "\u0083\u008fs\ud898\udd46a\u0081\u00ddm\ud9c0\udde9\u00a03\u00fd": [true, null, null]}, {"\u00c4\u008a": true, "u\u00fc\r\uda49\udf7dY\u00c3\u00a1\udbd7\udc3f\u00bc\u007f\u00ccN\\\u00ba\u0004\u0099": null, "Z\u00c3Y": 7.7078806334223855e+124}, {"Y\u00a1\f\ud9b2\udc40": {"": -13172}, "mb\uda14\udc32\ud9e6\udffa\u00ed\t\u009bK\u00bd\ud8a2\udd8fp\udab8\udf87\u00db\u0092\ud85e\udd01\udbfa\udfde\u00d1W\u00924": 1311650774, "c\u0094\u0000\ub4d5\udb51\udd1a": -0.99999}], "": [{}], "\u00a4\u009b\u0006h\udbba\uddf9\u00a4\ud85c\udee5\udb01\udf6b": [{"\uda0e\udee7\u00fc\u00cdz#\u00ff\u00cc": 4107, "\u4b80\u000b": ",", "\u0005.\u00e3": null}, {"-h\u008a": 30143}, {"\u00c4": false, "\u0093i": 5.960464477539063e-08, "''3": false}], "~\ud8a8\ude3d\u00e0\u0011\u008e\u000f": [22835], "\ud8fd\uddeb4\ud961\udcdb": [[], [], {"": [-0.5], "\u00ac\u00d45\ud8e0\udf83\ud916\ude5b\uda6d\udc65\"": [[true, -1253938803], [{}], [null]], "\u000b\ud80b\udcbd\u008c": {}}], "\u00cc\u00b5\udba0\udd69\u00d5\uda3b\ude19\"": [{"\udb08\udfd7\u00c0g\u00a5@\u0092\ud8bf\udf55\udb05\udd22(\udb6e\udc88\u000f\u805d\u0010\"\udbd3\udeb2I": {"z\u0010\u00a1\u00b0": true, "\u0006d=\u00a6\u0002": 1.2298214923921424e+16, "\u00858\u00d2\u0080\u001dFr\udbf7\uddfbQ\u00d8%\u009f\u00cf\u00bc2\u00b5I\u00f3\u0090.\u00a1": "D\u008a\u008c\udabf\ude82\udba8\ude84R\u00faJ"}, "\ud916\udec8P\u00d7\ud822\udd12": -1.7976931348623157e+308, "\u00fb\ud834\udf21": "\u0016\u00d1\udb60\udf1c\\_\u00ad\u00108"}, [], [{}, -2.00001, 20]]}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:13.169751623Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:12 GMT
+        body: '{"timestamp":"2024-01-19T06:06:13.171+00:00","status":400,"error":"Bad Request","path":"/api/employees/14"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:13.57932412Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644378
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/14 \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --data '{"email": "e\u00dd\ud8fa\uddceC\u0086\u00bb\udb56\udcbd\u00f8\u00c1G\ud9dc\ude94", "firstName": "\b\u0018\u00cb\u0087y\u0095\u00fdk\u00cd\udbe9\udd8a\u008b", "lastName": "\u008b\ud904\udf7a\u00af\u00ae\uda06\udf5f\u00cd^L\u00c2E\u00dd2\u0007w\u009fy\udb4b\ude93\u00c8\u00c8\udbb1\udf6dB?", "\ud903\udee6\u0083\u00a4\u00f6W\u00b6]": [{"0\u001b\udbe8\udc90\u0002": {"": "\u0006R\u00d8\u0091ZL\u00edu^\ud88e\udec1\u0092\u0080\u0005\u0013\u009c\u00b0", "V\ud9ce\udc4c\u0081\u0018\ud9d1\udffa\uda0d\udf7ax": 1.192092896e-07, "\u0089\u000eX\u00bc\u001aT\ud808\udee3\u0095\ud873\ude0d\u00d0\u0016\uda87\udc39\udb41\udc8c\uda7e\udd62\u00ac\udbea\udcc6Ah\udabd\udc34\u000e\ud955\ude44f\u0096\u0004\u00ea\uda60\ude9b&\u00bf\u00e8z\ud979\udf70\u0013": -11504}, "\u00bf\u001a\ufabb\u00e1\u0004\u00af0\udb46\ude57Y": {"\u007f": "\udb0b\ude27"}, "\u0083\u008fs\ud898\udd46a\u0081\u00ddm\ud9c0\udde9\u00a03\u00fd": [true, null, null]}, {"\u00c4\u008a": true, "u\u00fc\r\uda49\udf7dY\u00c3\u00a1\udbd7\udc3f\u00bc\u007f\u00ccN\\\u00ba\u0004\u0099": null, "Z\u00c3Y": 7.7078806334223855e+124}, {"Y\u00a1\f\ud9b2\udc40": {"": -13172}, "mb\uda14\udc32\ud9e6\udffa\u00ed\t\u009bK\u00bd\ud8a2\udd8fp\udab8\udf87\u00db\u0092\ud85e\udd01\udbfa\udfde\u00d1W\u00924": 1311650774, "c\u0094\u0000\ub4d5\udb51\udd1a": -0.99999}], "": [{}], "\u00a4\u009b\u0006h\udbba\uddf9\u00a4\ud85c\udee5\udb01\udf6b": [{"\uda0e\udee7\u00fc\u00cdz#\u00ff\u00cc": 4107, "\u4b80\u000b": ",", "\u0005.\u00e3": null}, {"-h\u008a": 30143}, {"\u00c4": false, "\u0093i": 5.960464477539063e-08, "'3": false}], "~\ud8a8\ude3d\u00e0\u0011\u008e\u000f": [22835], "\ud8fd\uddeb4\ud961\udcdb": [[], [], {"": [-0.5], "\u00ac\u00d45\ud8e0\udf83\ud916\ude5b\uda6d\udc65\"": [[true, -1253938803], [{}], [null]], "\u000b\ud80b\udcbd\u008c": {}}], "\u00cc\u00b5\udba0\udd69\u00d5\uda3b\ude19\"": [{"\udb08\udfd7\u00c0g\u00a5@\u0092\ud8bf\udf55\udb05\udd22(\udb6e\udc88\u000f\u805d\u0010\"\udbd3\udeb2I": {"z\u0010\u00a1\u00b0": true, "\u0006d=\u00a6\u0002": 1.2298214923921424e+16, "\u00858\u00d2\u0080\u001dFr\udbf7\uddfbQ\u00d8%\u009f\u00cf\u00bc2\u00b5I\u00f3\u0090.\u00a1": "D\u008a\u008c\udabf\ude82\udba8\ude84R\u00faJ"}, "\ud916\udec8P\u00d7\ud822\udd12": -1.7976931348623157e+308, "\u00fb\ud834\udf21": "\u0016\u00d1\udb60\udf1c\\_\u00ad\u00108"}, [], [{}, -2.00001, 20]]}'

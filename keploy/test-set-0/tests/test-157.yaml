@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-157
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/14
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "696"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "TZ\u00b6\u00de\ud858\udf16f\udaf2\udfd5", "firstName": "r\ud938\uddb0l\ud899\uddb7>\u0095\u00f6\u00c6", "lastName": "H", "\u00e6\u00a6\u009c\udbb1\udc2e\ud8e1\udde4\u00e5": {"\u00ed": {"\u00025\u00b5\u00b3": {}, "\udab4\udce7": {"M\u00b2": [true], "\u0014\u0086\u0097\u0086U\u00c2": [""]}}}, "\u00a1\u00f8$B\\sX\udbd4\udf25\u009d\ud867\ude9a\u0082\udb06\ude67L": [[], [], [{"J\udbfe\udd55\u00e1\u00dfp\ue625\u00ab": 10}, {"\ud9ab\ude33": true, "\u0098\u0097\u0088\ud8fe\udfd6": "I\u00b2\uda54\udd282\u0093\u009f\u00d5", "\u0094\u001e\ud84c\ude80\r\u00fcd)\u00b7": 3.081368121921513e+16}, {"h\u008a\u001d\u009b]\u0001\u00ac\u00da\u00d2": false, "\u00beE": -11775, "\u00f1": "\u00e5"}]]}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:13.61216703Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:12 GMT
+        body: '{"timestamp":"2024-01-19T06:06:13.613+00:00","status":400,"error":"Bad Request","path":"/api/employees/14"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:18.868027707Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644383
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/14 \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --data '{"email": "TZ\u00b6\u00de\ud858\udf16f\udaf2\udfd5", "firstName": "r\ud938\uddb0l\ud899\uddb7>\u0095\u00f6\u00c6", "lastName": "H", "\u00e6\u00a6\u009c\udbb1\udc2e\ud8e1\udde4\u00e5": {"\u00ed": {"\u00025\u00b5\u00b3": {}, "\udab4\udce7": {"M\u00b2": [true], "\u0014\u0086\u0097\u0086U\u00c2": [""]}}}, "\u00a1\u00f8$B\\sX\udbd4\udf25\u009d\ud867\ude9a\u0082\udb06\ude67L": [[], [], [{"J\udbfe\udd55\u00e1\u00dfp\ue625\u00ab": 10}, {"\ud9ab\ude33": true, "\u0098\u0097\u0088\ud8fe\udfd6": "I\u00b2\uda54\udd282\u0093\u009f\u00d5", "\u0094\u001e\ud84c\ude80\r\u00fcd)\u00b7": 3.081368121921513e+16}, {"h\u008a\u001d\u009b]\u0001\u00ac\u00da\u00d2": false, "\u00beE": -11775, "\u00f1": "\u00e5"}]]}'

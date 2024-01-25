@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-242
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/1
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "458"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\u2d05\u0094\u00a8\ud9a6\udea0\u0094g\u00a1\ud850\udc6b\u0007\u008a05u\u001bjh\u00a1\u00d8\u0013;\u00e4\u00f8\u00b4;\u00dc\u0017", "firstName": "\ud98f\udccf\udb81\udd6b1\uda7d\uddf9\u00e8\u0090x", "lastName": "\uc44312\u000e2", "2\ud803\udf01\ud842\ude018>7mE\u00d7E\n\u0013\u001cj\u001cA3\u00cf\u00a5\ud86b\udd4aIy\u0088%\udaf8\ude82I\udae1\udcc2": [[true, "x\u0000"], [], {"r\u00d3\\\u0097\ud8b4\udd98\ud81d\udd05a": [true, true, 1329946179]}]}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:17.983467413Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:17 GMT
+        body: '{"timestamp":"2024-01-19T06:06:17.985+00:00","status":400,"error":"Bad Request","path":"/api/employees/1"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:36.221044208Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644400
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/1 \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --data '{"email": "\u2d05\u0094\u00a8\ud9a6\udea0\u0094g\u00a1\ud850\udc6b\u0007\u008a05u\u001bjh\u00a1\u00d8\u0013;\u00e4\u00f8\u00b4;\u00dc\u0017", "firstName": "\ud98f\udccf\udb81\udd6b1\uda7d\uddf9\u00e8\u0090x", "lastName": "\uc44312\u000e2", "2\ud803\udf01\ud842\ude018>7mE\u00d7E\n\u0013\u001cj\u001cA3\u00cf\u00a5\ud86b\udd4aIy\u0088%\udaf8\ude82I\udae1\udcc2": [[true, "x\u0000"], [], {"r\u00d3\\\u0097\ud8b4\udd98\ud81d\udd05a": [true, true, 1329946179]}]}'

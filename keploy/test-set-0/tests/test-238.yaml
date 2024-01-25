@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-238
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/27386
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "372"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "W\u00cc\udbb8\udd98\u00d7\u42ff\u009fg\ud85c\udc6a\u00de\u00d4\u0016\u001f\u009a\u00d2\u00bf\u0018{\u008ekEg\ud892\udde7M\u00db\u00f4z", "firstName": "\u0011q5\u00ca\u0012\u0084", "lastName": "6\u00ca\u00ff\u00ecj\ud88e\udd81O\u000e\u00e9&\u0016\u0012KL\u0018u", "\u00c04\u00be\ud932\ude3bJ;o\u0016\uda39\ude158[T\udb51\udf86\u00ef\u0098\u8733\u009e\u00c8": {}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:18.214122033Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:17 GMT
+        body: '{"timestamp":"2024-01-19T06:06:18.217+00:00","status":400,"error":"Bad Request","path":"/api/employees/27386"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:36.224175223Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644399
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/27386 \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --data '{"email": "W\u00cc\udbb8\udd98\u00d7\u42ff\u009fg\ud85c\udc6a\u00de\u00d4\u0016\u001f\u009a\u00d2\u00bf\u0018{\u008ekEg\ud892\udde7M\u00db\u00f4z", "firstName": "\u0011q5\u00ca\u0012\u0084", "lastName": "6\u00ca\u00ff\u00ecj\ud88e\udd81O\u000e\u00e9&\u0016\u0012KL\u0018u", "\u00c04\u00be\ud932\ude3bJ;o\u0016\uda39\ude158[T\udb51\udf86\u00ef\u0098\u8733\u009e\u00c8": {}}'

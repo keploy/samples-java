@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-240
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/-23274480888954367469562962642716393516
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "377"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "1\ud803\udf00\ud942\uddc4\udbac\udc8feBQ\u00eb\u00d3\u00185117N\udb17\udd49>\u0013 \u00e9", "firstName": "12", "lastName": "\udaf1\udd27510", "\u00farj\ud9b7\udfad*\u00a2\u0087\u0013": [[true, {"\u0019\u0007": "", "\u0011": 8462, "?\u0084\ud983\udf01\u00ff": 0.0}]], "0": 32896, "0\udaad\udcfeq\udbeb\udd9e\ud9a3\udda5\u00e30%m\u00dd+\u00e2\u0015\uda71\udf02": null}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:17.960196742Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:17 GMT
+        body: '{"timestamp":"2024-01-19T06:06:17.961+00:00","status":400,"error":"Bad Request","path":"/api/employees/-23274480888954367469562962642716393516"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:36.220781578Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644399
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/-23274480888954367469562962642716393516 \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --data '{"email": "1\ud803\udf00\ud942\uddc4\udbac\udc8feBQ\u00eb\u00d3\u00185117N\udb17\udd49>\u0013 \u00e9", "firstName": "12", "lastName": "\udaf1\udd27510", "\u00farj\ud9b7\udfad*\u00a2\u0087\u0013": [[true, {"\u0019\u0007": "", "\u0011": 8462, "?\u0084\ud983\udf01\u00ff": 0.0}]], "0": 32896, "0\udaad\udcfeq\udbeb\udd9e\ud9a3\udda5\u00e30%m\u00dd+\u00e2\u0015\uda71\udf02": null}'

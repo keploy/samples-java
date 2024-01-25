@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-100
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/14
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "49"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "F", "firstName": "0", "lastName": "0"}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:12.980136381Z
+        host: ""
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:12 GMT
+        body: '{"id":14,"firstName":"0","lastName":"0","email":"F"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:13.578490991Z
+    objects: []
+    assertions:
+        noise:
+            body.id: []
+            header.Date: []
+    created: 1705644373
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/14 \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --data '{"email": "F", "firstName": "0", "lastName": "0"}'

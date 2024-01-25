@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-133
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/15
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "559"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\u0018\u0083\rfg\u00d22\u009d", "firstName": "\u00c6\udacc\udf7e3\u2f92 \udb94\ude94\ud8af\udd28&&\u00da\u001aKT", "lastName": "\ufdd42?\udbdc\uddf2>W\udafb\udea2", "": null, "\u008641d": {}, " \u00ca\ud8f9\udf473\u0006K\u00fe": [[]], "\u00c3": [{"\u00da\u00e7": []}, {}, null], "\u00d2\u00e8\u0087\u00c0\u000b\u0015+\ud8f7\udd65\u00ad\u0093\u00c8/R": {}, "J\udaee\ude38\u00bf=\ud931\uddd1\u00d8\uda13\udee7\ud912\udc88\u00dd": [], "\udb1a\udc77\udb5e\udd7ai@\u0019\u0080C": [{"\u0085=": 14011}], "j": {}, "\udaf2\udfac": {"F\u00cdUE\u00b6": null}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:13.565300468Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:12 GMT
+        body: '{"timestamp":"2024-01-19T06:06:13.567+00:00","status":400,"error":"Bad Request","path":"/api/employees/15"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:13.583618683Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644378
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/15 \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --data '{"email": "\u0018\u0083\rfg\u00d22\u009d", "firstName": "\u00c6\udacc\udf7e3\u2f92 \udb94\ude94\ud8af\udd28&&\u00da\u001aKT", "lastName": "\ufdd42?\udbdc\uddf2>W\udafb\udea2", "": null, "\u008641d": {}, " \u00ca\ud8f9\udf473\u0006K\u00fe": [[]], "\u00c3": [{"\u00da\u00e7": []}, {}, null], "\u00d2\u00e8\u0087\u00c0\u000b\u0015+\ud8f7\udd65\u00ad\u0093\u00c8/R": {}, "J\udaee\ude38\u00bf=\ud931\uddd1\u00d8\uda13\udee7\ud912\udc88\u00dd": [], "\udb1a\udc77\udb5e\udd7ai@\u0019\u0080C": [{"\u0085=": 14011}], "j": {}, "\udaf2\udfac": {"F\u00cdUE\u00b6": null}}'

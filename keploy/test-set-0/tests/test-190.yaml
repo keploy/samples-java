@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-190
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "304"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"content": {"application/json": {"schema": {"properties": {"email": {"pattern": "[A-Za-z0-9_]", "type": "string"}, "firstName": {"pattern": "[A-Za-z0-9_]", "type": "string"}, "lastName": {"pattern": "[A-Za-z0-9_]", "type": "string"}}, "required": ["firstName", "lastName", "email"], "type": "object"}}}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:16.661246177Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:15 GMT
+        body: '{"timestamp":"2024-01-19T06:06:16.662+00:00","status":400,"error":"Bad Request","path":"/api/employees"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:26.275773863Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644388
+curl: |-
+    curl --request POST \
+      --url http://localhost:8080/api/employees \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --data '{"content": {"application/json": {"schema": {"properties": {"email": {"pattern": "[A-Za-z0-9_]", "type": "string"}, "firstName": {"pattern": "[A-Za-z0-9_]", "type": "string"}, "lastName": {"pattern": "[A-Za-z0-9_]", "type": "string"}}, "required": ["firstName", "lastName", "email"], "type": "object"}}}}'

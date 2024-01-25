@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-249
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/13307
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "477"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\ud88e\udeafx\uda32\udff3\udad2\udca9\udb1d\udf65\u00fb>>\ud91e\ude76\u00ee\u00a9`g\ud8bb\ude73\u0006[\ud87a\udf9b\uda92\udc99\u009e1\u00e0\uda6f\udd02\udba5\ude7a\u00c7H\udabb\ude91\u00c2\u00fa\u00ec\u00e7\ud980\ude55\fU\ud966\udf70", "firstName": "{\u00da\udad3\udd8c\ud8f5\udede\u00f2\u00b9\u0016t\u00e1\u0016w\u00c8\uda8e\udd0f", "lastName": "\ud8a8\udedf\uf74e\ud889\udd42S\u00c7\udb26\udf76,", "4": {"b4\u00a4\ud9ed\uddc3": "\u00eb\u00a5kG\u00c1\u0094\u00db"}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:19.449318655Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:19 GMT
+        body: '{"timestamp":"2024-01-19T06:06:19.450+00:00","status":400,"error":"Bad Request","path":"/api/employees/13307"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:38.168761373Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644402
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/13307 \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --data '{"email": "\ud88e\udeafx\uda32\udff3\udad2\udca9\udb1d\udf65\u00fb>>\ud91e\ude76\u00ee\u00a9`g\ud8bb\ude73\u0006[\ud87a\udf9b\uda92\udc99\u009e1\u00e0\uda6f\udd02\udba5\ude7a\u00c7H\udabb\ude91\u00c2\u00fa\u00ec\u00e7\ud980\ude55\fU\ud966\udf70", "firstName": "{\u00da\udad3\udd8c\ud8f5\udede\u00f2\u00b9\u0016t\u00e1\u0016w\u00c8\uda8e\udd0f", "lastName": "\ud8a8\udedf\uf74e\ud889\udd42S\u00c7\udb26\udf76,", "4": {"b4\u00a4\ud9ed\uddc3": "\u00eb\u00a5kG\u00c1\u0094\u00db"}}'

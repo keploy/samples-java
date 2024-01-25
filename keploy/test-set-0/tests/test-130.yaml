@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-130
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/15
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "390"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\ud87c\udeea\rV\udb11\udda9\udb7f\udf52\u00b9\u0006\u00ad\u00a0\u001b:\ud958\udeb2RG\u00ee\u00ed", "firstName": "\uda2f\ude33\u0019\u0086\u0017\uda5f\udf3d\ud962\udcab\u00e7\u00cd\u009b\u00c22\u00a1\u00ed", "lastName": "H16A\u00c4\uda98\udea8\"", "\ud8c2\udd7bt\u00a3\u00fe\uda94\udce1": [1.0451128860176325e+29, true, false], "2": [null, [-131, true, 4.499981537215208e+16], 0]}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:12.7605312Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:12 GMT
+        body: '{"timestamp":"2024-01-19T06:06:12.762+00:00","status":400,"error":"Bad Request","path":"/api/employees/15"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:12.922860721Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644378
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/15 \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --data '{"email": "\ud87c\udeea\rV\udb11\udda9\udb7f\udf52\u00b9\u0006\u00ad\u00a0\u001b:\ud958\udeb2RG\u00ee\u00ed", "firstName": "\uda2f\ude33\u0019\u0086\u0017\uda5f\udf3d\ud962\udcab\u00e7\u00cd\u009b\u00c22\u00a1\u00ed", "lastName": "H16A\u00c4\uda98\udea8\"", "\ud8c2\udd7bt\u00a3\u00fe\uda94\udce1": [1.0451128860176325e+29, true, false], "2": [null, [-131, true, 4.499981537215208e+16], 0]}'

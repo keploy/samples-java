@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-279
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/-19334
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "540"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\ud92a\ude30\u00adl\u00b6\u00fdn\u00ccg\ud817\udc5bA", "firstName": "q\u00a0\ud955\udc3d\u00f5", "lastName": "\u00d2k\uda58\ude82\ud933\udc27\u00c3\u0088\u0006\u00056g\udaf2\udea5", "\u008aj": [], "\ud93a\udf06b\u00c2\udb7a\udca9\u000e \udaec\ude03\udad3\ude64\u00039\u00be\udbeb\udf98\u00e3\u00af\u00ea\u00f3\ud951\udd49": {"\udb7a\udc1f\u009d\udaf7\udd51S\u00eb\udb52\udcdb\u0083\u0090\uda59\udc62\u0012": [{"*\bl\udb5e\ude28#": null}, {}], "": {"\u00e8\u00caB\u00aa": {"8(\u0082\u00eb\u00b4(": -74, "u^\u00153\uc8d0": null}}}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:21.486235023Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:21 GMT
+        body: '{"timestamp":"2024-01-19T06:06:21.487+00:00","status":400,"error":"Bad Request","path":"/api/employees/-19334"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:45.708175007Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644410
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/-19334 \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --data '{"email": "\ud92a\ude30\u00adl\u00b6\u00fdn\u00ccg\ud817\udc5bA", "firstName": "q\u00a0\ud955\udc3d\u00f5", "lastName": "\u00d2k\uda58\ude82\ud933\udc27\u00c3\u0088\u0006\u00056g\udaf2\udea5", "\u008aj": [], "\ud93a\udf06b\u00c2\udb7a\udca9\u000e \udaec\ude03\udad3\ude64\u00039\u00be\udbeb\udf98\u00e3\u00af\u00ea\u00f3\ud951\udd49": {"\udb7a\udc1f\u009d\udaf7\udd51S\u00eb\udb52\udcdb\u0083\u0090\uda59\udc62\u0012": [{"*\bl\udb5e\ude28#": null}, {}], "": {"\u00e8\u00caB\u00aa": {"8(\u0082\u00eb\u00b4(": -74, "u^\u00153\uc8d0": null}}}}'

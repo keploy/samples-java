@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-68
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/17
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "434"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\ud842\udd9bu\ud872\udfdd_\ud853\udcf8\u008c\udb26\ude09\u00c9\uda26\udcdf\uda21\udf56\u00ddp4", "firstName": "\u00c8\u00ad!\ud86e\udf32403", "lastName": "\u00eb\u001c\u00cdW2", "": [{"\u7c08\ud8c2\udd0d\u00ce\u00fe\u00b0\u00e9\u0089\ud8a7\udc9c\ud9d3\udf31\u00e7Y@\u00f5\ud89e\ude68,\u008b\u00b2": "\ud842\udd86\u000e\uda95\udd3d\u00d2\u00bd", "\udb46\udcfb\u14b1\udaad\ude22E": -128}], "\ud882\udd74\u00a8\u00af": [null]}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:05.450930621Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:05 GMT
+        body: '{"timestamp":"2024-01-19T06:06:05.452+00:00","status":400,"error":"Bad Request","path":"/api/employees/17"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:05.570859912Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644367
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/17 \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --data '{"email": "\ud842\udd9bu\ud872\udfdd_\ud853\udcf8\u008c\udb26\ude09\u00c9\uda26\udcdf\uda21\udf56\u00ddp4", "firstName": "\u00c8\u00ad!\ud86e\udf32403", "lastName": "\u00eb\u001c\u00cdW2", "": [{"\u7c08\ud8c2\udd0d\u00ce\u00fe\u00b0\u00e9\u0089\ud8a7\udc9c\ud9d3\udf31\u00e7Y@\u00f5\ud89e\ude68,\u008b\u00b2": "\ud842\udd86\u000e\uda95\udd3d\u00d2\u00bd", "\udb46\udcfb\u14b1\udaad\ude22E": -128}], "\ud882\udd74\u00a8\u00af": [null]}'

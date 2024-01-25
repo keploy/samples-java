@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-86
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/14
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "330"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\u00fb\u00c5u\u00c5\u001b\u00bejZ\u00e8\u00cf\u00cd\u00fdM\u00c5\u00b9o\u00af\u0014\u0093M\u00a5\u00c7Q", "firstName": "0m\u00cd\u0012\u00ab\ud90b\udc50\u0018\u00c1\u0006\u00c3|\u00f7", "lastName": "\ud9ab\udeb3<\u00e9\u87a5(\u00d5\u00d0\udb60\uddce\u0098%\uda4a\uddb9\ud922\udd7e\u00d4\u00a7\udbfc\udf8f\u0014G\u0005"}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:05.712144363Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:05 GMT
+        body: '{"timestamp":"2024-01-19T06:06:05.713+00:00","status":400,"error":"Bad Request","path":"/api/employees/14"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:07.064304768Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644371
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/14 \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --data '{"email": "\u00fb\u00c5u\u00c5\u001b\u00bejZ\u00e8\u00cf\u00cd\u00fdM\u00c5\u00b9o\u00af\u0014\u0093M\u00a5\u00c7Q", "firstName": "0m\u00cd\u0012\u00ab\ud90b\udc50\u0018\u00c1\u0006\u00c3|\u00f7", "lastName": "\ud9ab\udeb3<\u00e9\u87a5(\u00d5\u00d0\udb60\uddce\u0098%\uda4a\uddb9\ud922\udd7e\u00d4\u00a7\udbfc\udf8f\u0014G\u0005"}'

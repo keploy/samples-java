@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-10
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "406"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "K", "firstName": "I", "lastName": "w\u00e6L", "": [{".\u0016\u00a6\u008eg\u00d8&g\u00ab": true, "": null}], "\u00a0?\u001e|&Z\u00e1\u0081\ud9ef\udf80\u0085\u00b6MVT[": {}, "A\u00f4\ud99e\udec9D%\u00a0w\udacf\udeb9": {"\u00c4;": [], "\u00a3.\u0089\b\ud92d\udd87\u00bb": [], "@\ud963\uddb3\ud8de\udeb7": {"\u0401\u00ef": 1.1125369292536007e-308, "": {"": {"\u0019": {"\u000e": 0, "": 8417280}}}}}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:05:59.612808152Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:05:59 GMT
+        body: '{"timestamp":"2024-01-19T06:05:59.615+00:00","status":400,"error":"Bad Request","path":"/api/employees"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:05:59.617644756Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644361
+curl: |-
+    curl --request POST \
+      --url http://localhost:8080/api/employees \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --data '{"email": "K", "firstName": "I", "lastName": "w\u00e6L", "": [{".\u0016\u00a6\u008eg\u00d8&g\u00ab": true, "": null}], "\u00a0?\u001e|&Z\u00e1\u0081\ud9ef\udf80\u0085\u00b6MVT[": {}, "A\u00f4\ud99e\udec9D%\u00a0w\udacf\udeb9": {"\u00c4;": [], "\u00a3.\u0089\b\ud92d\udd87\u00bb": [], "@\ud963\uddb3\ud8de\udeb7": {"\u0401\u00ef": 1.1125369292536007e-308, "": {"": {"\u0019": {"\u000e": 0, "": 8417280}}}}}}'

@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-22
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "280"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\ud8b5\udd49Nc\ud947\uddeb\ud8cd\udea4\ud8b6\udc86\u0082\udb31\udc97\u00fd\u0090\u00159\r", "firstName": "c\u001a\ud908\udfd1", "lastName": "I\ud9d6\ude9bh\ud9ea\udd0c\u0083\u00c6=\u00fd\ud873\udc0cG\u00cb.\u00ee\uda8a\udc95\u00a6\u00a7\uda9a\udf04\u00fd\u00ef\u00b5)"}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:00.272422673Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:00 GMT
+        body: '{"timestamp":"2024-01-19T06:06:00.275+00:00","status":400,"error":"Bad Request","path":"/api/employees"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:00.276393242Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644362
+curl: |-
+    curl --request POST \
+      --url http://localhost:8080/api/employees \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --data '{"email": "\ud8b5\udd49Nc\ud947\uddeb\ud8cd\udea4\ud8b6\udc86\u0082\udb31\udc97\u00fd\u0090\u00159\r", "firstName": "c\u001a\ud908\udfd1", "lastName": "I\ud9d6\ude9bh\ud9ea\udd0c\u0083\u00c6=\u00fd\ud873\udc0cG\u00cb.\u00ee\uda8a\udc95\u00a6\u00a7\uda9a\udf04\u00fd\u00ef\u00b5)"}'

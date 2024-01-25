@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-162
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/15
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "413"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "17", "firstName": "11\u00f4\u001f", "lastName": "\u03010", "c\u001b\uda10\ude57": [{"B\u00e6\u0011_": {"\u00a3\u001co]\ud8a3\udd8b\udaae\ude39\u001boe": {"": true}, "j\u00d9&\udafd\udf05\t<\u00c8G\ud9ba\udce71": [null, 524416, null], "": {"": -189120298352897.0, "\u8106f4\u00b8\u00bf\u00fc\u000f\u00b1Kos\u37f5\udba9\ude2e.": true, "\ud802\udd04;L\u0086\u009f\u00b2": null}}, "10\ud803\udd01": [[]]}]}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:15.946267928Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:15 GMT
+        body: '{"timestamp":"2024-01-19T06:06:15.947+00:00","status":400,"error":"Bad Request","path":"/api/employees/15"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:19.248520849Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644384
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/15 \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --data '{"email": "17", "firstName": "11\u00f4\u001f", "lastName": "\u03010", "c\u001b\uda10\ude57": [{"B\u00e6\u0011_": {"\u00a3\u001co]\ud8a3\udd8b\udaae\ude39\u001boe": {"": true}, "j\u00d9&\udafd\udf05\t<\u00c8G\ud9ba\udce71": [null, 524416, null], "": {"": -189120298352897.0, "\u8106f4\u00b8\u00bf\u00fc\u000f\u00b1Kos\u37f5\udba9\ude2e.": true, "\ud802\udd04;L\u0086\u009f\u00b2": null}}, "10\ud803\udd01": [[]]}]}'

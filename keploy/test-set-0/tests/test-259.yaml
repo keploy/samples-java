@@ -1,0 +1,41 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-259
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/-928952864
+        header:
+            Accept-Encoding: gzip
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: ""
+        body_type: ""
+        timestamp: 2024-01-19T06:06:17.215149296Z
+        host: ""
+    resp:
+        status_code: 404
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:16 GMT
+        body: '{"timestamp":"2024-01-19T06:06:17.223+00:00","message":"Employee not found for this id :: -928952864","details":"uri=/api/employees/-928952864"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:33.162205685Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644404
+curl: |
+    curl --request GET \
+      --url http://localhost:8080/api/employees/-928952864 \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Accept-Encoding: gzip' \

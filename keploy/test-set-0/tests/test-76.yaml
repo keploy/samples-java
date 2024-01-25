@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-76
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/18
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "545"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "\ud964\ude2cz\ud885\udcd4", "firstName": "Y=\u0015KZ\udb61\udeedF\u00a6\u00cf:\u0081o\u00c5\ud9c6\udc37i\u00b5", "lastName": "\u00e4ekPN%\"\ud817\udd35\udb02\ude6c}", "q\r\ud94f\udda7\u00c1{": {"\u00fa55\ud875\udcb2m\u0003": {}, "t\u00ef\u00a3\u0016\uda17\udd02\u0002\u00e4\u0085\u00bf\ud996\udefa": [2.5790151118522484e+16], "\u00ca\u00b3": [[{"\u00bb\u00fas6\ue2f0T\ud849\ude7bvL\u00c9\\z\u00fa": null}]]}, "\udac1\udcd4": {"\u00bc": {}, "\u00ce\u00dd\ud80a\udecb\u001a\u0099\u00da\u001e\u00d8\u0006\u00bb\u00f7": "FR\u008b\u000f"}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:05.759559346Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:05 GMT
+        body: '{"timestamp":"2024-01-19T06:06:05.761+00:00","status":400,"error":"Bad Request","path":"/api/employees/18"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:07.067844772Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644369
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/18 \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --data '{"email": "\ud964\ude2cz\ud885\udcd4", "firstName": "Y=\u0015KZ\udb61\udeedF\u00a6\u00cf:\u0081o\u00c5\ud9c6\udc37i\u00b5", "lastName": "\u00e4ekPN%\"\ud817\udd35\udb02\ude6c}", "q\r\ud94f\udda7\u00c1{": {"\u00fa55\ud875\udcb2m\u0003": {}, "t\u00ef\u00a3\u0016\uda17\udd02\u0002\u00e4\u0085\u00bf\ud996\udefa": [2.5790151118522484e+16], "\u00ca\u00b3": [[{"\u00bb\u00fas6\ue2f0T\ud849\ude7bvL\u00c9\\z\u00fa": null}]]}, "\udac1\udcd4": {"\u00bc": {}, "\u00ce\u00dd\ud80a\udecb\u001a\u0099\u00da\u001e\u00d8\u0006\u00bb\u00f7": "FR\u008b\u000f"}}'

@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-75
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/17
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "2417"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "F\u00aa", "firstName": "\fp\u00dc\u00d9f\udb46\udd9f\uda56\ude9b<\uda54\udd18|\u00ae\u001a\u00d2\u00c9\u0005\u00f4\u00e4\u00f2A \u00be\u00a7\u00d4\u008d\u008c\u00d5\u00c4\u00c1", "lastName": "\udaf4\udda1\u00dd\too\u00c6r\u00e6\u00e7.\ud9f4\udd67\u00d8\n\u00e7\u00c5P\u00cf\ud97a\udcef\u00a7\u0082V\uda39\udd76", "\u001c": {}, "L\uda6e\udd10\u0097\u00d6\u009e": {"\u001a": {"\u00bda\u00b6\u615a\u00a3>\u008b\u0011\u00ca#": false, "\u00be\u00ce\u0019\udbff\udf91\u008d\u00fe\u00ff\u0087\u00da": true, "yg\u00f8H\u00df\ud86a\uddf7\u00e7\u00c8\u00e7\u0085": "\u00e1\u00ce\ud853\udd87S\u00b1"}, "\u00c1\u00e2\u0085\u00fa\u00d4": {}, "\u00cb\u001a\u000e<": {}}, "_\u0013\u009b\u00ee\u00c1*": [[["\udaab\ude82\u00ec\u0087\ud94a\udc0b\uda04\udc45\u0097?\ud8a3\udd3eS\u00df\u0005\u0082\ud903\udff4V", false]], {}, [-21980]], "w\ud8be\udde9\u00c3\u008d\u00c0": 31175, "\ud8b2\udd43\u00b5\u0011": {"\u00f7": {"F\u00f8]&Z\u00d6": {}}, "": {"\u001e": {}}, "6\u00d6\u00fbo^\u008b\u00ee\ud8db\udeb4\u00d4\uda96\udfbe\u00cb3{t": {"\ud9e1\uddbcwg": {"\ud96f\udc48\u00baN": null, "": null, "\u0081": "\u0085O\u001b\udbe6\ude15g"}}}, "\u00b3\u0010\u00d5.$\u00ef": {}, "\n": [[]], "\udb4f\udfaa\u00f9T": {}, "\u00df\u0013": {"\udbc6\udeeeV\u00b1\u0091\f~\u00ff\u0014": null}, "\u0014[C": [], "\u00b6\u009f\u00d2~": [], "\u00b4A": [{"\u00a1\udaeb\udc3b\udaab\udf4e\udae2\udeb6\u00ab\u00ce\u008d\u00ca": [["\u2c64j\u001e_\u00fc\u00f0aE\u0012\u0007i(Y\uda3e\udc4e_\u00d0\u0085"]], "Dj\u00a0\udb4d\uddbe": ["", {"2": false, "\u00f1\u00c2Iu": {"\u001a": null, "\uda3d\udd57\u00d6\ud821\udcb1F\\\udb99\udf26\u001c\u00ae\u00cc\u0094": null, "": null}, "=\u00bc]B\u00f9\u00c3\ud9bb\uddf7\r\u00ba\ud897\udf88\u00d4\u00b3\u009d\u008b\u00af\u0097": [null, null, "\u00a5\u00d6$"]}, true], "": []}, {".": true, "": [], "\u00a5\uda2c\ude28\ud985\udd93\ud9f2\ude1b": "W"}, ""], "<\u0089\u001b\u00c8\u3ae7\u191cv\u00e8\u00ca\u0083\u00f3\u0084\u00a7\ud911\uddab]}e\u00ae*\ud8d2\udc72\u00c9\u00a0\ud8bd\udede\u0086\u0091N\u00d1\udbd8\udf11S\ud92c\udf37\u00bf\u0005\u00eb": [{}, {}, {"\u0090\udad9\udf6c": true}], "\u00d8": {"\u0094\ud81f\udf10kE7\u00cf\u00bb\u00da\ud9a8\uddfc\u00f9\ud894\udf4b\u00ea\u00d0\u001fY\uda6d\udcdc\u00b7\u00f9": [{"uG\u0085\u00a0(\u00bc\u00cd\u008b\u00c9\u000f": ["x\u0098\ud83b\uded5l", "\u00ce", null]}, "\u00a98\u0005\u00d0\u00d6\u00a1"], "*\u00db": [{}, {}, [-3.5341518101943156e-54, 1.175494351e-38]], "": {}}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:06.677875061Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:06 GMT
+        body: '{"timestamp":"2024-01-19T06:06:06.679+00:00","status":400,"error":"Bad Request","path":"/api/employees/17"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:07.111706773Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644369
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/17 \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --data '{"email": "F\u00aa", "firstName": "\fp\u00dc\u00d9f\udb46\udd9f\uda56\ude9b<\uda54\udd18|\u00ae\u001a\u00d2\u00c9\u0005\u00f4\u00e4\u00f2A \u00be\u00a7\u00d4\u008d\u008c\u00d5\u00c4\u00c1", "lastName": "\udaf4\udda1\u00dd\too\u00c6r\u00e6\u00e7.\ud9f4\udd67\u00d8\n\u00e7\u00c5P\u00cf\ud97a\udcef\u00a7\u0082V\uda39\udd76", "\u001c": {}, "L\uda6e\udd10\u0097\u00d6\u009e": {"\u001a": {"\u00bda\u00b6\u615a\u00a3>\u008b\u0011\u00ca#": false, "\u00be\u00ce\u0019\udbff\udf91\u008d\u00fe\u00ff\u0087\u00da": true, "yg\u00f8H\u00df\ud86a\uddf7\u00e7\u00c8\u00e7\u0085": "\u00e1\u00ce\ud853\udd87S\u00b1"}, "\u00c1\u00e2\u0085\u00fa\u00d4": {}, "\u00cb\u001a\u000e<": {}}, "_\u0013\u009b\u00ee\u00c1*": [[["\udaab\ude82\u00ec\u0087\ud94a\udc0b\uda04\udc45\u0097?\ud8a3\udd3eS\u00df\u0005\u0082\ud903\udff4V", false]], {}, [-21980]], "w\ud8be\udde9\u00c3\u008d\u00c0": 31175, "\ud8b2\udd43\u00b5\u0011": {"\u00f7": {"F\u00f8]&Z\u00d6": {}}, "": {"\u001e": {}}, "6\u00d6\u00fbo^\u008b\u00ee\ud8db\udeb4\u00d4\uda96\udfbe\u00cb3{t": {"\ud9e1\uddbcwg": {"\ud96f\udc48\u00baN": null, "": null, "\u0081": "\u0085O\u001b\udbe6\ude15g"}}}, "\u00b3\u0010\u00d5.$\u00ef": {}, "\n": [[]], "\udb4f\udfaa\u00f9T": {}, "\u00df\u0013": {"\udbc6\udeeeV\u00b1\u0091\f~\u00ff\u0014": null}, "\u0014[C": [], "\u00b6\u009f\u00d2~": [], "\u00b4A": [{"\u00a1\udaeb\udc3b\udaab\udf4e\udae2\udeb6\u00ab\u00ce\u008d\u00ca": [["\u2c64j\u001e_\u00fc\u00f0aE\u0012\u0007i(Y\uda3e\udc4e_\u00d0\u0085"]], "Dj\u00a0\udb4d\uddbe": ["", {"2": false, "\u00f1\u00c2Iu": {"\u001a": null, "\uda3d\udd57\u00d6\ud821\udcb1F\\\udb99\udf26\u001c\u00ae\u00cc\u0094": null, "": null}, "=\u00bc]B\u00f9\u00c3\ud9bb\uddf7\r\u00ba\ud897\udf88\u00d4\u00b3\u009d\u008b\u00af\u0097": [null, null, "\u00a5\u00d6$"]}, true], "": []}, {".": true, "": [], "\u00a5\uda2c\ude28\ud985\udd93\ud9f2\ude1b": "W"}, ""], "<\u0089\u001b\u00c8\u3ae7\u191cv\u00e8\u00ca\u0083\u00f3\u0084\u00a7\ud911\uddab]}e\u00ae*\ud8d2\udc72\u00c9\u00a0\ud8bd\udede\u0086\u0091N\u00d1\udbd8\udf11S\ud92c\udf37\u00bf\u0005\u00eb": [{}, {}, {"\u0090\udad9\udf6c": true}], "\u00d8": {"\u0094\ud81f\udf10kE7\u00cf\u00bb\u00da\ud9a8\uddfc\u00f9\ud894\udf4b\u00ea\u00d0\u001fY\uda6d\udcdc\u00b7\u00f9": [{"uG\u0085\u00a0(\u00bc\u00cd\u008b\u00c9\u000f": ["x\u0098\ud83b\uded5l", "\u00ce", null]}, "\u00a98\u0005\u00d0\u00d6\u00a1"], "*\u00db": [{}, {}, [-3.5341518101943156e-54, 1.175494351e-38]], "": {}}}'

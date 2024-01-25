@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-127
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/14
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "390"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "{\u0081\u00cf\u00e7\u001fN", "firstName": "H", "lastName": "q\u00bc\u00b3\u00cc\u0086\ud851\udf93I", "\ud8fe\udea1k\u00b3": ["\u0097\u00c1O\u00a8"], "\u4b41\u00cb": {"": []}, "\u00c3": [[]], "": {"": 0.0, "\u0800\ud9c2\udf01\u00d2\u00a7R\u00cd\u00c9": [{}], "NF\u0091\ud9dd\ude10P\ud8b3\udd19\u009dF#": [[null, 7664, -15357], 6803, {"": -14, "\u000e": -2.225073858507203e-309}]}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:12.866277398Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:12 GMT
+        body: '{"timestamp":"2024-01-19T06:06:12.867+00:00","status":400,"error":"Bad Request","path":"/api/employees/14"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:12.923734517Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644377
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/14 \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --data '{"email": "{\u0081\u00cf\u00e7\u001fN", "firstName": "H", "lastName": "q\u00bc\u00b3\u00cc\u0086\ud851\udf93I", "\ud8fe\udea1k\u00b3": ["\u0097\u00c1O\u00a8"], "\u4b41\u00cb": {"": []}, "\u00c3": [[]], "": {"": 0.0, "\u0800\ud9c2\udf01\u00d2\u00a7R\u00cd\u00c9": [{}], "NF\u0091\ud9dd\ude10P\ud8b3\udd19\u009dF#": [[null, 7664, -15357], 6803, {"": -14, "\u000e": -2.225073858507203e-309}]}}'

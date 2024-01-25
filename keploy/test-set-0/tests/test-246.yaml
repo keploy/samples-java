@@ -1,0 +1,45 @@
+version: api.keploy-enterprise.io/v1beta1
+kind: Http
+name: test-246
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/-1564840901167075145
+        header:
+            Accept-Encoding: gzip
+            Content-Length: "1260"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Go-http-client/1.1
+        body: '{"email": "8\u0086\ud9a8\udcc4lMV", "firstName": "\u00fb1\u008fgR\u00fc\uda5b\udd5d\u009f\u008cJ\u0016\u00abV\u009f\u00dd\ud83e\udcc0$\u00aa", "lastName": "A", "B\u00dd": {}, "\uda1a\udec2[y Y\u0015\u00dbn\u008b\u00e7\ud9bc\udd4f\u0088!\u00da\ud998\udced\u00cc\u00ec": [{"": ["\u00c1\ue8bd\u00bd\uda6b\ude95\u0016)\u0081\u00f7", {"\fh\u00fan": -676}], "\u00a3c\uda8e\uddc0": {"\udb95\ude8ek\ud9f3\udea3\u001f\udad8\udcd0V\u00d9\u0098\u00e9\ud947\ude8e\u00d7": {"\u00df": 1e-05}}, "\u0016T\u00ab!\u0093\u009f\u0088\u009a(\u00d7\u00a7H": {"m~\u00f2l\u00e3\u0000a\u00f1": 1.7976931348623155e+308}}, [], {"\u00af": 2.2250738585072014e-308, "W`u": [[null, 1.7976931348623155e+308, 32761]], "\u0095\u0085\u00eaEr\u00f8\u00962\u0005\u00b1)a\u00d0t\u008e/\u00bd\u00de": "\udae3\udd5a\uda9d\udca8\\\u008d\u0016\u00ae&\u0007"}], "\u00b3\u00d1\u00a7\ud9bd\udcae\u00fa": {"E\u000e\u00ce\udb24\udd49\u000bV\u00ec\u000f\u00ea\ud9d8\udf4c\u00b6\u00ccx]\u0083\u00d2\u00ac}\u0098}/\u0087\u0087\u00fd\u00a1\u00c3t~`ZE\u0082Z\u008e\uda4a\udfec\uda56\udde3\u00ba\u00fa\u0093\u00a2": {}}, "\uda79\udfc1\u00b1": [{"\u0011\u00d0*\u0080\u00c6\\": null, "\udb38\udf96\ud909\udd81\ud859\udff3": -106, "\u00c0\u00b2\u00e80\u000e\ud96d\udf3c\ud93c\udfc7t": false}], "-\u00de\u000e9%": {}}'
+        body_type: ""
+        timestamp: 2024-01-19T06:06:18.629678931Z
+        host: ""
+    resp:
+        status_code: 400
+        header:
+            Content-Type: application/json
+            Date: Fri, 19 Jan 2024 06:06:17 GMT
+        body: '{"timestamp":"2024-01-19T06:06:18.631+00:00","status":400,"error":"Bad Request","path":"/api/employees/-1564840901167075145"}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-01-19T06:06:38.165255347Z
+    objects: []
+    assertions:
+        noise:
+            body.timestamp: []
+            header.Date: []
+    created: 1705644401
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/-1564840901167075145 \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: Go-http-client/1.1' \
+      --header 'Content-Type: application/json' \
+      --header 'Accept-Encoding: gzip' \
+      --data '{"email": "8\u0086\ud9a8\udcc4lMV", "firstName": "\u00fb1\u008fgR\u00fc\uda5b\udd5d\u009f\u008cJ\u0016\u00abV\u009f\u00dd\ud83e\udcc0$\u00aa", "lastName": "A", "B\u00dd": {}, "\uda1a\udec2[y Y\u0015\u00dbn\u008b\u00e7\ud9bc\udd4f\u0088!\u00da\ud998\udced\u00cc\u00ec": [{"": ["\u00c1\ue8bd\u00bd\uda6b\ude95\u0016)\u0081\u00f7", {"\fh\u00fan": -676}], "\u00a3c\uda8e\uddc0": {"\udb95\ude8ek\ud9f3\udea3\u001f\udad8\udcd0V\u00d9\u0098\u00e9\ud947\ude8e\u00d7": {"\u00df": 1e-05}}, "\u0016T\u00ab!\u0093\u009f\u0088\u009a(\u00d7\u00a7H": {"m~\u00f2l\u00e3\u0000a\u00f1": 1.7976931348623155e+308}}, [], {"\u00af": 2.2250738585072014e-308, "W`u": [[null, 1.7976931348623155e+308, 32761]], "\u0095\u0085\u00eaEr\u00f8\u00962\u0005\u00b1)a\u00d0t\u008e/\u00bd\u00de": "\udae3\udd5a\uda9d\udca8\\\u008d\u0016\u00ae&\u0007"}], "\u00b3\u00d1\u00a7\ud9bd\udcae\u00fa": {"E\u000e\u00ce\udb24\udd49\u000bV\u00ec\u000f\u00ea\ud9d8\udf4c\u00b6\u00ccx]\u0083\u00d2\u00ac}\u0098}/\u0087\u0087\u00fd\u00a1\u00c3t~`ZE\u0082Z\u008e\uda4a\udfec\uda56\udde3\u00ba\u00fa\u0093\u00a2": {}}, "\uda79\udfc1\u00b1": [{"\u0011\u00d0*\u0080\u00c6\\": null, "\udb38\udf96\ud909\udd81\ud859\udff3": -106, "\u00c0\u00b2\u00e80\u000e\ud96d\udf3c\ud93c\udfc7t": false}], "-\u00de\u000e9%": {}}'
