@@ -4,6 +4,11 @@ This is a petclinic app where you can record testcases and mocks by interacting 
 This project has two parts - the frontend and backend, since Keploy is a backend testing platform, we need to start the backend part of the project
 using Keploy and run the frontend as it is.
 
+Prerequisites:
+1. Node 20.11.0 LTS
+2. Docker Desktop 4.25.2 and above
+3. MVN version 3.6.3
+
 ## Setup the frontend
 
 ```
@@ -58,8 +63,6 @@ to
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/petclinic
 ```
-
-
 
 ## Run the backend with Keploy(binary)
 
