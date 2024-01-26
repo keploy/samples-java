@@ -25,7 +25,7 @@ npm run start
 ## Spin up the database
 
 ```
-docker run -e POSTGRES_USER=petclinic -e POSTGRES_PASSWORD=petclinic -e POSTGRES_DB=petclinic -p 5432:5432 --net keploy-network  postgres:15.2
+docker run -e POSTGRES_USER=petclinic -e POSTGRES_PASSWORD=petclinic -e POSTGRES_DB=petclinic -p 5432:5432 --net keploy-network --name mypostgres postgres:15.2
 ```
 
 ## Setup Keploy
@@ -41,6 +41,26 @@ cd samples-java/spring-petclinic/spring-petclinic-rest
 mvn clean install -Dmaven.test.skip=true
 ```
 
+You also need to update the postgresql properties, go to
+
+```
+spring-petclinic/spring-petclinic-rest/src/main/resources/application-postgresql.properties
+```
+
+and change
+
+```
+spring.datasource.url=jdbc:postgresql://mypostgres:5432/petclinic
+```
+
+to
+
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/petclinic
+```
+
+
+
 ## Run the backend with Keploy(binary)
 
 ```
@@ -52,14 +72,16 @@ Now when you interact with the UI, the tests should start getting created in a f
 ## Starting the backend with Keploy(docker)
 Starting the backend with keploy requires just a small change in the script used to run Keploy. The command will look something like this:
 
+### For docker on Mac
+
+```
+alias keploy='sudo docker run --pull always --name keploy-v2 -e BINARY_TO_DOCKER=true -p 16789:16789 --privileged --pid=host -it -v " + os.Getenv("PWD") + ":/files -v /sys/fs/cgroup:/sys/fs/cgroup -v debugfs:/sys/kernel/debug:rw -v /sys/fs/bpf:/sys/fs/bpf -v /var/run/docker.sock:/var/run/docker.sock -v " + os.Getenv("HOME") + "/.keploy-config:/root/.keploy-config -v " + os.Getenv("HOME") + "/.keploy:/root/.keploy --rm ghcr.io/keploy/keploy'
+```
+
 ### For docker on Linux
 
 ```
-alias keploy='sudo docker run --pull always --name keploy-v2 -p 16789:16789 --privileged --pid=host -it -v "$(pwd)":/files -v /sys/fs/cgroup:/sys/fs/cgroup -v /sys/kernel/debug:/sys/kernel/debug -v /sys/fs/bpf:/sys/fs/bpf -v /var/run/docker.sock:/var/run/docker.sock -v '"$HOME"'/.keploy-config:/root/.keploy-config -v '"$HOME"'/.keploy:/root/.keploy --rm ghcr.io/keploy/keploy'
-```
-
-```
-alias keploy='sudo docker run --pull always --name keploy-v2 -p 16789:16789 --privileged --pid=host -it -v "$(pwd)":/files -v /sys/fs/cgroup:/sys/fs/cgroup -v /sys/kernel/debug:/sys/kernel/debug -v /sys/fs/bpf:/sys/fs/bpf -v /var/run/docker.sock:/var/run/docker.sock -v '"$HOME"'/.keploy-config:/root/.keploy-config -v '"$HOME"'/keploy-config:/root/keploy-config --rm ghcr.io/keploy/keploy'
+alias keploy='sudo docker run --pull always --name keploy-v2 -e BINARY_TO_DOCKER=true -p 16789:16789 --privileged --pid=host -it -v " + os.Getenv("PWD") + ":/files -v /sys/fs/cgroup:/sys/fs/cgroup -v /sys/kernel/debug:/sys/kernel/debug -v /sys/fs/bpf:/sys/fs/bpf -v /var/run/docker.sock:/var/run/docker.sock -v " + os.Getenv("HOME") + "/.keploy-config:/root/.keploy-config -v " + os.Getenv("HOME") + "/.keploy:/root/.keploy --rm ghcr.io/keploy/keploy'
 
 ```
 
