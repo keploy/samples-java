@@ -7,11 +7,11 @@ WORKDIR /app
 # Install Maven
 RUN apt-get update && apt-get install -y maven
 
-# Build the binary
-RUN mvn clean install -Dmaven.test.skip=true
-
 # Copy the current directory contents into the container at /app
 COPY . /app/
+
+# Build the binary
+RUN mvn clean install -Dmaven.test.skip=true
 
 # Expose the port the app runs on
 EXPOSE 9966
