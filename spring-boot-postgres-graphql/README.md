@@ -42,25 +42,6 @@ Follow the steps to start the application:
 
 ## Setup DB
 
-You have two possible cases:
-
-### Use your postgres installation
-
-If you already have PostgreSQL installed on your machine and want to use this installation, follow these steps:
-1. If not already started, launch the PostgreSQL service:
-   ```bash
-   sudo service postgresql start
-   ```
-
-2. Set the password for the postgres user (or alternatively, modify the application.properties file within the project):
-   ```bash
-   sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'root';"
-   ```
-3. Create the demo database:
-
-   ```bash
-   sudo -u postgres createdb library_demo
-   ```
 ### Use postgres docker image
 
 If you have Docker installed and prefer a PostgreSQL instance in a container, follow these steps:
