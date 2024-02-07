@@ -1,0 +1,80 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-36
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/owners/2
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Dnt: "1"
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Ch-Ua: '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
+        body: ""
+        body_type: ""
+        timestamp: 2024-02-05T15:27:48.099460803+05:30
+        host: ""
+    resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Mon, 05 Feb 2024 09:57:48 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '{"firstName":"Neha","lastName":"Gupta","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":2,"pets":[{"name":"Dog","birthDate":"2023-12-19","type":{"name":"Dog","id":1},"id":1,"ownerId":2,"visits":[{"date":"2024-02-09","description":"Regular checkup ","id":1,"petId":null},{"date":"2024-02-02","description":"blah blah","id":2,"petId":null}]}]}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-02-05T15:27:49.595253955+05:30
+    objects: []
+    assertions:
+        noise:
+            body.pets.birthDate: []
+            body.pets.visits.date: []
+            body.pets.visits.description: []
+            body.telephone: []
+            header.Access-Control-Expose-Headers: []
+            header.Date: []
+    created: 1707127069
+curl: |
+    curl --request GET \
+      --url http://localhost:9966/petclinic/api/owners/2 \
+      --header 'Sec-Fetch-Dest: empty' \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Dnt: 1' \
+      --header 'Host: localhost:9966' \
+      --header 'Origin: http://localhost:4200' \
+      --header 'Sec-Ch-Ua-Platform: "macOS"' \
+      --header 'Accept-Language: en-US,en;q=0.9' \
+      --header 'Sec-Ch-Ua: "Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36' \
+      --header 'Accept: application/json, text/plain, */*' \
+      --header 'Sec-Fetch-Mode: cors' \
+      --header 'Connection: keep-alive' \
+      --header 'Sec-Ch-Ua-Mobile: ?0' \
+      --header 'Sec-Fetch-Site: same-site' \
+      --header 'Referer: http://localhost:4200/' \

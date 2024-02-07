@@ -4,39 +4,39 @@ name: test-10
 spec:
     metadata: {}
     req:
-        method: PUT
+        method: GET
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:9967/petclinic/api/pettypes/1
+        url: http://localhost:9966/petclinic/api/owners/1
         header:
             Accept: application/json, text/plain, */*
             Accept-Encoding: gzip, deflate, br
             Accept-Language: en-US,en;q=0.9
             Connection: keep-alive
-            Content-Length: "22"
-            Content-Type: application/json
-            Host: localhost:9967
-            Origin: http://localhost:59555
-            Referer: http://localhost:59555/
-            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Dnt: "1"
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Ch-Ua: '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"'
             Sec-Ch-Ua-Mobile: ?0
             Sec-Ch-Ua-Platform: '"macOS"'
             Sec-Fetch-Dest: empty
             Sec-Fetch-Mode: cors
             Sec-Fetch-Site: same-site
-            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-        body: '{"id":1,"name":"Cats"}'
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
+        body: ""
         body_type: ""
-        timestamp: 2023-12-09T06:32:02.104894269Z
+        timestamp: 2024-02-05T15:26:49.538270455+05:30
+        host: ""
     resp:
-        status_code: 204
+        status_code: 200
         header:
             Access-Control-Allow-Origin: '*'
             Access-Control-Expose-Headers: errors, content-type
             Cache-Control: no-cache, no-store, max-age=0, must-revalidate
             Connection: keep-alive
             Content-Type: application/json
-            Date: Sat, 09 Dec 2023 06:32:02 GMT
+            Date: Mon, 05 Feb 2024 09:56:48 GMT
             Expires: "0"
             Keep-Alive: timeout=60
             Pragma: no-cache
@@ -44,34 +44,34 @@ spec:
             X-Content-Type-Options: nosniff
             X-Frame-Options: DENY
             X-Xss-Protection: "0"
-        body: ""
+        body: '{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":1,"pets":[]}'
         body_type: ""
         status_message: ""
         proto_major: 0
         proto_minor: 0
-        timestamp: 2023-12-09T06:32:02.135805046Z
+        timestamp: 2024-02-05T15:26:52.917711061+05:30
     objects: []
     assertions:
         noise:
+            body.telephone: []
             header.Access-Control-Expose-Headers: []
             header.Date: []
-    created: 1702103522
-curl: |-
-    curl --request PUT \
-      --url http://localhost:9967/petclinic/api/pettypes/1 \
-      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' \
-      --header 'Sec-Ch-Ua-Mobile: ?0' \
-      --header 'Content-Type: application/json' \
-      --header 'Host: localhost:9967' \
-      --header 'Origin: http://localhost:59555' \
-      --header 'Accept-Language: en-US,en;q=0.9' \
+    created: 1707127012
+curl: |
+    curl --request GET \
+      --url http://localhost:9966/petclinic/api/owners/1 \
+      --header 'Referer: http://localhost:4200/' \
       --header 'Connection: keep-alive' \
-      --header 'Referer: http://localhost:59555/' \
-      --header 'Sec-Fetch-Mode: cors' \
-      --header 'Sec-Fetch-Site: same-site' \
-      --header 'Sec-Ch-Ua: "Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"' \
       --header 'Sec-Fetch-Dest: empty' \
-      --header 'Accept-Encoding: gzip, deflate, br' \
-      --header 'Accept: application/json, text/plain, */*' \
       --header 'Sec-Ch-Ua-Platform: "macOS"' \
-      --data '{"id":1,"name":"Cats"}'
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Sec-Fetch-Mode: cors' \
+      --header 'Origin: http://localhost:4200' \
+      --header 'Sec-Fetch-Site: same-site' \
+      --header 'Sec-Ch-Ua-Mobile: ?0' \
+      --header 'Accept: application/json, text/plain, */*' \
+      --header 'Sec-Ch-Ua: "Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"' \
+      --header 'Host: localhost:9966' \
+      --header 'Dnt: 1' \
+      --header 'Accept-Language: en-US,en;q=0.9' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36' \
