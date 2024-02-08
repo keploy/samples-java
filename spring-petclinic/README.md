@@ -82,20 +82,20 @@ Now you can start interacting with the UI and Keploy will automatically create t
 ## Running the testcases using Keploy
 
 ```
-keploy test -c "java -jar target/<name-of-your-jar>" --delay 10
+keploy test -c "java -jar target/<name-of-your-jar>" --delay 20
 ```
 
 # Instructions For Starting Using Docker
 Here we just need to change the command used to start the application and it should work correctly.
 
 ```
-keploy record -c "docker compose up" --containerName javaApp --buildDelay 50s
+keploy record -c "docker compose up" --containerName javaApp --buildDelay 100s
 ```
 
 ## Running the testcases using Keploy
 
 ```
-keploy test -c "docker compose up" --containerName javaApp --buildDelay 50s --delay 10
+keploy test -c "docker compose up" --containerName javaApp --buildDelay 50s --delay 20
 ```
 Here `delay` is the time it takes for your application to get started, after which Keploy will start running the testcases. If your application takes longer than 10s to get started, you can change the `delay` accordingly.
 `buildDelay` is the time that it takes for the image to get built. This is useful when you are building the docker image from your docker compose file itself.
