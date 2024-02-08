@@ -3,11 +3,17 @@
 This is a petclinic app where you can record testcases and mocks by interacting with the UI, and then test them using Keploy.
 This project has two parts - the frontend and backend, since Keploy is a backend testing platform, we need to start the backend part of the project
 using Keploy and run the frontend as it is.
+You can start the backend using Keploy in 2 ways:
+- Using Keploy's binary.
+- Using Keploy's docker image.
 
-Prerequisites:
+Prerequisites For Binary:
 1. Node 20.11.0 LTS
-2. Docker Desktop 4.25.2 and above
+2. OpenJDK 17.0.9
 3. MVN version 3.6.3
+
+Prerequisites For Docker:
+1.  Docker Desktop 4.25.2 and above
 
 ## Setup the frontend
 
@@ -26,6 +32,8 @@ npm i
 ```
 npm run start
 ```
+
+# Instructions For Starting Using Binary
 
 ## Spin up the database
 
@@ -64,44 +72,30 @@ to
 spring.datasource.url=jdbc:postgresql://localhost:5432/petclinic
 ```
 
-## Run the backend with Keploy(binary)
+## Recording the testcases with Keploy
 
 ```
 keploy record -c "java -jar target/<name-of-your-jar>"
 ```
+Now you can start interacting with the UI and Keploy will automatically create the testcases and mocks for it in a folder named 'keploy'.
 
-Now when you interact with the UI, the tests should start getting created in a folder called 'keploy' in the directory where you started the backend. When you are done recording the testcases and mocks, you can run them using keploy.
-
-## Starting the backend with Keploy(docker)
-Starting the backend with keploy requires just a small change in the script used to run Keploy. The command will look something like this:
-
-### For docker on Mac
+## Running the testcases using Keploy
 
 ```
-alias keploy='sudo docker run --pull always --name keploy-v2 -e BINARY_TO_DOCKER=true -p 16789:16789 --privileged --pid=host -it -v " + os.Getenv("PWD") + ":/files -v /sys/fs/cgroup:/sys/fs/cgroup -v debugfs:/sys/kernel/debug:rw -v /sys/fs/bpf:/sys/fs/bpf -v /var/run/docker.sock:/var/run/docker.sock -v " + os.Getenv("HOME") + "/.keploy-config:/root/.keploy-config -v " + os.Getenv("HOME") + "/.keploy:/root/.keploy --rm ghcr.io/keploy/keploy'
+keploy test -c "java -jar target/<name-of-your-jar>" --delay 20
 ```
 
-### For docker on Linux
+# Instructions For Starting Using Docker
+Here we just need to change the command used to start the application and it should work correctly.
 
 ```
-alias keploy='sudo docker run --pull always --name keploy-v2 -e BINARY_TO_DOCKER=true -p 16789:16789 --privileged --pid=host -it -v " + os.Getenv("PWD") + ":/files -v /sys/fs/cgroup:/sys/fs/cgroup -v /sys/kernel/debug:/sys/kernel/debug -v /sys/fs/bpf:/sys/fs/bpf -v /var/run/docker.sock:/var/run/docker.sock -v " + os.Getenv("HOME") + "/.keploy-config:/root/.keploy-config -v " + os.Getenv("HOME") + "/.keploy:/root/.keploy --rm ghcr.io/keploy/keploy'
-
+keploy record -c "docker compose up" --containerName javaApp --buildDelay 100s
 ```
 
-```
-keploy record -c "docker compose up" --containerName javaApp --buildDelay 50s
-```
-
-## Running the testcases using Keploy(binary)
+## Running the testcases using Keploy
 
 ```
-keploy test -c "java -jar target/<name-of-your-jar>" --delay 10
-```
-
-## Running the testcases using Keploy(docker)
-
-```
-keploy test -c "docker compose up" --containerName javaApp --buildDelay 50s --delay 10
+keploy test -c "docker compose up" --containerName javaApp --buildDelay 50s --delay 20
 ```
 Here `delay` is the time it takes for your application to get started, after which Keploy will start running the testcases. If your application takes longer than 10s to get started, you can change the `delay` accordingly.
 `buildDelay` is the time that it takes for the image to get built. This is useful when you are building the docker image from your docker compose file itself.
