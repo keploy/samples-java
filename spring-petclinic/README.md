@@ -3,6 +3,12 @@
 This is a petclinic app where you can record testcases and mocks by interacting with the UI, and then test them using Keploy.
 This project has two parts - the frontend and backend, since Keploy is a backend testing platform, we need to start the backend part of the project using Keploy and run the frontend as it is.
 
+First, you need to install Keploy. For that you can use the command below:
+
+```
+curl -O https://raw.githubusercontent.com/keploy/keploy/main/keploy.sh && source keploy.sh
+```
+
 ## Setup the frontend
 
 ```
@@ -20,20 +26,15 @@ npm i
 ```
 npm run start
 ```
-## Spin up the database
-
-```
-docker run -e POSTGRES_USER=petclinic -e POSTGRES_PASSWORD=petclinic -e POSTGRES_DB=petclinic -p 5432:5432 --net keploy-network --name mypostgres postgres:15.2
-```
 
 You can start the backend using Keploy in 2 ways:
 - [Using Keploy's binary](#binary-guide)
 - [Using Keploy's docker image](#docker-guide)
 
-But first, you need to install Keploy. For that you can use the command below:
+Lets's move to the backend directory and get started.
 
 ```
-curl -O https://raw.githubusercontent.com/keploy/keploy/main/keploy.sh && source keploy.sh
+cd samples-java/spring-petclinic/spring-petclinic-rest
 ```
 
 # Instructions For Starting Using Binary <a name="binary-guide"></a>
@@ -46,16 +47,17 @@ Prerequisites For Binary:
 ## Setup the backend
 
 ```
-cd samples-java/spring-petclinic/spring-petclinic-rest
 mvn clean install -Dmaven.test.skip=true
 ```
 
+## Spin up the database
+
+```
+docker run -e POSTGRES_USER=petclinic -e POSTGRES_PASSWORD=petclinic -e POSTGRES_DB=petclinic -p 5432:5432 --name mypostgres postgres:15.2
+```
+
 You also need to update the postgresql properties, go to
-
-```
-spring-petclinic/spring-petclinic-rest/src/main/resources/application-postgresql.properties
-```
-
+`spring-petclinic/spring-petclinic-rest/src/main/resources/application-postgresql.properties`
 and change
 
 ```
@@ -66,6 +68,11 @@ to
 
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/petclinic
+```
+and then build the jar again using
+
+```
+mvn clean install -Dmaven.test.skip=true
 ```
 
 ## Recording the testcases with Keploy

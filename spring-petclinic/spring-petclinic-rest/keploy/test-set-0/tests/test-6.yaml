@@ -7,27 +7,28 @@ spec:
         method: POST
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:9967/petclinic/api/specialties
+        url: http://localhost:9966/petclinic/api/owners
         header:
             Accept: application/json, text/plain, */*
             Accept-Encoding: gzip, deflate, br
             Accept-Language: en-US,en;q=0.9
             Connection: keep-alive
-            Content-Length: "23"
+            Content-Length: "138"
             Content-Type: application/json
-            Host: localhost:9967
-            Origin: http://localhost:59555
-            Referer: http://localhost:59555/
-            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Ch-Ua: '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"'
             Sec-Ch-Ua-Mobile: ?0
             Sec-Ch-Ua-Platform: '"macOS"'
             Sec-Fetch-Dest: empty
             Sec-Fetch-Mode: cors
             Sec-Fetch-Site: same-site
-            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-        body: '{"name":"veterinanian"}'
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
+        body: '{"id":null,"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678"}'
         body_type: ""
-        timestamp: 2023-12-09T06:31:50.44240483Z
+        timestamp: 2024-02-12T16:54:48.120284304+05:30
+        host: ""
     resp:
         status_code: 201
         header:
@@ -36,43 +37,44 @@ spec:
             Cache-Control: no-cache, no-store, max-age=0, must-revalidate
             Connection: keep-alive
             Content-Type: application/json
-            Date: Sat, 09 Dec 2023 06:31:50 GMT
+            Date: Mon, 12 Feb 2024 11:24:48 GMT
             Expires: "0"
             Keep-Alive: timeout=60
-            Location: /api/specialties/1
+            Location: /api/owners/1
             Pragma: no-cache
             Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
             X-Content-Type-Options: nosniff
             X-Frame-Options: DENY
             X-Xss-Protection: "0"
-        body: '{"id":1,"name":"veterinanian"}'
+        body: '{"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678","id":1,"pets":[]}'
         body_type: ""
         status_message: ""
         proto_major: 0
         proto_minor: 0
-        timestamp: 2023-12-09T06:31:52.461415497Z
+        timestamp: 2024-02-12T16:54:48.313252372+05:30
     objects: []
     assertions:
         noise:
+            body.city: []
             header.Access-Control-Expose-Headers: []
             header.Date: []
-    created: 1702103512
+    created: 1707737088
 curl: |-
     curl --request POST \
-      --url http://localhost:9967/petclinic/api/specialties \
+      --url http://localhost:9966/petclinic/api/owners \
       --header 'Accept-Encoding: gzip, deflate, br' \
-      --header 'Sec-Fetch-Dest: empty' \
-      --header 'Connection: keep-alive' \
-      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' \
-      --header 'Accept-Language: en-US,en;q=0.9' \
-      --header 'Referer: http://localhost:59555/' \
-      --header 'Sec-Fetch-Mode: cors' \
-      --header 'Content-Type: application/json' \
-      --header 'Accept: application/json, text/plain, */*' \
-      --header 'Host: localhost:9967' \
-      --header 'Sec-Fetch-Site: same-site' \
-      --header 'Origin: http://localhost:59555' \
       --header 'Sec-Ch-Ua-Platform: "macOS"' \
-      --header 'Sec-Ch-Ua: "Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"' \
+      --header 'Accept-Language: en-US,en;q=0.9' \
+      --header 'Referer: http://localhost:4200/' \
+      --header 'Sec-Ch-Ua: "Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36' \
+      --header 'Host: localhost:9966' \
+      --header 'Sec-Fetch-Site: same-site' \
+      --header 'Sec-Fetch-Mode: cors' \
       --header 'Sec-Ch-Ua-Mobile: ?0' \
-      --data '{"name":"veterinanian"}'
+      --header 'Origin: http://localhost:4200' \
+      --header 'Connection: keep-alive' \
+      --header 'Sec-Fetch-Dest: empty' \
+      --header 'Accept: application/json, text/plain, */*' \
+      --header 'Content-Type: application/json' \
+      --data '{"id":null,"firstName":"John","lastName":"Doe","address":"14th Main Street, Royal Street","city":"London, England","telephone":"12345678"}'
