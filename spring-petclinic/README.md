@@ -46,17 +46,7 @@ Prerequisites For Binary:
 
 ## Setup the backend
 
-```
-mvn clean install -Dmaven.test.skip=true
-```
-
-## Spin up the database
-
-```
-docker run -e POSTGRES_USER=petclinic -e POSTGRES_PASSWORD=petclinic -e POSTGRES_DB=petclinic -p 5432:5432 --name mypostgres postgres:15.2
-```
-
-You also need to update the postgresql properties, go to
+You need to update the postgresql properties, go to
 `spring-petclinic/spring-petclinic-rest/src/main/resources/application-postgresql.properties`
 and change
 
@@ -69,10 +59,16 @@ to
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/petclinic
 ```
-and then build the jar again using
+and then build the jar using:
 
 ```
 mvn clean install -Dmaven.test.skip=true
+```
+
+## Spin up the database
+
+```
+docker run -e POSTGRES_USER=petclinic -e POSTGRES_PASSWORD=petclinic -e POSTGRES_DB=petclinic -p 5432:5432 --name mypostgres postgres:15.2
 ```
 
 ## Recording the testcases with Keploy
