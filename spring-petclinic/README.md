@@ -88,6 +88,7 @@ keploy test -c "java -jar target/spring-petclinic-rest-3.0.2.jar" --delay 20
 
 Prerequisites For Docker:
 1.  Docker Desktop 4.25.2 and above
+
 Here we just need to change the command used to start the application.
 
 ```
