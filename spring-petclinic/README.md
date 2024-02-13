@@ -27,15 +27,15 @@ npm i
 npm run start
 ```
 
-You can start the backend using Keploy in 2 ways:
-- [Using Keploy's binary](#binary-guide)
-- [Using Keploy's docker image](#docker-guide)
-
-Lets's move to the backend directory and get started.
+Now it's time to setup the backend of our application. Let's move to the backend directory and get started.
 
 ```
 cd samples-java/spring-petclinic/spring-petclinic-rest
 ```
+
+You can start the backend using Keploy in 2 ways:
+- [Using Keploy's binary](#binary-guide)
+- [Using Keploy's docker image](#docker-guide)
 
 # Instructions For Starting Using Binary <a name="binary-guide"></a>
 
@@ -83,6 +83,10 @@ Now you can start interacting with the UI and Keploy will automatically create t
 ```
 keploy test -c "java -jar target/spring-petclinic-rest-3.0.2.jar" --delay 20
 ```
+
+🎉 Hooray! You've made it to the end of the binary section! 🎉
+
+Next we move on to the instructions to start the application using docker.
 
 # Instructions For Starting Using Docker <a name="docker-guide"></a>
 
