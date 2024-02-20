@@ -1,0 +1,334 @@
+version: api.keploy.io/v1beta1
+name: report-1
+status: PASSED
+success: 5
+failure: 0
+total: 5
+tests:
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1708341182
+      completed: 1708341182
+      test_case_path: /Users/charankamarapu/Desktop/dry_run/samples-java/employee-manager/keploy/test-set-0
+      mock_path: /Users/charankamarapu/Desktop/dry_run/samples-java/employee-manager/keploy/test-set-0/mocks.yaml
+      test_case_id: test-1
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees
+        header:
+            Accept: '*/*'
+            Content-Length: "100"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: |-
+            {
+                "firstName": "Myke",
+                "lastName": "Tyson",
+                "email": "mt@gmail.com",
+                "timestamp":1
+            }
+        timestamp: 2023-12-04T09:32:07.519798019Z
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Mon, 04 Dec 2023 09:32:07 GMT
+        body: '{"id":13,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682327}'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-04T09:32:10.504964682Z
+      noise:
+        body.timestamp: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Mon, 04 Dec 2023 09:32:07 GMT
+              actual:
+                key: Date
+                value:
+                    - Mon, 19 Feb 2024 11:13:02 GMT
+        body_result:
+            - normal: true
+              expected: '{"id":13,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682327}'
+              actual: '{"id":13,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1708341182}'
+              type: JSON
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1708341182
+      completed: 1708341182
+      test_case_path: /Users/charankamarapu/Desktop/dry_run/samples-java/employee-manager/keploy/test-set-0
+      mock_path: /Users/charankamarapu/Desktop/dry_run/samples-java/employee-manager/keploy/test-set-0/mocks.yaml
+      test_case_id: test-2
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees
+        header:
+            Accept: '*/*'
+            Content-Length: "100"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: |-
+            {
+                "firstName": "Myke",
+                "lastName": "Tyson",
+                "email": "mt@gmail.com",
+                "timestamp":1
+            }
+        timestamp: 2023-12-04T09:32:09.749962868Z
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Mon, 04 Dec 2023 09:32:09 GMT
+        body: '{"id":14,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682329}'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-04T09:32:12.761148746Z
+      noise:
+        body.timestamp: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Mon, 04 Dec 2023 09:32:09 GMT
+              actual:
+                key: Date
+                value:
+                    - Mon, 19 Feb 2024 11:13:02 GMT
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+        body_result:
+            - normal: true
+              expected: '{"id":14,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682329}'
+              actual: '{"id":14,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1708341182}'
+              type: JSON
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1708341182
+      completed: 1708341182
+      test_case_path: /Users/charankamarapu/Desktop/dry_run/samples-java/employee-manager/keploy/test-set-0
+      mock_path: /Users/charankamarapu/Desktop/dry_run/samples-java/employee-manager/keploy/test-set-0/mocks.yaml
+      test_case_id: test-3
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        timestamp: 2023-12-04T09:32:13.062492036Z
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Mon, 04 Dec 2023 09:32:13 GMT
+        body: '[{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700642324},{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650840},{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650845},{"id":4,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650846},{"id":5,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650870},{"id":6,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650871},{"id":7,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700668292},{"id":8,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701155376},{"id":9,"firstName":"GK","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701155441},{"id":10,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682065},{"id":11,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682066},{"id":12,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682068},{"id":13,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682327},{"id":14,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682329}]'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-04T09:32:16.06356756Z
+      noise:
+        body.timestamp: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Mon, 04 Dec 2023 09:32:13 GMT
+              actual:
+                key: Date
+                value:
+                    - Mon, 19 Feb 2024 11:13:02 GMT
+        body_result:
+            - normal: true
+              expected: '[{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700642324},{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650840},{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650845},{"id":4,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650846},{"id":5,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650870},{"id":6,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650871},{"id":7,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700668292},{"id":8,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701155376},{"id":9,"firstName":"GK","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701155441},{"id":10,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682065},{"id":11,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682066},{"id":12,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682068},{"id":13,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682327},{"id":14,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682329}]'
+              actual: '[{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700642324},{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650840},{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650845},{"id":4,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650846},{"id":5,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650870},{"id":6,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650871},{"id":7,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700668292},{"id":8,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701155376},{"id":9,"firstName":"GK","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701155441},{"id":10,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682065},{"id":11,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682066},{"id":12,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682068},{"id":13,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682327},{"id":14,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682329}]'
+              type: JSON
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1708341182
+      completed: 1708341182
+      test_case_path: /Users/charankamarapu/Desktop/dry_run/samples-java/employee-manager/keploy/test-set-0
+      mock_path: /Users/charankamarapu/Desktop/dry_run/samples-java/employee-manager/keploy/test-set-0/mocks.yaml
+      test_case_id: test-4
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/11
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        timestamp: 2023-12-04T09:32:17.236905852Z
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Mon, 04 Dec 2023 09:32:17 GMT
+        body: '{"id":11,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682066}'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-04T09:32:20.25768276Z
+      noise:
+        body.timestamp: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Mon, 04 Dec 2023 09:32:17 GMT
+              actual:
+                key: Date
+                value:
+                    - Mon, 19 Feb 2024 11:13:02 GMT
+        body_result:
+            - normal: true
+              expected: '{"id":11,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682066}'
+              actual: '{"id":11,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682066}'
+              type: JSON
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1708341182
+      completed: 1708341182
+      test_case_path: /Users/charankamarapu/Desktop/dry_run/samples-java/employee-manager/keploy/test-set-0
+      mock_path: /Users/charankamarapu/Desktop/dry_run/samples-java/employee-manager/keploy/test-set-0/mocks.yaml
+      test_case_id: test-5
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/employees/111
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.81.0
+        body: ""
+        timestamp: 2023-12-04T09:32:20.577053016Z
+      resp:
+        status_code: 404
+        header:
+            Content-Type: application/json
+            Date: Mon, 04 Dec 2023 09:32:20 GMT
+        body: '{"timestamp":"2023-12-04T09:32:20.584+00:00","message":"Employee not found for this id :: 111","details":"uri=/api/employees/111"}'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-04T09:32:23.591186772Z
+      noise:
+        body.timestamp: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 404
+            actual: 404
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Mon, 04 Dec 2023 09:32:20 GMT
+              actual:
+                key: Date
+                value:
+                    - Mon, 19 Feb 2024 11:13:02 GMT
+        body_result:
+            - normal: true
+              expected: '{"timestamp":"2023-12-04T09:32:20.584+00:00","message":"Employee not found for this id :: 111","details":"uri=/api/employees/111"}'
+              actual: '{"timestamp":"2024-02-19T11:13:02.892+00:00","message":"Employee not found for this id :: 111","details":"uri=/api/employees/111"}'
+              type: JSON
+        dep_result: []
+test_set: test-set-0
