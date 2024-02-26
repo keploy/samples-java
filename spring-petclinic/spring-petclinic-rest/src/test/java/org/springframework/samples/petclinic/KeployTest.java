@@ -11,7 +11,7 @@ public class KeployTest {
 @Test
 @Order(Integer.MAX_VALUE)
 public void testKeploy() throws IOException, InterruptedException {
-    String jarPath = "target/springbootapp-0.0.1-SNAPSHOT.jar";
+    String jarPath = "target/spring-petclinic-rest-3.0.2.jar";
     Keploy.runTests(jarPath);
 }
 }
