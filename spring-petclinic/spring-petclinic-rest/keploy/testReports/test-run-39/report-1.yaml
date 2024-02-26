@@ -1,0 +1,720 @@
+version: api.keploy.io/v1beta1
+name: report-1
+status: FAILED
+success: 0
+failure: 4
+total: 4
+tests:
+    - kind: Http
+      name: report-1
+      status: FAILED
+      started: 1708951276
+      completed: 1708951276
+      test_case_path: /Users/shubham/projects/keploy/samples/java/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-0
+      mock_path: /Users/shubham/projects/keploy/samples/java/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-0/mocks.yaml
+      test_case_id: test-1
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/owners
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate
+            Accept-Language: en-IN,en-GB;q=0.9,en;q=0.8
+            Connection: keep-alive
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.15
+        body: ""
+        timestamp: 2024-02-26T18:10:07.190357766+05:30
+      resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Mon, 26 Feb 2024 12:40:07 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"firstName":"Shubham","lastName":"Jain","address":"sadar bazar","city":"delhi","telephone":"8882110959","id":1,"pets":[]},{"firstName":"Sarthak","lastName":"Shyngle","address":"850 NEW BURTON","city":"DOVER","telephone":"8882110959","id":3,"pets":[]},{"firstName":"Govind","lastName":"Kumar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":4,"pets":[]},{"firstName":"Animesh","lastName":"Pathak","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":5,"pets":[]},{"firstName":"Charan","lastName":"Kumar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":6,"pets":[]},{"firstName":"Nitin","lastName":"Gupta","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":7,"pets":[]},{"firstName":"neha","lastName":"gupta","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":8,"pets":[]},{"firstName":"Ashish","lastName":"Sharma","address":"Sector 127","city":"Noida","telephone":"8882110959","id":2,"pets":[]},{"firstName":"Pankaj","lastName":"Kankar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":9,"pets":[{"name":"asdfad","birthDate":"2024-01-10","type":{"name":"Parrot","id":3},"id":7,"ownerId":9,"visits":[]},{"name":"Ronnie","birthDate":"2024-01-01","type":{"name":"Eagle","id":5},"id":6,"ownerId":9,"visits":[]}]},{"firstName":"Gourav","lastName":"Kumar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":10,"pets":[]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":11,"pets":[]},{"firstName":"SArthak","lastName":"Shyngle","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":12,"pets":[]},{"firstName":"Saurabh","lastName":"Kumar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":13,"pets":[]},{"firstName":"Pranshu","lastName":"Srivastava","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":14,"pets":[]},{"firstName":"Ashish","lastName":"Kumar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":15,"pets":[{"name":"Dog","birthDate":"2024-01-02","type":{"name":"Rabbit","id":4},"id":14,"ownerId":15,"visits":[]}]},{"firstName":"Anirudh","lastName":"Jain","address":"HSR","city":"BLR","telephone":"8882110959","id":16,"pets":[]},{"firstName":"govind","lastName":"Srivastava","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":17,"pets":[]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":18,"pets":[]},{"firstName":"Gaurav","lastName":"Gupta","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":19,"pets":[{"name":"Johhny","birthDate":"2023-12-19","type":{"name":"Eagle","id":5},"id":21,"ownerId":19,"visits":[]},{"name":"Ronnie","birthDate":"2024-01-10","type":{"name":"Rabbit","id":4},"id":22,"ownerId":19,"visits":[]}]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":20,"pets":[]},{"firstName":"Gaurav","lastName":"Gupta","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":21,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":22,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":23,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":24,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":25,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":26,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":27,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":28,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":29,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":30,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":31,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":32,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":33,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":34,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":35,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":36,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":37,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":38,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":39,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":40,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":41,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":42,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":43,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":44,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":45,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":46,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":47,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":48,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":49,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":50,"pets":[]},{"firstName":"Nick","lastName":"Thomas","address":"eiffle tower","city":"Paris","telephone":"8882110959","id":51,"pets":[]},{"firstName":"Sebastian","lastName":"Viquez","address":"Costa rica","city":"Costa rica","telephone":"8882110959","id":52,"pets":[]},{"firstName":"Mahesh","lastName":"Gupta","address":"Rani bagh ","city":"Delhi","telephone":"2134314","id":53,"pets":[]},{"firstName":"Jyoti","lastName":"bansal","address":"Bellandur","city":"BLR","telephone":"8882110959","id":54,"pets":[]},{"firstName":"Jay","lastName":"Prasad","address":"Bellandur","city":"BLR","telephone":"8882110959","id":55,"pets":[]}]'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-02-26T18:10:09.748956216+05:30
+      noise:
+        body.id: []
+        body.pets.birthDate: []
+        body.pets.id: []
+        body.pets.ownerId: []
+        body.telephone: []
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: false
+            expected: 200
+            actual: 0
+        headers_result:
+            - normal: false
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value: []
+            - normal: false
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value: []
+            - normal: false
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value: []
+            - normal: false
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value: []
+            - normal: false
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value: []
+            - normal: false
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value: []
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value: []
+            - normal: false
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value: []
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Mon, 26 Feb 2024 12:40:07 GMT
+              actual:
+                key: Date
+                value: []
+            - normal: false
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value: []
+            - normal: false
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value: []
+            - normal: false
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value: []
+            - normal: false
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value: []
+        body_result:
+            - normal: false
+              expected: '[{"firstName":"Shubham","lastName":"Jain","address":"sadar bazar","city":"delhi","telephone":"8882110959","id":1,"pets":[]},{"firstName":"Sarthak","lastName":"Shyngle","address":"850 NEW BURTON","city":"DOVER","telephone":"8882110959","id":3,"pets":[]},{"firstName":"Govind","lastName":"Kumar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":4,"pets":[]},{"firstName":"Animesh","lastName":"Pathak","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":5,"pets":[]},{"firstName":"Charan","lastName":"Kumar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":6,"pets":[]},{"firstName":"Nitin","lastName":"Gupta","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":7,"pets":[]},{"firstName":"neha","lastName":"gupta","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":8,"pets":[]},{"firstName":"Ashish","lastName":"Sharma","address":"Sector 127","city":"Noida","telephone":"8882110959","id":2,"pets":[]},{"firstName":"Pankaj","lastName":"Kankar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":9,"pets":[{"name":"asdfad","birthDate":"2024-01-10","type":{"name":"Parrot","id":3},"id":7,"ownerId":9,"visits":[]},{"name":"Ronnie","birthDate":"2024-01-01","type":{"name":"Eagle","id":5},"id":6,"ownerId":9,"visits":[]}]},{"firstName":"Gourav","lastName":"Kumar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":10,"pets":[]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":11,"pets":[]},{"firstName":"SArthak","lastName":"Shyngle","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":12,"pets":[]},{"firstName":"Saurabh","lastName":"Kumar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":13,"pets":[]},{"firstName":"Pranshu","lastName":"Srivastava","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":14,"pets":[]},{"firstName":"Ashish","lastName":"Kumar","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":15,"pets":[{"name":"Dog","birthDate":"2024-01-02","type":{"name":"Rabbit","id":4},"id":14,"ownerId":15,"visits":[]}]},{"firstName":"Anirudh","lastName":"Jain","address":"HSR","city":"BLR","telephone":"8882110959","id":16,"pets":[]},{"firstName":"govind","lastName":"Srivastava","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":17,"pets":[]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":18,"pets":[]},{"firstName":"Gaurav","lastName":"Gupta","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":19,"pets":[{"name":"Johhny","birthDate":"2023-12-19","type":{"name":"Eagle","id":5},"id":21,"ownerId":19,"visits":[]},{"name":"Ronnie","birthDate":"2024-01-10","type":{"name":"Rabbit","id":4},"id":22,"ownerId":19,"visits":[]}]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":20,"pets":[]},{"firstName":"Gaurav","lastName":"Gupta","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":21,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":22,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":23,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":24,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":25,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":26,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":27,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":28,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":29,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":30,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":31,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":32,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":33,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":34,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":35,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":36,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":37,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":38,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":39,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":40,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":41,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":42,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":43,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":44,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":45,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":46,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":47,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":48,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":49,"pets":[]},{"firstName":"ANimesh","lastName":"Pathask","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":50,"pets":[]},{"firstName":"Nick","lastName":"Thomas","address":"eiffle tower","city":"Paris","telephone":"8882110959","id":51,"pets":[]},{"firstName":"Sebastian","lastName":"Viquez","address":"Costa rica","city":"Costa rica","telephone":"8882110959","id":52,"pets":[]},{"firstName":"Mahesh","lastName":"Gupta","address":"Rani bagh ","city":"Delhi","telephone":"2134314","id":53,"pets":[]},{"firstName":"Jyoti","lastName":"bansal","address":"Bellandur","city":"BLR","telephone":"8882110959","id":54,"pets":[]},{"firstName":"Jay","lastName":"Prasad","address":"Bellandur","city":"BLR","telephone":"8882110959","id":55,"pets":[]}]'
+              actual: 'Get "http://localhost:9966/petclinic/api/owners": dial tcp [::1]:9966: connect: connection refused'
+              type: PLAIN
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: FAILED
+      started: 1708951276
+      completed: 1708951276
+      test_case_path: /Users/shubham/projects/keploy/samples/java/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-0
+      mock_path: /Users/shubham/projects/keploy/samples/java/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-0/mocks.yaml
+      test_case_id: test-2
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/owners?lastName=jain
+        url_params:
+            lastName: jain
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate
+            Accept-Language: en-IN,en-GB;q=0.9,en;q=0.8
+            Connection: keep-alive
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.15
+        body: ""
+        timestamp: 2024-02-26T18:10:19.423450435+05:30
+      resp:
+        status_code: 404
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Length: "0"
+            Date: Mon, 26 Feb 2024 12:40:19 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: ""
+        status_message: Not Found
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-02-26T18:10:21.60073045+05:30
+      noise:
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: false
+            expected: 404
+            actual: 0
+        headers_result:
+            - normal: false
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value: []
+            - normal: false
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value: []
+            - normal: false
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value: []
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Mon, 26 Feb 2024 12:40:19 GMT
+              actual:
+                key: Date
+                value: []
+            - normal: false
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value: []
+            - normal: false
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value: []
+            - normal: false
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value: []
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value: []
+            - normal: false
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value: []
+            - normal: false
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value: []
+            - normal: false
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value: []
+            - normal: false
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value: []
+            - normal: false
+              expected:
+                key: Content-Length
+                value:
+                    - "0"
+              actual:
+                key: Content-Length
+                value: []
+        body_result:
+            - normal: false
+              expected: ""
+              actual: 'Get "http://localhost:9966/petclinic/api/owners?lastName=jain": dial tcp [::1]:9966: connect: connection refused'
+              type: PLAIN
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: FAILED
+      started: 1708951277
+      completed: 1708951277
+      test_case_path: /Users/shubham/projects/keploy/samples/java/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-0
+      mock_path: /Users/shubham/projects/keploy/samples/java/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-0/mocks.yaml
+      test_case_id: test-3
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/owners?lastName=Jain
+        url_params:
+            lastName: Jain
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate
+            Accept-Language: en-IN,en-GB;q=0.9,en;q=0.8
+            Connection: keep-alive
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.15
+        body: ""
+        timestamp: 2024-02-26T18:10:22.943629418+05:30
+      resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Mon, 26 Feb 2024 12:40:22 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"firstName":"Shubham","lastName":"Jain","address":"sadar bazar","city":"delhi","telephone":"8882110959","id":1,"pets":[]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":11,"pets":[]},{"firstName":"Anirudh","lastName":"Jain","address":"HSR","city":"BLR","telephone":"8882110959","id":16,"pets":[]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":18,"pets":[]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":20,"pets":[]}]'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-02-26T18:10:24.984014455+05:30
+      noise:
+        body.id: []
+        body.telephone: []
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: false
+            expected: 200
+            actual: 0
+        headers_result:
+            - normal: false
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value: []
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Mon, 26 Feb 2024 12:40:22 GMT
+              actual:
+                key: Date
+                value: []
+            - normal: false
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value: []
+            - normal: false
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value: []
+            - normal: false
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value: []
+            - normal: false
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value: []
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value: []
+            - normal: false
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value: []
+            - normal: false
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value: []
+            - normal: false
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value: []
+            - normal: false
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value: []
+            - normal: false
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value: []
+            - normal: false
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value: []
+        body_result:
+            - normal: false
+              expected: '[{"firstName":"Shubham","lastName":"Jain","address":"sadar bazar","city":"delhi","telephone":"8882110959","id":1,"pets":[]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":11,"pets":[]},{"firstName":"Anirudh","lastName":"Jain","address":"HSR","city":"BLR","telephone":"8882110959","id":16,"pets":[]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":18,"pets":[]},{"firstName":"Shubham","lastName":"Jain","address":"4415/14, Lotan Jat street, Pahari Dhiraj, Sadar Bazar","city":"Delhi","telephone":"8882110959","id":20,"pets":[]}]'
+              actual: 'Get "http://localhost:9966/petclinic/api/owners?lastName=Jain": dial tcp [::1]:9966: connect: connection refused'
+              type: PLAIN
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: FAILED
+      started: 1708951277
+      completed: 1708951277
+      test_case_path: /Users/shubham/projects/keploy/samples/java/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-0
+      mock_path: /Users/shubham/projects/keploy/samples/java/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-0/mocks.yaml
+      test_case_id: test-4
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/owners
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate
+            Accept-Language: en-IN,en-GB;q=0.9,en;q=0.8
+            Connection: keep-alive
+            Content-Length: "110"
+            Content-Type: application/json
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.15
+        body: '{"id":null,"firstName":"Deepti","lastName":"Smith","address":"Bakers","city":"Delhi","telephone":"8882110959"}'
+        timestamp: 2024-02-26T18:10:47.19993266+05:30
+      resp:
+        status_code: 201
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Mon, 26 Feb 2024 12:40:47 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Location: /api/owners/56
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '{"firstName":"Deepti","lastName":"Smith","address":"Bakers","city":"Delhi","telephone":"8882110959","id":56,"pets":[]}'
+        status_message: Created
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-02-26T18:10:47.432520531+05:30
+      noise:
+        body.id: []
+        body.telephone: []
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: false
+            expected: 201
+            actual: 0
+        headers_result:
+            - normal: false
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value: []
+            - normal: false
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value: []
+            - normal: false
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value: []
+            - normal: false
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value: []
+            - normal: false
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value: []
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Mon, 26 Feb 2024 12:40:47 GMT
+              actual:
+                key: Date
+                value: []
+            - normal: false
+              expected:
+                key: Location
+                value:
+                    - /api/owners/56
+              actual:
+                key: Location
+                value: []
+            - normal: false
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value: []
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value: []
+            - normal: false
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value: []
+            - normal: false
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value: []
+            - normal: false
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value: []
+            - normal: false
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value: []
+            - normal: false
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value: []
+        body_result:
+            - normal: false
+              expected: '{"firstName":"Deepti","lastName":"Smith","address":"Bakers","city":"Delhi","telephone":"8882110959","id":56,"pets":[]}'
+              actual: 'Post "http://localhost:9966/petclinic/api/owners": dial tcp [::1]:9966: connect: connection refused'
+              type: PLAIN
+        dep_result: []
+test_set: test-set-0
