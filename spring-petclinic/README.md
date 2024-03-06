@@ -44,8 +44,9 @@ Prerequisites For Binary:
 2. OpenJDK 17.0.9
 3. MVN version 3.6.3
 
-## Setup the backend
+# Setup the backend
 
+## Using Postgres as the database
 You need to update the postgresql properties, go to
 `spring-petclinic/spring-petclinic-rest/src/main/resources/application-postgresql.properties`
 and change
@@ -65,11 +66,43 @@ and then build the jar using:
 mvn clean install -Dmaven.test.skip=true
 ```
 
-## Spin up the database
+#### Spin up the database
 
 ```
 docker run -e POSTGRES_USER=petclinic -e POSTGRES_PASSWORD=petclinic -e POSTGRES_DB=petclinic -p 5432:5432 --name mypostgres postgres:15.2
 ```
+
+## Using MySQL as the database
+You need to update the properties file , go to
+`spring-petclinic/spring-petclinic-rest/src/main/resources/application.properties`
+and make active profile as mysql - 
+```
+spring.profiles.active=mysql,spring-data-jpa
+```
+Inside the `src/main/resources/application-mysql.properties` change the url to 
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/testdb?useSSL=false&allowPublicKeyRetrieval=true
+```
+and then build the jar using:
+
+```
+mvn clean install -Dmaven.test.skip=true
+```
+:
+#### Spin up the MySQL database
+
+```
+docker run command - docker run -e MYSQL_USER=mysql -e MYSQL_PASSWORD=123456 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=testdb -p 3306:3306 --rm  mysql:latest
+```
+
+### Some limitations currently in mysql parser - 
+
+1) Please note that SSL is currently not supported in the MySQL integration. To use the package without SSL, you can include the following parameters in your database URL like the following example -
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/testdb?useSSL=false&allowPublicKeyRetrieval=true
+```
+
+2) Currently best experience for using MySQL support of keploy is to use default settings which where 
 
 ## Recording the testcases with Keploy
 
