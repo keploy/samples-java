@@ -1,0 +1,7 @@
+version: api.keploy.io/v1beta1
+name: test-set-2-report
+status: INTERNAL_ERR
+success: 0
+failure: 0
+total: 2
+test_set: test-set-2

@@ -1,0 +1,609 @@
+version: api.keploy.io/v1beta1
+name: report-1
+status: PASSED
+success: 3
+failure: 0
+total: 3
+tests:
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1710584755
+      completed: 1710584755
+      test_case_path: /Users/sarthak_1/Documents/Keploy/trash/gk_workspace/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: /Users/sarthak_1/Documents/Keploy/trash/gk_workspace/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1/mocks.yaml
+      test_case_id: test-1
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/owners
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-GB,en
+            Connection: keep-alive
+            Content-Length: "167"
+            Content-Type: application/json
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Brave";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            Sec-Gpc: "1"
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: '{"id":null,"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959"}'
+        timestamp: 2024-03-16T10:24:54.293235564Z
+      resp:
+        status_code: 201
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Sat, 16 Mar 2024 10:24:55 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Location: /api/owners/2
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '{"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959","id":2,"pets":[]}'
+        status_message: Created
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-03-16T10:24:55.094748124Z
+      noise:
+        body.telephone: []
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 201
+            actual: 201
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 16 Mar 2024 10:24:55 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 16 Mar 2024 10:25:55 GMT
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: Location
+                value:
+                    - /api/owners/2
+              actual:
+                key: Location
+                value:
+                    - /api/owners/2
+        body_result:
+            - normal: true
+              expected: '{"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959","id":2,"pets":[]}'
+              actual: '{"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959","id":2,"pets":[]}'
+              type: JSON
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1710584755
+      completed: 1710584755
+      test_case_path: /Users/sarthak_1/Documents/Keploy/trash/gk_workspace/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: /Users/sarthak_1/Documents/Keploy/trash/gk_workspace/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1/mocks.yaml
+      test_case_id: test-2
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/owners
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-GB,en
+            Connection: keep-alive
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Brave";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            Sec-Gpc: "1"
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: ""
+        timestamp: 2024-03-16T10:24:55.040066579Z
+      resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Sat, 16 Mar 2024 10:24:55 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"firstName":"SARTHAK","lastName":"Shyngle","address":"Sector-2 , Opposite Manipal Hospital, Dwarka","city":"New Delhi","telephone":"9958178959","id":1,"pets":[]},{"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959","id":2,"pets":[]}]'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-03-16T10:24:58.1587184Z
+      noise:
+        body.firstName: []
+        body.lastName: []
+        body.telephone: []
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 16 Mar 2024 10:24:55 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 16 Mar 2024 10:25:55 GMT
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+        body_result:
+            - normal: true
+              expected: '[{"firstName":"SARTHAK","lastName":"Shyngle","address":"Sector-2 , Opposite Manipal Hospital, Dwarka","city":"New Delhi","telephone":"9958178959","id":1,"pets":[]},{"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959","id":2,"pets":[]}]'
+              actual: '[{"firstName":"SARTHAK","lastName":"Shyngle","address":"Sector-2 , Opposite Manipal Hospital, Dwarka","city":"New Delhi","telephone":"9958178959","id":1,"pets":[]},{"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959","id":2,"pets":[]}]'
+              type: JSON
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1710584756
+      completed: 1710584756
+      test_case_path: /Users/sarthak_1/Documents/Keploy/trash/gk_workspace/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1
+      mock_path: /Users/sarthak_1/Documents/Keploy/trash/gk_workspace/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test-set-1/mocks.yaml
+      test_case_id: test-3
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/owners
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-GB,en
+            Connection: keep-alive
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Brave";v="120"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            Sec-Gpc: "1"
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: ""
+        timestamp: 2024-03-16T10:25:16.42753463Z
+      resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Sat, 16 Mar 2024 10:25:16 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '[{"firstName":"SARTHAK","lastName":"Shyngle","address":"Sector-2 , Opposite Manipal Hospital, Dwarka","city":"New Delhi","telephone":"9958178959","id":1,"pets":[]},{"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959","id":2,"pets":[]}]'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-03-16T10:25:20.508820602Z
+      noise:
+        body.firstName: []
+        body.lastName: []
+        body.telephone: []
+        header.Access-Control-Expose-Headers: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+              actual:
+                key: Vary
+                value:
+                    - Origin
+                    - Access-Control-Request-Method
+                    - Access-Control-Request-Headers
+            - normal: true
+              expected:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+              actual:
+                key: Cache-Control
+                value:
+                    - no-cache
+                    - ' no-store'
+                    - ' max-age=0'
+                    - ' must-revalidate'
+            - normal: true
+              expected:
+                key: Expires
+                value:
+                    - "0"
+              actual:
+                key: Expires
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+              actual:
+                key: Keep-Alive
+                value:
+                    - timeout=60
+            - normal: true
+              expected:
+                key: Pragma
+                value:
+                    - no-cache
+              actual:
+                key: Pragma
+                value:
+                    - no-cache
+            - normal: true
+              expected:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+              actual:
+                key: Access-Control-Expose-Headers
+                value:
+                    - errors, content-type
+            - normal: true
+              expected:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+              actual:
+                key: X-Content-Type-Options
+                value:
+                    - nosniff
+            - normal: true
+              expected:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+              actual:
+                key: X-Xss-Protection
+                value:
+                    - "0"
+            - normal: true
+              expected:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+              actual:
+                key: Access-Control-Allow-Origin
+                value:
+                    - '*'
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: X-Frame-Options
+                value:
+                    - DENY
+              actual:
+                key: X-Frame-Options
+                value:
+                    - DENY
+            - normal: true
+              expected:
+                key: Connection
+                value:
+                    - keep-alive
+              actual:
+                key: Connection
+                value:
+                    - keep-alive
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Sat, 16 Mar 2024 10:25:16 GMT
+              actual:
+                key: Date
+                value:
+                    - Sat, 16 Mar 2024 10:25:55 GMT
+        body_result:
+            - normal: true
+              expected: '[{"firstName":"SARTHAK","lastName":"Shyngle","address":"Sector-2 , Opposite Manipal Hospital, Dwarka","city":"New Delhi","telephone":"9958178959","id":1,"pets":[]},{"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959","id":2,"pets":[]}]'
+              actual: '[{"firstName":"SARTHAK","lastName":"Shyngle","address":"Sector-2 , Opposite Manipal Hospital, Dwarka","city":"New Delhi","telephone":"9958178959","id":1,"pets":[]},{"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959","id":2,"pets":[]}]'
+              type: JSON
+        dep_result: []
+test_set: test-set-1

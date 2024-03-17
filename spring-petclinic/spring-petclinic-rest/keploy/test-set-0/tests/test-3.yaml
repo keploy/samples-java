@@ -4,76 +4,71 @@ name: test-3
 spec:
     metadata: {}
     req:
-        method: POST
+        method: GET
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:9966/petclinic/api/pettypes
+        url: http://localhost:9966/petclinic/api/owners
         header:
             Accept: application/json, text/plain, */*
             Accept-Encoding: gzip, deflate, br
-            Accept-Language: en-US,en;q=0.9
+            Accept-Language: en-GB,en
             Connection: keep-alive
-            Content-Length: "24"
-            Content-Type: application/json
             Host: localhost:9966
             Origin: http://localhost:4200
             Referer: http://localhost:4200/
-            Sec-Ch-Ua: '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"'
+            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Brave";v="120"'
             Sec-Ch-Ua-Mobile: ?0
             Sec-Ch-Ua-Platform: '"macOS"'
             Sec-Fetch-Dest: empty
             Sec-Fetch-Mode: cors
             Sec-Fetch-Site: same-site
-            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
-        body: '{"id":null,"name":"Cat"}'
-        body_type: ""
-        timestamp: 2024-02-12T16:54:26.826941684+05:30
-        host: ""
+            Sec-Gpc: "1"
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        body: ""
+        timestamp: 2024-03-15T13:52:35.346509754Z
     resp:
-        status_code: 201
+        status_code: 200
         header:
             Access-Control-Allow-Origin: '*'
             Access-Control-Expose-Headers: errors, content-type
             Cache-Control: no-cache, no-store, max-age=0, must-revalidate
             Connection: keep-alive
             Content-Type: application/json
-            Date: Mon, 12 Feb 2024 11:24:26 GMT
+            Date: Fri, 15 Mar 2024 13:52:35 GMT
             Expires: "0"
             Keep-Alive: timeout=60
-            Location: /api/pettypes/1
             Pragma: no-cache
             Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
             X-Content-Type-Options: nosniff
             X-Frame-Options: DENY
             X-Xss-Protection: "0"
-        body: '{"name":"Cat","id":1}'
-        body_type: ""
-        status_message: ""
+        body: '[{"firstName":"SARTHAK","lastName":"Shyngle","address":"Sector-2 , Opposite Manipal Hospital, Dwarka","city":"New Delhi","telephone":"9958178959","id":1,"pets":[]},{"firstName":"Shiksha","lastName":"Shyngle","address":"A-504,Plot 3A, Sector-2,Opposite Manipal Hospital,Dwarka","city":"New Delhi","telephone":"9958178959","id":2,"pets":[]},{"firstName":"SARTHAK","lastName":"Shyngle","address":"Sector-2 , Opposite Manipal Hospital, Dwarka","city":"New Delhi","telephone":"9958178959","id":3,"pets":[]},{"firstName":"Shivam","lastName":"Jha","address":"HNO A -504 SECTOR-2 ANMOL APPTT","city":"NEW DELHI","telephone":"9958178959","id":4,"pets":[]},{"firstName":"Gourav","lastName":"Kumar","address":"HNO A -504 SECTOR-2 ANMOL APPTT","city":"NEW DELHI","telephone":"9958178959","id":5,"pets":[]}]'
+        status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2024-02-12T16:54:28.97927723+05:30
+        timestamp: 2024-03-15T13:52:39.328167767Z
     objects: []
     assertions:
         noise:
+            body.telephone: []
             header.Access-Control-Expose-Headers: []
             header.Date: []
-    created: 1707737068
-curl: |-
-    curl --request POST \
-      --url http://localhost:9966/petclinic/api/pettypes \
-      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36' \
+    created: 1710510759
+curl: |
+    curl --request GET \
+      --url http://localhost:9966/petclinic/api/owners \
+      --header 'Sec-Fetch-Site: same-site' \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Sec-Ch-Ua-Mobile: ?0' \
+      --header 'Sec-Ch-Ua: "Not_A Brand";v="8", "Chromium";v="120", "Brave";v="120"' \
+      --header 'Accept: application/json, text/plain, */*' \
+      --header 'Sec-Gpc: 1' \
+      --header 'Accept-Language: en-GB,en' \
+      --header 'Origin: http://localhost:4200' \
+      --header 'Sec-Ch-Ua-Platform: "macOS"' \
+      --header 'Connection: keep-alive' \
+      --header 'Host: localhost:9966' \
       --header 'Sec-Fetch-Mode: cors' \
       --header 'Sec-Fetch-Dest: empty' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' \
       --header 'Referer: http://localhost:4200/' \
-      --header 'Host: localhost:9966' \
-      --header 'Origin: http://localhost:4200' \
-      --header 'Accept-Encoding: gzip, deflate, br' \
-      --header 'Accept: application/json, text/plain, */*' \
-      --header 'Sec-Ch-Ua: "Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"' \
-      --header 'Content-Type: application/json' \
-      --header 'Sec-Fetch-Site: same-site' \
-      --header 'Sec-Ch-Ua-Mobile: ?0' \
-      --header 'Connection: keep-alive' \
-      --header 'Accept-Language: en-US,en;q=0.9' \
-      --header 'Sec-Ch-Ua-Platform: "macOS"' \
-      --data '{"id":null,"name":"Cat"}'
