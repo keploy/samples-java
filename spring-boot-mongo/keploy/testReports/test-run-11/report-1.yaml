@@ -1,0 +1,148 @@
+version: api.keploy.io/v1beta1
+name: report-1
+status: FAILED
+success: 0
+failure: 2
+total: 2
+tests:
+    - kind: Http
+      name: report-1
+      status: FAILED
+      started: 1711539656
+      completed: 1711539657
+      test_case_path: /Users/sarthak_1/Documents/Keploy/Lima-workspace/beta/samples-java/spring-boot-mongo/keploy/test-set-3
+      mock_path: /Users/sarthak_1/Documents/Keploy/Lima-workspace/beta/samples-java/spring-boot-mongo/keploy/test-set-3/mocks.yaml
+      test_case_id: test-1
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/potions
+        header:
+            Accept: '*/*'
+            Content-Length: "195"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: curl/7.88.1
+        body: |4-
+                {
+                        "name": "Strength Potion v2",
+                        "description": "Enhances the drinker's physical strength temporarily.",
+                        "bottle": 3,
+                        "quantity": 150
+                     }
+        timestamp: 2024-03-27T11:39:27.893132829Z
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:39:30 GMT
+        body: '{"id":"1c450a22-2d43-4f14-b4ee-7e8682617f40","name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":3,"quantity":150}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-03-27T11:39:33.11570678Z
+      noise:
+        body.quantity: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Wed, 27 Mar 2024 11:39:30 GMT
+              actual:
+                key: Date
+                value:
+                    - Wed, 27 Mar 2024 11:40:57 GMT
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+        body_result:
+            - normal: false
+              expected: '{"id":"1c450a22-2d43-4f14-b4ee-7e8682617f40","name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":3,"quantity":150}'
+              actual: '{"id":"04c14edd-4e91-48fe-978c-5953f9d7327b","name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":3,"quantity":150}'
+              type: JSON
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: FAILED
+      started: 1711539657
+      completed: 1711539657
+      test_case_path: /Users/sarthak_1/Documents/Keploy/Lima-workspace/beta/samples-java/spring-boot-mongo/keploy/test-set-3
+      mock_path: /Users/sarthak_1/Documents/Keploy/Lima-workspace/beta/samples-java/spring-boot-mongo/keploy/test-set-3/mocks.yaml
+      test_case_id: test-2
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/potions
+        header:
+            Accept: '*/*'
+            Content-Length: "195"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: curl/7.88.1
+        body: |4-
+                {
+                        "name": "Strength Potion v2",
+                        "description": "Enhances the drinker's physical strength temporarily.",
+                        "bottle": 3,
+                        "quantity": 150
+                     }
+        timestamp: 2024-03-27T11:40:00.932919002Z
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:40:01 GMT
+        body: '{"id":"9dd02877-c3f5-4fc6-b6f9-3bb427e0f20d","name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":3,"quantity":150}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-03-27T11:40:04.126811855Z
+      noise:
+        body.quantity: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Wed, 27 Mar 2024 11:40:01 GMT
+              actual:
+                key: Date
+                value:
+                    - Wed, 27 Mar 2024 11:40:57 GMT
+        body_result:
+            - normal: false
+              expected: '{"id":"9dd02877-c3f5-4fc6-b6f9-3bb427e0f20d","name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":3,"quantity":150}'
+              actual: '{"id":"be326b33-4ecd-425d-a4b6-6688ff5371c2","name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":3,"quantity":150}'
+              type: JSON
+        dep_result: []
+test_set: test-set-3
