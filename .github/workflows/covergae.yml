@@ -47,7 +47,7 @@ jobs:
         ail-emoji: ':red_circle:'
 
     - name: Fail PR if coverage of changed files is less than 60%
-      if: ${{ steps.jacoco.outputs.coverage-changed-files < 0.0 }}
+      if: ${{ steps.jacoco.outputs.coverage-changed-files < 1.0 }}
       run: |
         echo "Coverage of changed files is less than 60%!"
         exit 1
