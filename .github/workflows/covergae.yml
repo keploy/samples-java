@@ -30,12 +30,12 @@ jobs:
       run: |
         cd spring-petclinic/spring-petclinic-rest
         mvn clean install -Dmaven.test.skip=true
-        sudo -E env PATH="$PATH" keploybin test -c "mvn test" --delay 30 --coverage
+        mvn test
 
     - name: SonarQube Analysis
       run: |
         cd spring-petclinic/spring-petclinic-rest
         mvn clean install -Dmaven.test.skip=true
-        sudo -E env PATH="$PATH" keploybin test -c "mvn verify sonar:sonar -Dsonar.projectKey=msil-test-new -Dsonar.coverage.jacoco.xmlReportPaths=target/site/e2e-ut-aggregate/jacoco.xml" --delay 30 --coverage
+        mvn verify sonar:sonar -Dsonar.projectKey=msil-test-new -Dsonar.coverage.jacoco.xmlReportPaths=target/site/e2e-ut-aggregate/jacoco.xml
 
     # Add additional steps for coverage threshold enforcement if needed
