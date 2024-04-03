@@ -161,6 +161,9 @@ public class ClinicServiceImpl implements ClinicService {
 		// just ignore not found exceptions for Jdbc/Jpa realization
 			return null;
 		}
+		if (petType == null) {
+			return null;
+		}
 		return petType;
 	}
 
