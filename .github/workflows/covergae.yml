@@ -19,11 +19,6 @@ jobs:
       with:
         java-version: '17'
         distribution: 'adopt'
-
-    - name: Set up Maven
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'maven'
         maven-version: '3.8.4'
 
     - name: Download and prepare Keploy binary
