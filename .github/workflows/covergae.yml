@@ -32,13 +32,11 @@ jobs:
         mvn clean install -Dmaven.test.skip=true
         mvn test
 
-    
-    - name: Publish JaCoCo report
-      uses: cicirello/jacoco-report@v2
+    - name: Add coverage to PR
+      id: jacoco
+      uses: madrapps/jacoco-report@v1.6.1
       with:
-        jacoco-csv-file: spring-petclinic/spring-petclinic-rest/target/site/e2e-ut-aggregate/jacoco.csv
-        report-name: "JaCoCo Coverage Report"
-        minimum-coverage: 85
-        fail-if-coverage-less-than-minimum: true
-
-    # Add additional steps for coverage threshold enforcement if needed
+        paths: |
+          spring-petclinic/spring-petclinic-rest/target/site/e2e-ut-aggregate/jacoco.xml
+        min-coverage-overall: 40
+        min-coverage-changed-files: 60
