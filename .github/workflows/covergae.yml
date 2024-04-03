@@ -38,5 +38,8 @@ jobs:
       with:
         paths: |
           spring-petclinic/spring-petclinic-rest/target/site/e2e-ut-aggregate/jacoco.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
         min-coverage-overall: 40
         min-coverage-changed-files: 60
+
+    
