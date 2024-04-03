@@ -12,6 +12,7 @@ public class KeployTest {
 @Order(Integer.MAX_VALUE)
 public void testKeploy() throws IOException, InterruptedException {
     String jarPath = "./target/spring-petclinic-rest-3.0.2.jar";
-    Keploy.runTests(jarPath);
+    Keploy.RunOptions runOptions = new Keploy.RunOptions();
+    Keploy.runTests(jarPath, runOptions);
 }
 }
