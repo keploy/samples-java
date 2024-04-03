@@ -32,10 +32,13 @@ jobs:
         mvn clean install -Dmaven.test.skip=true
         mvn test
 
-    - name: SonarQube Analysis
-      run: |
-        cd spring-petclinic/spring-petclinic-rest
-        mvn clean install -Dmaven.test.skip=true
-        mvn verify sonar:sonar -Dsonar.projectKey=msil-test-new -Dsonar.coverage.jacoco.xmlReportPaths=target/site/e2e-ut-aggregate/jacoco.xml
+    
+    - name: Publish JaCoCo report
+      uses: cicirello/jacoco-report@v2
+      with:
+        jacoco-csv-file: spring-petclinic/spring-petclinic-rest/target/site/e2e-ut-aggregate/jacoco.csv
+        report-name: "JaCoCo Coverage Report"
+        minimum-coverage: 85
+        fail-if-coverage-less-than-minimum: true
 
     # Add additional steps for coverage threshold enforcement if needed
