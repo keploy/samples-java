@@ -13,6 +13,7 @@ public class KeployTest {
 public void testKeploy() throws IOException, InterruptedException {
     String jarPath = "./target/spring-petclinic-rest-3.0.2.jar";
     Keploy.RunOptions runOptions = new Keploy.RunOptions();
+    runOptions.setDelay(20);
     Keploy.runTests(jarPath, runOptions);
 }
 }
