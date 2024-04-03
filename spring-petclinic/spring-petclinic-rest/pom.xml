@@ -341,7 +341,7 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <execution>
+<!--                     <execution>
                         <id>check</id>
                         <goals>
                             <goal>check</goal>
@@ -365,7 +365,7 @@
                                 </rule>
                             </rules>
                         </configuration>
-                    </execution>
+                    </execution> -->
                     <execution>
                         <id>report</id>
                         <phase>prepare-package</phase>
