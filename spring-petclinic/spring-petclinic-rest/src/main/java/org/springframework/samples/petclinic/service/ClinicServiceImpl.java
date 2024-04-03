@@ -154,6 +154,7 @@ public class ClinicServiceImpl implements ClinicService {
 	@Transactional(readOnly = true)
 	public PetType findPetTypeById(int petTypeId) {
 		PetType petType = null;
+		petType = null;
 		try {
 			petType = petTypeRepository.findById(petTypeId);
 		} catch (ObjectRetrievalFailureException|EmptyResultDataAccessException e) {
