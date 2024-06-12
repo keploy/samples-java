@@ -13,19 +13,20 @@
 
 This repo contains the sample for [Keploy's](https://keploy.io) Java Application. Please feel free to contribute if you'd like submit a sample for another use-case or library.
 
->**Note** :- Issue Creation is disabled on this Repository, please visit [here](https://github.com/keploy/keploy/issues/new/choose) to submit Issue.
+> **Note** :- Issue Creation is disabled on this Repository, please visit [here](https://github.com/keploy/keploy/issues/new/choose) to submit Issue.
 
+## Java Sample Apps with Keploy
 
-## Sample Apps with Keploy
-
-1. [employee-manager](https://github.com/keploy/samples-java/tree/main/employee-manager)
-2. [spring-boot-mongo](https://github.com/keploy/samples-java/tree/main/spring-boot-mongo)
-3. [user-manager](https://github.com/keploy/samples-java/tree/main/user-manager)
-4. [spring-boot-postgres-graphql](https://github.com/keploy/samples-java/tree/main/spring-boot-postgres-graphql)
+1. [Employee Manager](https://github.com/keploy/samples-java/tree/main/employee-manager) - A sample Employee-Manager app to test Keploy integration capabilities using [SpringBoot](https://spring.io) and [PostgreSQL](https://www.postgresql.org/).
+2. [Springboot MongoDB](https://github.com/keploy/samples-java/tree/main/spring-boot-mongo) - The application is built purely with Java Spring-Boot that does the complete CRUD in the MongoDB database. This CRUD Application is about managing the data of Magical Potions in the Keploy inventory.
+3. [User Manager](https://github.com/keploy/samples-java/tree/main/user-manager) - A sample User-Manager app to test Keploy integration capabilities using [SpringBoot](https://spring.io) and [MongoDB](https://www.mongodb.com/).
+4. [Springboot Postgres GraphQL](https://github.com/keploy/samples-java/tree/main/spring-boot-postgres-graphql) - This is a Spring Boot application implementing a GraphQL service to handle requests related to books and authors.
+5. [Springboot PetClinic](https://github.com/keploy/samples-java/tree/main/spring-petclinic) - This is a petclinic app where you can record testcases and mocks by interacting with the UI, and then test them using Keploy.
 
 ## Community Support ❤️
 
 ### 🤔 Questions?
+
 Reach out to us. We're here to help!
 
 [![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)](https://join.slack.com/t/keploy/shared_invite/zt-12rfbvc01-o54cOG0X1G6eVJTuI_orSA)
@@ -34,6 +35,7 @@ Reach out to us. We're here to help!
 [![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/Keployio)
 
 ### 💖 Let's Build Together!
+
 Whether you're a newbie coder or a wizard 🧙‍♀️, your perspective is golden. Take a peek at our:
 
 📜 [Contribution Guidelines](https://github.com/keploy/keploy/blob/main/CONTRIBUTING.md)
