@@ -20,6 +20,13 @@ EXPOSE 9966
 RUN curl -o ca.crt https://raw.githubusercontent.com/keploy/keploy/main/pkg/core/proxy/asset/ca.crt
 
 RUN curl -o setup_ca.sh https://raw.githubusercontent.com/keploy/keploy/main/pkg/core/proxy/asset/setup_ca.sh
+ADD https://keploy-enterprise.s3.us-west-2.amazonaws.com/releases/latest/assets/freeze_time_arm64.so /lib/keploy/freeze_time_arm64.so
+
+#set suitable permissions
+RUN chmod +x /lib/keploy/freeze_time_arm64.so
+
+# Set LD_PRELOAD environment variable to use freeze_time_arm64.so
+ENV LD_PRELOAD=/lib/keploy/freeze_time_arm64.so
 
 # Give execute permission to the setup_ca.sh script
 RUN chmod +x setup_ca.sh
