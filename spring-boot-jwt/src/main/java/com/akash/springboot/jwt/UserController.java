@@ -1,5 +1,7 @@
 package com.akash.springboot.jwt;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,9 @@ public class UserController {
 
     private Map<String, String> users = new HashMap<>();
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> user) {
         String username = user.get("username");
@@ -19,11 +24,12 @@ public class UserController {
         users.put(username, password);
 
         // TODO: Generate JWT token
+        String token = jwtUtil.generateToken(username);
 
         Map<String, String> response = new HashMap<>();
-        response.put("token", "demo-token");
-
-        return ResponseEntity.ok(response);
+        response.put("token", token);
+        System.err.println(token);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     
@@ -32,11 +38,11 @@ public class UserController {
         String token = request.get("token");
 
         //TODO: Validate token
-        boolean isValid = true;
+        boolean isValid = jwtUtil.validateToken(token);
 
         Map<String, Boolean> response = new HashMap<>();
         response.put("isValid", isValid);
-
-        return ResponseEntity.ok(response);
+        System.err.println(isValid);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
