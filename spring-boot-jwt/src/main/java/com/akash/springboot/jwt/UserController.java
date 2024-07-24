@@ -19,9 +19,9 @@ public class UserController {
     private JwtUtil jwtUtil;
 
     @GetMapping("/")
-	public String index() {
-		return "Greetings from Spring Boot!";
-	}
+    public String index() {
+        return "Greetings from Spring Boot!";
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> user) {
@@ -30,7 +30,8 @@ public class UserController {
         users.put(username, password);
 
         try {
-           String token = jwtUtil.generateToken(username);            Map<String, String> response = new HashMap<>();
+            String token = jwtUtil.generateToken(username);
+            Map<String, String> response = new HashMap<>();
             response.put("token", token);
             System.err.println(token);
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -41,12 +42,10 @@ public class UserController {
         return new ResponseEntity<>("Invalid user", HttpStatus.UNAUTHORIZED);
     }
 
-    
-    @PostMapping("/tokenAuthentication")
+    @PostMapping("/tokenVerification")
     public ResponseEntity<?> tokenAuthentication(@RequestBody Map<String, String> request) {
         String token = request.get("token");
 
-        //TODO: Validate token
         boolean isValid = jwtUtil.validateToken(token);
 
         Map<String, Boolean> response = new HashMap<>();
