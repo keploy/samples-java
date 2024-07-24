@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,19 +18,27 @@ public class UserController {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @GetMapping("/")
+	public String index() {
+		return "Greetings from Spring Boot!";
+	}
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> user) {
         String username = user.get("username");
         String password = user.get("password");
         users.put(username, password);
 
-        // TODO: Generate JWT token
-        String token = jwtUtil.generateToken(username);
+        try {
+           String token = jwtUtil.generateToken(username);            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+            System.err.println(token);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
-        Map<String, String> response = new HashMap<>();
-        response.put("token", token);
-        System.err.println(token);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>("Invalid user", HttpStatus.UNAUTHORIZED);
     }
 
     
