@@ -43,14 +43,11 @@ public class UserController {
     }
 
     @PostMapping("/tokenVerification")
-    public ResponseEntity<?> tokenAuthentication(@RequestBody Map<String, String> request) {
-        String token = request.get("token");
-
+    public ResponseEntity<?> tokenAuthentication(@RequestHeader("Authorization") String token) {
         boolean isValid = jwtUtil.validateToken(token);
 
         Map<String, Boolean> response = new HashMap<>();
         response.put("isValid", isValid);
-        System.err.println(isValid);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

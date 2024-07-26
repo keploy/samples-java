@@ -94,11 +94,9 @@ The following API endpoints are available:
 - Verify
 
   ```bash
-  curl --location --request POST 'http://localhost:8080/users/verify' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-    "token": "your_jwt_token_here"
-  }'
+  curl --location --request POST 'http://localhost:8080/users/tokenVerification' \
+  --header 'Authorization: Bearer <your_jwt_token_here>'
+  ```
   ```
 
 #### TEST mode
