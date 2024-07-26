@@ -8,6 +8,7 @@ Before getting started, make sure you have the following installed:
 
 - Latest version of JDK
 - Install [Keploy](https://keploy.io/docs/server/installation/)
+- Install [Docker](https://docs.docker.com/engine/install/)
 - Postman for testing APIs
 
 ## Getting Started
@@ -66,14 +67,32 @@ The following API endpoints are available:
   }
   ```
 
+## Running with Docker
+
+To run the application with Docker, follow these steps:
+
+1. Build the Docker image:
+
+   ```bash
+   docker build -t spring-boot-jwt .
+   ```
+
+2. Run the Docker container:
+
+   ```bash
+   docker run -p 8080:8080 spring-boot-jwt
+   ```
+
+The application will be accessible at `http://localhost:8080`.
+
 ## Integration with Keploy
 
 #### RECORD Mode
 
 1. To run the application, run
 
-   ```
-   keploy run -c "./mvnw spring-boot:run" --delay 240
+   ```bash
+   keploy record -c "docker run -p 8080:8080 spring-boot-jwt"
    ```
 
 2. To generate testcases, you can make API calls using Postman or `curl`:
@@ -96,16 +115,12 @@ The following API endpoints are available:
   --header 'Authorization: Bearer <your_jwt_token_here>'
   ```
 
-  ```
-
-  ```
-
 #### TEST mode
 
 To test the application, start Keploy in test mode. In the root directory, run the following command:
 
 ```bash
-keploy test -c "./mvnw spring-boot:run" --delay 240
+keploy test -c "docker run -p 8080:8080 spring-boot-jwt" --delay 30
 ```
 
 This command will run the tests and generate the report in the `Keploy/reports` directory in the current working directory.

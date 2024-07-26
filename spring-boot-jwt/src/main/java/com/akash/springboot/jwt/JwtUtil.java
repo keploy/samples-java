@@ -1,5 +1,6 @@
 package com.akash.springboot.jwt;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
@@ -27,10 +28,16 @@ public class JwtUtil {
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
+            System.err.println("Valid");
             return true;
         } catch (SignatureException e) {
+            System.err.println("Signature Exception");
+            return false;
+        } catch (ExpiredJwtException e) {
+            System.err.println("ExpiredJwtException");
             return false;
         } catch (Exception e) {
+            System.err.println("Other Exception");
             return false;
         }
     }
