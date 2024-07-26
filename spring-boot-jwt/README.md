@@ -52,12 +52,10 @@ The following API endpoints are available:
 
   Verify the validity of a JWT token.
 
-  Request Body:
+  Request Header:
 
   ```json
-  {
-    "token": "your_jwt_token_here"
-  }
+    Authorization: Bearer <your_jwt_token_here>
   ```
 
   Response:
@@ -97,6 +95,9 @@ The following API endpoints are available:
   curl --location --request POST 'http://localhost:8080/users/tokenVerification' \
   --header 'Authorization: Bearer <your_jwt_token_here>'
   ```
+
+  ```
+
   ```
 
 #### TEST mode
