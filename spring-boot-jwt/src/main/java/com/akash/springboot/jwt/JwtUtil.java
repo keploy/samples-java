@@ -30,6 +30,8 @@ public class JwtUtil {
             return true;
         } catch (SignatureException e) {
             return false;
+        } catch (Exception e) {
+            return false;
         }
     }
 }
