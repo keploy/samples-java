@@ -8,7 +8,7 @@ Before getting started, make sure you have the following installed:
 
 - Latest version of JDK
 - Install [Keploy](https://keploy.io/docs/server/installation/)
-- Install [Docker](https://docs.docker.com/engine/install/)
+- Install [Docker](https://docs.docker.com/engine/install/) (if you want to run application in docker).
 - Postman for testing APIs
 
 ## Getting Started

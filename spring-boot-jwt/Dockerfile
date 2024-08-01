@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y maven
 # Copy the current directory contents into the container at /app
 COPY . /app/
 
+# Run mvn clean install
+RUN mvn clean install
+
 # Expose the port the app runs on
 EXPOSE 8080
 
