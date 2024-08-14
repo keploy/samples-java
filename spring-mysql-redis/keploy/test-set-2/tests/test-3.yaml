@@ -1,0 +1,37 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-3
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/todos
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.88.1
+        body: ""
+        timestamp: 2024-08-14T12:49:44.370942923+05:30
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 14 Aug 2024 07:19:44 GMT
+        body: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":7,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-08-14T12:49:47.456214503+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1723619987
+curl: |
+    curl --request GET \
+      --url http://localhost:8080/api/todos \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: curl/7.88.1' \
+      --header 'Accept: */*' \
