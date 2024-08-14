@@ -1,0 +1,75 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-47
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/specialties
+        header:
+            Accept: application/json, text/plain, */*
+            Accept-Encoding: gzip, deflate, br, zstd
+            Accept-Language: en-US,en;q=0.9
+            Connection: keep-alive
+            Content-Length: "15"
+            Content-Type: application/json
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Ch-Ua: '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+        body: '{"name":"bark"}'
+        timestamp: 2024-08-09T12:25:16.723178143+05:30
+    resp:
+        status_code: 201
+        header:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Fri, 09 Aug 2024 06:55:16 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Location: /api/specialties/10
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: '{"id":10,"name":"bark"}'
+        status_message: Created
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-08-09T12:25:18.894380684+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1723186518
+curl: |-
+    curl --request POST \
+      --url http://localhost:9966/petclinic/api/specialties \
+      --header 'Referer: http://localhost:4200/' \
+      --header 'Accept: application/json, text/plain, */*' \
+      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
+      --header 'Sec-Ch-Ua-Platform: "macOS"' \
+      --header 'Content-Type: application/json' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
+      --header 'Sec-Fetch-Dest: empty' \
+      --header 'Sec-Fetch-Site: same-site' \
+      --header 'Origin: http://localhost:4200' \
+      --header 'Sec-Ch-Ua-Mobile: ?0' \
+      --header 'Connection: keep-alive' \
+      --header 'Host: localhost:9966' \
+      --header 'Accept-Language: en-US,en;q=0.9' \
+      --header 'Sec-Fetch-Mode: cors' \
+      --header 'Sec-Ch-Ua: "Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"' \
+      --data '{"name":"bark"}'

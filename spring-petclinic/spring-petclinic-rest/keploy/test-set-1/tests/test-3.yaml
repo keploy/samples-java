@@ -4,72 +4,72 @@ name: test-3
 spec:
     metadata: {}
     req:
-        method: GET
+        method: POST
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:9967/petclinic/api/owners?lastName=John%20Doe
-        url_params:
-            lastName: John Doe
+        url: http://localhost:9966/petclinic/api/owners
         header:
             Accept: application/json, text/plain, */*
-            Accept-Encoding: gzip, deflate, br
+            Accept-Encoding: gzip, deflate, br, zstd
             Accept-Language: en-US,en;q=0.9
             Connection: keep-alive
-            Host: localhost:9967
-            Origin: http://localhost:59555
-            Referer: http://localhost:59555/
-            Sec-Ch-Ua: '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"'
+            Content-Length: "115"
+            Content-Type: application/json
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Ch-Ua: '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"'
             Sec-Ch-Ua-Mobile: ?0
             Sec-Ch-Ua-Platform: '"macOS"'
             Sec-Fetch-Dest: empty
             Sec-Fetch-Mode: cors
             Sec-Fetch-Site: same-site
-            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-        body: ""
-        body_type: ""
-        timestamp: 2023-12-09T06:32:43.676771286Z
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+        body: '{"id":null,"firstName":"Hermione","lastName":"Dadheech","address":"250/3","city":"Jaipur","telephone":"8078632831"}'
+        timestamp: 2024-08-08T21:28:44.88833569+05:30
     resp:
-        status_code: 404
+        status_code: 201
         header:
             Access-Control-Allow-Origin: '*'
             Access-Control-Expose-Headers: errors, content-type
             Cache-Control: no-cache, no-store, max-age=0, must-revalidate
             Connection: keep-alive
-            Content-Length: "0"
-            Date: Sat, 09 Dec 2023 06:32:43 GMT
+            Content-Type: application/json
+            Date: Thu, 08 Aug 2024 15:58:44 GMT
             Expires: "0"
             Keep-Alive: timeout=60
+            Location: /api/owners/8
             Pragma: no-cache
             Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
             X-Content-Type-Options: nosniff
             X-Frame-Options: DENY
             X-Xss-Protection: "0"
-        body: ""
-        body_type: ""
-        status_message: ""
+        body: '{"firstName":"Hermione","lastName":"Dadheech","address":"250/3","city":"Jaipur","telephone":"8078632831","id":8,"pets":[]}'
+        status_message: Created
         proto_major: 0
         proto_minor: 0
-        timestamp: 2023-12-09T06:32:45.708746469Z
+        timestamp: 2024-08-08T21:28:45.199426784+05:30
     objects: []
     assertions:
         noise:
-            header.Access-Control-Expose-Headers: []
             header.Date: []
-    created: 1702103565
-curl: |
-    curl --request GET \
-      --url http://localhost:9967/petclinic/api/owners?lastName=John%20Doe \
-      --header 'Connection: keep-alive' \
-      --header 'Host: localhost:9967' \
-      --header 'Sec-Ch-Ua-Platform: "macOS"' \
-      --header 'Sec-Fetch-Dest: empty' \
-      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' \
-      --header 'Origin: http://localhost:59555' \
-      --header 'Sec-Ch-Ua-Mobile: ?0' \
-      --header 'Sec-Ch-Ua: "Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"' \
-      --header 'Accept-Language: en-US,en;q=0.9' \
+    created: 1723132725
+curl: |-
+    curl --request POST \
+      --url http://localhost:9966/petclinic/api/owners \
+      --header 'Host: localhost:9966' \
+      --header 'Origin: http://localhost:4200' \
       --header 'Sec-Fetch-Mode: cors' \
-      --header 'Accept: application/json, text/plain, */*' \
-      --header 'Accept-Encoding: gzip, deflate, br' \
-      --header 'Referer: http://localhost:59555/' \
+      --header 'Sec-Ch-Ua: "Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
+      --header 'Accept-Language: en-US,en;q=0.9' \
+      --header 'Sec-Ch-Ua-Mobile: ?0' \
+      --header 'Referer: http://localhost:4200/' \
+      --header 'Sec-Ch-Ua-Platform: "macOS"' \
+      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
       --header 'Sec-Fetch-Site: same-site' \
+      --header 'Accept: application/json, text/plain, */*' \
+      --header 'Content-Type: application/json' \
+      --header 'Connection: keep-alive' \
+      --header 'Sec-Fetch-Dest: empty' \
+      --data '{"id":null,"firstName":"Hermione","lastName":"Dadheech","address":"250/3","city":"Jaipur","telephone":"8078632831"}'

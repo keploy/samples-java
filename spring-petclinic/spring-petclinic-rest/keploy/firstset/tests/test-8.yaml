@@ -1,0 +1,69 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-8
+spec:
+    metadata: {}
+    req:
+        method: OPTIONS
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9966/petclinic/api/vets/8
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip, deflate, br, zstd
+            Accept-Language: en-US,en;q=0.9
+            Access-Control-Request-Method: DELETE
+            Connection: keep-alive
+            Host: localhost:9966
+            Origin: http://localhost:4200
+            Referer: http://localhost:4200/
+            Sec-Fetch-Dest: empty
+            Sec-Fetch-Mode: cors
+            Sec-Fetch-Site: same-site
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+        body: ""
+        timestamp: 2024-08-08T19:53:25.107092302+05:30
+    resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Methods: DELETE
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Expose-Headers: errors, content-type
+            Access-Control-Max-Age: "1800"
+            Allow: GET, HEAD, POST, PUT, DELETE, OPTIONS, TRACE, PATCH
+            Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+            Connection: keep-alive
+            Content-Length: "0"
+            Date: Thu, 08 Aug 2024 14:23:25 GMT
+            Expires: "0"
+            Keep-Alive: timeout=60
+            Pragma: no-cache
+            Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            X-Content-Type-Options: nosniff
+            X-Frame-Options: DENY
+            X-Xss-Protection: "0"
+        body: ""
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-08-08T19:53:25.229395826+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1723127005
+curl: |
+    curl --request OPTIONS \
+      --url http://localhost:9966/petclinic/api/vets/8 \
+      --header 'Sec-Fetch-Mode: cors' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
+      --header 'Host: localhost:9966' \
+      --header 'Sec-Fetch-Site: same-site' \
+      --header 'Sec-Fetch-Dest: empty' \
+      --header 'Referer: http://localhost:4200/' \
+      --header 'Accept-Language: en-US,en;q=0.9' \
+      --header 'Access-Control-Request-Method: DELETE' \
+      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
+      --header 'Origin: http://localhost:4200' \
+      --header 'Connection: keep-alive' \
+      --header 'Accept: */*' \
