@@ -1,5 +1,0 @@
-org/example/todo/TodoApplication.class
-org/example/todo/model/Todo.class
-org/example/todo/controller/TodoController.class
-org/example/todo/service/TodoService.class
-org/example/todo/repository/TodoRepository.class

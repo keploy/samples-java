@@ -1,2 +1,0 @@
---add-exports
-jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED
