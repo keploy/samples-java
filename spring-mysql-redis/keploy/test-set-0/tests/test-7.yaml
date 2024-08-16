@@ -1,0 +1,37 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-7
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/todos/1
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.88.1
+        body: ""
+        timestamp: 2024-08-14T12:00:58.100905676+05:30
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 14 Aug 2024 06:30:58 GMT
+        body: '{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-08-14T12:01:01.141191243+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1723617061
+curl: |
+    curl --request GET \
+      --url http://localhost:8080/api/todos/1 \
+      --header 'User-Agent: curl/7.88.1' \
+      --header 'Accept: */*' \
+      --header 'Host: localhost:8080' \
