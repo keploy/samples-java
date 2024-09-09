@@ -4,11 +4,11 @@ This repository contains a sample project that demonstrates the integration of K
 
 ## Prerequisites
 
-Before getting started, make sure you have the following installed:
+Before getting started, ensure you have the following installed:
 
 - Latest version of JDK
-- Install [Keploy](https://keploy.io/docs/server/installation/)
-- Install [Docker](https://docs.docker.com/engine/install/) (if you want to run application in docker).
+- [Keploy](https://keploy.io/docs/server/installation/)
+- [Docker](https://docs.docker.com/engine/install/) (if you want to run the application in Docker)
 - Postman for testing APIs
 
 ## Getting Started
@@ -17,54 +17,23 @@ To get started, clone the repository:
 
 ```bash
 git clone https://github.com/jaiakash/samples-java.git
-cd spring-boot-jwt
+cd samples-java/spring-boot-jwt
 ```
 
-## API Endpoints
+## Native Usage
 
-The following API endpoints are available:
+To run the application locally, follow these steps:
 
-#### Login
+1. Build the application:
 
-- POST `/users/login`
-
-  Authenticate a user and receive a JWT token.
-
-  Request Body:
-
-  ```json
-  {
-    "username": "your_username",
-    "password": "your_password"
-  }
+  ```bash
+  mvn clean install
   ```
 
-  Response:
+2. Run the application:
 
-  ```json
-  {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-  }
-  ```
-
-#### Token Verification
-
-- POST `/users/tokenVerification`
-
-  Verify the validity of a JWT token.
-
-  Request Header:
-
-  ```json
-    Authorization: Bearer <your_jwt_token_here>
-  ```
-
-  Response:
-
-  ```json
-  {
-    "isValid": true
-  }
+  ```bash
+  java -jar target/spring-boot-jwt.jar
   ```
 
 ## Running with Docker
@@ -73,29 +42,37 @@ To run the application with Docker, follow these steps:
 
 1. Build the Docker image:
 
-   ```bash
-   docker build -t spring-boot-jwt .
-   ```
+  ```bash
+  docker build -t spring-boot-jwt .
+  ```
 
 2. Run the Docker container:
 
-   ```bash
-   docker run -p 8080:8080 spring-boot-jwt
-   ```
+  ```bash
+  docker run -p 8080:8080 spring-boot-jwt
+  ```
 
 The application will be accessible at `http://localhost:8080`.
 
 ## Integration with Keploy
 
-#### RECORD Mode
+### RECORD Mode
 
-1. To run the application, run
+1. To run the application, use:
 
-   ```bash
-   keploy record -c "docker run -p 8080:8080 spring-boot-jwt"
-   ```
+  #### Native Usage
 
-2. To generate testcases, you can make API calls using Postman or `curl`:
+  ```bash
+  keploy record -c "java -jar target/spring-boot-jwt.jar"
+  ```
+
+  #### Docker Usage
+
+  ```bash
+  keploy record -c "docker run -p 8080:8080 spring-boot-jwt"
+  ```
+
+2. To generate test cases, make API calls using Postman or `curl`:
 
 - Login
 
@@ -103,8 +80,8 @@ The application will be accessible at `http://localhost:8080`.
   curl --location --request POST 'http://localhost:8080/users/login' \
   --header 'Content-Type: application/json' \
   --data-raw '{
-    "username": "akash@example.com",
-    "password": "password"
+   "username": "akash@example.com",
+   "password": "password"
   }'
   ```
 
@@ -115,12 +92,21 @@ The application will be accessible at `http://localhost:8080`.
   --header 'Authorization: Bearer <your_jwt_token_here>'
   ```
 
-#### TEST mode
+### TEST Mode
 
 To test the application, start Keploy in test mode. In the root directory, run the following command:
+
+#### Native Usage
+
+```bash
+keploy test -c "java -jar target/spring-boot-jwt.jar" --delay 30
+```
+
+#### Docker Usage
 
 ```bash
 keploy test -c "docker run -p 8080:8080 spring-boot-jwt" --delay 30
 ```
 
 This command will run the tests and generate the report in the `Keploy/reports` directory in the current working directory.
+
