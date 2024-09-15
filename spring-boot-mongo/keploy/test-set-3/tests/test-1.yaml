@@ -1,6 +1,6 @@
 version: api.keploy.io/v1beta1
 kind: Http
-name: test-2
+name: test-1
 spec:
     metadata: {}
     req:
@@ -13,7 +13,7 @@ spec:
             Content-Length: "195"
             Content-Type: application/json
             Host: localhost:8080
-            User-Agent: curl/7.81.0
+            User-Agent: curl/7.88.1
         body: |4-
                 {
                         "name": "Strength Potion v2",
@@ -21,35 +21,27 @@ spec:
                         "bottle": 3,
                         "quantity": 150
                      }
-        body_type: ""
-        timestamp: 2023-11-28T18:27:48.174482586+05:30
+        timestamp: 2024-09-15T10:06:09.293757365+05:30
     resp:
         status_code: 200
         header:
-            Content-Type: application/json
-            Date: Tue, 28 Nov 2023 12:57:48 GMT
-        body: '{"id":"21fac58b-8c6c-4d4a-bef8-0034324bae29","name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":3,"quantity":150}'
-        body_type: ""
-        status_message: ""
+            Content-Type: application/json;charset=UTF-8
+            Date: Sun, 15 Sep 2024 04:36:09 GMT
+        body: '{"id":"4ae859fe-468a-4a6a-9c84-531db4a65e86","name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":3,"quantity":150}'
+        status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2023-11-28T18:27:51.486206401+05:30
+        timestamp: 2024-09-15T10:06:12.350592849+05:30
     objects: []
     assertions:
         noise:
-            body.quantity: []
             header.Date: []
-    created: 1701176271
+    created: 1726374972
 curl: |-
     curl --request POST \
       --url http://localhost:8080/potions \
       --header 'Host: localhost:8080' \
-      --header 'User-Agent: curl/7.81.0' \
+      --header 'User-Agent: curl/7.88.1' \
       --header 'Accept: */*' \
       --header 'Content-Type: application/json' \
-      --data '    {
-                "name": "Strength Potion v2",
-                "description": "Enhances the drinker's physical strength temporarily.",
-                "bottle": 3,
-                "quantity": 150
-             }'
+      --data "    {\n            \"name\": \"Strength Potion v2\",\n            \"description\": \"Enhances the drinker's physical strength temporarily.\",\n            \"bottle\": 3,\n            \"quantity\": 150\n         }"

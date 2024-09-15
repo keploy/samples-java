@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   spring-boot-mongo:
@@ -6,9 +6,7 @@ services:
     container_name: spring-boot-mongo
     ports:
       - "27017:27017"
-    networks:
-      - backend
-
-networks:
-  backend:
-    driver: bridge
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: yourUsername
+      MONGO_INITDB_ROOT_PASSWORD: yourPassword
+      MONGO_INITDB_DATABASE: Keploy
