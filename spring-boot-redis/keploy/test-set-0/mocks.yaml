@@ -1,0 +1,30 @@
+version: api.keploy.io/v1beta1
+kind: Mocks
+name: product-mocks
+spec:
+  mocks:
+    - req:
+        method: POST
+        url: http://localhost:8080/products
+      resp:
+        status_code: 201
+        header:
+          Content-Type: application/json
+        body: '{"id":"1","name":"Product A","price":10.99}'
+
+    - req:
+        method: GET
+        url: http://localhost:8080/products/1
+      resp:
+        status_code: 200
+        header:
+          Content-Type: application/json
+        body: '{"id":"1","name":"Product A","price":10.99}'
+
+    - req:
+        method: DELETE
+        url: http://localhost:8080/products/1
+      resp:
+        status_code: 204
+        header:
+          Content-Type: application/json
