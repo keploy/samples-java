@@ -10,14 +10,16 @@ import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BookElasticsearchClient {
     private ElasticsearchClient client;
 
     @Value("${spring.elasticsearch.port}")
-    private Integer port;
+    private String port;
 
-    @Value("${spring.elasticsearch.port}")
+    @Value("${spring.elasticsearch.url}")
     private String url;
 
     public ElasticsearchClient getClient()
@@ -31,7 +33,7 @@ public class BookElasticsearchClient {
 
     private void initClient()
     {
-        RestClient restClient = RestClient.builder(new HttpHost("localhost", 9200)).build();
+        RestClient restClient = RestClient.builder(new HttpHost(url, Integer.parseInt(port))).build();
 
         ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
 

@@ -6,18 +6,18 @@ import java.util.List;
 
 import com.example.spring_elastic.client.BookElasticsearchClient;
 import com.example.spring_elastic.models.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
-import co.elastic.clients.elasticsearch.core.BulkRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 
 @Configuration
 public class BookElasticsearchService {
-    BookElasticsearchClient client = new BookElasticsearchClient();
-
+    @Autowired
+    private BookElasticsearchClient client;
     private static final String BOOK_INDEX = "books";
 
     public Book createBook(Book book) {
