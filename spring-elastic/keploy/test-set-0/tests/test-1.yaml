@@ -1,0 +1,45 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-1
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8081/book/find_by_name?name=Great
+        url_params:
+            name: Great
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip, deflate, br
+            Connection: keep-alive
+            Host: localhost:8081
+            User-Agent: PostmanRuntime/7.26.8
+        body: ""
+        timestamp: 2024-10-14T21:38:34.683468007+02:00
+    resp:
+        status_code: 200
+        header:
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Mon, 14 Oct 2024 19:38:25 GMT
+            Keep-Alive: timeout=60
+        body: '[{"id":"1","name":"The Great Gatsby","description":"A novel set in the Jazz Age that tells the story of Jay Gatsby and his love for Daisy Buchanan.","price":30.0}]'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-10-14T21:38:27.656159256+02:00
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1728934707
+curl: |
+    curl --request GET \
+      --url http://localhost:8081/book/find_by_name?name=Great \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Connection: keep-alive' \
+      --header 'User-Agent: PostmanRuntime/7.26.8' \
+      --header 'Accept: */*' \
+      --header 'Host: localhost:8081' \
