@@ -1,6 +1,5 @@
 HELP.md
 target/
-keploy/test-set-0/mocks.yaml
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
