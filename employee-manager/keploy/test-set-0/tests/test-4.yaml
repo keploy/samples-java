@@ -4,37 +4,44 @@ name: test-4
 spec:
     metadata: {}
     req:
-        method: GET
+        method: PUT
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:8080/api/employees/11
+        url: http://localhost:8080/api/employees/3
         header:
             Accept: '*/*'
+            Accept-Encoding: gzip,deflate
+            Connection: Keep-Alive
+            Content-Length: "68"
+            Content-Type: application/json
             Host: localhost:8080
-            User-Agent: curl/7.81.0
-        body: ""
-        body_type: ""
-        timestamp: 2023-12-04T09:32:17.236905852Z
+            User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)
+        body: '{"firstName":"Jane","lastName":"Doe","email":"jane.doe@example.com"}'
+        timestamp: 2024-10-17T15:36:14.979974102+05:30
     resp:
         status_code: 200
         header:
+            Connection: keep-alive
             Content-Type: application/json
-            Date: Mon, 04 Dec 2023 09:32:17 GMT
-        body: '{"id":11,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682066}'
-        body_type: ""
-        status_message: ""
+            Date: Thu, 17 Oct 2024 10:06:15 GMT
+            Keep-Alive: timeout=60
+        body: '{"id":3,"firstName":"Jane","lastName":"Doe","email":"jane.doe@example.com","timestamp":1729159575}'
+        status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2023-12-04T09:32:20.25768276Z
+        timestamp: 2024-10-17T15:36:18.822656255+05:30
     objects: []
     assertions:
         noise:
-            body.timestamp: []
             header.Date: []
-    created: 1701682340
-curl: |
-    curl --request GET \
-      --url http://localhost:8080/api/employees/11 \
-      --header 'User-Agent: curl/7.81.0' \
+    created: 1729159578
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/api/employees/3 \
+      --header 'Connection: Keep-Alive' \
+      --header 'User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)' \
+      --header 'Accept-Encoding: gzip,deflate' \
       --header 'Accept: */*' \
+      --header 'Content-Type: application/json' \
       --header 'Host: localhost:8080' \
+      --data "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"email\":\"jane.doe@example.com\"}"
