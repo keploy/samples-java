@@ -7,34 +7,38 @@ spec:
         method: GET
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:8080/api/employees/
+        url: http://localhost:8080/api/employees/1
         header:
             Accept: '*/*'
+            Accept-Encoding: gzip,deflate
+            Connection: Keep-Alive
             Host: localhost:8080
-            User-Agent: curl/7.81.0
+            User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)
         body: ""
-        body_type: ""
-        timestamp: 2023-12-04T09:32:13.062492036Z
+        timestamp: 2024-10-17T15:36:14.159181013+05:30
     resp:
-        status_code: 200
+        status_code: 404
         header:
+            Connection: keep-alive
             Content-Type: application/json
-            Date: Mon, 04 Dec 2023 09:32:13 GMT
-        body: '[{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700642324},{"id":2,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650840},{"id":3,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650845},{"id":4,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650846},{"id":5,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650870},{"id":6,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700650871},{"id":7,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1700668292},{"id":8,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701155376},{"id":9,"firstName":"GK","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701155441},{"id":10,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682065},{"id":11,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682066},{"id":12,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682068},{"id":13,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682327},{"id":14,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682329}]'
-        body_type: ""
-        status_message: ""
+            Date: Thu, 17 Oct 2024 10:06:14 GMT
+            Keep-Alive: timeout=60
+        body: '{"timestamp":"2024-10-17T10:06:14.170+00:00","message":"Employee not found for this id :: 1","details":"uri=/api/employees/1"}'
+        status_message: Not Found
         proto_major: 0
         proto_minor: 0
-        timestamp: 2023-12-04T09:32:16.06356756Z
+        timestamp: 2024-10-17T15:36:16.999927198+05:30
     objects: []
     assertions:
         noise:
             body.timestamp: []
             header.Date: []
-    created: 1701682336
+    created: 1729159576
 curl: |
     curl --request GET \
-      --url http://localhost:8080/api/employees/ \
-      --header 'Host: localhost:8080' \
-      --header 'User-Agent: curl/7.81.0' \
+      --url http://localhost:8080/api/employees/1 \
+      --header 'Connection: Keep-Alive' \
+      --header 'User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)' \
+      --header 'Accept-Encoding: gzip,deflate' \
       --header 'Accept: */*' \
+      --header 'Host: localhost:8080' \

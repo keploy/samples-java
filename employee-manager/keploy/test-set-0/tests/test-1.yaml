@@ -4,52 +4,40 @@ name: test-1
 spec:
     metadata: {}
     req:
-        method: POST
+        method: GET
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:8080/api/employees
+        url: http://localhost:8080/api/employees/2
         header:
             Accept: '*/*'
-            Content-Length: "100"
-            Content-Type: application/json
+            Accept-Encoding: gzip,deflate
+            Connection: Keep-Alive
             Host: localhost:8080
-            User-Agent: curl/7.81.0
-        body: |-
-            {
-                "firstName": "Myke",
-                "lastName": "Tyson",
-                "email": "mt@gmail.com",
-                "timestamp":1
-            }
-        body_type: ""
-        timestamp: 2023-12-04T09:32:07.519798019Z
+            User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)
+        body: ""
+        timestamp: 2024-10-17T15:36:14.274044713+05:30
     resp:
         status_code: 200
         header:
+            Connection: keep-alive
             Content-Type: application/json
-            Date: Mon, 04 Dec 2023 09:32:07 GMT
-        body: '{"id":13,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1701682327}'
-        body_type: ""
-        status_message: ""
+            Date: Thu, 17 Oct 2024 10:06:14 GMT
+            Keep-Alive: timeout=60
+        body: '{"id":2,"firstName":"John","lastName":"Doe","email":"john.doe@example.com","timestamp":0}'
+        status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2023-12-04T09:32:10.504964682Z
+        timestamp: 2024-10-17T15:36:16.999271024+05:30
     objects: []
     assertions:
         noise:
-            body.timestamp: []
             header.Date: []
-    created: 1701682330
-curl: |-
-    curl --request POST \
-      --url http://localhost:8080/api/employees \
+    created: 1729159576
+curl: |
+    curl --request GET \
+      --url http://localhost:8080/api/employees/2 \
       --header 'Host: localhost:8080' \
-      --header 'User-Agent: curl/7.81.0' \
+      --header 'Connection: Keep-Alive' \
+      --header 'User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)' \
+      --header 'Accept-Encoding: gzip,deflate' \
       --header 'Accept: */*' \
-      --header 'Content-Type: application/json' \
-      --data '{
-        "firstName": "Myke",
-        "lastName": "Tyson",
-        "email": "mt@gmail.com",
-        "timestamp":1
-    }'
