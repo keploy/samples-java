@@ -1,0 +1,51 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-2
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8081/book/create
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip, deflate, br
+            Authorization: Basic ZWxhc3RpYzo4ZkVHZ25FTm9zSz0yWlp2bjFiYQ==
+            Connection: keep-alive
+            Content-Length: "242"
+            Content-Type: application/json
+            Host: localhost:8081
+            Postman-Token: 0853358a-4d38-4d65-882b-90615afde2fb
+            User-Agent: PostmanRuntime/7.26.8
+        body: "{\r\n    \"id\": \"2\",\r\n    \"name\": \"Harry Potter\",\r\n    \"description\": \"A magical journey of a young wizard, Harry Potter, as he navigates his adventures in the wizarding world and faces his ultimate enemy, Lord Voldemort.\",\r\n    \"price\": 50\r\n}\r\n"
+        timestamp: 2024-10-24T21:29:05.587673534+02:00
+    resp:
+        status_code: 200
+        header:
+            Connection: keep-alive
+            Content-Type: application/json
+            Date: Thu, 24 Oct 2024 19:29:05 GMT
+            Keep-Alive: timeout=60
+        body: '{"id":"2","name":"Harry Potter","description":"A magical journey of a young wizard, Harry Potter, as he navigates his adventures in the wizarding world and faces his ultimate enemy, Lord Voldemort.","price":50.0}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-10-24T21:29:07.729124751+02:00
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1729798147
+curl: |-
+    curl --request POST \
+      --url http://localhost:8081/book/create \
+      --header 'Connection: keep-alive' \
+      --header 'User-Agent: PostmanRuntime/7.26.8' \
+      --header 'Host: localhost:8081' \
+      --header 'Postman-Token: 0853358a-4d38-4d65-882b-90615afde2fb' \
+      --header 'Accept: */*' \
+      --header 'Content-Type: application/json' \
+      --header 'Authorization: Basic ZWxhc3RpYzo4ZkVHZ25FTm9zSz0yWlp2bjFiYQ==' \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --data "{\r\n    \"id\": \"2\",\r\n    \"name\": \"Harry Potter\",\r\n    \"description\": \"A magical journey of a young wizard, Harry Potter, as he navigates his adventures in the wizarding world and faces his ultimate enemy, Lord Voldemort.\",\r\n    \"price\": 50\r\n}\r\n"
