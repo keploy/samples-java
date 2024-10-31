@@ -1,0 +1,37 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-3
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/products
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/8.10.1
+        body: ""
+        timestamp: 2024-10-31T19:10:17.147714809+05:30
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Thu, 31 Oct 2024 13:40:17 GMT
+        body: '[{"id":"1","name":"Product1","price":99.99},{"id":"ee432ba0-ea0b-4165-9487-9a08efc694e4","name":"Product1","price":100.0}]'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-10-31T19:10:19.257006361+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1730382019
+curl: |
+    curl --request GET \
+      --url http://localhost:8080/products \
+      --header 'Accept: */*' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: curl/8.10.1' \

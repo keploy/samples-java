@@ -11,26 +11,27 @@ spec:
         header:
             Accept: '*/*'
             Host: localhost:8080
-            User-Agent: curl/7.88.1
-        timestamp: 2024-08-14T11:58:49.994804119+05:30
+            User-Agent: curl/8.10.1
+        body: ""
+        timestamp: 2024-10-31T19:10:10.077452417+05:30
     resp:
         status_code: 200
         header:
             Content-Type: application/json
-            Date: Wed, 14 Aug 2024 06:28:51 GMT
-        body: '{"id":"1","name":"Product A","price":10.99}'
+            Date: Thu, 31 Oct 2024 13:40:10 GMT
+        body: '{"id":"1","name":"Product1","price":99.99}'
         status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2024-08-14T11:58:53.957634007+05:30
+        timestamp: 2024-10-31T19:10:13.214744183+05:30
     objects: []
     assertions:
         noise:
             header.Date: []
-    created: 1723616933
-curl: |-
+    created: 1730382013
+curl: |
     curl --request GET \
       --url http://localhost:8080/products/1 \
-      --header 'User-Agent: curl/7.88.1' \
+      --header 'User-Agent: curl/8.10.1' \
       --header 'Accept: */*' \
-      --header 'Host: localhost:8080'
+      --header 'Host: localhost:8080' \

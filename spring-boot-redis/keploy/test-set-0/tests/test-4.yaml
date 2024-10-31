@@ -1,0 +1,46 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-4
+spec:
+    metadata: {}
+    req:
+        method: PUT
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/products/1
+        header:
+            Accept: '*/*'
+            Content-Length: "69"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: curl/8.10.1
+        body: |-
+            {
+                "id": "1",
+                "name": "Updated Product1",
+                "price": 89.99
+            }
+        timestamp: 2024-10-31T19:10:24.321102796+05:30
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Thu, 31 Oct 2024 13:40:24 GMT
+        body: '{"id":"1","name":"Updated Product1","price":89.99}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-10-31T19:10:27.409136678+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1730382027
+curl: |-
+    curl --request PUT \
+      --url http://localhost:8080/products/1 \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: curl/8.10.1' \
+      --header 'Accept: */*' \
+      --header 'Content-Type: application/json' \
+      --data "{\n    \"id\": \"1\",\n    \"name\": \"Updated Product1\",\n    \"price\": 89.99\n}"
