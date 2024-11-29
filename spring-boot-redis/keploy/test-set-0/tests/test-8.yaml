@@ -1,37 +1,46 @@
 version: api.keploy.io/v1beta1
 kind: Http
-name: test-2
+name: test-8
 spec:
     metadata: {}
     req:
-        method: GET
+        method: PUT
         proto_major: 1
         proto_minor: 1
         url: http://localhost:8080/products/1
         header:
             Accept: '*/*'
+            Content-Length: "63"
+            Content-Type: application/json
             Host: localhost:8080
             User-Agent: curl/8.11.0
-        body: ""
-        timestamp: 2024-11-29T12:53:48.01595248+05:30
+        body: |-
+            {
+              "id": "1",
+              "name": "Updated Laptop",
+              "price": 1100.00
+            }
+        timestamp: 2024-11-29T12:55:04.997204691+05:30
     resp:
         status_code: 200
         header:
             Content-Type: application/json
-            Date: Fri, 29 Nov 2024 07:23:48 GMT
-        body: '{"id":"1","name":"Laptop","price":1200.0}'
+            Date: Fri, 29 Nov 2024 07:25:05 GMT
+        body: '{"id":"1","name":"Updated Laptop","price":1100.0}'
         status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2024-11-29T12:53:51.13729979+05:30
+        timestamp: 2024-11-29T12:55:08.081288123+05:30
     objects: []
     assertions:
         noise:
             header.Date: []
-    created: 1732865031
-curl: |
-    curl --request GET \
+    created: 1732865108
+curl: |-
+    curl --request PUT \
       --url http://localhost:8080/products/1 \
+      --header 'Content-Type: application/json' \
       --header 'Host: localhost:8080' \
       --header 'User-Agent: curl/8.11.0' \
       --header 'Accept: */*' \
+      --data "{\n  \"id\": \"1\",\n  \"name\": \"Updated Laptop\",\n  \"price\": 1100.00\n}"

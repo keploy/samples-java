@@ -1,37 +1,37 @@
 version: api.keploy.io/v1beta1
 kind: Http
-name: test-2
+name: test-10
 spec:
     metadata: {}
     req:
         method: GET
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:8080/products/1
+        url: http://localhost:8080/products
         header:
             Accept: '*/*'
             Host: localhost:8080
             User-Agent: curl/8.11.0
         body: ""
-        timestamp: 2024-11-29T12:53:48.01595248+05:30
+        timestamp: 2024-11-29T12:55:20.019992312+05:30
     resp:
         status_code: 200
         header:
             Content-Type: application/json
-            Date: Fri, 29 Nov 2024 07:23:48 GMT
-        body: '{"id":"1","name":"Laptop","price":1200.0}'
+            Date: Fri, 29 Nov 2024 07:25:20 GMT
+        body: '[{"id":"2","name":"Mobile phone","price":500.0},{"id":"3","name":"Charger","price":50.0}]'
         status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2024-11-29T12:53:51.13729979+05:30
+        timestamp: 2024-11-29T12:55:22.051832396+05:30
     objects: []
     assertions:
         noise:
             header.Date: []
-    created: 1732865031
+    created: 1732865122
 curl: |
     curl --request GET \
-      --url http://localhost:8080/products/1 \
+      --url http://localhost:8080/products \
       --header 'Host: localhost:8080' \
       --header 'User-Agent: curl/8.11.0' \
       --header 'Accept: */*' \

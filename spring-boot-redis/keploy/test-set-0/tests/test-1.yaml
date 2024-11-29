@@ -10,37 +10,37 @@ spec:
         url: http://localhost:8080/products
         header:
             Accept: '*/*'
-            Content-Length: "61"
+            Content-Length: "55"
             Content-Type: application/json
             Host: localhost:8080
-            User-Agent: curl/8.10.1
+            User-Agent: curl/8.11.0
         body: |-
             {
-                "id": "1",
-                "name": "Product1",
-                "price": 99.99
+              "id": "1",
+              "name": "Laptop",
+              "price": 1200.00
             }
-        timestamp: 2024-10-31T19:09:57.169025051+05:30
+        timestamp: 2024-11-29T12:53:38.068366874+05:30
     resp:
         status_code: 200
         header:
             Content-Type: application/json
-            Date: Thu, 31 Oct 2024 13:39:59 GMT
-        body: '{"id":"1","name":"Product1","price":99.99}'
+            Date: Fri, 29 Nov 2024 07:23:40 GMT
+        body: '{"id":"1","name":"Laptop","price":1200.0}'
         status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2024-10-31T19:10:02.136543888+05:30
+        timestamp: 2024-11-29T12:53:43.066130612+05:30
     objects: []
     assertions:
         noise:
             header.Date: []
-    created: 1730382002
+    created: 1732865023
 curl: |-
     curl --request POST \
       --url http://localhost:8080/products \
+      --header 'User-Agent: curl/8.11.0' \
       --header 'Accept: */*' \
       --header 'Content-Type: application/json' \
       --header 'Host: localhost:8080' \
-      --header 'User-Agent: curl/8.10.1' \
-      --data "{\n    \"id\": \"1\",\n    \"name\": \"Product1\",\n    \"price\": 99.99\n}"
+      --data "{\n  \"id\": \"1\",\n  \"name\": \"Laptop\",\n  \"price\": 1200.00\n}"
