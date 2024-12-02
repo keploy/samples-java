@@ -1,0 +1,355 @@
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-0
+spec:
+    metadata:
+        operation: '{ OpQuery flags: [], fullCollectionName: admin.$cmd, numberToSkip: 0, numberToReturn: -1, query: {"isMaster": {"$numberInt":"1"},"helloOk": true,"client": {"driver": {"name": "mongo-java-driver|sync|spring-boot","version": "4.9.1"},"os": {"type": "Linux","name": "Linux","architecture": "aarch64","version": "6.1.0-18-cloud-arm64"},"platform": "Java/Debian/17.0.10+7-Debian-1deb12u1"}}, returnFieldsSelector:  }'
+        type: config
+    requests:
+        - header:
+            length: 311
+            requestId: 2
+            responseTo: 0
+            Opcode: 2004
+          message:
+            flags: 0
+            collection_name: admin.$cmd
+            number_to_skip: 0
+            number_to_return: -1
+            query: '{"isMaster":{"$numberInt":"1"},"helloOk":true,"client":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.9.1"},"os":{"type":"Linux","name":"Linux","architecture":"aarch64","version":"6.1.0-18-cloud-arm64"},"platform":"Java/Debian/17.0.10+7-Debian-1deb12u1"}}'
+            return_fields_selector: ""
+    responses:
+        - header:
+            length: 329
+            requestId: 52
+            responseTo: 2
+            Opcode: 1
+          message:
+            response_flags: 8
+            cursor_id: 0
+            starting_from: 0
+            number_returned: 1
+            documents:
+                - '{"helloOk":true,"ismaster":true,"topologyVersion":{"processId":{"$oid":"660403a3d51e110d440ddd8a"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1711539547254"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"7"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"21"},"readOnly":false,"ok":{"$numberDouble":"1.0"}}'
+          read_delay: 28907302
+    created: 1711539547
+    reqTimestampMock: 2024-03-27T11:39:07.233950083Z
+    resTimestampMock: 2024-03-27T11:39:07.26419901Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-1
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"hello":{"$numberInt":"1"},"$db":"admin"} }], checksum: 0 }'
+        type: config
+    requests:
+        - header:
+            length: 52
+            requestId: 4
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"hello":{"$numberInt":"1"},"$db":"admin"} }'
+            checksum: 0
+          read_delay: 10089556390
+    responses:
+        - header:
+            length: 313
+            requestId: 54
+            responseTo: 4
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"isWritablePrimary":true,"topologyVersion":{"processId":{"$oid":"660403a3d51e110d440ddd8a"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1711539557371"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"8"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"21"},"readOnly":false,"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 12529656
+    created: 1711539557
+    reqTimestampMock: 2024-03-27T11:39:17.360430484Z
+    resTimestampMock: 2024-03-27T11:39:17.37763414Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-2
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 65536, sections: [{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"topologyVersion":{"processId":{"$oid":"660403a3d51e110d440ddd8a"},"counter":{"$numberLong":"0"}},"maxAwaitTimeMS":{"$numberLong":"10000"},"$db":"admin","$readPreference":{"mode":"primaryPreferred"}} }], checksum: 0 }'
+        type: config
+    requests:
+        - header:
+            length: 197
+            requestId: 3
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 65536
+            sections:
+                - '{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"topologyVersion":{"processId":{"$oid":"660403a3d51e110d440ddd8a"},"counter":{"$numberLong":"0"}},"maxAwaitTimeMS":{"$numberLong":"10000"},"$db":"admin","$readPreference":{"mode":"primaryPreferred"}} }'
+            checksum: 0
+          read_delay: 101134971
+    responses:
+        - header:
+            length: 323
+            requestId: 55
+            responseTo: 3
+            Opcode: 2013
+          message:
+            flagBits: 2
+            sections:
+                - '{ SectionSingle msg: {"helloOk":true,"isWritablePrimary":true,"topologyVersion":{"processId":{"$oid":"660403a3d51e110d440ddd8a"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1711539557378"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"7"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"21"},"readOnly":false,"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 10014279864
+    created: 1711539557
+    reqTimestampMock: 2024-03-27T11:39:07.364471636Z
+    resTimestampMock: 2024-03-27T11:39:17.378982682Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-3
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:39:28 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539568
+    reqTimestampMock: 2024-03-27T11:39:28.29260728Z
+    resTimestampMock: 2024-03-27T11:39:28.303108268Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-4
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "59"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:39:28 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539568
+    reqTimestampMock: 2024-03-27T11:39:28.312083036Z
+    resTimestampMock: 2024-03-27T11:39:28.312503854Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-5
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"YTTng14JSCeZLGnfBsdmyA==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"FE9DLSIKRRxAf2GChn7utA==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"FE9DLSIKRRxAf2GChn7utA==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 7
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"YTTng14JSCeZLGnfBsdmyA==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"FE9DLSIKRRxAf2GChn7utA==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"FE9DLSIKRRxAf2GChn7utA==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 216775600
+    responses:
+        - header:
+            length: 120
+            requestId: 59
+            responseTo: 7
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"FE9DLSIKRRxAf2GChn7utA==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 408011275
+    created: 1711539569
+    reqTimestampMock: 2024-03-27T11:39:28.944382963Z
+    resTimestampMock: 2024-03-27T11:39:29.408233636Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-6
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:40:00 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539600
+    reqTimestampMock: 2024-03-27T11:40:00.955995066Z
+    resTimestampMock: 2024-03-27T11:40:00.968827325Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-7
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "116"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:40:00 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539600
+    reqTimestampMock: 2024-03-27T11:40:00.971653918Z
+    resTimestampMock: 2024-03-27T11:40:00.972809157Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-8
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"YTTng14JSCeZLGnfBsdmyA==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"xk/1w3co0J0N8uAntDv5tg==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"xk/1w3co0J0N8uAntDv5tg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 11
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"YTTng14JSCeZLGnfBsdmyA==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"xk/1w3co0J0N8uAntDv5tg==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"xk/1w3co0J0N8uAntDv5tg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 31602894201
+    responses:
+        - header:
+            length: 120
+            requestId: 66
+            responseTo: 11
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"xk/1w3co0J0N8uAntDv5tg==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 21562720
+    created: 1711539601
+    reqTimestampMock: 2024-03-27T11:40:00.987397484Z
+    resTimestampMock: 2024-03-27T11:40:01.011425191Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-9
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"endSessions":[{"id":{"$binary":{"base64":"YTTng14JSCeZLGnfBsdmyA==","subType":"04"}}}],"$db":"admin","$readPreference":{"mode":"primaryPreferred"}} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 141
+            requestId: 14
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"endSessions":[{"id":{"$binary":{"base64":"YTTng14JSCeZLGnfBsdmyA==","subType":"04"}}}],"$db":"admin","$readPreference":{"mode":"primaryPreferred"}} }'
+            checksum: 0
+          read_delay: 17749425046
+    responses:
+        - header:
+            length: 38
+            requestId: 71
+            responseTo: 14
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 5952622
+    created: 1711539618
+    reqTimestampMock: 2024-03-27T11:40:18.759681664Z
+    resTimestampMock: 2024-03-27T11:40:18.77157674Z
