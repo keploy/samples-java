@@ -7,20 +7,20 @@ spec:
         method: OPTIONS
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:9966/petclinic/api/pettypes/10
+        url: http://localhost:9966/petclinic/api/pettypes/{{string .id4 }}
         header:
-            Accept: '*/*'
-            Accept-Encoding: gzip, deflate, br, zstd
-            Accept-Language: en-US,en;q=0.9
-            Access-Control-Request-Method: DELETE
-            Connection: keep-alive
-            Host: localhost:9966
-            Origin: http://localhost:4200
-            Referer: http://localhost:4200/
-            Sec-Fetch-Dest: empty
-            Sec-Fetch-Mode: cors
-            Sec-Fetch-Site: same-site
-            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+            Accept: '{{string .Accept1 }}'
+            Accept-Encoding: '{{string .AcceptEncoding }}'
+            Accept-Language: '{{string .AcceptLanguage }}'
+            Access-Control-Request-Method: '{{string .AccessControlRequestMethod }}'
+            Connection: '{{string .Connection }}'
+            Host: '{{string .Host }}'
+            Origin: '{{string .Origin }}'
+            Referer: '{{string .Referer }}'
+            Sec-Fetch-Dest: '{{string .SecFetchDest }}'
+            Sec-Fetch-Mode: '{{string .SecFetchMode }}'
+            Sec-Fetch-Site: '{{string .SecFetchSite }}'
+            User-Agent: '{{string .UserAgent }}'
         body: ""
         timestamp: 2024-08-09T12:25:38.279256269+05:30
     resp:
@@ -54,16 +54,16 @@ spec:
     created: 1723186538
 curl: |
     curl --request OPTIONS \
-      --url http://localhost:9966/petclinic/api/pettypes/10 \
-      --header 'Sec-Fetch-Site: same-site' \
-      --header 'Access-Control-Request-Method: DELETE' \
-      --header 'Origin: http://localhost:4200' \
-      --header 'Host: localhost:9966' \
-      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
-      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
-      --header 'Accept: */*' \
-      --header 'Sec-Fetch-Dest: empty' \
-      --header 'Accept-Language: en-US,en;q=0.9' \
-      --header 'Connection: keep-alive' \
-      --header 'Sec-Fetch-Mode: cors' \
-      --header 'Referer: http://localhost:4200/' \
+      --url http://localhost:9966/petclinic/api/pettypes/{{string .id4 }} \
+      --header 'Sec-Fetch-Mode: {{string .SecFetchMode }}' \
+      --header 'Sec-Fetch-Site: {{string .SecFetchSite }}' \
+      --header 'Origin: {{string .Origin }}' \
+      --header 'Accept: {{string .Accept1 }}' \
+      --header 'Access-Control-Request-Method: {{string .AccessControlRequestMethod }}' \
+      --header 'Host: {{string .Host }}' \
+      --header 'Accept-Encoding: {{string .AcceptEncoding }}' \
+      --header 'Referer: {{string .Referer }}' \
+      --header 'User-Agent: {{string .UserAgent }}' \
+      --header 'Connection: {{string .Connection }}' \
+      --header 'Sec-Fetch-Dest: {{string .SecFetchDest }}' \
+      --header 'Accept-Language: {{string .AcceptLanguage }}' \

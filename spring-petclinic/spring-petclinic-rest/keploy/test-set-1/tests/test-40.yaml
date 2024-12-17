@@ -7,21 +7,21 @@ spec:
         method: OPTIONS
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:9966/petclinic/api/specialties/4
+        url: http://localhost:9966/petclinic/api/specialties/{{string .id4 }}
         header:
-            Accept: '*/*'
-            Accept-Encoding: gzip, deflate, br, zstd
-            Accept-Language: en-US,en;q=0.9
-            Access-Control-Request-Headers: content-type
-            Access-Control-Request-Method: PUT
-            Connection: keep-alive
-            Host: localhost:9966
-            Origin: http://localhost:4200
-            Referer: http://localhost:4200/
-            Sec-Fetch-Dest: empty
-            Sec-Fetch-Mode: cors
-            Sec-Fetch-Site: same-site
-            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+            Accept: '{{string .Accept }}'
+            Accept-Encoding: '{{string .AcceptEncoding }}'
+            Accept-Language: '{{string .AcceptLanguage }}'
+            Access-Control-Request-Headers: '{{string .AccessControlRequestHeaders }}'
+            Access-Control-Request-Method: '{{string .AccessControlRequestMethod2 }}'
+            Connection: '{{string .Connection }}'
+            Host: '{{string .Host }}'
+            Origin: '{{string .Origin }}'
+            Referer: '{{string .Referer }}'
+            Sec-Fetch-Dest: '{{string .SecFetchDest }}'
+            Sec-Fetch-Mode: '{{string .SecFetchMode }}'
+            Sec-Fetch-Site: '{{string .SecFetchSite }}'
+            User-Agent: '{{string .UserAgent }}'
         body: ""
         timestamp: 2024-08-08T21:30:07.427914636+05:30
     resp:
@@ -56,17 +56,17 @@ spec:
     created: 1723132807
 curl: |
     curl --request OPTIONS \
-      --url http://localhost:9966/petclinic/api/specialties/4 \
-      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
-      --header 'Connection: keep-alive' \
-      --header 'Origin: http://localhost:4200' \
-      --header 'Sec-Fetch-Site: same-site' \
-      --header 'Access-Control-Request-Headers: content-type' \
-      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
-      --header 'Accept-Language: en-US,en;q=0.9' \
-      --header 'Host: localhost:9966' \
-      --header 'Access-Control-Request-Method: PUT' \
-      --header 'Sec-Fetch-Mode: cors' \
-      --header 'Referer: http://localhost:4200/' \
-      --header 'Accept: */*' \
-      --header 'Sec-Fetch-Dest: empty' \
+      --url http://localhost:9966/petclinic/api/specialties/{{string .id4 }} \
+      --header 'Sec-Fetch-Dest: {{string .SecFetchDest }}' \
+      --header 'Sec-Fetch-Site: {{string .SecFetchSite }}' \
+      --header 'User-Agent: {{string .UserAgent }}' \
+      --header 'Accept-Encoding: {{string .AcceptEncoding }}' \
+      --header 'Accept-Language: {{string .AcceptLanguage }}' \
+      --header 'Host: {{string .Host }}' \
+      --header 'Accept: {{string .Accept }}' \
+      --header 'Connection: {{string .Connection }}' \
+      --header 'Sec-Fetch-Mode: {{string .SecFetchMode }}' \
+      --header 'Access-Control-Request-Method: {{string .AccessControlRequestMethod2 }}' \
+      --header 'Origin: {{string .Origin }}' \
+      --header 'Referer: {{string .Referer }}' \
+      --header 'Access-Control-Request-Headers: {{string .AccessControlRequestHeaders }}' \

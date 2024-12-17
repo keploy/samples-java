@@ -2,6 +2,8 @@ path: ""
 appId: 0
 appName: ""
 command: java -jar target/spring-petclinic-rest-3.0.2.jar
+templatize:
+    testSets: []
 port: 0
 dnsPort: 26789
 proxyPort: 16789
@@ -17,6 +19,8 @@ test:
         global: {}
         test-sets: {}
     delay: 5
+    host: ""
+    port: 0
     apiTimeout: 5
     skipCoverage: false
     coverageReportPath: ""
@@ -28,7 +32,15 @@ test:
     jacocoAgentPath: ""
     basePath: ""
     mocking: true
-    ignoredTests: {}
+    ignoredTests:
+        test-set-1: []
+        test1:
+            - test-3
+    disableLineCoverage: false
+    disableMockUpload: false
+    useLocalMock: false
+    updateTemplate: false
+    freezeTime: false
 record:
     filters: []
     recordTimer: 0s
@@ -38,6 +50,46 @@ generateGithubActions: true
 keployContainer: keploy-v2
 keployNetwork: keploy-network
 cmdType: native
+contract:
+    services: []
+    tests: []
+    path: ""
+    download: false
+    generate: false
+    driven: ""
+    mappings:
+        servicesMapping: {}
+        self: ""
 inCi: false
+autogen:
+    filters: []
+    recordTimer: 0s
+    schemaPath: ""
+dedup:
+    selectedTests: {}
+    globalNoise:
+        global: {}
+        test-sets: {}
+    delay: 0
+    host: ""
+    port: 0
+    apiTimeout: 0
+    skipCoverage: false
+    coverageReportPath: ""
+    ignoreOrdering: false
+    mongoPassword: ""
+    language: ""
+    removeUnusedMocks: false
+    fallBackOnMiss: false
+    jacocoAgentPath: ""
+    basePath: ""
+    mocking: false
+    ignoredTests: {}
+    disableLineCoverage: false
+    disableMockUpload: false
+    useLocalMock: false
+    updateTemplate: false
+    rm: false
+    freezeTime: false
 
 # Visit [https://keploy.io/docs/running-keploy/configuration-file/] to learn about using keploy through configration file.

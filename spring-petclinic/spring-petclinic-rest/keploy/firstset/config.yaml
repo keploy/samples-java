@@ -1,0 +1,31 @@
+preScript: ""
+postScript: ""
+template:
+    Accept: application/json, text/plain, */*
+    Accept1: '*/*'
+    AcceptEncoding: gzip, deflate, br, zstd
+    AcceptLanguage: en-US,en;q=0.9
+    AccessControlRequestHeaders: content-type
+    AccessControlRequestMethod: DELETE
+    Connection: keep-alive
+    ContentLength: "71"
+    ContentLength1: "24"
+    ContentLength2: "15"
+    ContentType: application/json
+    Host: localhost:9966
+    Origin: http://localhost:4200
+    Referer: http://localhost:4200/
+    SecChUa: Not/A)Brand;v=8, Chromium;v=126, Google Chrome;v=126
+    SecChUaMobile: ?0
+    SecChUaPlatform: macOS
+    SecFetchDest: empty
+    SecFetchMode: cors
+    SecFetchSite: same-site
+    UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+    id: "3"
+    id1: "5"
+    id2: "4"
+    id3: "8"
+    id4: "9"
+    lastName: Dadheech
+mockRegistry: null

@@ -1,0 +1,321 @@
+version: api.keploy.io/v1beta1
+name: test-set-1-report
+status: PASSED
+success: 5
+failure: 0
+ignored: 0
+total: 5
+tests:
+    - kind: Http
+      name: test-set-1
+      status: PASSED
+      started: 1723621451
+      completed: 1723621452
+      test_case_path: /Users/hermionedadheech/workspace/work/java8-spring-todo/keploy/test-set-1
+      mock_path: /Users/hermionedadheech/workspace/work/java8-spring-todo/keploy/test-set-1/mocks
+      test_case_id: test-1
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/todos
+        header:
+            Accept: '*/*'
+            Content-Length: "160"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: curl/7.88.1
+        body: |-
+            {
+                    "title": "Learn Spring Boot",
+                    "description": "Read the Spring Boot documentation and write some sample code",
+                    "completed": false
+                }
+        timestamp: 2024-08-14T12:44:37.277587983+05:30
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 14 Aug 2024 07:44:12 GMT
+        body: '{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Wed, 14 Aug 2024 07:14:39 GMT
+              actual:
+                key: Date
+                value:
+                    - Wed, 14 Aug 2024 07:44:12 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}'
+              actual: '{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}'
+        dep_result: []
+    - kind: Http
+      name: test-set-1
+      status: PASSED
+      started: 1723621452
+      completed: 1723621453
+      test_case_path: /Users/hermionedadheech/workspace/work/java8-spring-todo/keploy/test-set-1
+      mock_path: /Users/hermionedadheech/workspace/work/java8-spring-todo/keploy/test-set-1/mocks
+      test_case_id: test-2
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/todos
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.88.1
+        body: ""
+        timestamp: 2024-08-14T12:44:55.660346837+05:30
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 14 Aug 2024 07:44:12 GMT
+        body: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Wed, 14 Aug 2024 07:14:55 GMT
+              actual:
+                key: Date
+                value:
+                    - Wed, 14 Aug 2024 07:44:12 GMT
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+              actual: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+        dep_result: []
+    - kind: Http
+      name: test-set-1
+      status: PASSED
+      started: 1723621453
+      completed: 1723621453
+      test_case_path: /Users/hermionedadheech/workspace/work/java8-spring-todo/keploy/test-set-1
+      mock_path: /Users/hermionedadheech/workspace/work/java8-spring-todo/keploy/test-set-1/mocks
+      test_case_id: test-3
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/todos
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.88.1
+        body: ""
+        timestamp: 2024-08-14T12:45:01.393280042+05:30
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 14 Aug 2024 07:44:12 GMT
+        body: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Wed, 14 Aug 2024 07:15:01 GMT
+              actual:
+                key: Date
+                value:
+                    - Wed, 14 Aug 2024 07:44:12 GMT
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+              actual: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+        dep_result: []
+    - kind: Http
+      name: test-set-1
+      status: PASSED
+      started: 1723621453
+      completed: 1723621453
+      test_case_path: /Users/hermionedadheech/workspace/work/java8-spring-todo/keploy/test-set-1
+      mock_path: /Users/hermionedadheech/workspace/work/java8-spring-todo/keploy/test-set-1/mocks
+      test_case_id: test-4
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/todos
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.88.1
+        body: ""
+        timestamp: 2024-08-14T12:45:14.067901971+05:30
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 14 Aug 2024 07:44:12 GMT
+        body: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Wed, 14 Aug 2024 07:15:14 GMT
+              actual:
+                key: Date
+                value:
+                    - Wed, 14 Aug 2024 07:44:12 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+              actual: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+        dep_result: []
+    - kind: Http
+      name: test-set-1
+      status: PASSED
+      started: 1723621453
+      completed: 1723621453
+      test_case_path: /Users/hermionedadheech/workspace/work/java8-spring-todo/keploy/test-set-1
+      mock_path: /Users/hermionedadheech/workspace/work/java8-spring-todo/keploy/test-set-1/mocks
+      test_case_id: test-5
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/api/todos
+        header:
+            Accept: '*/*'
+            Host: localhost:8080
+            User-Agent: curl/7.88.1
+        body: ""
+        timestamp: 2024-08-14T12:45:20.873501325+05:30
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Wed, 14 Aug 2024 07:44:12 GMT
+        body: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json
+              actual:
+                key: Content-Type
+                value:
+                    - application/json
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Wed, 14 Aug 2024 07:15:20 GMT
+              actual:
+                key: Date
+                value:
+                    - Wed, 14 Aug 2024 07:44:12 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+              actual: '[{"id":1,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":2,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":3,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":4,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":5,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false},{"id":6,"title":"Learn Spring Boot","description":"Read the Spring Boot documentation and write some sample code","completed":false}]'
+        dep_result: []
+test_set: test-set-1

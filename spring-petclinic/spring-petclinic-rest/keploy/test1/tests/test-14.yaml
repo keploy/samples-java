@@ -9,22 +9,22 @@ spec:
         proto_minor: 1
         url: http://localhost:9966/petclinic/api/owners/2/pets/4/visits
         header:
-            Accept: application/json, text/plain, */*
-            Accept-Encoding: gzip, deflate, br, zstd
-            Accept-Language: en-US,en;q=0.9
-            Connection: keep-alive
+            Accept: '{{string .Accept }}'
+            Accept-Encoding: '{{string .AcceptEncoding }}'
+            Accept-Language: '{{string .AcceptLanguage }}'
+            Connection: '{{string .Connection }}'
             Content-Length: "165"
-            Content-Type: application/json
-            Host: localhost:9966
-            Origin: http://localhost:4200
-            Referer: http://localhost:4200/
-            Sec-Ch-Ua: '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"'
-            Sec-Ch-Ua-Mobile: ?0
-            Sec-Ch-Ua-Platform: '"macOS"'
-            Sec-Fetch-Dest: empty
-            Sec-Fetch-Mode: cors
-            Sec-Fetch-Site: same-site
-            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+            Content-Type: '{{string .ContentType }}'
+            Host: '{{string .Host }}'
+            Origin: '{{string .Origin }}'
+            Referer: '{{string .Referer }}'
+            Sec-Ch-Ua: '{{string .SecChUa }}'
+            Sec-Ch-Ua-Mobile: '{{string .SecChUaMobile }}'
+            Sec-Ch-Ua-Platform: '{{string .SecChUaPlatform }}'
+            Sec-Fetch-Dest: '{{string .SecFetchDest }}'
+            Sec-Fetch-Mode: '{{string .SecFetchMode }}'
+            Sec-Fetch-Site: '{{string .SecFetchSite }}'
+            User-Agent: '{{string .UserAgent }}'
         body: '{"date":"2024-08-09","description":"check up","id":null,"pet":{"name":"lucy","birthDate":"2024-08-07","type":{"name":"mouse","id":8},"id":4,"ownerId":2,"visits":[]}}'
         timestamp: 2024-08-09T12:23:36.98475691+05:30
     resp:
@@ -44,7 +44,7 @@ spec:
             X-Content-Type-Options: nosniff
             X-Frame-Options: DENY
             X-Xss-Protection: "0"
-        body: '{"date":"2024-08-09","description":"check up","id":2,"petId":4}'
+        body: '{"date":"2024-08-09","description":"check up","id":{{float .id }},"petId":{{float .petId }}}'
         status_message: Created
         proto_major: 0
         proto_minor: 0
@@ -58,19 +58,19 @@ spec:
 curl: |-
     curl --request POST \
       --url http://localhost:9966/petclinic/api/owners/2/pets/4/visits \
-      --header 'Host: localhost:9966' \
-      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
-      --header 'Connection: keep-alive' \
-      --header 'Sec-Fetch-Dest: empty' \
-      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
-      --header 'Origin: http://localhost:4200' \
-      --header 'Content-Type: application/json' \
-      --header 'Referer: http://localhost:4200/' \
-      --header 'Accept-Language: en-US,en;q=0.9' \
-      --header 'Sec-Fetch-Site: same-site' \
-      --header 'Sec-Fetch-Mode: cors' \
-      --header 'Sec-Ch-Ua: "Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"' \
-      --header 'Accept: application/json, text/plain, */*' \
-      --header 'Sec-Ch-Ua-Platform: "macOS"' \
-      --header 'Sec-Ch-Ua-Mobile: ?0' \
-      --data '{"date":"2024-08-09","description":"check up","id":null,"pet":{"name":"lucy","birthDate":"2024-08-07","type":{"name":"mouse","id":8},"id":4,"ownerId":2,"visits":[]}}'
+      --header 'Host: {{string .Host }}' \
+      --header 'Connection: {{string .Connection }}' \
+      --header 'Sec-Fetch-Site: {{string .SecFetchSite }}' \
+      --header 'Referer: {{string .Referer }}' \
+      --header 'Sec-Ch-Ua-Mobile: {{string .SecChUaMobile }}' \
+      --header 'Sec-Ch-Ua: {{string .SecChUa }}' \
+      --header 'Content-Type: {{string .ContentType }}' \
+      --header 'Accept-Language: {{string .AcceptLanguage }}' \
+      --header 'Accept: {{string .Accept }}' \
+      --header 'User-Agent: {{string .UserAgent }}' \
+      --header 'Origin: {{string .Origin }}' \
+      --header 'Sec-Fetch-Dest: {{string .SecFetchDest }}' \
+      --header 'Sec-Fetch-Mode: {{string .SecFetchMode }}' \
+      --header 'Sec-Ch-Ua-Platform: {{string .SecChUaPlatform }}' \
+      --header 'Accept-Encoding: {{string .AcceptEncoding }}' \
+      --data "{\"date\":\"2024-08-09\",\"description\":\"check up\",\"id\":null,\"pet\":{\"name\":\"lucy\",\"birthDate\":\"2024-08-07\",\"type\":{\"name\":\"mouse\",\"id\":8},\"id\":4,\"ownerId\":2,\"visits\":[]}}"

@@ -1,0 +1,3 @@
+🐰 Keploy: 2024-12-13T18:18:56+05:30 	[34mINFO[0m	Graphql server started	{"port": 6879}
+🐰 Keploy: 2024-12-13T22:34:01+05:30 	[34mINFO[0m	🔄 Keploy has updated the test cases for the user's application.	{"path": "/Users/hermionedadheech/workspace/work/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test1/tests", "testcase name": "test-1"}
+🐰 Keploy: 2024-12-14T15:11:05+05:30 	[34mINFO[0m	🔄 Keploy has updated the test cases for the user's application.	{"path": "/Users/hermionedadheech/workspace/work/samples-java/spring-petclinic/spring-petclinic-rest/keploy/test1/tests", "testcase name": "test-1"}

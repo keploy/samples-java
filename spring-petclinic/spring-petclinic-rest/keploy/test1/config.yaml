@@ -1,0 +1,45 @@
+preScript: ""
+postScript: ""
+template:
+    Accept: application/json, text/plain, */*
+    Accept1: '*/*'
+    AcceptEncoding: gzip, deflate, br, zstd
+    AcceptLanguage: en-US,en;q=0.9
+    AccessControlRequestHeaders: content-type
+    AccessControlRequestMethod: DELETE
+    AccessControlRequestMethod1: POST
+    Connection: keep-alive
+    ContentLength: "204"
+    ContentLength1: "73"
+    ContentLength2: "24"
+    ContentLength3: "15"
+    ContentType: application/json
+    Host: localhost:9966
+    Origin: http://localhost:4200
+    Referer: http://localhost:4200/
+    SecChUa: Not/A)Brand;v=8, Chromium;v=126, Google Chrome;v=126
+    SecChUaMobile: ?0
+    SecChUaPlatform: macOS
+    SecFetchDest: empty
+    SecFetchMode: cors
+    SecFetchSite: same-site
+    UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+    firstName: Hermione
+    id: "2"
+    id1: "3"
+    id2: "4"
+    id3: "7"
+    id4: "10"
+    id5: "8"
+    id6: "6"
+    id7: "13"
+    id8: "9"
+    id9: "11"
+    id10: "12"
+    id11: "14"
+    lastName: Dadheech
+    ownerId: "2"
+    ownerId1: "7"
+    petId: "4"
+    petId1: "6"
+mockRegistry: null

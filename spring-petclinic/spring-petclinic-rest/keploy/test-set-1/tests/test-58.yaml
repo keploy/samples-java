@@ -9,18 +9,18 @@ spec:
         proto_minor: 1
         url: http://localhost:9966/petclinic/api/specialties/7
         header:
-            Accept: '*/*'
-            Accept-Encoding: gzip, deflate, br, zstd
-            Accept-Language: en-US,en;q=0.9
-            Access-Control-Request-Method: DELETE
-            Connection: keep-alive
-            Host: localhost:9966
-            Origin: http://localhost:4200
-            Referer: http://localhost:4200/
-            Sec-Fetch-Dest: empty
-            Sec-Fetch-Mode: cors
-            Sec-Fetch-Site: same-site
-            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+            Accept: '{{string .Accept }}'
+            Accept-Encoding: '{{string .AcceptEncoding }}'
+            Accept-Language: '{{string .AcceptLanguage }}'
+            Access-Control-Request-Method: '{{string .AccessControlRequestMethod1 }}'
+            Connection: '{{string .Connection }}'
+            Host: '{{string .Host }}'
+            Origin: '{{string .Origin }}'
+            Referer: '{{string .Referer }}'
+            Sec-Fetch-Dest: '{{string .SecFetchDest }}'
+            Sec-Fetch-Mode: '{{string .SecFetchMode }}'
+            Sec-Fetch-Site: '{{string .SecFetchSite }}'
+            User-Agent: '{{string .UserAgent }}'
         body: ""
         timestamp: 2024-08-08T21:30:34.189419273+05:30
     resp:
@@ -55,15 +55,15 @@ spec:
 curl: |
     curl --request OPTIONS \
       --url http://localhost:9966/petclinic/api/specialties/7 \
-      --header 'Accept: */*' \
-      --header 'Accept-Language: en-US,en;q=0.9' \
-      --header 'Connection: keep-alive' \
-      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
-      --header 'Origin: http://localhost:4200' \
-      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
-      --header 'Sec-Fetch-Site: same-site' \
-      --header 'Host: localhost:9966' \
-      --header 'Access-Control-Request-Method: DELETE' \
-      --header 'Sec-Fetch-Dest: empty' \
-      --header 'Referer: http://localhost:4200/' \
-      --header 'Sec-Fetch-Mode: cors' \
+      --header 'Accept-Encoding: {{string .AcceptEncoding }}' \
+      --header 'Sec-Fetch-Dest: {{string .SecFetchDest }}' \
+      --header 'Origin: {{string .Origin }}' \
+      --header 'Access-Control-Request-Method: {{string .AccessControlRequestMethod1 }}' \
+      --header 'Host: {{string .Host }}' \
+      --header 'Sec-Fetch-Mode: {{string .SecFetchMode }}' \
+      --header 'Accept: {{string .Accept }}' \
+      --header 'Connection: {{string .Connection }}' \
+      --header 'User-Agent: {{string .UserAgent }}' \
+      --header 'Accept-Language: {{string .AcceptLanguage }}' \
+      --header 'Referer: {{string .Referer }}' \
+      --header 'Sec-Fetch-Site: {{string .SecFetchSite }}' \

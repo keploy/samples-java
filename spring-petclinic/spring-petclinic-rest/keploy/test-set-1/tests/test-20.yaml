@@ -9,20 +9,20 @@ spec:
         proto_minor: 1
         url: http://localhost:9966/petclinic/api/owners/1
         header:
-            Accept: application/json, text/plain, */*
-            Accept-Encoding: gzip, deflate, br, zstd
-            Accept-Language: en-US,en;q=0.9
-            Connection: keep-alive
-            Host: localhost:9966
-            Origin: http://localhost:4200
-            Referer: http://localhost:4200/
-            Sec-Ch-Ua: '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"'
-            Sec-Ch-Ua-Mobile: ?0
-            Sec-Ch-Ua-Platform: '"macOS"'
-            Sec-Fetch-Dest: empty
-            Sec-Fetch-Mode: cors
-            Sec-Fetch-Site: same-site
-            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+            Accept: '{{string .Accept1 }}'
+            Accept-Encoding: '{{string .AcceptEncoding }}'
+            Accept-Language: '{{string .AcceptLanguage }}'
+            Connection: '{{string .Connection }}'
+            Host: '{{string .Host }}'
+            Origin: '{{string .Origin }}'
+            Referer: '{{string .Referer }}'
+            Sec-Ch-Ua: '{{string .SecChUa }}'
+            Sec-Ch-Ua-Mobile: '{{string .SecChUaMobile }}'
+            Sec-Ch-Ua-Platform: '{{string .SecChUaPlatform }}'
+            Sec-Fetch-Dest: '{{string .SecFetchDest }}'
+            Sec-Fetch-Mode: '{{string .SecFetchMode }}'
+            Sec-Fetch-Site: '{{string .SecFetchSite }}'
+            User-Agent: '{{string .UserAgent }}'
         body: ""
         timestamp: 2024-08-08T21:29:16.580147892+05:30
     resp:
@@ -41,7 +41,7 @@ spec:
             X-Content-Type-Options: nosniff
             X-Frame-Options: DENY
             X-Xss-Protection: "0"
-        body: '{"firstName":"Hermione","lastName":"Dad","address":"212","city":"jaipur","telephone":"212","id":1,"pets":[]}'
+        body: '{"firstName":"Hermione","lastName":"Dad","address":"212","city":"jaipur","telephone":"212","id":{{float .id1 }},"pets":[]}'
         status_message: OK
         proto_major: 0
         proto_minor: 0
@@ -54,17 +54,17 @@ spec:
 curl: |
     curl --request GET \
       --url http://localhost:9966/petclinic/api/owners/1 \
-      --header 'Sec-Fetch-Mode: cors' \
-      --header 'Sec-Ch-Ua-Platform: "macOS"' \
-      --header 'Sec-Ch-Ua-Mobile: ?0' \
-      --header 'Sec-Fetch-Site: same-site' \
-      --header 'Sec-Fetch-Dest: empty' \
-      --header 'Sec-Ch-Ua: "Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"' \
-      --header 'Accept: application/json, text/plain, */*' \
-      --header 'Accept-Language: en-US,en;q=0.9' \
-      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
-      --header 'Host: localhost:9966' \
-      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
-      --header 'Referer: http://localhost:4200/' \
-      --header 'Origin: http://localhost:4200' \
-      --header 'Connection: keep-alive' \
+      --header 'Connection: {{string .Connection }}' \
+      --header 'User-Agent: {{string .UserAgent }}' \
+      --header 'Accept: {{string .Accept1 }}' \
+      --header 'Host: {{string .Host }}' \
+      --header 'Referer: {{string .Referer }}' \
+      --header 'Sec-Ch-Ua: {{string .SecChUa }}' \
+      --header 'Origin: {{string .Origin }}' \
+      --header 'Accept-Language: {{string .AcceptLanguage }}' \
+      --header 'Accept-Encoding: {{string .AcceptEncoding }}' \
+      --header 'Sec-Fetch-Dest: {{string .SecFetchDest }}' \
+      --header 'Sec-Fetch-Site: {{string .SecFetchSite }}' \
+      --header 'Sec-Ch-Ua-Mobile: {{string .SecChUaMobile }}' \
+      --header 'Sec-Fetch-Mode: {{string .SecFetchMode }}' \
+      --header 'Sec-Ch-Ua-Platform: {{string .SecChUaPlatform }}' \
