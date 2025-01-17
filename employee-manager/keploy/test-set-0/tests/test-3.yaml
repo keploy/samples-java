@@ -4,41 +4,40 @@ name: test-3
 spec:
     metadata: {}
     req:
-        method: GET
+        method: DELETE
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:8080/api/employees/1
+        url: http://localhost:8080/api/employees/4
         header:
             Accept: '*/*'
             Accept-Encoding: gzip,deflate
             Connection: Keep-Alive
             Host: localhost:8080
-            User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)
+            User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.13)
         body: ""
-        timestamp: 2024-10-17T15:36:14.159181013+05:30
+        timestamp: 2025-01-02T10:30:35.899359452+05:30
     resp:
-        status_code: 404
+        status_code: 200
         header:
             Connection: keep-alive
             Content-Type: application/json
-            Date: Thu, 17 Oct 2024 10:06:14 GMT
+            Date: Thu, 02 Jan 2025 05:00:36 GMT
             Keep-Alive: timeout=60
-        body: '{"timestamp":"2024-10-17T10:06:14.170+00:00","message":"Employee not found for this id :: 1","details":"uri=/api/employees/1"}'
-        status_message: Not Found
+        body: '{"deleted":true}'
+        status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2024-10-17T15:36:16.999927198+05:30
+        timestamp: 2025-01-02T10:30:39.509984766+05:30
     objects: []
     assertions:
         noise:
-            body.timestamp: []
             header.Date: []
-    created: 1729159576
+    created: 1735794039
 curl: |
-    curl --request GET \
-      --url http://localhost:8080/api/employees/1 \
-      --header 'Connection: Keep-Alive' \
-      --header 'User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)' \
+    curl --request DELETE \
+      --url http://localhost:8080/api/employees/4 \
       --header 'Accept-Encoding: gzip,deflate' \
       --header 'Accept: */*' \
       --header 'Host: localhost:8080' \
+      --header 'Connection: Keep-Alive' \
+      --header 'User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.13)' \

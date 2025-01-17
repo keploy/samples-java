@@ -4,40 +4,41 @@ name: test-2
 spec:
     metadata: {}
     req:
-        method: DELETE
+        method: GET
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:8080/api/employees/1
+        url: http://localhost:8080/api/employees/4
         header:
             Accept: '*/*'
             Accept-Encoding: gzip,deflate
             Connection: Keep-Alive
             Host: localhost:8080
-            User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)
+            User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.13)
         body: ""
-        timestamp: 2024-10-17T15:36:13.78733161+05:30
+        timestamp: 2025-01-02T10:30:36.350541611+05:30
     resp:
-        status_code: 200
+        status_code: 404
         header:
             Connection: keep-alive
             Content-Type: application/json
-            Date: Thu, 17 Oct 2024 10:06:14 GMT
+            Date: Thu, 02 Jan 2025 05:00:36 GMT
             Keep-Alive: timeout=60
-        body: '{"deleted":true}'
-        status_message: OK
+        body: '{"timestamp":"2025-01-02T05:00:36.364+00:00","message":"Employee not found for this id :: 4","details":"uri=/api/employees/4"}'
+        status_message: Not Found
         proto_major: 0
         proto_minor: 0
-        timestamp: 2024-10-17T15:36:16.999855239+05:30
+        timestamp: 2025-01-02T10:30:39.509526137+05:30
     objects: []
     assertions:
         noise:
+            body.timestamp: []
             header.Date: []
-    created: 1729159576
+    created: 1735794039
 curl: |
-    curl --request DELETE \
-      --url http://localhost:8080/api/employees/1 \
-      --header 'Accept-Encoding: gzip,deflate' \
-      --header 'Accept: */*' \
+    curl --request GET \
+      --url http://localhost:8080/api/employees/4 \
       --header 'Host: localhost:8080' \
       --header 'Connection: Keep-Alive' \
-      --header 'User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)' \
+      --header 'User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.13)' \
+      --header 'Accept-Encoding: gzip,deflate' \
+      --header 'Accept: */*' \

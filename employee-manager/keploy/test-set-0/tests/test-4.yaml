@@ -7,7 +7,7 @@ spec:
         method: PUT
         proto_major: 1
         proto_minor: 1
-        url: http://localhost:8080/api/employees/3
+        url: http://localhost:8080/api/employees/6
         header:
             Accept: '*/*'
             Accept-Encoding: gzip,deflate
@@ -15,33 +15,34 @@ spec:
             Content-Length: "68"
             Content-Type: application/json
             Host: localhost:8080
-            User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)
+            User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.13)
         body: '{"firstName":"Jane","lastName":"Doe","email":"jane.doe@example.com"}'
-        timestamp: 2024-10-17T15:36:14.979974102+05:30
+        timestamp: 2025-01-02T10:30:37.427177427+05:30
     resp:
         status_code: 200
         header:
             Connection: keep-alive
             Content-Type: application/json
-            Date: Thu, 17 Oct 2024 10:06:15 GMT
+            Date: Thu, 02 Jan 2025 05:00:37 GMT
             Keep-Alive: timeout=60
-        body: '{"id":3,"firstName":"Jane","lastName":"Doe","email":"jane.doe@example.com","timestamp":1729159575}'
+        body: '{"id":6,"firstName":"Jane","lastName":"Doe","email":"jane.doe@example.com","timestamp":1735794037}'
         status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2024-10-17T15:36:18.822656255+05:30
+        timestamp: 2025-01-02T10:30:41.536429439+05:30
     objects: []
     assertions:
         noise:
             header.Date: []
-    created: 1729159578
+            body.timestamp: []
+    created: 1735794041
 curl: |-
     curl --request PUT \
-      --url http://localhost:8080/api/employees/3 \
+      --url http://localhost:8080/api/employees/6 \
+      --header 'Host: localhost:8080' \
       --header 'Connection: Keep-Alive' \
-      --header 'User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.12)' \
+      --header 'User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.13)' \
       --header 'Accept-Encoding: gzip,deflate' \
       --header 'Accept: */*' \
       --header 'Content-Type: application/json' \
-      --header 'Host: localhost:8080' \
       --data "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"email\":\"jane.doe@example.com\"}"
