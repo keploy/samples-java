@@ -268,10 +268,6 @@
                                         }
                                     }
                                 }
-                            },
-                            "getEmployees": {
-                                "description": "The `GET /employees` endpoint for all employees",
-                                "operationId": "getEmployees"
                             }
                         }
                     },
