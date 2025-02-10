@@ -6,6 +6,7 @@ import com.example.demo.repository.EmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +42,10 @@ public class EmployeeController {
     //save employee
     @PostMapping("employees")
     public ResponseEntity<?> createEmployee(@Valid @RequestBody Employee employee) throws Exception {
+
+        if (!isValidEmail(employee.getEmail())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email: must contain '@'");
+         }
         logger.info("Received request to create employee: {}", employee);
         return ResponseEntity.ok(this.employeeRepository.save(employee));
     }
@@ -69,5 +74,10 @@ public class EmployeeController {
         response.put("deleted", Boolean.TRUE);
 
         return response;
+    }
+
+    // Utility method for email validation
+    private boolean isValidEmail(String email) {
+        return email != null && email.contains("@");
     }
 }

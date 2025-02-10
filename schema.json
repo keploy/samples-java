@@ -12,35 +12,6 @@
     ],
     "paths": {
         "/employees": {
-            "get": {
-                "summary": "Get all employees",
-                "operationId": "getEmployees",
-                "responses": {
-                    "200": {
-                        "description": "List of employees",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Employee"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid request parameters",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
             "post": {
                 "summary": "Create a new employee",
                 "operationId": "createEmployee",
