@@ -13,7 +13,7 @@ public class User {
 
     @XmlElement(name = "mobile")
     private String mobile;
-    // Constructors, getters, and setters
+
     public User() {}
 
     public User(String name, int age, String mobile) {
@@ -37,9 +37,11 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
+
     public String getMobile() {
         return mobile;
     }
+
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
