@@ -21,6 +21,8 @@ import java.io.IOException;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +44,13 @@ public class RootRestController {
 	public void redirectToSwagger(HttpServletResponse response) throws IOException {
 		response.sendRedirect(this.servletContextPath + "/swagger-ui/index.html");
 	}
+
+	@RequestMapping(value = "/v3/open-api")
+    public ResponseEntity<ClassPathResource> serveSwaggerYaml() {
+        // Serve the custom Swagger YAML file from the classpath
+        ClassPathResource resource = new ClassPathResource("openapi.json");
+        return ResponseEntity.ok().body(resource);
+    }
 
 }
 
