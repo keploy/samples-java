@@ -1,0 +1,6 @@
+preScript: ""
+postScript: ""
+template: {}
+mockRegistry:
+    mock: 0385cbe2e76e218cbd967f6a5a90cd08151d63a95b5cb38e71a162509068637c
+    app: spring-petclinic-rest
