@@ -11,6 +11,8 @@ pipeline {
                     # Download and install Keploy binary
                     curl --silent -O -L https://keploy.io/install.sh && bash install.sh
 
+                    alias keploy
+
                     # keploy test -c "docker compose up" --container-name "ginMongoApp" --delay 15
                     keploy test -c "docker compose up" --container-name "javaApp" -t test-set-0 --build-delay 50 --delay 20 --debug
                     """
