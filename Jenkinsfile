@@ -24,7 +24,7 @@ pipeline {
                 # Build the app (assuming Maven)
                 ./mvnw package -DskipTests
 
-                # Run Keploy
+                # Run Keploy test
                 keploy test -c "java -jar target/spring-petclinic-rest-3.0.2.jar" --delay 20 --language java
                 '''
             }
