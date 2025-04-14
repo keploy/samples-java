@@ -28,7 +28,7 @@ pipeline {
                     # Run keploy test with proper volume mounts
                     sudo keploy test -c 'docker-compose up' \
                         --container-name 'javaApp' \
-                        --test-set 'test-set-0' \
+                        -t 'test-set-0' \
                         --build-delay 50 \
                         --delay 20 \
                         --debug \
