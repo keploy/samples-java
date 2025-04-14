@@ -19,7 +19,7 @@ pipeline {
 
                     # Run keploy test
                     # Using single quotes for the command to avoid escaping issues
-                    sudo keploy test -c 'docker-compose up' --container-name 'javaApp' --test-set 'test-set-0' --build-delay 50 --delay 20 --debug
+                    sudo keploy test -c 'docker-compose up' --container-name 'javaApp' -t 'test-set-0' --build-delay 50 --delay 20 --debug
                     """
                 }
             }
