@@ -9,8 +9,6 @@ pipeline {
                 // switch to the directory and run test
                 dir('spring-petclinic/spring-petclinic-rest') {
                     sh """
-                    # Install required dependencies
-                    sudo apt-get update && sudo apt-get install -y tar
                     
                     # Download and install Keploy binary
                     curl --silent -O -L https://keploy.io/install.sh && sudo bash install.sh
@@ -19,21 +17,13 @@ pipeline {
                     which keploy
 
                     # Set up the environment (ensure docker is running)
-                    sudo systemctl start docker || true
                     
                     # Print current directory for debugging
                     pwd
                     ls -la
                     
-                    # Run keploy test with proper volume mounts
-                    sudo keploy test -c 'docker-compose up' \
-                        --container-name 'javaApp' \
-                        -t 'test-set-0' \
-                        --build-delay 50 \
-                        --delay 20 \
-                        --debug \
-                        --path "\$(pwd)/keploy" \
-                        --config-path "\$(pwd)"
+                    # Run keploy test
+                    keploy test -c "java -jar target/spring-petclinic-rest-3.0.2.jar" --delay 20
                     """
                 }
             }
