@@ -1,9 +1,6 @@
 pipeline {
     agent {
-        docker {
             image 'ubuntu:22.04'
-            args '--privileged -u root'
-        }
     }
     stages {
         stage('Keploy Tests') {
