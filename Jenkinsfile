@@ -14,7 +14,7 @@ pipeline {
                     which keploy
 
                     # keploy test -c "docker compose up" --container-name "ginMongoApp" --delay 15
-                    sudo keploy test -c "docker compose up" --container-name "javaApp" -t test-set-0 --build-delay 50 --delay 20 --debug
+                    sudo keploy test -c 'docker compose up' --container-name 'javaApp' -t 'test-set-0' --build-delay 50 --delay 20 --debug
                     """
                 }
             }
