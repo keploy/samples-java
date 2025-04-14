@@ -1,36 +1,35 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'ubuntu:22.04'
+            args '--privileged -u root'
+        }
+    }
     stages {
         stage('Keploy Tests') {
             steps {
-                // Clone the git repository
-                git branch: 'chore/Integrate-github-cicd', url: 'https://github.com/Achanandhi-M/samples-java.git'
-                
-                // switch to the directory and run test
-                dir('spring-petclinic/spring-petclinic-rest') {
-                    sh """
-                    apt-get update && apt-get install -y kmod linux-headers-generic bpfcc-tools
+                sh '''
+                apt-get update && apt-get install -y curl kmod linux-headers-generic bpfcc-tools git openjdk-17-jdk
 
-                    mkdir -p /sys/kernel/debug
-                    mkdir -p /sys/kernel/tracing
-                    # Download and install Keploy binary
-                    curl --silent -O -L https://keploy.io/install.sh && sudo bash install.sh
+                # Clone the repo
+                git clone -b chore/Integrate-github-cicd https://github.com/Achanandhi-M/samples-java.git
+                cd samples-java/spring-petclinic/spring-petclinic-rest
 
-                    # Verify keploy installation
-                    which keploy
+                mkdir -p /sys/kernel/debug
+                mkdir -p /sys/kernel/tracing
 
-                    # Set up the environment (ensure docker is running)
-                    
-                    # Print current directory for debugging
-                    pwd
-                    ls -la
-                    mount -t debugfs nodev /sys/kernel/debug || true
-                    mount -t tracefs nodev /sys/kernel/tracing || true
-                    
-                    # Run keploy test
-                    keploy test -c "java -jar target/spring-petclinic-rest-3.0.2.jar" --delay 20
-                    """
-                }
+                # Download and install Keploy
+                curl --silent -O -L https://keploy.io/install.sh && bash install.sh
+
+                mount -t debugfs nodev /sys/kernel/debug || true
+                mount -t tracefs nodev /sys/kernel/tracing || true
+
+                # Build the app (assuming Maven)
+                ./mvnw package -DskipTests
+
+                # Run Keploy
+                keploy test -c "java -jar target/spring-petclinic-rest-3.0.2.jar" --delay 20 --language java
+                '''
             }
         }
     }
