@@ -6,7 +6,7 @@ pipeline {
                 // Clone the git repository
                 git branch: 'chore/Integrate-github-cicd', url: 'https://github.com/Achanandhi-M/samples-java.git'
                 // switch to the directory and run test
-                dir('spring-petclinic-rest') {
+                dir('spring-petclinic/spring-petclinic-rest') {
                     sh """
                     # Download and install Keploy binary
                     curl --silent -O -L https://keploy.io/install.sh && bash install.sh
