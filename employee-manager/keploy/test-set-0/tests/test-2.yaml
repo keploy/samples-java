@@ -14,22 +14,22 @@ spec:
             Host: localhost:8080
             User-Agent: curl/8.7.1
         body: ""
-        timestamp: 2025-04-16T15:26:01.73971932Z
+        timestamp: 2025-04-17T06:29:00.564798345Z
     resp:
         status_code: 200
         header:
             Content-Type: application/json
-            Date: Wed, 16 Apr 2025 15:26:01 GMT
-        body: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1744817151}'
+            Date: Thu, 17 Apr 2025 06:29:00 GMT
+        body: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1744871332}'
         status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2025-04-16T15:26:04.868476251Z
+        timestamp: 2025-04-17T06:29:03.694762792Z
     objects: []
     assertions:
         noise:
             header.Date: []
-    created: 1744817164
+    created: 1744871343
 curl: |
     curl --request GET \
       --url http://localhost:8080/api/employees/1 \

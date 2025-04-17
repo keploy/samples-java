@@ -22,28 +22,28 @@ spec:
                 "email": "mt@gmail.com",
                 "timestamp":1
             }
-        timestamp: 2025-04-16T15:25:51.381551857Z
+        timestamp: 2025-04-17T06:28:52.138531466Z
     resp:
         status_code: 200
         header:
             Content-Type: application/json
-            Date: Wed, 16 Apr 2025 15:25:51 GMT
-        body: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1744817151}'
+            Date: Thu, 17 Apr 2025 06:28:52 GMT
+        body: '{"id":1,"firstName":"Myke","lastName":"Tyson","email":"mt@gmail.com","timestamp":1744871332}'
         status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2025-04-16T15:25:54.532831219Z
+        timestamp: 2025-04-17T06:28:55.308312969Z
     objects: []
     assertions:
         noise:
             header.Date: []
-    created: 1744817154
+    created: 1744871335
 curl: |-
     curl --request POST \
       --url http://localhost:8080/api/employees \
-      --header 'Accept: */*' \
       --header 'Content-Type: application/json' \
       --header 'Host: localhost:8080' \
       --header 'User-Agent: curl/8.7.1' \
+      --header 'Accept: */*' \
       --data "{\n    \"firstName\": \"Myke\",\n    \"lastName\": \"Tyson\",\n    \"email\": \"mt@gmail.com\",\n    \"timestamp\":1\n}"
 respType: json
