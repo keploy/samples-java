@@ -1,7 +1,17 @@
-version: '3.7'
 services:
+  java-app:
+    build:
+      context: .
+    container_name: javaApp
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    networks:
+      - keploy-network
   postgres:
-    image: postgres:latest
+    image: "postgres:15.2"
+    container_name: postgres
     restart: always
     environment:
       - POSTGRES_DB=keploy-test
@@ -9,7 +19,13 @@ services:
       - POSTGRES_PASSWORD=keploy
     ports:
       - '5432:5432'
+    networks:
+      - keploy-network
     volumes:
       # - ./postgres-data:/var/lib/postgresql/data
       # copy the sql script to create tables
       - ./src/main/resources/data.sql:/docker-entrypoint-datadb.d/data.sql
+
+networks:
+  keploy-network:
+    external: true

@@ -16,8 +16,13 @@ buildDelay: 30
 test:
     selectedTests: {}
     globalNoise:
-        global: {}
-        test-sets: {}
+        #global: {
+         #   "body":{
+          #      "timestamp":"",
+           # }
+        #}
+        
+    test-sets: {}
     delay: 5
     host: ""
     port: 0
