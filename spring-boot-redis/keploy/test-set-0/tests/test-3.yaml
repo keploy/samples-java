@@ -1,0 +1,46 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-3
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/products
+        header:
+            Accept: '*/*'
+            Content-Length: "60"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: curl/8.11.0
+        body: |-
+            {
+              "id": "2",
+              "name": "Mobile phone",
+              "price": 500.00
+            }
+        timestamp: 2024-11-29T12:54:14.689053739+05:30
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+            Date: Fri, 29 Nov 2024 07:24:14 GMT
+        body: '{"id":"2","name":"Mobile phone","price":500.0}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-11-29T12:54:17.793066517+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1732865057
+curl: |-
+    curl --request POST \
+      --url http://localhost:8080/products \
+      --header 'Accept: */*' \
+      --header 'Content-Type: application/json' \
+      --header 'Host: localhost:8080' \
+      --header 'User-Agent: curl/8.11.0' \
+      --data "{\n  \"id\": \"2\",\n  \"name\": \"Mobile phone\",\n  \"price\": 500.00\n}"
