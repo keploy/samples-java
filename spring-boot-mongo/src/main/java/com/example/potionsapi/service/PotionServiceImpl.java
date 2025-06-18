@@ -1,6 +1,5 @@
 package com.example.potionsapi.service;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,69 +20,47 @@ public class PotionServiceImpl implements PotionService {
     private PotionRepository potionRepository;
 
     @Override
-    public Potion createPotion( Potion potion ){
+    public Potion createPotion(Potion potion) {
         return potionRepository.save(potion);
     }
 
     @Override
-    public Potion updatePotion( UUID id, Potion potion ) {
-        Optional < Potion > PotionsDB = this.potionRepository.findById(id);
+    public Potion updatePotion(UUID id, Potion potion) {
+        Potion existingPotion = potionRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Record not found with id: " + id));
 
-        if (PotionsDB.isPresent()) {
-            Potion potionUpdate = PotionsDB.get();
-            potionUpdate.setId(id);
-            potionUpdate.setName(potion.getName());
-            potionUpdate.setDescription(potion.getDescription());
-            potionUpdate.setBottle(potion.getBottle());
-            potionUpdate.setQuantity(potion.getQuantity());
-            return potionRepository.save(potionUpdate);
-        }
-        else {
-            throw new ResourceNotFoundException("Record not found with id: " + potion.getId());
-        }
+        existingPotion.setName(potion.getName());
+        existingPotion.setDescription(potion.getDescription());
+        existingPotion.setBottle(potion.getBottle());
+        existingPotion.setQuantity(potion.getQuantity());
+
+        return potionRepository.save(existingPotion);
     }
 
     @Override
-    public List <Potion> getAllPotion() {
-        return this.potionRepository.findAll();
+    public List<Potion> getAllPotion() {
+        return potionRepository.findAll();
     }
 
     @Override
-    public Potion getPotionById(UUID potionId ) {
-
-        Optional < Potion > PotionsDB = this.potionRepository.findById(potionId);
-
-        if (PotionsDB.isPresent()) {
-            return PotionsDB.get();
-        }
-        else{
-            throw new ResourceNotFoundException("Record not found with id: " + potionId);
-        }
+    public Potion getPotionById(UUID potionId) {
+        return potionRepository.findById(potionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Record not found with id: " + potionId));
     }
 
-//    @Override
-//    public Potion getPotionByName( String potionName ) {
-//
-//        Optional < Potion > PotionsDB = this.potionRepository.findByName(potionName);
-//
-//        if (PotionsDB.isPresent()) {
-//            return PotionsDB.get();
-//        }
-//        else{
-//            throw new ResourceNotFoundException("Record not found with name: " + potionName);
-//        }
-//    }
+    // Optional: Uncomment and implement only if needed
+    /*
+    @Override
+    public Potion getPotionByName(String potionName) {
+        return potionRepository.findByName(potionName)
+                .orElseThrow(() -> new ResourceNotFoundException("Record not found with name: " + potionName));
+    }
+    */
 
     @Override
-    public void deletePotion( UUID potionId ) {
-
-        Optional < Potion > PotionsDB = this.potionRepository.findById(potionId);
-
-        if (PotionsDB.isPresent()) {
-            this.potionRepository.delete(PotionsDB.get());
-        }
-        else {
-            throw new ResourceNotFoundException("Record not found with id: " + potionId);
-        }
+    public void deletePotion(UUID potionId) {
+        Potion potion = potionRepository.findById(potionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Record not found with id: " + potionId));
+        potionRepository.delete(potion);
     }
 }

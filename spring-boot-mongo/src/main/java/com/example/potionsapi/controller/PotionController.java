@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.potionsapi.model.Potion;
 import com.example.potionsapi.service.PotionService;
 
+
 @RestController
 public class PotionController {
 
@@ -55,3 +56,6 @@ public class PotionController {
         return HttpStatus.OK;
     }
 }
+
+
+
