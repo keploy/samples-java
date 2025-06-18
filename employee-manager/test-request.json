@@ -1,0 +1,8 @@
+// Test JSON file for API testing
+// Used to avoid PowerShell escaping issues when making curl requests
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "status": "ACTIVE"
+} 

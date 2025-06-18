@@ -1,0 +1,263 @@
+================================================================================
+                    EMPLOYEE MANAGER - SETUP & USAGE GUIDE
+================================================================================
+
+This guide will help you set up and run the Employee Manager application with 
+Keploy testing integration.
+
+================================================================================
+                                PREREQUISITES
+================================================================================
+
+1. Java 17 or higher
+2. Maven 3.6+
+3. Docker and Docker Compose
+4. PostgreSQL (will be run via Docker)
+5. Keploy (for testing)
+
+================================================================================
+                                QUICK START
+================================================================================
+
+STEP 1: Clone and Navigate
+--------------------------
+git clone <your-repository-url>
+cd employee-manager
+
+STEP 2: Build the Project
+-------------------------
+mvn clean package -DskipTests
+
+STEP 3: Start Database
+----------------------
+docker-compose up -d postgres
+
+STEP 4: Run the Application Using Docker
+---------------------------
+docker-compose up -d java-app
+
+
+STEP 5: Verify Application
+--------------------------
+curl http://localhost:8080/api/employees
+curl http://localhost:8080/actuator/health
+
+================================================================================
+                                API ENDPOINTS
+================================================================================
+
+BASE URL: http://localhost:8080/api/
+
+1. GET /employees
+   - Get all employees with filtering, sorting, and pagination
+   - Query Parameters:
+     * name: Filter by first name or last name (case-insensitive)
+     * email: Filter by email (case-insensitive)
+     * department: Filter by department (placeholder for future)
+     * sortBy: Field to sort by (default: id)
+     * sortDir: Sort direction - asc/desc (default: asc)
+     * page: Page number (default: 0)
+     * size: Page size (default: 20)
+
+   Examples:
+   curl "http://localhost:8080/api/employees?name=John&sortBy=firstName&sortDir=asc"
+   curl "http://localhost:8080/api/employees?email=example.com&page=0&size=10"
+
+2. GET /employees/{id}
+   - Get employee by ID
+   Example: curl http://localhost:8080/api/employees/1
+
+3. POST /employees
+   - Create new employee
+   Example: curl -X POST http://localhost:8080/api/employees \
+     -H "Content-Type: application/json" \
+     -d '{"firstName":"John","lastName":"Doe","email":"john@example.com"}'
+
+4. PUT /employees/{id}
+   - Update existing employee
+   Example: curl -X PUT http://localhost:8080/api/employees/1 \
+     -H "Content-Type: application/json" \
+     -d '{"firstName":"Jane","lastName":"Doe","email":"jane@example.com"}'
+
+5. DELETE /employees/{id}
+   - Delete employee by ID
+   Example: curl -X DELETE http://localhost:8080/api/employees/1
+
+6. GET /actuator/health
+   - Health check endpoint
+   Example: curl http://localhost:8080/actuator/health
+
+================================================================================
+                                KEPLOY TESTING
+================================================================================
+
+Keploy is integrated for automated testing. Here's how to use it:
+
+STEP 1: Install Keploy
+----------------------
+curl -O https://raw.githubusercontent.com/keploy/keploy/main/keploy.sh
+source keploy.sh
+
+STEP 2: Record Test Cases
+-------------------------
+# Start recording (run in WSL/Ubuntu terminal)
+sudo -E env SPRING_PROFILES_ACTIVE=local keploy record -c "java -jar target/springbootapp-0.0.1-SNAPSHOT.jar" --delay 20
+
+# In another terminal, make API calls to generate test cases
+curl http://localhost:8080/api/employees
+curl -X POST http://localhost:8080/api/employees -H "Content-Type: application/json" -d @test-request.json
+curl http://localhost:8080/api/employees/1
+curl "http://localhost:8080/api/employees?name=John&sortBy=firstName"
+
+# Stop recording (Ctrl+C)
+
+STEP 3: Run Tests
+-----------------
+sudo -E env SPRING_PROFILES_ACTIVE=local keploy test -c "java -jar target/springbootapp-0.0.1-SNAPSHOT.jar" --delay 20
+
+STEP 4: View Test Results
+-------------------------
+Test results will be displayed in the terminal with:
+- Total tests run
+- Passed/Failed counts
+- Test coverage percentage
+- Detailed test case results
+
+================================================================================
+                                PROJECT STRUCTURE
+================================================================================
+
+src/main/java/com/example/demo/
+├── controller/
+│   └── EmployeeController.java           # REST API endpoints
+├── dto/
+│   ├── EmployeeRequestDTO.java           # Request data transfer object
+│   └── EmployeeResponseDTO.java          # Response data transfer object
+├── exception/
+│   ├── ErrorDetails.java                 # Error response structure
+│   ├── GlobalExceptionHandler.java       # Global exception handling
+│   └── ResourceNotFoundException.java    # Custom exception
+├── model/
+│   └── Employee.java                     # JPA entity
+├── repository/
+│   └── EmployeeRepository.java           # Data access layer
+└── SamplesJavaApplication.java           # Main application class
+
+src/main/resources/
+├── application.properties                # Main configuration
+├── application-local.properties          # Local development config
+└── data.sql                              # Initial database data
+
+keploy/
+├── test-set-0/                           # Generated test cases
+├── test-set-1/                           # Additional test sets
+└── test-set-2/                           # More test sets
+
+================================================================================
+                                CONFIGURATION
+================================================================================
+
+Application Properties:
+- Database: PostgreSQL (Docker container)
+- Port: 8080
+- JPA: Hibernate with auto-update
+- Actuator: Enabled with health checks
+
+Profiles:
+- Default: Uses Docker PostgreSQL (postgres:5432)
+- Local: Uses localhost PostgreSQL (localhost:5432)
+
+Docker Services:
+- postgres: PostgreSQL database
+- java-app: Spring Boot application
+
+================================================================================
+                                DEVELOPMENT WORKFLOW
+================================================================================
+
+1. Make code changes
+2. Build: mvn clean package -DskipTests
+3. Test locally: java -jar target/springbootapp-0.0.1-SNAPSHOT.jar --spring.profiles.active=local
+4. Record Keploy tests: Make API calls while recording
+5. Run Keploy tests: Verify changes don't break existing functionality
+6. Commit and push changes
+
+================================================================================
+                                TROUBLESHOOTING
+================================================================================
+
+Common Issues:
+
+1. Database Connection Failed
+   - Ensure PostgreSQL container is running: docker ps
+   - Check database logs: docker-compose logs postgres
+   - Restart containers: docker-compose down && docker-compose up -d
+
+2. Application Won't Start
+   - Check if port 8080 is available
+   - Verify Java version: java -version
+   - Check application logs: docker-compose logs java-app
+
+3. Keploy Tests Failing
+   - Increase delay parameter: --delay 30
+   - Ensure application is fully started before tests run
+   - Check Keploy logs for specific error messages
+
+4. Build Failures
+   - Clean and rebuild: mvn clean package
+   - Check Java version compatibility
+   - Verify all dependencies in pom.xml
+
+5. IDE Issues
+   - Refresh Maven project
+   - Clean and rebuild project
+   - Check package declarations match directory structure
+
+================================================================================
+                                FEATURES
+================================================================================
+
+✅ CRUD Operations (Create, Read, Update, Delete)
+✅ Advanced Filtering (by name, email)
+✅ Sorting (by any field, asc/desc)
+✅ Pagination Support
+✅ DTO Pattern Implementation
+✅ Spring Boot Actuator Integration
+✅ Keploy Testing Integration
+✅ Docker Containerization
+✅ PostgreSQL Database
+✅ Exception Handling
+✅ Input Validation
+
+================================================================================
+                                CONTRIBUTING
+================================================================================
+
+1. Follow the existing code style and comment patterns
+2. Add proper comments for new methods
+3. Test your changes with Keploy
+4. Update this guide if adding new features
+5. Ensure all tests pass before submitting PR
+
+================================================================================
+                                SUPPORT
+================================================================================
+
+For issues or questions:
+1. Check this guide first
+2. Review the README.md file
+3. Check application logs
+4. Verify all prerequisites are installed
+5. Create an issue in the repository
+
+================================================================================
+                                VERSION INFO
+================================================================================
+
+- Spring Boot: 2.7.3
+- Java: 17
+- PostgreSQL: 15.2
+- Keploy: 2.6.9
+- Maven: 3.6+
+
+================================================================================ 
