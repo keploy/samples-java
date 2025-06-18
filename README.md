@@ -12,25 +12,19 @@
 </p>
 
 This repo contains the sample for [Keploy's](https://keploy.io) Java Application. Please feel free to contribute if you'd like submit a sample for another use-case or library.
-## Running the App
-
-Make sure you have Java 11+ and Maven installed.
-
-To run:
-
-```bash
-./mvnw spring-boot:run
-The app will start at: http://localhost:8080
 
 > **Note** :- Issue Creation is disabled on this Repository, please visit [here](https://github.com/keploy/keploy/issues/new/choose) to submit Issue.
 
 ## Java Sample Apps with Keploy
 
-1. [Employee Manager](https://github.com/keploy/samples-java/tree/main/employee-manager) - A sample Employee-Manager app to test Keploy integration capabilities using SpringBoot and PostgreSQL.
-2. [Springboot MongoDB](https://github.com/keploy/samples-java/tree/main/spring-boot-mongo) - The application is built purely with Java Spring-Boot that does the complete CRUD in the MongoDB database. This CRUD Application is about managing the data of Magical Potions in the Keploy inventory.
-3. [User Manager](https://github.com/keploy/samples-java/tree/main/user-manager) - A sample User-Manager app to test Keploy integration capabilities using SpringBoot and MongoDB.
-4. [Springboot Postgres GraphQL](https://github.com/keploy/samples-java/tree/main/spring-boot-postgres-graphql) - This is a Spring Boot application implementing a GraphQL service to handle requests related to books and authors.
-5. [Springboot PetClinic](https://github.com/keploy/samples-java/tree/main/spring-petclinic) - This is a Pet Clinic app where you can record testcases and mocks by interacting with the UI, and then test them using Keploy.
+## 🧩 Sample Applications
+
+- **[Employee Manager](./employee-manager)** – SpringBoot + PostgreSQL app to manage employees.
+- **[SpringBoot MongoDB](./springboot-mongodb)** – Manages Magical Potions inventory via CRUD.
+- **[User Manager](./user-manager)** – SpringBoot + MongoDB app for user management.
+- **[Postgres GraphQL](./springboot-postgres-graphql)** – GraphQL API for books and authors.
+- **[SpringBoot PetClinic](./springboot-petclinic)** – Classic PetClinic with Keploy test/mocks support.
+
 
 ## Community Support ❤️
 
