@@ -4,6 +4,15 @@ import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import jakarta.validation.constraints.*;
+
+@NotBlank
+private String name;
+
+@Min(0)
+@Max(150)
+private Integer age;
+
 
 @Data
 @ToString

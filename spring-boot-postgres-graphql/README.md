@@ -134,6 +134,22 @@ To test the app, start Keploy in test mode. In the root directory, run:
    ```bash
       keploy test -c "mvn spring-boot:run" --delay 15
    ```
+### Note on Mutations
+
+Currently, this GraphQL API supports only query operations for reading data. Mutations for adding or updating books/authors are not yet implemented in the codebase.
+
+Contributors are welcome to add mutation support in future updates.
+### Example Mutation
+
+You can use the following mutation to add a new book:
+
+```graphql
+mutation {
+  addBook(name: "New Book", pageCount: 250, authorId: 1) {
+    id
+    name
+  }
+}
 
    This will run the tests and generate the report in the `Keploy/reports` directory in the current working directory.
 
