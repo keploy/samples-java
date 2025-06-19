@@ -26,6 +26,11 @@ public class EmployeeController {
        return this.employeeRepository.findAll();
    }
 
+     @GetMapping("/greet")
+    public ResponseEntity<String> greetUser() {
+    return ResponseEntity.ok("Hello from Keploy Java Sample!");
+  }
+
     //get employee by id
     @GetMapping("employees/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") Long employeeId) throws ResourceNotFoundException {
