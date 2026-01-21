@@ -1,5 +1,5 @@
 # Use an official OpenJDK runtime as a parent image
-FROM openjdk:25-bookworm
+FROM openjdk:26-ea-30-jdk-trixie
 
 # Set the working directory to /app
 WORKDIR /app

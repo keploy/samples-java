@@ -1,11 +1,11 @@
-version: "3.9"
 services:
   java-app:
     build:
       context: .
     container_name: javaApp
     depends_on:
-      - mypostgres
+      mypostgres:
+        condition: service_healthy
     ports:
       - "9966:9966"
     networks:
@@ -15,7 +15,7 @@ services:
     image: "postgres:15.2"
     container_name: mypostgres
     ports:
-    - "5432:5432"
+      - "5432:5432"
     networks:
       - keploy-network
     volumes:
@@ -24,6 +24,12 @@ services:
       POSTGRES_USER: petclinic
       POSTGRES_PASSWORD: petclinic
       POSTGRES_DB: petclinic
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U petclinic -d petclinic"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
 networks:
   keploy-network:
