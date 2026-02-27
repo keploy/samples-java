@@ -4,6 +4,8 @@ type Query {
     getAllBooks: [Book]
     getAuthorById(id: Int): Author
     getAllAuthors: [Author]
+    getAllCategories: [Category]
+    getCategoryById(id: ID!): Category
 }
 
 type Mutation {
@@ -12,12 +14,14 @@ type Mutation {
     deleteBook(id: ID!): Boolean
     addAuthor(author: AuthorInput!): Author
     deleteAuthor(id: ID!): Boolean
+    addCategory(category: CategoryInput!): Category
 }
 
 input BookInput {
     name: String!
     pageCount: Int!
     authorId: Int!
+    categoryId: Int
 }
 
 input AuthorInput {
@@ -25,15 +29,28 @@ input AuthorInput {
     lastName: String!
 }
 
+input CategoryInput {
+    name: String!
+    description: String
+}
+
 type Book {
     id: ID
     name: String
     pageCount: Int
     author: Author
+    category: Category
 }
 
 type Author {
     id: ID
     firstName: String
     lastName: String
+}
+
+type Category {
+    id: ID
+    name: String
+    description: String
+    books: [Book]
 }

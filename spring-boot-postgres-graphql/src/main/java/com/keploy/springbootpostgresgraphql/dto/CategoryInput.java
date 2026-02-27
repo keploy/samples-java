@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookInput {
+public class CategoryInput {
     private String name;
-    private int pageCount;
-    private int authorId;
-    private Integer categoryId;
+    private String description;
 }

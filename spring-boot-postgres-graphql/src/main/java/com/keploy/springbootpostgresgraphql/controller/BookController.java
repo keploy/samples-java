@@ -2,10 +2,13 @@ package com.keploy.springbootpostgresgraphql.controller;
 
 import com.keploy.springbootpostgresgraphql.dto.AuthorInput;
 import com.keploy.springbootpostgresgraphql.dto.BookInput;
+import com.keploy.springbootpostgresgraphql.dto.CategoryInput;
 import com.keploy.springbootpostgresgraphql.entity.Author;
 import com.keploy.springbootpostgresgraphql.entity.Book;
+import com.keploy.springbootpostgresgraphql.entity.Category;
 import com.keploy.springbootpostgresgraphql.repository.AuthorRepository;
 import com.keploy.springbootpostgresgraphql.repository.BookRepository;
+import com.keploy.springbootpostgresgraphql.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,6 +24,8 @@ public class BookController {
     BookRepository bookRepository;
     @Autowired
     AuthorRepository authorRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
     @QueryMapping
     public Book getBookByName(@Argument String name) {
@@ -47,6 +52,16 @@ public class BookController {
         return authorRepository.findAll();
     }
 
+    @QueryMapping
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
+    @QueryMapping
+    public Category getCategoryById(@Argument int id) {
+        return categoryRepository.findCategoryById(id);
+    }
+
     @MutationMapping
     public Book addBook(@Argument BookInput book) {
         Author author = authorRepository.findAuthorById(book.getAuthorId());
@@ -54,6 +69,10 @@ public class BookController {
         newBook.setName(book.getName());
         newBook.setPageCount(book.getPageCount());
         newBook.setAuthor(author);
+        if (book.getCategoryId() != null) {
+            Category category = categoryRepository.findCategoryById(book.getCategoryId());
+            newBook.setCategory(category);
+        }
         return bookRepository.save(newBook);
     }
 
@@ -65,6 +84,12 @@ public class BookController {
             existingBook.setName(book.getName());
             existingBook.setPageCount(book.getPageCount());
             existingBook.setAuthor(author);
+            if (book.getCategoryId() != null) {
+                Category category = categoryRepository.findCategoryById(book.getCategoryId());
+                existingBook.setCategory(category);
+            } else {
+                existingBook.setCategory(null);
+            }
             return bookRepository.save(existingBook);
         }
         return null;
@@ -88,5 +113,13 @@ public class BookController {
     public Boolean deleteAuthor(@Argument int id) {
         authorRepository.deleteById(id);
         return true;
+    }
+
+    @MutationMapping
+    public Category addCategory(@Argument CategoryInput category) {
+        Category newCategory = new Category();
+        newCategory.setName(category.getName());
+        newCategory.setDescription(category.getDescription());
+        return categoryRepository.save(newCategory);
     }
 }
