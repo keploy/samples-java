@@ -116,6 +116,17 @@ public class BookController {
     }
 
     @MutationMapping
+    public Author updateAuthor(@Argument int id, @Argument AuthorInput author) {
+        Author existingAuthor = authorRepository.findAuthorById(id);
+        if (existingAuthor != null) {
+            existingAuthor.setFirstName(author.getFirstName());
+            existingAuthor.setLastName(author.getLastName());
+            return authorRepository.save(existingAuthor);
+        }
+        return null;
+    }
+
+    @MutationMapping
     public Category addCategory(@Argument CategoryInput category) {
         Category newCategory = new Category();
         newCategory.setName(category.getName());

@@ -13,6 +13,7 @@ type Mutation {
     updateBook(id: ID!, book: BookInput!): Book
     deleteBook(id: ID!): Boolean
     addAuthor(author: AuthorInput!): Author
+    updateAuthor(id: ID!, author: AuthorInput!): Author
     deleteAuthor(id: ID!): Boolean
     addCategory(category: CategoryInput!): Category
 }
