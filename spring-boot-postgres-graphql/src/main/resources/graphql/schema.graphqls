@@ -48,6 +48,8 @@ type Author {
     id: ID
     firstName: String
     lastName: String
+    bookCount: Int
+    books: [Book]
 }
 
 type Category {
