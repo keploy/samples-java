@@ -53,6 +53,11 @@ public class BookController {
     }
 
     @QueryMapping
+    public List<Book> searchBooks(@Argument String title) {
+        return bookRepository.findByNameContainingIgnoreCase(title);
+    }
+
+    @QueryMapping
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }

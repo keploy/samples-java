@@ -6,6 +6,7 @@ type Query {
     getAllAuthors: [Author]
     getAllCategories: [Category]
     getCategoryById(id: ID!): Category
+    searchBooks(title: String!): [Book]
 }
 
 type Mutation {
