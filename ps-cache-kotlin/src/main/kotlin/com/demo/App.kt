@@ -78,7 +78,7 @@ class AccountController(private val jdbc: JdbcTemplate, private val dataSource: 
             ?: return ResponseEntity.status(500).body(mapOf("error" to "pool MXBean not available"))
 
         mxBean.softEvictConnections()
-        Thread.sleep(200)
+        Thread.sleep(500)
 
         return ResponseEntity.ok(mapOf(
             "evicted" to true,
