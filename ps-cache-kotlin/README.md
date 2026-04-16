@@ -11,7 +11,7 @@ The JDBC driver (PostgreSQL JDBC + HikariCP) caches prepared statements per conn
 3. Sort-order prediction starts from 0 on a fresh connection, pointing to the wrong window's mocks
 
 ### Real-world impact
-This was reported by a customer running a Kotlin/Spring Boot app with Agoda's travel account service. Test-6 (member_id=31) returned Alice's data (member_id=19) instead of Charlie's — **silently returning the wrong customer's financial data**.
+This was reported by a customer running a Kotlin/Spring Boot app with Agoda's travel account service. The post-eviction test returned Alice's data (member_id=19) instead of Charlie's — **silently returning the wrong customer's financial data**.
 
 ## Architecture
 
@@ -39,61 +39,80 @@ This was reported by a customer running a Kotlin/Spring Boot app with Agoda's tr
 
 ## How to Reproduce the Bug
 
-### Prerequisites
+### Option A: Using Docker Compose (recommended)
+
 ```bash
-docker run -d --name pg-demo -e POSTGRES_PASSWORD=testpass -e POSTGRES_DB=demodb -p 5433:5432 postgres:16
+docker compose up --build
 ```
 
-### Pre-create the schema
+This starts PostgreSQL (with schema + seed data via `init.sql`) and the app on port 8080.
+
+### Option B: Standalone
+
+**Prerequisites:** Java 21, Maven, PostgreSQL running on localhost:5432.
+
 ```bash
-docker exec pg-demo psql -U postgres -d demodb -c "
-  CREATE SCHEMA IF NOT EXISTS travelcard;
-  CREATE TABLE IF NOT EXISTS travelcard.travel_account (
+# Start Postgres (if not already running)
+docker run -d --name pg-demo \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=testdb \
+  -p 5432:5432 postgres:16
+
+# Create the schema and seed data
+docker exec pg-demo psql -U postgres -d testdb -f- <<'SQL'
+CREATE SCHEMA IF NOT EXISTS travelcard;
+CREATE TABLE IF NOT EXISTS travelcard.travel_account (
     id SERIAL PRIMARY KEY, member_id INT NOT NULL UNIQUE,
     name TEXT NOT NULL, balance INT NOT NULL DEFAULT 0);
-  INSERT INTO travelcard.travel_account (member_id, name, balance) VALUES
+INSERT INTO travelcard.travel_account (member_id, name, balance) VALUES
     (19, 'Alice', 1000), (23, 'Bob', 2500),
-    (31, 'Charlie', 500), (42, 'Diana', 7500);"
-```
+    (31, 'Charlie', 500), (42, 'Diana', 7500)
+ON CONFLICT (member_id) DO NOTHING;
+SQL
 
-### Build the app
-```bash
+# Build
 mvn package -DskipTests -q
 ```
 
-### With the OLD keploy binary (demonstrates failure)
+### Record and replay
+
 ```bash
 # Record
 sudo keploy record -c "java -jar target/kotlin-app-1.0.0.jar"
-# Hit endpoints:
-curl http://localhost:8090/account?member=19
-curl http://localhost:8090/account?member=23
-curl http://localhost:8090/evict
-curl http://localhost:8090/account?member=31
-curl http://localhost:8090/account?member=42
-# Stop recording (Ctrl+C)
 
-# Reset DB and replay
-docker exec pg-demo psql -U postgres -d demodb -c "TRUNCATE travelcard.travel_account; INSERT INTO ..."
+# In another terminal, hit endpoints in order:
+curl "http://localhost:8080/account?member=19"   # Alice  (warms PS cache on Connection A)
+curl "http://localhost:8080/account?member=23"   # Bob    (cached PS, Bind-only)
+curl "http://localhost:8080/evict"                # Force HikariCP to evict connections
+curl "http://localhost:8080/account?member=31"   # Charlie (new Connection B, cold PS cache)
+curl "http://localhost:8080/account?member=42"   # Diana   (cached PS on Connection B)
+
+# Or run the traffic script:
+# bash test.sh
+
+# Stop recording (Ctrl+C), then replay:
 sudo keploy test -c "java -jar target/kotlin-app-1.0.0.jar" --skip-coverage
 ```
 
-**Expected failure (without fix):**
+**Expected failure (without fix):** The post-eviction `/account?member=31` test fails:
 ```
-test-5 (/account?member=31):
-  EXPECTED: {"memberId":31, "name":"Charlie", "balance":500}
-  ACTUAL:   {"memberId":19, "name":"Alice",   "balance":1000}  ← WRONG PERSON
+EXPECTED: {"id":3, "memberId":31, "name":"Charlie", "balance":500}
+ACTUAL:   {"id":1, "memberId":19, "name":"Alice",   "balance":1000}  <- WRONG PERSON
 ```
+
+> **Note:** The exact test number that fails depends on how many health-check
+> requests keploy captures during recording (typically test-5 through test-7).
 
 **With obfuscation enabled (worse):**
 ```
-test-5: EXPECTED Charlie → ACTUAL Alice
-test-6: EXPECTED Diana  → ACTUAL Bob     ← TWO wrong results
+Post-eviction member=31: EXPECTED Charlie -> ACTUAL Alice
+Post-eviction member=42: EXPECTED Diana  -> ACTUAL Bob     <- TWO wrong results
 ```
 
 ### With the FIXED keploy binary
 ```bash
-# Same steps → all tests pass, correct data for each member
+# Same steps -> all tests pass, correct data for each member
 ```
 
 ## What the Fix Does
@@ -101,7 +120,7 @@ test-6: EXPECTED Diana  → ACTUAL Bob     ← TWO wrong results
 The fix adds **recording-connection affinity** to the Postgres mock matcher (see [keploy/integrations#121](https://github.com/keploy/integrations/pull/121)):
 
 1. When the first `Bind` mock is consumed on a replay connection, its recording `connID` is stored
-2. Subsequent scoring applies +50/-50 bonus/penalty to prefer mocks from the same recording window
+2. Subsequent scoring applies a small tiebreaker bonus to prefer mocks from the same recording connection
 3. Only activates when 2+ distinct recording connections exist (zero impact on single-connection apps)
 
 ## Configuration
@@ -109,14 +128,24 @@ The fix adds **recording-connection affinity** to the Postgres mock matcher (see
 ### application.properties
 | Property | Value | Purpose |
 |----------|-------|---------|
+| `server.port` | `8080` | HTTP server port |
 | `spring.datasource.hikari.maximum-pool-size` | `1` | Forces all requests through one connection |
 | `prepareThreshold=1` | JDBC URL param | Caches PS after first use |
-| `spring.sql.init.mode` | `never` | Schema created externally |
+| `spring.sql.init.mode` | `never` | Schema created externally (via init.sql) |
+
+### Environment variables (defaults in parentheses)
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `DB_HOST` | `localhost` | PostgreSQL host |
+| `DB_PORT` | `5432` | PostgreSQL port |
+| `DB_NAME` | `testdb` | Database name |
+| `DB_USER` | `postgres` | Database user |
+| `DB_PASSWORD` | `postgres` | Database password |
 
 ### Endpoints
 
 | Endpoint | Description |
 |----------|-------------|
 | `GET /health` | Health check |
-| `GET /account?member=N` | Query travel_account by member_id (BEGIN → SELECT → COMMIT) |
+| `GET /account?member=N` | Query travel_account by member_id (BEGIN -> SELECT -> COMMIT) |
 | `GET /evict` | Soft-evict HikariCP connections (forces new PG connection) |
