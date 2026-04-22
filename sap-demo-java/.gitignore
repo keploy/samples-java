@@ -1,0 +1,21 @@
+# Build artefacts
+target/
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+.idea/
+.vscode/
+*.iml
+
+# Secrets
+.env
+k8s/secret.yaml
+
+# Keploy captures (these ARE the artefact — commit deliberately, not auto)
+# Uncomment the next two lines if you prefer to gitignore them:
+# keploy/
+# keploy.yml
+
+# OS / editor noise
+.DS_Store
+*.swp
+*.swo

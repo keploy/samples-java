@@ -1,0 +1,177 @@
+spring:
+  application:
+    name: customer360
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+  # --- Postgres / JPA ----------------------------------------------------
+  # The app persists tags, notes, and an audit log locally. In a RISE/BTP
+  # landscape this would be a hyperscaler-hosted Postgres or SAP HANA Cloud;
+  # for the demo we use stock Postgres, which Keploy's OSS core can record
+  # and replay at the wire-protocol level.
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/customer360}
+    username: ${SPRING_DATASOURCE_USERNAME:customer360}
+    password: ${SPRING_DATASOURCE_PASSWORD:customer360}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 10000
+      pool-name: customer360-hikari
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        format_sql: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+  # --- Cache -----------------------------------------------------------
+  # Caffeine-backed caches for SAP master data. Typical BTP-extension
+  # caching TTL is 30s-5min; we use 60s for demo visibility. Keploy
+  # records only the first-uncached call per (method, argument) — exactly
+  # what happens in production traffic.
+  cache:
+    type: caffeine
+    cache-names:
+      - sap.partner
+      - sap.partners-page
+      - sap.addresses
+      - sap.roles
+      - sap.count
+    caffeine:
+      spec: maximumSize=5000,expireAfterWrite=60s
+
+server:
+  port: ${SERVER_PORT:8080}
+  # Graceful shutdown gives in-flight requests a chance to finish during
+  # rolling deploys on Kubernetes.
+  shutdown: graceful
+  forward-headers-strategy: native
+  compression:
+    enabled: false
+  http2:
+    enabled: true
+  tomcat:
+    mbeanregistry:
+      enabled: true
+
+# ----------------------------------------------------------------------------
+# SAP upstream configuration
+# ----------------------------------------------------------------------------
+sap:
+  api:
+    # Defaults to the public SAP Business Accelerator Hub sandbox; override
+    # for a real tenant by setting SAP_API_BASE_URL (and providing a bearer
+    # token or API key for that tenant).
+    base-url: ${SAP_API_BASE_URL:https://sandbox.api.sap.com/s4hanacloud}
+    key: ${SAP_API_KEY:}
+    bearer-token: ${SAP_BEARER_TOKEN:}
+    connect-timeout-seconds: 10
+    read-timeout-seconds: 30
+    default-top: 10
+
+customer360:
+  aggregate-timeout-seconds: 25
+
+# ----------------------------------------------------------------------------
+# Resilience4j: retry + circuit breaker for SAP upstream calls
+# ----------------------------------------------------------------------------
+resilience4j:
+  retry:
+    instances:
+      sapApi:
+        max-attempts: 3
+        wait-duration: 500ms
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+        retry-exceptions:
+          - org.springframework.web.client.ResourceAccessException
+          - java.net.SocketTimeoutException
+        ignore-exceptions:
+          - com.tricentisdemo.sap.customer360.sap.SapApiException
+  circuitbreaker:
+    instances:
+      sapApi:
+        register-health-indicator: true
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 20
+        minimum-number-of-calls: 10
+        failure-rate-threshold: 60
+        slow-call-rate-threshold: 70
+        slow-call-duration-threshold: 20s
+        permitted-number-of-calls-in-half-open-state: 3
+        wait-duration-in-open-state: 10s
+        automatic-transition-from-open-to-half-open-enabled: true
+
+# ----------------------------------------------------------------------------
+# Spring Boot Actuator — health, metrics, info
+# /actuator/health is the Kubernetes liveness/readiness probe target.
+# ----------------------------------------------------------------------------
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: when_authorized
+      show-components: always
+      group:
+        liveness:
+          include: livenessState
+        readiness:
+          include: readinessState, circuitBreakers
+  health:
+    circuitbreakers:
+      enabled: true
+    db:
+      enabled: true
+  info:
+    env:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      percentiles:
+        http.server.requests: 0.5, 0.95, 0.99
+info:
+  app:
+    name: ${spring.application.name}
+    description: SAP Customer 360 aggregator — reference integration service
+    version: 1.0.0
+
+# ----------------------------------------------------------------------------
+# OpenAPI / Swagger UI
+# ----------------------------------------------------------------------------
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+# ----------------------------------------------------------------------------
+# Logging — structured pattern with correlation id so every line is traceable.
+# ----------------------------------------------------------------------------
+logging:
+  level:
+    root: INFO
+    com.tricentisdemo.sap: INFO
+    org.springframework.web: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{correlationId:-}] %logger{40} - %msg%n"

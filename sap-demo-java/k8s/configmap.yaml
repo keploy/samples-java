@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: customer360-config
+  namespace: sap-demo
+  labels:
+    app.kubernetes.io/name: customer360
+    app.kubernetes.io/component: integration-service
+data:
+  # Non-secret runtime config. Override per-environment.
+  SPRING_PROFILES_ACTIVE: "kubernetes"
+  SAP_API_BASE_URL: "https://sandbox.api.sap.com/s4hanacloud"
+  SERVER_PORT: "8080"
+  JAVA_OPTS: "-XX:MaxRAMPercentage=75 -XX:+ExitOnOutOfMemoryError"

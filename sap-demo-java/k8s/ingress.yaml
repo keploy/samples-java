@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: customer360
+  namespace: sap-demo
+  labels:
+    app.kubernetes.io/name: customer360
+  annotations:
+    # Send the upstream request with the original Host header so Spring
+    # Boot's forward-headers-strategy sees the correct X-Forwarded-Host.
+    nginx.ingress.kubernetes.io/upstream-vhost: "$host"
+spec:
+  # Use the ingress-nginx class by default. ingress-nginx is installed
+  # automatically by deploy_kind.sh when the target cluster has no
+  # IngressClass yet.
+  ingressClassName: nginx
+  rules:
+    # localtest.me is a public DNS record that resolves *.localtest.me to
+    # 127.0.0.1. No /etc/hosts editing required — just
+    #   curl http://customer360.localtest.me/actuator/health
+    - host: customer360.localtest.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: customer360
+                port:
+                  number: 8080
+    # Fallback: plain localhost also works, for scripts / smoke tests that
+    # don't care about Host headers.
+    - host: localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: customer360
+                port:
+                  number: 8080

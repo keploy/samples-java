@@ -1,0 +1,44 @@
+# Local-only runner — convenient for quick iteration without kind.
+# Starts Postgres + the Spring Boot app; the app waits for Postgres via
+# depends_on/healthcheck.
+#
+# For the demo, prefer ./deploy_kind.sh (matches production topology).
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: customer360-postgres
+    environment:
+      POSTGRES_DB: customer360
+      POSTGRES_USER: customer360
+      POSTGRES_PASSWORD: customer360
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "customer360", "-d", "customer360"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  customer360:
+    build: .
+    container_name: customer360
+    image: customer360:local
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/customer360
+      SPRING_DATASOURCE_USERNAME: customer360
+      SPRING_DATASOURCE_PASSWORD: customer360
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+volumes:
+  pgdata:
