@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sap-demo
+  labels:
+    app.kubernetes.io/part-of: customer360
+    # Marker for Keploy's k8s-proxy: treat this namespace as a candidate for
+    # sidecar injection / live recording. Ignored if k8s-proxy isn't installed.
+    keploy.io/enabled: "true"

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%X{correlationId:-}] %cyan(%logger{40}) - %msg%n"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--
+      In Kubernetes we emit one JSON line per log event so that cluster log
+      aggregators (Loki, Fluentbit, Datadog) can index by correlationId.
+      Activate with SPRING_PROFILES_ACTIVE=kubernetes.
+    -->
+    <springProfile name="kubernetes">
+        <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>{"ts":"%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}","level":"%level","logger":"%logger{40}","correlationId":"%X{correlationId:-}","msg":"%replace(%msg){'\"','\\\"'}"}%n</pattern>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="JSON"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="!kubernetes">
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+</configuration>
