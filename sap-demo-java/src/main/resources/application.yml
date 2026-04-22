@@ -83,12 +83,21 @@ sap:
     base-url: ${SAP_API_BASE_URL:https://sandbox.api.sap.com/s4hanacloud}
     key: ${SAP_API_KEY:}
     bearer-token: ${SAP_BEARER_TOKEN:}
-    connect-timeout-seconds: 10
-    read-timeout-seconds: 30
+    # Timeouts are sized for the SAP Business Accelerator Hub sandbox when
+    # routed through Keploy's eBPF proxy; first-hit latency on cold cache
+    # + TLS MITM occasionally reaches ~20s for a single OData GET, so we
+    # allow generous budgets rather than 502 a demo for a transient stall.
+    connect-timeout-seconds: ${SAP_CONNECT_TIMEOUT_SECONDS:15}
+    read-timeout-seconds: ${SAP_READ_TIMEOUT_SECONDS:45}
     default-top: 10
 
 customer360:
-  aggregate-timeout-seconds: 25
+  # Upper bound for the parallel fan-out (addresses/roles/tags/notes). The
+  # mandatory partner call runs before this and is bounded separately by
+  # sap.api.read-timeout-seconds × retry attempts. Kept larger than
+  # read-timeout so a single slow-but-eventually-successful SAP response
+  # still lands inside the captured window rather than degrading the view.
+  aggregate-timeout-seconds: ${CUSTOMER360_AGGREGATE_TIMEOUT_SECONDS:50}
 
 # ----------------------------------------------------------------------------
 # Resilience4j: retry + circuit breaker for SAP upstream calls

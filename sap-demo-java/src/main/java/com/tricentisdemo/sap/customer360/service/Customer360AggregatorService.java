@@ -9,6 +9,7 @@ import com.tricentisdemo.sap.customer360.persistence.CustomerTag;
 import com.tricentisdemo.sap.customer360.sap.CorrelationIdInterceptor;
 import com.tricentisdemo.sap.customer360.sap.SapApiException;
 import com.tricentisdemo.sap.customer360.sap.SapBusinessPartnerClient;
+import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -180,9 +181,21 @@ public class Customer360AggregatorService {
         try {
             return supplier.get();
         } catch (SapApiException sap) {
-            log.warn("{} failed (SAP): {}", what, sap.getMessage());
+            log.warn("{} failed (SAP {}): {}", what, sap.getUpstreamStatus().value(), sap.getMessage());
+            return List.of();
+        } catch (CallNotPermittedException circuit) {
+            // Circuit breaker open — degrade the optional view rather than
+            // propagating a 503 out of the aggregator. The partner call
+            // (mandatory) has its own circuit and is handled upstream.
+            log.warn("{} skipped: circuit breaker open ({})", what, circuit.getMessage());
             return List.of();
         } catch (RuntimeException e) {
+            log.warn("{} failed ({}): {}", what, e.getClass().getSimpleName(), e.getMessage());
+            return List.of();
+        } catch (Exception e) {
+            // Defensive: any checked exception that slipped through a
+            // supplier lambda (e.g. via sneaky-throws) should still degrade
+            // the optional fan-out, never 500 the parent request.
             log.warn("{} failed ({}): {}", what, e.getClass().getSimpleName(), e.getMessage());
             return List.of();
         }
