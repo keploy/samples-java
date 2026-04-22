@@ -32,23 +32,20 @@ public class TagService {
             throw new IllegalArgumentException("tag must not be blank");
         }
         String normalised = tag.trim().toLowerCase();
-        if (repo.existsByCustomerIdAndTag(customerId, normalised)) {
-            // Idempotent — return the existing row instead of 409'ing.
-            return repo.findAllByCustomerIdOrderByCreatedAtDesc(customerId).stream()
-                .filter(t -> t.getTag().equals(normalised))
-                .findFirst()
-                .orElseThrow();
-        }
+        // Single-lookup idempotency: if the row exists, return it; otherwise
+        // insert. We retry the lookup on DataIntegrityViolationException to
+        // cover the narrow window where a concurrent insert beats us.
+        return repo.findByCustomerIdAndTag(customerId, normalised)
+            .orElseGet(() -> insertOrFetchExisting(customerId, normalised, createdBy));
+    }
+
+    private CustomerTag insertOrFetchExisting(String customerId, String tag, String createdBy) {
         try {
-            return repo.save(new CustomerTag(customerId, normalised, createdBy));
+            return repo.save(new CustomerTag(customerId, tag, createdBy));
         } catch (DataIntegrityViolationException race) {
-            // Unique constraint lost a race to another thread — treat as
-            // already-present.
-            log.debug("tag add race on ({},{}); fetching existing", customerId, normalised);
-            return repo.findAllByCustomerIdOrderByCreatedAtDesc(customerId).stream()
-                .filter(t -> t.getTag().equals(normalised))
-                .findFirst()
-                .orElseThrow();
+            log.debug("tag add race on ({},{}); fetching existing", customerId, tag);
+            return repo.findByCustomerIdAndTag(customerId, tag)
+                .orElseThrow(() -> race);
         }
     }
 

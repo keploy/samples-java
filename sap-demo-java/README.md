@@ -81,7 +81,7 @@ Swagger UI inside the kind cluster: `http://localhost:30080/swagger-ui.html`.
 ## Quick start (kind cluster)
 
 ```bash
-cd /home/shubham/tricentis/sap_testing/sap_demo_java
+cd sap-demo-java
 
 # 1. One-time: drop your SAP API key into .env
 cp .env.example .env

@@ -9,13 +9,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CustomerTagRepository extends JpaRepository<CustomerTag, Long> {
 
     List<CustomerTag> findAllByCustomerIdOrderByCreatedAtDesc(String customerId);
 
-    boolean existsByCustomerIdAndTag(String customerId, String tag);
+    Optional<CustomerTag> findByCustomerIdAndTag(String customerId, String tag);
 
     @Modifying
     @Transactional

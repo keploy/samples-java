@@ -1,4 +1,4 @@
-# Postgres 15 for the Customer 360 local store (tags, notes, audit).
+# Postgres 16 for the Customer 360 local store (tags, notes, audit).
 #
 # Kept in a single file for demo-legibility: Secret + Service + Deployment.
 # emptyDir volume (not PVC) — fresh DB on every pod restart, which is fine
@@ -68,7 +68,7 @@ spec:
       terminationGracePeriodSeconds: 15
       containers:
         - name: postgres
-          image: postgres:15-alpine
+          image: postgres:16-alpine
           imagePullPolicy: IfNotPresent
           ports:
             - name: postgres

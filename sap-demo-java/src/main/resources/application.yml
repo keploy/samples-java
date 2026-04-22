@@ -166,12 +166,13 @@ springdoc:
     operationsSorter: method
 
 # ----------------------------------------------------------------------------
-# Logging — structured pattern with correlation id so every line is traceable.
+# Logging — levels only. The console/JSON patterns live in logback-spring.xml
+# (which is the single source of truth; Boot's `logging.pattern.*` keys are
+# ignored whenever logback-spring.xml is present, so duplicating them here
+# invited drift).
 # ----------------------------------------------------------------------------
 logging:
   level:
     root: INFO
     com.tricentisdemo.sap: INFO
     org.springframework.web: INFO
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{correlationId:-}] %logger{40} - %msg%n"

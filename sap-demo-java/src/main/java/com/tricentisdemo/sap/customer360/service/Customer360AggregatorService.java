@@ -122,9 +122,18 @@ public class Customer360AggregatorService {
             roles = rolesF.getNow(List.of());
             tags = tagsF.getNow(List.of());
             notes = notesF.getNow(List.of());
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (InterruptedException e) {
+            // Re-assert interrupt so callers higher up can observe it.
             Thread.currentThread().interrupt();
             log.warn("Aggregation interrupted for bp={}: {}", customerId, e.getMessage());
+            addresses = addressesF.getNow(List.of());
+            roles = rolesF.getNow(List.of());
+            tags = tagsF.getNow(List.of());
+            notes = notesF.getNow(List.of());
+        } catch (ExecutionException e) {
+            // Execution failed inside an async stage; the interrupt flag of
+            // the caller is unaffected, so do NOT call Thread.interrupt().
+            log.warn("Aggregation failed for bp={}: {}", customerId, e.getMessage());
             addresses = addressesF.getNow(List.of());
             roles = rolesF.getNow(List.of());
             tags = tagsF.getNow(List.of());

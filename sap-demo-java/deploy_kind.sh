@@ -194,7 +194,18 @@ build_and_load() {
     fail "cluster '${CLUSTER_NAME}' does not exist — run '$0 -c ${CLUSTER_NAME} cluster' first"
     exit 1
   fi
-  if [ ! -f target/customer360.jar ] || [ src -nt target/customer360.jar ]; then
+  # Rebuild the jar if any source file under src/ or pom.xml is newer than
+  # the jar — `dir -nt file` only compares the directory mtime, which does
+  # NOT move when files inside the directory are edited, so a plain
+  # `[ src -nt target/customer360.jar ]` would happily reuse a stale jar
+  # after a code change.
+  needs_build=1
+  if [ -f target/customer360.jar ]; then
+    if [ -z "$(find src pom.xml -type f -newer target/customer360.jar -print -quit 2>/dev/null)" ]; then
+      needs_build=0
+    fi
+  fi
+  if [ "${needs_build}" -eq 1 ]; then
     say "building customer360.jar (mvn package)"
     mvn -q -B -DskipTests package
   else

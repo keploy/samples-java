@@ -89,9 +89,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ProblemResponse> handleUnexpected(Exception ex, HttpServletRequest req) {
-        log.error("Unhandled exception", ex);
+        String cid = MDC.get(CorrelationIdInterceptor.MDC_KEY);
+        // Full exception (message, stack, class) stays server-side only. Clients
+        // receive a generic message plus the correlation id, which they can
+        // quote back to operators when opening a ticket.
+        log.error("Unhandled exception [{}] path={} — check server logs", cid, req.getRequestURI(), ex);
         ProblemResponse body = baseProblem(HttpStatus.INTERNAL_SERVER_ERROR,
-            "Internal Server Error", ex.getMessage(), req);
+            "Internal Server Error",
+            "An unexpected error occurred. Quote the correlationId when contacting support.",
+            req);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
             .headers(commonHeaders(null))
             .body(body);

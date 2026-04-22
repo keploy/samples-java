@@ -119,4 +119,4 @@ serverPort: 0
 mockDownload:
     registryIds: []
 
-# Visit [https://keploy.io/docs/running-keploy/configuration-file/] to learn about using keploy through configration file.
+# Visit [https://keploy.io/docs/running-keploy/configuration-file/] to learn about using keploy through configuration file.

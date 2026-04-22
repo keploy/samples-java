@@ -12,7 +12,6 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.RestTemplate;
@@ -25,15 +24,10 @@ import java.util.concurrent.Executor;
  * Configures the {@link RestTemplate} used for all outbound calls to the SAP
  * S/4HANA Business Partner OData service.
  *
- * <p>Three interceptors are attached:
+ * <p>Two interceptors are attached:
  * <ol>
  *   <li><b>SapAuthInterceptor</b> — stamps the required {@code APIKey} header
  *       (sandbox) or {@code Authorization: Bearer} (production tenant).</li>
- *   <li><b>IdentityEncodingInterceptor</b> — forces {@code Accept-Encoding: identity}
- *       so bodies are not gzip-compressed in transit. In production this is
- *       optional; here it keeps Keploy-captured YAML mocks human-readable,
- *       which matters for demo-grade visibility and for diff-reviewing
- *       contract changes in pull requests.</li>
  *   <li><b>CorrelationIdInterceptor</b> — propagates the inbound request's
  *       correlation id into the outbound SAP call so traces chain across
  *       the hop.</li>
@@ -77,13 +71,17 @@ public class SapClientConfig {
                 + "Outbound SAP calls will fail with 401.");
         }
 
-        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setConnectTimeout((int) Duration.ofSeconds(connectTimeoutSeconds).toMillis());
-        factory.setConnectionRequestTimeout((int) Duration.ofSeconds(connectTimeoutSeconds).toMillis());
-
+        // Spring Boot auto-selects HttpClient5 when httpclient5 is on the
+        // classpath (see pom.xml). Setting connect+read timeouts via the
+        // RestTemplateBuilder plumbs them through to the underlying
+        // HttpClient5 RequestConfig (connect) and SocketConfig (soTimeout ==
+        // read timeout), which is the only API surface that still exists in
+        // Spring 6 — HttpComponentsClientHttpRequestFactory.setReadTimeout
+        // was removed with the HttpClient5 migration.
         return builder
             .rootUri(baseUrl)
-            .requestFactory(() -> factory)
+            .setConnectTimeout(Duration.ofSeconds(connectTimeoutSeconds))
+            .setReadTimeout(Duration.ofSeconds(readTimeoutSeconds))
             .additionalInterceptors(
                 new SapAuthInterceptor(apiKey, bearerToken),
                 new CorrelationIdInterceptor()

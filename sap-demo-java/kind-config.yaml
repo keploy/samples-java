@@ -15,3 +15,8 @@ nodes:
   - containerPort: 443
     hostPort: 443
     protocol: TCP
+  # The NodePort Service (k8s/service.yaml) binds 30080 on every node; this
+  # mapping makes http://localhost:30080 reach the single-node kind cluster.
+  - containerPort: 30080
+    hostPort: 30080
+    protocol: TCP

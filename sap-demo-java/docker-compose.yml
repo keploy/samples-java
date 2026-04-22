@@ -5,7 +5,7 @@
 # For the demo, prefer ./deploy_kind.sh (matches production topology).
 services:
   postgres:
-    image: postgres:15-alpine
+    image: postgres:16-alpine
     container_name: customer360-postgres
     environment:
       POSTGRES_DB: customer360

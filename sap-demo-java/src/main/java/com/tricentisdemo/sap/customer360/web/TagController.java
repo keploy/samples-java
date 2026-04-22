@@ -73,8 +73,9 @@ public class TagController {
         @PathVariable @NotBlank String tag
     ) {
         log.info("DELETE tag={} for bp={}", tag, customerId);
-        boolean deleted = tags.remove(customerId, tag);
+        String normalised = tag.trim().toLowerCase();
+        boolean deleted = tags.remove(customerId, normalised);
         audit.record(customerId, "tags.delete", null);
-        return ResponseEntity.ok(Map.of("deleted", deleted, "tag", tag.toLowerCase()));
+        return ResponseEntity.ok(Map.of("deleted", deleted, "tag", normalised));
     }
 }
