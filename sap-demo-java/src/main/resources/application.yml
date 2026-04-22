@@ -12,7 +12,15 @@ spring:
   # for the demo we use stock Postgres, which Keploy's OSS core can record
   # and replay at the wire-protocol level.
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/customer360}
+    # Default to IPv4 (127.0.0.1) + sslmode=disable so Keploy's eBPF proxy
+    # can capture the Postgres wire protocol cleanly on the host. The
+    # `localhost` hostname resolves to ::1 on most modern Linux stacks, and
+    # the eBPF hooks currently attach only to the v4 path; additionally
+    # the default postgres driver opts in to SSL negotiation, which fails
+    # with EOF mid-handshake under the proxy. Compose and k8s override this
+    # via SPRING_DATASOURCE_URL (hostname: postgres) where those concerns
+    # don't apply.
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://127.0.0.1:5432/customer360?sslmode=disable}
     username: ${SPRING_DATASOURCE_USERNAME:customer360}
     password: ${SPRING_DATASOURCE_PASSWORD:customer360}
     hikari:
