@@ -25,6 +25,42 @@ downstream calls behave on the wire.
 
 ---
 
+## Architecture at a glance
+
+```mermaid
+flowchart LR
+  Client[Client<br/>curl / browser] --> Ctrl[Customer360Controller]
+  Ctrl --> Agg[Customer360AggregatorService]
+
+  Agg -->|sync| SapPartner[SAP OData<br/>A_BusinessPartner]
+  Agg -->|async| SapAddr[SAP OData<br/>to_BusinessPartnerAddress]
+  Agg -->|async| SapRole[SAP OData<br/>to_BusinessPartnerRole]
+  Agg -->|async| PgTags[(Postgres<br/>customer_tag)]
+  Agg -->|async| PgNotes[(Postgres<br/>customer_note)]
+
+  SapPartner -.->|HTTP/1.1 + TLS<br/>keep-alive| SAPAPI[SAP Sandbox]
+  SapAddr -.-> SAPAPI
+  SapRole -.-> SAPAPI
+  PgTags -.->|JDBC + TLS| PG[(Postgres 16)]
+  PgNotes -.-> PG
+```
+
+A few things to notice about this shape:
+
+- The synchronous SAP `A_BusinessPartner` fetch runs first and acts as the
+  existence check — if it fails the whole request short-circuits.
+- The four remaining calls (two SAP nav collections + two Postgres
+  queries) run **in parallel** via `CompletableFuture.allOf` dispatched on
+  the dedicated `sapCallExecutor` thread pool.
+- All three SAP calls hit the same host (same SNI) and share a
+  connection-pooled Apache `HttpComponents5` client with keep-alive; the
+  two Postgres calls share a HikariCP pool.
+- The five results are merged into a single JSON envelope and returned to
+  the caller in one trip — one inbound request, five concurrent backend
+  conversations, one response.
+
+---
+
 ## Why this shape is interesting for Keploy
 
 The service is deliberately structured to exercise the trickiest parts of
@@ -32,12 +68,10 @@ Keploy's interception layer in a single flow.
 
 - **Parallel outbound TLS** — every `/360` request opens 3 concurrent HTTPS
   connections to the SAP sandbox plus 2 concurrent TLS-enabled Postgres
-  queries. This shape reliably surfaces parser-level concurrency bugs.
+  queries, giving Keploy a dense concurrency pattern to capture and replay.
 - **Chunked HTTP/1.1 + keep-alive reuse** — SAP's sandbox returns chunked
-  responses over a reused keep-alive connection. This is the path that
-  exposed a 60-second idle-timeout stall inside Keploy (a single `/360`
-  request went from ~50 s down to ~586 ms after the fix). See
-  [keploy/keploy#4110](https://github.com/keploy/keploy/pull/4110).
+  responses over a reused keep-alive connection, so the recorded mocks
+  preserve the same wire shape your service sees in production.
 - **Schema diversity in a single repo** — GET / POST / DELETE verbs, JSON
   request bodies, a custom `X-Correlation-Id` header, actuator health
   probes, both chunked and Content-Length responses, and the OpenAPI
@@ -45,6 +79,19 @@ Keploy's interception layer in a single flow.
 - **Stateful local DB** — Flyway-migrated schema behind a HikariCP
   connection pool, which exercises the v3 Postgres parser's
   prepared-statement cache handling and pool-reuse semantics.
+
+### Why Keploy?
+
+- Captures live production-shape traffic, including the concurrent SAP
+  fan-out, without mocks.
+- Replays the exact same multi-TLS concurrency pattern inside CI, so
+  regressions in the real HTTP/Postgres stack are caught before release.
+- Auto-detects non-deterministic fields (timestamps, correlation IDs) and
+  marks them as noise.
+- In-cluster mode spins up an ephemeral replica and runs the test set
+  automatically on every new pod version — no manual test writing.
+- No code changes to the Spring Boot app — Keploy sits in the network
+  path via eBPF.
 
 ---
 
@@ -199,13 +246,10 @@ Classic Spring Boot layering, with one custom wrinkle for the fan-out:
 - **`502 SAP upstream error` on `/360`.** Check `SAP_API_KEY`; the SAP
   sandbox also rate-limits at roughly 120 requests/minute. The built-in
   Resilience4j circuit breaker will open if you punch through that.
-- **Recording stalls / `/360` takes ~60 s.** You're probably on Keploy
-  < v3.3, which had an HTTP chunked-terminator bug on keep-alive reuse.
-  Upgrade to v3.3.x or newer (fixed in
-  [keploy/keploy#4110](https://github.com/keploy/keploy/pull/4110)).
-- **Tests fail only on `X-Correlation-Id`.** Make sure the header is in
-  `test.globalNoise.global` in `keploy.yml`; it's generated per request
-  and can never match otherwise.
+- **Tests drift on `X-Correlation-Id`.** Configure `X-Correlation-Id`
+  as noise in `keploy.yml` under `globalNoise.header.X-Correlation-Id`.
+  Keploy respects case-insensitive header matching, so you can use any
+  casing.
 - **`ImagePullBackOff` / `ErrImageNeverPull` in kind.** You forgot to
   `kind load docker-image customer360:local` — run `./deploy_kind.sh build`.
 - **Liveness probe flaps at startup.** The 40 s `startupProbe` grace is
