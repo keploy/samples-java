@@ -1,8 +1,8 @@
 services:
   java-dedup:
     read_only: true
-    tmpfs:
-      - /tmp:rw,nosuid,nodev,mode=1777
+    volumes:
+      - keploy-sockets-vol:/tmp
     cap_drop:
       - ALL
     security_opt:
