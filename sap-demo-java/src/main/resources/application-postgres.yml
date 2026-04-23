@@ -1,0 +1,19 @@
+# Postgres profile — the default.
+#
+# Activated when SPRING_PROFILES_ACTIVE is unset or "postgres". All
+# connection-pool, JPA and cache settings are in application.yml;
+# only the dialect-specific bits live here.
+#
+# The public sandbox/demo uses stock Postgres 16, which Keploy's OSS
+# core records and replays at the wire-protocol level. In a
+# RISE/BTP landscape this is typically a hyperscaler-hosted Postgres
+# (RDS, Azure DB, Cloud SQL) or SAP HANA Cloud — swap the URL via
+# SPRING_DATASOURCE_URL and the driver stays the same.
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/customer360}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    locations: classpath:db/migration/postgres
