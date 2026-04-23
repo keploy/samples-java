@@ -35,7 +35,7 @@ Run it with Docker Compose after the Maven package step has created `target/java
 docker compose up --build
 ```
 
-For a more restricted container run:
+The image runs as a non-root user. For a more restricted container run with a read-only root filesystem, dropped capabilities, `no-new-privileges`, and a writable `/tmp` tmpfs:
 
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.restricted.yml up --build

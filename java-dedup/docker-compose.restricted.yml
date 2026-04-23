@@ -2,7 +2,7 @@ services:
   java-dedup:
     read_only: true
     tmpfs:
-      - /tmp
+      - /tmp:rw,nosuid,nodev,mode=1777
     cap_drop:
       - ALL
     security_opt:
