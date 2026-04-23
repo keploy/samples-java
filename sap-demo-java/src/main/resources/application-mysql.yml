@@ -1,0 +1,24 @@
+# MySQL 8 profile.
+#
+# Activated when SPRING_PROFILES_ACTIVE=mysql. All connection-pool, JPA
+# and cache settings are shared with the Postgres profile in
+# application.yml; only the dialect-specific bits live here.
+#
+# Docker compose brings up a matching mysql:8.0 service under the
+# "mysql" compose profile:
+#   docker compose --profile mysql up -d mysql customer360
+#
+# URL parameters explained:
+#   useSSL=false            — local demo; flip to true behind RISE/BTP
+#   allowPublicKeyRetrieval — required for caching_sha2_password auth
+#                             over a first-contact (non-TLS) socket
+#   serverTimezone=UTC      — match Hibernate's jdbc.time_zone=UTC so
+#                             TIMESTAMP columns round-trip cleanly
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/customer360?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+  flyway:
+    locations: classpath:db/migration/mysql
