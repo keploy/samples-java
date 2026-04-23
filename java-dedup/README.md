@@ -1,6 +1,6 @@
 # Java Dynamic Deduplication Sample
 
-This sample is a small Spring Boot application used by Keploy CI to validate Java dynamic deduplication in native and Docker runs.
+This sample is a Spring Boot application used by Keploy CI to validate Java dynamic deduplication in native and Docker runs. It mirrors the Go dedup sample by exposing a broad set of endpoints and driving 1000 randomized 200-response requests during record.
 
 Build the application after installing the Java SDK locally:
 
@@ -13,6 +13,12 @@ Run it natively with JaCoCo TCP server mode:
 ```bash
 java -javaagent:target/jacocoagent.jar=address=127.0.0.1,port=36320,destfile=target/jacoco-keploy.exec,output=tcpserver \
   -jar target/java-dedup-0.0.1-SNAPSHOT.jar
+```
+
+Record high-volume traffic against the running app:
+
+```bash
+./run_random_1000.sh
 ```
 
 When replaying with dynamic deduplication, pass the JaCoCo port through Keploy so the SDK can talk to the local JaCoCo TCP server:

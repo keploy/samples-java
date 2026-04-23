@@ -1,9 +1,12 @@
 package io.keploy.samples.javadedup.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class Product {
 
+    @JsonProperty("product_id")
     private String productId;
     private String name;
     private String description;
