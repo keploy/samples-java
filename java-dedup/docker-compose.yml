@@ -10,6 +10,7 @@ services:
       - "8080:8080"
     environment:
       KEPLOY_JAVA_CLASS_DIRS: /app/target/classes
-
-volumes:
-  keploy-sockets-vol:
+    volumes:
+      - type: bind
+        source: /tmp
+        target: /tmp

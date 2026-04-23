@@ -35,7 +35,7 @@ Run it with Docker Compose after the Maven package step has created `target/java
 docker compose up --build
 ```
 
-The image runs as a non-root user. For a more restricted container run with a read-only root filesystem, dropped capabilities, `no-new-privileges`, and a writable shared `/tmp` volume for Keploy's Unix sockets:
+The Compose app bind-mounts host `/tmp` into the container so Keploy and the Java SDK use the same Unix socket paths for `/tmp/coverage_control.sock` and `/tmp/coverage_data.sock`. The image runs as a non-root user. For a more restricted container run with a read-only root filesystem, dropped capabilities, `no-new-privileges`, and writable host `/tmp` bind-mounted for Keploy's Unix sockets:
 
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.restricted.yml up --build
