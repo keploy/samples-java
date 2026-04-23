@@ -16,5 +16,5 @@ k8s/secret.yaml
 /tmp
 README.md
 demo_script.sh
-simulate_tosca_flow.sh
+simulate_fiori_flow.sh
 deploy_kind.sh

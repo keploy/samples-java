@@ -37,7 +37,7 @@ fail() { printf "${BOLD}${RED}XX  %s${NC}\n" "$*"; }
 BASE_URL="${BASE_URL:-http://localhost:30080}"
 
 # ----------------------------------------------------------------------------
-# exercise_endpoints — the scripted "Tosca-style" business flow that drives
+# exercise_endpoints — the scripted UI-style business flow that drives
 # the service while Keploy records underneath. 1 inbound → many SAP calls.
 # ----------------------------------------------------------------------------
 exercise_endpoints() {

@@ -97,7 +97,7 @@ resilience4j:
           - org.springframework.web.client.ResourceAccessException
           - java.net.SocketTimeoutException
         ignore-exceptions:
-          - com.tricentisdemo.sap.customer360.sap.SapApiException
+          - com.keploy.sapdemo.customer360.sap.SapApiException
   circuitbreaker:
     instances:
       sapApi:
@@ -174,5 +174,5 @@ springdoc:
 logging:
   level:
     root: INFO
-    com.tricentisdemo.sap: INFO
+    com.keploy.sapdemo: INFO
     org.springframework.web: INFO

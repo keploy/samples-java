@@ -11,17 +11,16 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.tricentisdemo.sap</groupId>
+    <groupId>com.keploy.sapdemo</groupId>
     <artifactId>customer360</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>SAP Customer 360 Service</name>
     <description>
-        Enterprise-grade Spring Boot integration service that aggregates SAP Business Partner
-        data from multiple S/4HANA OData endpoints into a unified Customer 360 view.
-        Designed as a reference implementation for RISE with SAP landscapes — the kind of
-        BTP-style integration middleware Tricentis customers build and must regression-test
-        during ECC → S/4HANA Cloud migrations.
+        Spring Boot integration service that aggregates SAP Business Partner data from multiple
+        S/4HANA OData endpoints into a unified Customer 360 view, merged with locally stored
+        CRM tags and notes from Postgres. Used as a regression-testing sample for Keploy's SAP
+        fan-out handling and its HTTPS + Postgres parsers.
     </description>
 
     <properties>
