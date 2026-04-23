@@ -14,8 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Postgres-only access-audit read surface — no SAP call on this path.
+ *
+ * <p>Exposes two equivalent routes for the same underlying query so both
+ * "audit-centric" consumers ({@code /api/v1/audit}) and the legacy
+ * customer-centric UI ({@code /api/v1/customers/recent-views}) resolve
+ * without the generic 500-from-NoResourceFoundException trap.
+ */
 @RestController
-@RequestMapping("/api/v1/customers")
 @Tag(name = "Audit", description = "Service-level access audit (Postgres read)")
 public class AuditController {
 
@@ -29,10 +36,13 @@ public class AuditController {
 
     @Operation(summary = "Most recent 50 audit events across all customers",
                description = "Postgres-only — no SAP call. Useful for compliance/ops dashboards.")
-    @GetMapping("/recent-views")
+    @GetMapping({"/api/v1/audit", "/api/v1/customers/recent-views"})
     public ResponseEntity<Map<String, Object>> recent() {
-        log.info("GET /customers/recent-views");
+        log.info("GET audit recent-views");
         List<AuditEvent> events = audit.recent();
+        if (events == null) {
+            events = List.of();
+        }
         return ResponseEntity.ok(Map.of(
             "items", events,
             "count", events.size()

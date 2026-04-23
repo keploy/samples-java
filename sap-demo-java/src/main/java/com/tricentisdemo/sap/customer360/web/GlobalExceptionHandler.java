@@ -17,6 +17,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 /**
  * Converts uncaught exceptions into RFC 7807 problem responses.
@@ -73,6 +74,23 @@ public class GlobalExceptionHandler {
         ProblemResponse body = baseProblem(HttpStatus.BAD_REQUEST, "Validation failed",
             ex.getMessage(), req);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .headers(commonHeaders(null))
+            .body(body);
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ProblemResponse> handleNoRoute(NoResourceFoundException ex,
+                                                        HttpServletRequest req) {
+        // Spring's default flow routes an unmatched URL through the static
+        // resource handler, which then throws NoResourceFoundException.
+        // Without this handler it falls into the generic Exception catch
+        // and surfaces as a 500 — confusing for clients probing nearby
+        // routes (e.g. GET /api/v1/audit when they meant
+        // /api/v1/customers/recent-views).
+        log.info("Unmapped route path={}", req.getRequestURI());
+        ProblemResponse body = baseProblem(HttpStatus.NOT_FOUND, "Not Found",
+            "No handler is registered for " + req.getRequestURI(), req);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .headers(commonHeaders(null))
             .body(body);
     }
