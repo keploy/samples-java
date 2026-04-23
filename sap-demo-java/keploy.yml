@@ -34,6 +34,7 @@ test:
                 # connectivity is already proven by every downstream test
                 # that hits the persistence layer successfully.
                 status: []
+                elapsedMs: []   # new — replay serves instantly; record captured real network latency
         test-sets: {}
     replaceWith:
         global:
