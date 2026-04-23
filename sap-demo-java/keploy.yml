@@ -21,8 +21,16 @@ test:
     selectedTests: {}
     globalNoise:
         global:
+            # Keploy's header matcher (pkg/matcher/utils.go CompareHeaders →
+            # SubstringKeyMatch) lowercases the incoming header name before
+            # the Contains check against the noise map, but does NOT
+            # lowercase the noise map keys. With a noise key of
+            # "X-Correlation-Id" the matcher evaluates
+            # strings.Contains("x-correlation-id", "X-Correlation-Id")
+            # which is false (Contains is case-sensitive), so the rule
+            # silently has no effect. Keep keys lowercase here.
             header:
-                X-Correlation-Id: []
+                x-correlation-id: []
             body:
                 correlationId: []
                 timestamp: []
@@ -34,7 +42,11 @@ test:
                 # connectivity is already proven by every downstream test
                 # that hits the persistence layer successfully.
                 status: []
-                elapsedMs: []   # new — replay serves instantly; record captured real network latency
+                # /360 aggregator wall-clock latency. Replayed mocks are
+                # served instantly while the recorded response captured
+                # real SAP sandbox round-trip latency; the value is not a
+                # correctness signal once the payload itself matches.
+                elapsedMs: []
         test-sets: {}
     replaceWith:
         global:
