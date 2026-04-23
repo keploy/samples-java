@@ -21,17 +21,19 @@ test:
     selectedTests: {}
     globalNoise:
         global:
-            header.X-Correlation-Id: []
-            body.correlationId: []
-            body.timestamp: []
-            body.installedOn: []
-            body.id: []
-            # /actuator/health Spring Boot DataSourceHealthIndicator can
-            # flip between UP and DOWN depending on Hikari pool warmup
-            # state at the instant of the probe; the actual DB
-            # connectivity is already proven by every downstream test
-            # that hits the persistence layer successfully.
-            body.status: []
+            header:
+                X-Correlation-Id: []
+            body:
+                correlationId: []
+                timestamp: []
+                installedOn: []
+                id: []
+                # /actuator/health Spring Boot DataSourceHealthIndicator can
+                # flip between UP and DOWN depending on Hikari pool warmup
+                # state at the instant of the probe; the actual DB
+                # connectivity is already proven by every downstream test
+                # that hits the persistence layer successfully.
+                status: []
         test-sets: {}
     replaceWith:
         global:
