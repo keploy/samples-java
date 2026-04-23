@@ -15,6 +15,14 @@ java -javaagent:target/jacocoagent.jar=address=127.0.0.1,port=36320,destfile=tar
   -jar target/java-dedup-0.0.1-SNAPSHOT.jar
 ```
 
+When replaying with dynamic deduplication, pass the JaCoCo port through Keploy so the SDK can talk to the local JaCoCo TCP server:
+
+```bash
+keploy test \
+  -c "java -javaagent:target/jacocoagent.jar=address=127.0.0.1,port=36320,destfile=target/jacoco-keploy.exec,output=tcpserver -jar target/java-dedup-0.0.1-SNAPSHOT.jar" \
+  --dedup --pass-through-ports 36320
+```
+
 Run it with Docker Compose after the Maven package step has created `target/java-dedup-0.0.1-SNAPSHOT.jar`:
 
 ```bash
