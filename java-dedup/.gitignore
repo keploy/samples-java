@@ -1,6 +1,5 @@
 /target/
-/keploy/
-/keploy.yml
+/keploy/reports/
 /dedupData.yaml
 /duplicates.yaml
 /*.log
