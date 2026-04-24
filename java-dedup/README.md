@@ -34,11 +34,15 @@ keploy test \
 Run it with Docker Compose after the Maven package step has created `target/java-dedup-0.0.1-SNAPSHOT.jar`:
 
 ```bash
-docker compose up --build
+docker compose build
+docker compose up
 ```
+
+The Compose file supports `JAVA_DEDUP_IMAGE`, `JAVA_DEDUP_CONTAINER_NAME`, and `JAVA_DEDUP_HOST_PORT` so CI can isolate repeated replay runs without recording new tests.
 
 The Compose app bind-mounts host `/tmp` into the container so Keploy and the Java SDK use the same Unix socket paths for `/tmp/coverage_control.sock` and `/tmp/coverage_data.sock`. The image runs as a non-root user. For a more restricted container run with a read-only root filesystem, dropped capabilities, `no-new-privileges`, and writable host `/tmp` bind-mounted for Keploy's Unix sockets:
 
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.restricted.yml up --build
+docker compose -f docker-compose.yml -f docker-compose.restricted.yml build
+docker compose -f docker-compose.yml -f docker-compose.restricted.yml up
 ```
