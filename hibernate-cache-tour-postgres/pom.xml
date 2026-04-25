@@ -60,7 +60,13 @@
 
         <!-- Hibernate L2 + query cache. JCache + EHCache 3.x is the
              officially supported provider for Hibernate 6 (the legacy
-             ehcache-2 provider was dropped). -->
+             ehcache-2 provider was dropped). spring-boot-starter-cache
+             is required so Spring auto-configures a CacheManager bean
+             that the JPA EntityManagerFactory can wire on boot. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-jcache</artifactId>
