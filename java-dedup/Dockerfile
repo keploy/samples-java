@@ -13,4 +13,4 @@ COPY --chown=10001:10001 target/classes /app/target/classes
 ENV KEPLOY_JAVA_CLASS_DIRS=/app/target/classes
 EXPOSE 8080
 USER 10001:10001
-ENTRYPOINT ["java", "-javaagent:/app/jacocoagent.jar=address=127.0.0.1,port=36320,destfile=/tmp/jacoco-keploy.exec,output=tcpserver", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-javaagent:/app/jacocoagent.jar", "-jar", "/app/app.jar"]
