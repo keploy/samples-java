@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  hibernate-cache-tour-postgres
+  ============================
+
+  A small Spring Boot 3 + Hibernate 6 + Postgres 16 reproducer that drives two
+  specific drift signatures in keploy's Postgres v3 logical codec:
+
+    * Issue #1 — pgjdbc prepareThreshold flip (text -> binary format).
+      pgjdbc defaults to prepareThreshold=5: the same SQL handle is sent in
+      text format for the first 4 calls and switches to binary on the 5th
+      execution. The exerciser hits each WHERE-id endpoint at least 8 times
+      so the recorded mocks for one SQL hash carry mixed format codes; the
+      codec-aware BindMatches fix at integrations f001efc reconciles them.
+
+    * Issue #3 — Hibernate StatementCache classification drift between
+      record and replay caused by per-test cache eviction. We enable the
+      query cache + L2 second-level cache (EHCache) so per-test boundaries
+      observably evict differently. The exerciser drives the boundary via
+      `keploy.io/test-name` headers.
+
+  Build target: a runnable jar at target/hibernate-cache-tour.jar that the
+  CI harness invokes via `java -jar target/hibernate-cache-tour.jar`.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.keploy</groupId>
+    <artifactId>hibernate-cache-tour-postgres</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>hibernate-cache-tour-postgres</name>
+    <description>Repro for pgjdbc prepareThreshold + Hibernate StatementCache drift</description>
+
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Hibernate L2 + query cache. JCache + EHCache 3.x is the
+             officially supported provider for Hibernate 6 (the legacy
+             ehcache-2 provider was dropped). -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-jcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <classifier>jakarta</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>hibernate-cache-tour</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
