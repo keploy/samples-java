@@ -9,8 +9,8 @@ The Java SDK reads JaCoCo coverage in-process via `org.jacoco.agent.rt.RT.getAge
 ## Setup
 
 ```bash
-(cd ../../java-sdk && mvn -B -DskipTests -Dgpg.skip=true install -pl keploy-sdk -am)
-mvn -B -DskipTests package
+(cd ../../java-sdk && mvn -B -DskipTests -Dgpg.skip=true clean install -pl keploy-sdk -am)
+mvn -B -DskipTests clean package
 ```
 
 This installs the sibling SDK snapshot locally, builds the sample, produces `target/java-dedup-0.0.1-SNAPSHOT.jar`, and copies `target/jacocoagent.jar` next to it.
@@ -20,7 +20,9 @@ This installs the sibling SDK snapshot locally, builds the sample, produces `tar
 ```bash
 keploy test \
   -c "java -javaagent:target/jacocoagent.jar -jar target/java-dedup-0.0.1-SNAPSHOT.jar" \
-  --dedup --language java --delay 20 \
+  --dedup --language java --delay 1 \
+  --health-url "http://127.0.0.1:8080/healthz" \
+  --health-poll-timeout 30s \
   --disableMockUpload --disableReportUpload
 
 keploy dedup --path .
@@ -33,10 +35,16 @@ docker compose build
 keploy test \
   -c "docker compose up" \
   --container-name "dedup-java" \
-  --dedup --language java --delay 20 \
+  --host "127.0.0.1" \
+  --dedup --language java --delay 1 \
+  --health-url "http://127.0.0.1:8080/healthz" \
+  --health-poll-timeout 30s \
   --disableMockUpload --disableReportUpload
 
 keploy dedup --path .
 ```
 
 During `keploy test`, Enterprise rewrites the Compose file and injects its own shared `/tmp` volume for the dedup control/data sockets. The base sample Compose file does not need a host `/tmp` bind mount.
+Re-run `docker compose build` whenever the jar, JaCoCo agent, or Dockerfile changes so replay uses the current image.
+
+The CI pipeline also validates additional production-style Docker layouts for the same app, including exploded classpath, restricted runtime, and distroless packaging.

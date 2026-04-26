@@ -33,13 +33,6 @@
             <artifactId>keploy-sdk</artifactId>
             <version>${keploy.sdk.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>org.jacoco.agent</artifactId>
-            <version>${jacoco.version}</version>
-            <classifier>runtime</classifier>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -71,6 +64,17 @@
                                     <destFileName>jacocoagent.jar</destFileName>
                                 </artifactItem>
                             </artifactItems>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-runtime-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeScope>runtime</includeScope>
+                            <outputDirectory>${project.build.directory}/dependency</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
