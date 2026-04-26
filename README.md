@@ -23,6 +23,7 @@ This repo contains the sample for [Keploy's](https://keploy.io) Java Application
 4. [Springboot Postgres GraphQL](https://github.com/keploy/samples-java/tree/main/spring-boot-postgres-graphql) - This is a Spring Boot application implementing a GraphQL service to handle requests related to books and authors.
 5. [Springboot PetClinic](https://github.com/keploy/samples-java/tree/main/spring-petclinic) - This is a Pet Clinic app where you can record testcases and mocks by interacting with the UI, and then test them using Keploy.
 6. [SAP Demo (Customer 360)](https://github.com/keploy/samples-java/tree/main/sap-demo-java) - A Spring Boot "Customer 360" API that fronts SAP S/4HANA Cloud (Business Partner + Sales Order OData) and a local PostgreSQL store. Includes docker-compose, a kind-based k8s deploy, and Tosca-style flow scripts suitable for recording end-to-end Keploy testcases against PostgreSQL + outbound SAP HTTPS.
+7. [Java Dynamic Deduplication](https://github.com/keploy/samples-java/tree/main/java-dedup) - A Spring Boot sample used by CI to validate Enterprise Java dynamic dedup in native, Docker, and restricted Docker replay runs. CI uses checked-in fixtures and does not record this sample in the pipeline.
 
 ## Community Support ❤️
 

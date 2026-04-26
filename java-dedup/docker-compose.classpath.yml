@@ -1,0 +1,4 @@
+services:
+  java-dedup:
+    build:
+      dockerfile: Dockerfile.classpath

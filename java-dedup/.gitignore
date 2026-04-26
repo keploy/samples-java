@@ -1,0 +1,9 @@
+/target/
+/keploy/reports/
+/dedupData.yaml
+/duplicates.yaml
+/docker-compose-tmp.yaml
+/jacoco.exec
+/.java-sdk-installed
+/java-sdk/
+/*.log
