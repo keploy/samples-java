@@ -47,4 +47,22 @@ keploy dedup --path .
 During `keploy test`, Enterprise rewrites the Compose file and injects its own shared `/tmp` volume for the dedup control/data sockets. The base sample Compose file does not need a host `/tmp` bind mount.
 Re-run `docker compose build` whenever the jar, JaCoCo agent, or Dockerfile changes so replay uses the current image.
 
-The CI pipeline also validates additional production-style Docker layouts for the same app, including exploded classpath, restricted runtime, and distroless packaging.
+## Run dedup with direct Docker
+
+```bash
+docker compose build
+keploy test \
+  -c "docker run --rm --name dedup-java -p 8080:8080 java-dedup:local" \
+  --container-name "dedup-java" \
+  --host "127.0.0.1" \
+  --dedup --language java --delay 1 \
+  --health-url "http://127.0.0.1:8080/healthz" \
+  --health-poll-timeout 30s \
+  --disableMockUpload --disableReportUpload
+
+keploy dedup --path .
+```
+
+During direct `docker run`, Enterprise injects the same shared `/tmp` volume into the app container. Do not pass your own `/tmp` mount in the app command.
+
+The CI pipeline also validates additional production-style Docker layouts for the same app, including direct Docker run, exploded classpath, restricted runtime, and distroless packaging.
