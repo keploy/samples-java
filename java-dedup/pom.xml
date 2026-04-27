@@ -19,7 +19,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <keploy.sdk.version>0.0.1-SNAPSHOT</keploy.sdk.version>
+        <keploy.sdk.version>2.0.0</keploy.sdk.version>
         <jacoco.version>0.8.12</jacoco.version>
     </properties>
 

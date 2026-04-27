@@ -9,11 +9,10 @@ The Java SDK reads JaCoCo coverage in-process via `org.jacoco.agent.rt.RT.getAge
 ## Setup
 
 ```bash
-(cd ../../java-sdk && mvn -B -DskipTests -Dgpg.skip=true clean install -pl keploy-sdk -am)
 mvn -B -DskipTests clean package
 ```
 
-This installs the sibling SDK snapshot locally, builds the sample, produces `target/java-dedup-0.0.1-SNAPSHOT.jar`, and copies `target/jacocoagent.jar` next to it.
+This builds the sample against the released Keploy Java SDK, produces `target/java-dedup-0.0.1-SNAPSHOT.jar`, and copies `target/jacocoagent.jar` next to it.
 
 ## Run dedup natively
 
