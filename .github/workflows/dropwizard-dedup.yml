@@ -1,0 +1,94 @@
+name: Dropwizard Dedup Sample
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: JDK ${{ matrix.java-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version: ["8", "17", "21"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java-version }}
+          cache: maven
+
+      - name: Build dropwizard-dedup without Keploy compile dependency
+        working-directory: dropwizard-dedup
+        run: mvn -B -DskipTests clean package
+
+      - name: Verify Keploy is not a compile-time dependency
+        working-directory: dropwizard-dedup
+        run: |
+          set -euo pipefail
+          mvn -B dependency:tree -Dincludes=io.keploy:keploy-sdk -DoutputFile=target/keploy-dependency-tree.txt
+          if grep -q "io.keploy:keploy-sdk" target/keploy-dependency-tree.txt; then
+            cat target/keploy-dependency-tree.txt
+            exit 1
+          fi
+          if grep -R "io.keploy\\.dedup\\|io.keploy\\.servlet\\|KeployDedupAgent\\|KeployMiddleware" src/main/java; then
+            exit 1
+          fi
+
+      - name: Smoke Dropwizard runtime with JaCoCo
+        working-directory: dropwizard-dedup
+        run: |
+          set -euo pipefail
+          smoke_http_port=$((19080 + ${{ matrix.java-version }}))
+          smoke_admin_port=$((20080 + ${{ matrix.java-version }}))
+
+          DW_HTTP_PORT="${smoke_http_port}" DW_ADMIN_PORT="${smoke_admin_port}" \
+            java -javaagent:target/jacocoagent.jar=destfile=target/smoke-jacoco.exec \
+            -jar target/dropwizard-dedup-0.0.1-SNAPSHOT.jar server config.yml \
+            > target/dropwizard-smoke.log 2>&1 &
+          app_pid=$!
+
+          cleanup() {
+            kill "${app_pid}" >/dev/null 2>&1 || true
+            wait "${app_pid}" >/dev/null 2>&1 || true
+          }
+          trap cleanup EXIT
+
+          ready=0
+          for i in $(seq 1 60); do
+            if curl -fsS "http://127.0.0.1:${smoke_http_port}/healthz" >/dev/null; then
+              ready=1
+              break
+            fi
+            if ! kill -0 "${app_pid}" >/dev/null 2>&1; then
+              cat target/dropwizard-smoke.log
+              exit 1
+            fi
+            sleep 1
+          done
+          if [ "${ready}" != "1" ]; then
+            cat target/dropwizard-smoke.log
+            exit 1
+          fi
+
+          curl -fsS "http://127.0.0.1:${smoke_http_port}/catalog?category=electronics&limit=1" | grep -q '"source":"warehouse-b"'
+          curl -fsS -H "X-Tenant: flipkart" -H "X-Request-Id: smoke-1" \
+            "http://127.0.0.1:${smoke_http_port}/headers" | grep -q '"tenant":"flipkart"'
+          curl -fsS -X POST "http://127.0.0.1:${smoke_http_port}/orders" \
+            -H "Content-Type: application/json" \
+            -d '{"customer":"smoke","sku":"BK-1","quantity":2,"priority":true}' | grep -q '"route":"air"'
+          curl -fsS "http://127.0.0.1:${smoke_http_port}/platform/content/html" | grep -q '<h1>dropwizard</h1>'
+          test "$(curl -sS -o /tmp/dropwizard-missing.json -w '%{http_code}' "http://127.0.0.1:${smoke_http_port}/catalog/MISSING")" = "404"
+          grep -q '"error":"not_found"' /tmp/dropwizard-missing.json
+
+          cleanup
+          trap - EXIT
+          test -s target/smoke-jacoco.exec

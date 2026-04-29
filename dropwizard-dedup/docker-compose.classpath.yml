@@ -1,0 +1,4 @@
+services:
+  dropwizard-dedup:
+    build:
+      dockerfile: Dockerfile.classpath
