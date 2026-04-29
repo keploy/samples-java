@@ -4,21 +4,23 @@ A Spring Boot application used by Keploy CI to validate Java dynamic deduplicati
 
 CI does not record this sample. The `keploy/` directory is checked in so the pipeline only builds the app and runs replay with `--dedup`.
 
-The Java SDK reads JaCoCo coverage in-process via `org.jacoco.agent.rt.RT.getAgent().getExecutionData(...)`, so attaching the JaCoCo Java agent is enough — no TCP server, no port choice, no `--pass-through-ports`.
+The Keploy Java SDK is attached as a Java agent at replay time. The sample does not compile against `io.keploy:keploy-sdk` and does not import Keploy classes in application code.
+
+The SDK reads JaCoCo coverage in-process via `org.jacoco.agent.rt.RT.getAgent().getExecutionData(...)`, so attach both agents when running dynamic deduplication: the Keploy agent for the control/data socket protocol, and the JaCoCo agent for runtime coverage.
 
 ## Setup
 
 ```bash
-mvn -B -DskipTests clean package
+mvn -B -DskipTests -Dkeploy.agent.version=2.0.1 clean package
 ```
 
-This builds the sample against the released Keploy Java SDK, produces `target/java-dedup-0.0.1-SNAPSHOT.jar`, and copies `target/jacocoagent.jar` next to it.
+This produces `target/java-dedup-0.0.1-SNAPSHOT.jar`, copies `target/keploy-sdk.jar`, and copies `target/jacocoagent.jar` next to it. Use the released Keploy Java SDK version that includes Java-agent support.
 
 ## Run dedup natively
 
 ```bash
 keploy test \
-  -c "java -javaagent:target/jacocoagent.jar -jar target/java-dedup-0.0.1-SNAPSHOT.jar" \
+  -c "java -javaagent:target/keploy-sdk.jar -javaagent:target/jacocoagent.jar -jar target/java-dedup-0.0.1-SNAPSHOT.jar" \
   --dedup --language java --delay 1 \
   --health-url "http://127.0.0.1:8080/healthz" \
   --health-poll-timeout 30s \
@@ -64,4 +66,4 @@ keploy dedup --path .
 
 During direct `docker run`, Enterprise injects the same shared `/tmp` volume into the app container. Do not pass your own `/tmp` mount in the app command.
 
-The CI pipeline also validates additional production-style Docker layouts for the same app, including direct Docker run, exploded classpath, restricted runtime, and distroless packaging.
+The CI pipeline also validates additional production-style layouts for the same app, including native classpath, direct Docker run, Docker Compose, exploded classpath images, restricted runtime, restricted classpath, and distroless packaging.

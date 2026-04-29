@@ -1,0 +1,7 @@
+services:
+  dropwizard-dedup:
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

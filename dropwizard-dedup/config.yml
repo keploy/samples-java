@@ -1,0 +1,12 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: ${DW_HTTP_PORT:-8080}
+  adminConnectors:
+    - type: http
+      port: ${DW_ADMIN_PORT:-8081}
+
+logging:
+  level: WARN
+  appenders:
+    - type: console

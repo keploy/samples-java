@@ -1,0 +1,13 @@
+services:
+  dropwizard-dedup:
+    image: ${JAVA_DEDUP_IMAGE:-dropwizard-dedup:local}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAVA_VERSION: ${JAVA_VERSION:-8}
+    environment:
+      KEPLOY_JAVA_DEDUP_DIAGNOSTICS: ${KEPLOY_JAVA_DEDUP_DIAGNOSTICS:-}
+    container_name: dedup-java
+    ports:
+      - "${JAVA_DEDUP_HOST_PORT:-8080}:8080"
