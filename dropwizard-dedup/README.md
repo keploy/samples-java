@@ -13,7 +13,7 @@ mvn -B -DskipTests clean package
 Build with the runtime Java agent copied into `target/keploy-sdk.jar`:
 
 ```bash
-mvn -B -DskipTests -Dkeploy.agent.version=2.0.2 clean package
+mvn -B -DskipTests -Dkeploy.agent.version=2.0.6 clean package
 ```
 
 Run with the agent:
