@@ -8,33 +8,27 @@ spec:
     method: GET
     proto_major: 1
     proto_minor: 1
-    url: http://127.0.0.1:8080/search?term=phone&sort=price
+    url: http://127.0.0.1:8080/healthz
     header:
-      Accept: '*/*'
-      Host: 127.0.0.1:8080
+      Host: '127.0.0.1:8080'
       User-Agent: curl/8.19.0
-    body: ""
-    timestamp: 2026-04-30T04:48:59Z
+      Accept: '*/*'
+    body: ''
+    timestamp: 2026-04-30T18:58:47Z
   resp:
     status_code: 200
     header:
+      Date: 'Thu, 30 Apr 2026 18:58:47 GMT'
       Content-Type: application/json
-      Date: Thu, 30 Apr 2026 04:48:59 GMT
-    body: '{"term":"phone","sort":"price","ranking":"discount-first","hits":[{"sku":"EL-1","name":"Noise Cancelling Headphones","category":"electronics","status":"backorder","price":"199.99"},{"sku":"BK-1","name":"Clean Architecture","category":"books","status":"available","price":"32.50"}]}'
+      Vary: Accept-Encoding
+      Content-Length: 16
+    body: '{"healthy":true}'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-04-30T04:48:59Z
+    timestamp: 2026-04-30T18:58:47Z
   objects: []
   assertions:
     noise:
-      header.Date: []
-      header.Vary: []
-  created: 1777524539
-  app_port: 8080
-curl: |
-  curl --request GET \
-    --url 'http://127.0.0.1:8080/search?term=phone&sort=price' \
-    --header 'Accept: */*' \
-    --header 'Host: 127.0.0.1:8080' \
-    --header 'User-Agent: curl/8.19.0'
+        header.Date: []
+  created: 1777575527

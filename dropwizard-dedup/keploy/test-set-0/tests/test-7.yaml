@@ -5,36 +5,30 @@ name: test-7
 spec:
   metadata: {}
   req:
-    method: POST
+    method: GET
     proto_major: 1
     proto_minor: 1
-    url: http://127.0.0.1:8080/orders
+    url: http://127.0.0.1:8080/healthz
     header:
-      Accept: '*/*'
-      Content-Type: application/json
-      Host: 127.0.0.1:8080
+      Host: '127.0.0.1:8080'
       User-Agent: curl/8.19.0
-    body: '{"customer":"ashish","sku":"BK-1","quantity":2,"priority":false}'
-    timestamp: 2026-04-30T04:48:59Z
+      Accept: '*/*'
+    body: ''
+    timestamp: 2026-04-30T18:58:47Z
   resp:
-    status_code: 201
+    status_code: 200
     header:
+      Date: 'Thu, 30 Apr 2026 18:58:47 GMT'
       Content-Type: application/json
-      Date: Thu, 30 Apr 2026 04:48:59 GMT
-    body: '{"orderId":"ORD-STANDARD","customer":"ashish","sku":"BK-1","quantity":2,"priority":false,"route":"ground","checks":["inventory","pricing","standard"]}'
-    status_message: Created
+      Vary: Accept-Encoding
+      Content-Length: 16
+    body: '{"healthy":true}'
+    status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-04-30T04:48:59Z
+    timestamp: 2026-04-30T18:58:47Z
   objects: []
   assertions:
     noise:
-      header.Date: []
-      header.Vary: []
-  created: 1777524539
-  app_port: 8080
-curl: |
-  curl --request POST \
-    --url http://127.0.0.1:8080/orders \
-    --header 'Content-Type: application/json' \
-    --data '{"customer":"ashish","sku":"BK-1","quantity":2,"priority":false}'
+        header.Date: []
+  created: 1777575527
