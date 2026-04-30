@@ -13,7 +13,7 @@ mvn -B -DskipTests clean package
 Build with the runtime Java agent copied into `target/keploy-sdk.jar`:
 
 ```bash
-mvn -B -DskipTests -Dkeploy.agent.version=2.0.1 clean package
+mvn -B -DskipTests -Dkeploy.agent.version=2.0.0 clean package
 ```
 
 Run with the agent:
@@ -22,5 +22,5 @@ Run with the agent:
 java \
   -javaagent:target/keploy-sdk.jar \
   -javaagent:target/jacocoagent.jar=destfile=/tmp/jacoco.exec \
-  -jar target/dropwizard-dedup-0.0.1-SNAPSHOT.jar server config.yml
+  -jar target/dropwizard-dedup.jar server config.yml
 ```

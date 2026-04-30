@@ -6,7 +6,7 @@
 
     <groupId>io.keploy.samples</groupId>
     <artifactId>dropwizard-dedup</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>dropwizard-dedup</name>
     <description>Keploy Java dynamic deduplication Dropwizard sample</description>
 
@@ -38,6 +38,7 @@
     </dependencies>
 
     <build>
+        <finalName>dropwizard-dedup</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
