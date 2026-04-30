@@ -1,6 +1,4 @@
 target/
-dedupData.yaml
-duplicates.yaml
 test-results/
 coverage-reports/
 docker-compose-tmp.yaml
