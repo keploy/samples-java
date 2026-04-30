@@ -8,35 +8,32 @@ spec:
     method: GET
     proto_major: 1
     proto_minor: 1
-    url: http://127.0.0.1:8080/catalog?category=books&limit=1
+    url: http://localhost:8080/catalog?category=books&limit=1
     header:
-      Host: '127.0.0.1:8080'
+      Host: 'localhost:8080'
       User-Agent: curl/8.19.0
       Accept: '*/*'
     body: ''
-    timestamp: 2026-04-30T19:48:43Z
+    timestamp: 2026-04-30T20:34:29Z
   resp:
     status_code: 200
     header:
-      Date: 'Thu, 30 Apr 2026 19:48:43 GMT'
+      Date: 'Thu, 30 Apr 2026 20:34:29 GMT'
       Content-Type: application/json
-      Vary: Accept-Encoding
-      Content-Length: 162
     body: '{"category":"books","limit":1,"items":[{"sku":"BK-1","name":"Clean Architecture","category":"books","status":"available","price":"32.50"}],"source":"warehouse-a"}'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-04-30T19:48:43Z
+    timestamp: 2026-04-30T20:34:29Z
   objects: []
   assertions:
     noise:
       header.Date: []
-      header.Vary: []
-  created: 1777578523
+  created: 1777581269
   app_port: 8080
 curl: |
   curl --request GET \
-    --url 'http://127.0.0.1:8080/catalog?category=books&limit=1' \
-    --header 'Host: 127.0.0.1:8080' \
+    --url 'http://localhost:8080/catalog?category=books&limit=1' \
+    --header 'Host: localhost:8080' \
     --header 'User-Agent: curl/8.19.0' \
     --header 'Accept: */*'
