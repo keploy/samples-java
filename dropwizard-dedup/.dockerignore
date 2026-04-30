@@ -1,5 +1,5 @@
 target/*
-!target/dropwizard-dedup-0.0.1-SNAPSHOT.jar
+!target/dropwizard-dedup.jar
 !target/keploy-sdk.jar
 !target/jacocoagent.jar
 !target/classes/
