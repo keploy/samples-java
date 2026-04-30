@@ -13,7 +13,7 @@
 
     <groupId>io.keploy.samples</groupId>
     <artifactId>java-dedup</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>java-dedup</name>
     <description>Keploy Java dynamic deduplication sample</description>
 
@@ -30,6 +30,7 @@
     </dependencies>
 
     <build>
+        <finalName>java-dedup</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

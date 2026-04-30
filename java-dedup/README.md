@@ -11,16 +11,16 @@ The SDK reads JaCoCo coverage in-process via `org.jacoco.agent.rt.RT.getAgent().
 ## Setup
 
 ```bash
-mvn -B -DskipTests -Dkeploy.agent.version=2.0.1 clean package
+mvn -B -DskipTests -Dkeploy.agent.version=2.0.0 clean package
 ```
 
-This produces `target/java-dedup-0.0.1-SNAPSHOT.jar`, copies `target/keploy-sdk.jar`, and copies `target/jacocoagent.jar` next to it. Use the released Keploy Java SDK version that includes Java-agent support.
+This builds the runnable application jar, copies `target/keploy-sdk.jar`, and copies `target/jacocoagent.jar` next to it.
 
 ## Run dedup natively
 
 ```bash
 keploy test \
-  -c "java -javaagent:target/keploy-sdk.jar -javaagent:target/jacocoagent.jar -jar target/java-dedup-0.0.1-SNAPSHOT.jar" \
+  -c "java -javaagent:target/keploy-sdk.jar -javaagent:target/jacocoagent.jar -jar target/java-dedup.jar" \
   --dedup --skip-app-restart --language java --delay 1 \
   --health-url "http://127.0.0.1:8080/healthz" \
   --health-poll-timeout 30s \

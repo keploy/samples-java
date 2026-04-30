@@ -6,7 +6,7 @@ WORKDIR /app
 RUN groupadd --gid 10001 appuser \
     && useradd --uid 10001 --gid 10001 --home-dir /home/appuser --create-home --shell /usr/sbin/nologin appuser
 
-COPY --chown=10001:10001 target/java-dedup-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY --chown=10001:10001 target/java-dedup.jar /app/app.jar
 COPY --chown=10001:10001 target/keploy-sdk.jar /app/keploy-sdk.jar
 COPY --chown=10001:10001 target/jacocoagent.jar /app/jacocoagent.jar
 EXPOSE 8080
