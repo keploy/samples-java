@@ -5,41 +5,39 @@ name: test-7
 spec:
   metadata: {}
   req:
-    method: POST
+    method: GET
     proto_major: 1
     proto_minor: 1
-    url: http://127.0.0.1:8080/orders
+    url: http://127.0.0.1:8080/search?term=knife&sort=newest
     header:
       Host: '127.0.0.1:8080'
       User-Agent: curl/8.19.0
       Accept: '*/*'
-      Content-Type: application/json
-    body: '{"customer": "carol", "sku": "EL-2", "quantity": 2, "priority": true}'
-    timestamp: 2026-04-30T20:48:01Z
+    body: ''
+    timestamp: 2026-04-30T21:14:38Z
   resp:
-    status_code: 201
+    status_code: 200
     header:
-      Date: 'Thu, 30 Apr 2026 20:48:02 GMT'
+      Date: 'Thu, 30 Apr 2026 21:14:39 GMT'
       Content-Type: application/json
-      Content-Length: 145
-    body: '{"orderId":"ORD-PRIORITY","customer":"carol","sku":"EL-2","quantity":2,"priority":true,"route":"air","checks":["inventory","pricing","expedite"]}'
-    status_message: Created
+      Vary: Accept-Encoding
+      Content-Length: 283
+    body: '{"term":"knife","sort":"newest","ranking":"relevance-first","hits":[{"sku":"EL-1","name":"Noise Cancelling Headphones","category":"electronics","status":"backorder","price":"199.99"},{"sku":"BK-1","name":"Clean Architecture","category":"books","status":"available","price":"32.50"}]}'
+    status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-04-30T20:48:01Z
+    timestamp: 2026-04-30T21:14:38Z
   objects: []
   assertions:
     noise:
       header.Date: []
       header.Vary: []
       header.Content-Length: []
-  created: 1777582082
+  created: 1777583679
   app_port: 8080
 curl: |
-  curl --request POST \
-    --url http://127.0.0.1:8080/orders \
+  curl --request GET \
+    --url 'http://127.0.0.1:8080/search?term=knife&sort=newest' \
     --header 'Host: 127.0.0.1:8080' \
     --header 'User-Agent: curl/8.19.0' \
-    --header 'Accept: */*' \
-    --header 'Content-Type: application/json' \
-    --data '{"customer": "carol", "sku": "EL-2", "quantity": 2, "priority": true}'
+    --header 'Accept: */*'
