@@ -1,0 +1,5 @@
+**
+!target/simple-java-dedup.jar
+!target/classes/**
+!target/keploy-sdk.jar
+!target/jacocoagent.jar

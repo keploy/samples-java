@@ -1,0 +1,10 @@
+services:
+  simple-java-dedup:
+    build:
+      context: .
+      args:
+        JAVA_VERSION: ${JAVA_VERSION:-8}
+    image: ${JAVA_DEDUP_IMAGE:-simple-java-dedup:local}
+    container_name: simple-java-dedup
+    ports:
+      - "${JAVA_DEDUP_HOST_PORT:-8080}:8080"
