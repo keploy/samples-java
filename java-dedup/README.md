@@ -2,7 +2,7 @@
 
 A Spring Boot application used by Keploy CI to validate Java dynamic deduplication. It mirrors the Go dedup sample by exposing a broad set of endpoints and committing 1000 replay fixtures across four testsets.
 
-CI does not record this sample. The `keploy/` directory is checked in so the pipeline only builds the app and runs replay with `--dedup`.
+CI does not record this sample. The `keploy/` directory is checked in so the pipeline only builds the app and runs replay with `--dedup`. When the sample behavior changes, record the fixtures locally and push the updated `keploy/` files.
 
 The Keploy Java SDK is attached as a Java agent at replay time. The sample does not compile against `io.keploy:keploy-sdk` and does not import Keploy classes in application code.
 
