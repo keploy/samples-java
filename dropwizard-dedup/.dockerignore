@@ -1,4 +1,11 @@
-target
+target/*
+!target/dropwizard-dedup-0.0.1-SNAPSHOT.jar
+!target/keploy-sdk.jar
+!target/jacocoagent.jar
+!target/classes/
+!target/classes/**
+!target/dependency/
+!target/dependency/**
 keploy/reports
 dedupData.yaml
 duplicates.yaml
