@@ -8,34 +8,37 @@ spec:
     method: POST
     proto_major: 1
     proto_minor: 1
-    url: http://localhost:8080/orders
+    url: http://127.0.0.1:8080/orders
     header:
-      Host: 'localhost:8080'
+      Host: '127.0.0.1:8080'
       User-Agent: curl/8.19.0
       Accept: '*/*'
       Content-Type: application/json
     body: '{"customer": "alice", "sku": "EL-2", "quantity": 2, "priority": true}'
-    timestamp: 2026-04-30T20:34:29Z
+    timestamp: 2026-04-30T20:48:01Z
   resp:
     status_code: 201
     header:
-      Date: 'Thu, 30 Apr 2026 20:34:30 GMT'
+      Date: 'Thu, 30 Apr 2026 20:48:02 GMT'
       Content-Type: application/json
+      Content-Length: 145
     body: '{"orderId":"ORD-PRIORITY","customer":"alice","sku":"EL-2","quantity":2,"priority":true,"route":"air","checks":["inventory","pricing","expedite"]}'
     status_message: Created
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-04-30T20:34:29Z
+    timestamp: 2026-04-30T20:48:01Z
   objects: []
   assertions:
     noise:
       header.Date: []
-  created: 1777581270
+      header.Vary: []
+      header.Content-Length: []
+  created: 1777582082
   app_port: 8080
 curl: |
   curl --request POST \
-    --url http://localhost:8080/orders \
-    --header 'Host: localhost:8080' \
+    --url http://127.0.0.1:8080/orders \
+    --header 'Host: 127.0.0.1:8080' \
     --header 'User-Agent: curl/8.19.0' \
     --header 'Accept: */*' \
     --header 'Content-Type: application/json' \
