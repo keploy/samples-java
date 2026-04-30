@@ -1,8 +1,8 @@
 # Java Dynamic Deduplication Sample
 
-A Spring Boot application used by Keploy CI to validate Java dynamic deduplication. It mirrors the Go dedup sample by exposing a broad set of endpoints and committing 1000 replay fixtures across four testsets.
+A Spring Boot application used by Keploy CI to validate Java dynamic deduplication. It mirrors the Go dedup sample by exposing a broad set of endpoints and committing 400 replay fixtures across four testsets.
 
-CI does not record this sample. The `keploy/` directory is checked in so the pipeline only builds the app and runs replay with `--dedup`. When the sample behavior changes, record the fixtures locally and push the updated `keploy/` files.
+CI does not record this sample. The `keploy/` directory is checked in so the pipeline only builds the app and runs replay with `--dedup --skip-app-restart`. When the sample behavior changes, record the fixtures locally and push the updated `keploy/` files.
 
 The Keploy Java SDK is attached as a Java agent at replay time. The sample does not compile against `io.keploy:keploy-sdk` and does not import Keploy classes in application code.
 
@@ -21,7 +21,7 @@ This produces `target/java-dedup-0.0.1-SNAPSHOT.jar`, copies `target/keploy-sdk.
 ```bash
 keploy test \
   -c "java -javaagent:target/keploy-sdk.jar -javaagent:target/jacocoagent.jar -jar target/java-dedup-0.0.1-SNAPSHOT.jar" \
-  --dedup --language java --delay 1 \
+  --dedup --skip-app-restart --language java --delay 1 \
   --health-url "http://127.0.0.1:8080/healthz" \
   --health-poll-timeout 30s \
   --disableMockUpload --disableReportUpload
@@ -37,7 +37,7 @@ keploy test \
   -c "docker compose up" \
   --container-name "dedup-java" \
   --host "127.0.0.1" \
-  --dedup --language java --delay 1 \
+  --dedup --skip-app-restart --language java --delay 1 \
   --health-url "http://127.0.0.1:8080/healthz" \
   --health-poll-timeout 30s \
   --disableMockUpload --disableReportUpload
@@ -56,7 +56,7 @@ keploy test \
   -c "docker run --rm --name dedup-java -p 8080:8080 java-dedup:local" \
   --container-name "dedup-java" \
   --host "127.0.0.1" \
-  --dedup --language java --delay 1 \
+  --dedup --skip-app-restart --language java --delay 1 \
   --health-url "http://127.0.0.1:8080/healthz" \
   --health-poll-timeout 30s \
   --disableMockUpload --disableReportUpload

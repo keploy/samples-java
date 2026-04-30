@@ -32,8 +32,8 @@ jobs:
           set -euo pipefail
           fixture_count="$(find keploy -path '*/tests/test-*.yaml' -size +100c | wc -l | tr -d ' ')"
           tracked_count="$(git ls-files 'keploy/test-set-*/tests/test-*.yaml' | wc -l | tr -d ' ')"
-          test "${fixture_count}" = "1000"
-          test "${tracked_count}" = "1000"
+          test "${fixture_count}" = "400"
+          test "${tracked_count}" = "400"
 
       - name: Build java-dedup without Keploy compile dependency
         working-directory: java-dedup

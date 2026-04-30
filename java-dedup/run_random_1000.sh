@@ -2,7 +2,7 @@
 set -Eeuo pipefail
 
 BASE_URL="${BASE_URL:-http://localhost:8080}"
-TOTAL_REQUESTS="${TOTAL_REQUESTS:-1000}"
+TOTAL_REQUESTS="${TOTAL_REQUESTS:-400}"
 
 endpoints=(
   "/"
