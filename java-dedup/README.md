@@ -11,7 +11,7 @@ The SDK reads JaCoCo coverage in-process via `org.jacoco.agent.rt.RT.getAgent().
 ## Setup
 
 ```bash
-mvn -B -DskipTests -Dkeploy.agent.version=2.0.0 clean package
+mvn -B -DskipTests -Dkeploy.agent.version=2.0.2 clean package
 ```
 
 This builds the runnable application jar, copies `target/keploy-sdk.jar`, and copies `target/jacocoagent.jar` next to it.
