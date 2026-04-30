@@ -26,6 +26,15 @@ jobs:
           java-version: ${{ matrix.java-version }}
           cache: maven
 
+      - name: Verify checked-in replay fixtures
+        working-directory: java-dedup
+        run: |
+          set -euo pipefail
+          fixture_count="$(find keploy -path '*/tests/test-*.yaml' -size +100c | wc -l | tr -d ' ')"
+          tracked_count="$(git ls-files 'keploy/test-set-*/tests/test-*.yaml' | wc -l | tr -d ' ')"
+          test "${fixture_count}" = "1000"
+          test "${tracked_count}" = "1000"
+
       - name: Build java-dedup without Keploy compile dependency
         working-directory: java-dedup
         run: mvn -B -DskipTests clean package

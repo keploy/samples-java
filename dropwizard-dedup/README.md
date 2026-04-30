@@ -2,6 +2,8 @@
 
 This sample validates that Keploy Java dynamic deduplication works for a non-Spring Java service. The app is a Dropwizard/Jersey HTTP service and does not import or depend on the Keploy SDK at compile time.
 
+CI does not record this sample. The `keploy/` directory contains checked-in fixtures, so Enterprise CI only builds the app and runs replay with `--dedup`. When the sample behavior changes, record the fixtures locally and push the updated `keploy/` files.
+
 Build without Keploy on the compile classpath:
 
 ```bash
