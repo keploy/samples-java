@@ -14,20 +14,28 @@ spec:
       User-Agent: curl/8.19.0
       Accept: '*/*'
     body: ''
-    timestamp: 2026-04-30T18:58:47Z
+    timestamp: 2026-04-30T19:48:43Z
   resp:
     status_code: 200
     header:
-      Date: 'Thu, 30 Apr 2026 18:58:47 GMT'
+      Date: 'Thu, 30 Apr 2026 19:48:44 GMT'
       Content-Type: application/json
       Content-Length: 54
     body: '{"requested_file":"/media/banner.png","download":true}'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-04-30T18:58:47Z
+    timestamp: 2026-04-30T19:48:43Z
   objects: []
   assertions:
     noise:
-        header.Date: []
-  created: 1777575527
+      header.Date: []
+      header.Vary: []
+  created: 1777578524
+  app_port: 8080
+curl: |
+  curl --request GET \
+    --url 'http://127.0.0.1:8080/files/media/banner.png?download=true' \
+    --header 'Host: 127.0.0.1:8080' \
+    --header 'User-Agent: curl/8.19.0' \
+    --header 'Accept: */*'
