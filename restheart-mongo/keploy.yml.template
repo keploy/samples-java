@@ -1,0 +1,21 @@
+# keploy.yml template for the restheart-mongo sample.
+#
+# globalNoise covers fields whose value is non-deterministic
+# across record/replay:
+#
+#   header.Date                    runtime-stamped
+#   body._etag                     RESTHeart auto-stamped on each
+#                                  document; changes per write
+#   body._oid / body._id           server-generated ObjectIds
+#                                  (when not set by client)
+#   body.lastModified              auto-now timestamp
+#
+# Centralised here so a future RESTHeart version that adds another
+# auto-stamped field is one edit, not a fan-out across lane scripts.
+test:
+  globalNoise:
+    global:
+      header.Date: []
+      body._etag: []
+      body._oid: []
+      body.lastModified: []

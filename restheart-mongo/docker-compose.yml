@@ -1,0 +1,47 @@
+# restheart-mongo sample compose. RESTHeart 9.x + MongoDB 7 on a
+# fixed subnet, every name env-driven so multiple matrix cells
+# can run in parallel on the same docker daemon.
+services:
+  restheart:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ${RESTHEART_APP_CONTAINER:-restheart_app}
+    init: true
+    stop_grace_period: 5s
+    ports:
+      - "${RESTHEART_APP_PORT:-8080}:8080"
+    environment:
+      RHO: >
+        /mclient/connection-string->"mongodb://${RESTHEART_MONGO_IP:-172.36.0.10}:27017",
+        /core/log-level->"INFO"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - restheart-net
+
+  mongo:
+    image: mongo:7
+    container_name: ${RESTHEART_MONGO_CONTAINER:-restheart_mongo}
+    stop_grace_period: 5s
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - restheart-mongo-data:/data/db
+    networks:
+      restheart-net:
+        ipv4_address: ${RESTHEART_MONGO_IP:-172.36.0.10}
+
+networks:
+  restheart-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${RESTHEART_NETWORK_SUBNET:-172.36.0.0/24}
+
+volumes:
+  restheart-mongo-data:
