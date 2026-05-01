@@ -21,9 +21,11 @@ The traffic loop exercises the surfaces that keploy parsers and matchers have to
 
 ```
 restheart-mongo/
-├── Dockerfile             # FROM softinstigate/restheart:9.2.1
+├── Dockerfile             # FROM softinstigate/restheart:9.2.1 (base; uninstrumented)
+├── Dockerfile.coverage    # extends base, layers JaCoCo agent + cli for coverage
 ├── docker-compose.yml     # mongo:7 + restheart:9.2.1, fixed subnet, env-driven
-├── flow.sh                # bootstrap | record-traffic | coverage | list-routes
+├── docker-compose.coverage.yml  # overlay; arms JaCoCo via JAVA_TOOL_OPTIONS
+├── flow.sh                # bootstrap | record-traffic | coverage
 ├── keploy.yml.template    # globalNoise for _etag/_oid/lastModified/Date
 └── README.md              # this file
 ```
@@ -33,19 +35,36 @@ restheart-mongo/
 The sample is keploy-independent: `docker compose up && bash flow.sh bootstrap && bash flow.sh record-traffic` runs end-to-end against bare RESTHeart. Lane scripts wrap that exact same path inside `keploy record` / `keploy test`.
 
 * `bootstrap` — wait for RESTHeart to start serving and PUT the seed collections (`items`, `people`, `places`, `halpeople`, `relpeople`, `gql-apps`, `acl`, `_schemas`, `avatars.files`, `range_files.files`, `imported_csv`) so subsequent record-traffic calls have something to find.
-* `record-traffic` — drive the full RESTHeart REST surface listed above. Every call is logged to `${RESTHEART_FIRED_ROUTES_FILE}` (when set) so `coverage` has a numerator without a keploy recording, and every call is fault-tolerant (`|| true`) so a single transient 4xx never aborts the run. keploy is the assertion layer.
-* `coverage` — emits `(method, path)` coverage. The denominator is curated from RESTHeart's pattern-based mount table (see `restheart_list_routes` in `flow.sh`); RESTHeart routes are not file-system-derivable like Next.js, so the list lives in source and stays in lockstep with `record-traffic`.
-* `list-routes` — diagnostic; prints the route table the coverage report uses as its denominator.
+* `record-traffic` — drive the full RESTHeart REST surface listed above. Every call is fault-tolerant (`|| true`) so a single transient 4xx never aborts the run. keploy is the assertion layer.
+* `coverage` — emits real Java line coverage via JaCoCo when the `docker-compose.coverage.yml` overlay is applied; otherwise a no-op (the base image is uninstrumented so this prints an info message and exits 0).
 
 ## Local run
+
+### Without keploy — smoke check
 
 ```sh
 docker compose up -d
 bash flow.sh bootstrap 240
-RESTHEART_FIRED_ROUTES_FILE=/tmp/fired.log bash flow.sh record-traffic
-RESTHEART_FIRED_ROUTES_FILE=/tmp/fired.log bash flow.sh coverage
+bash flow.sh record-traffic
 docker compose down -v
 ```
+
+This is what the keploy/enterprise compat lane wraps in `keploy record` / `keploy test` — the base compose is uninstrumented and runs unchanged inside that lane.
+
+### Without keploy — measuring real Java line coverage
+
+The base image is uninstrumented. Apply the coverage overlay to attach the JaCoCo agent:
+
+```sh
+mkdir -p coverage
+docker compose -f docker-compose.yml -f docker-compose.coverage.yml up -d --build
+bash flow.sh bootstrap 240
+bash flow.sh record-traffic
+bash flow.sh coverage
+docker compose -f docker-compose.yml -f docker-compose.coverage.yml down -v
+```
+
+The overlay (`Dockerfile.coverage` + `docker-compose.coverage.yml`) layers JaCoCo's agent + cli jars into the upstream restheart image and arms the agent at JVM start via `JAVA_TOOL_OPTIONS=-javaagent:...=output=tcpserver,...`. `flow.sh coverage` dumps execution data over the agent's TCP server (no JVM stop needed) and renders an XML line-coverage report. The overlay is consumed ONLY by the standalone GH Actions workflow — keploy/enterprise's compat lane ignores it and runs the base compose, paying zero JaCoCo cost (the agent rewrites bytecode at class-load and adds ~5-10% per-call overhead that would slow record/replay).
 
 ## Consumers
 
