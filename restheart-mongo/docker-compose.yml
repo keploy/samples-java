@@ -12,9 +12,14 @@ services:
     ports:
       - "${RESTHEART_APP_PORT:-8080}:8080"
     environment:
-      RHO: >
-        /mclient/connection-string->"mongodb://${RESTHEART_MONGO_IP:-172.36.0.10}:27017",
-        /core/log-level->"INFO"
+      # RHO is RESTHeart's runtime config-override syntax:
+      #   key->value  pairs separated by ';'
+      # We override the default mongo URL (which the upstream image
+      # points at host.docker.internal — irrelevant in compose) AND
+      # explicitly bind /http-listener/host to 0.0.0.0; without that
+      # second override the upstream image binds to localhost and is
+      # unreachable from the host port mapping.
+      RHO: '/mclient/connection-string->"mongodb://${RESTHEART_MONGO_IP:-172.36.0.10}:27017";/http-listener/host->"0.0.0.0";/core/log-level->"INFO"'
     depends_on:
       mongo:
         condition: service_healthy

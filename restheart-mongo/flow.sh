@@ -1230,137 +1230,95 @@ restheart_record_traffic() {
     done
 }
 
-# RESTHeart's routes are pattern-mount based, not file-system
-# based. The denominator below enumerates every (method, route)
-# tuple that restheart_record_traffic fires. Update this list when
-# adding new traffic so the coverage stays in lockstep.
-restheart_list_routes() {
-    cat <<'ROUTES'
-GET /
-GET /ping
-GET /metrics
-GET /health/db
-GET /logout
-POST /logout
-GET /roles/{name}
-GET /token
-GET /token/{name}
-POST /token
-POST /token/{name}
-DELETE /token/{name}
-GET /_size
-GET /_meta
-POST /_sessions
-GET /_sessions/{sid}
-GET /_sessions/{sid}/_txns
-POST /_sessions/{sid}/_txns
-PATCH /_sessions/{sid}/_txns/{txnid}
-DELETE /_sessions/{sid}/_txns/{txnid}
-GET /ic
-POST /ic
-POST /csv
-POST /graphql
-GET /graphql
-POST /graphql/{appname}
-OPTIONS /graphql
-OPTIONS /token
-GET /.well-known/oauth-authorization-server
-GET /.well-known/oauth-protected-resource
-GET /.well-known/oauth-protected-resource/{name}
-GET /{db}
-PUT /{db}
-DELETE /{db}
-GET /{db}/_meta
-GET /{db}/_size
-GET /{db}/{coll}
-PUT /{db}/{coll}
-POST /{db}/{coll}
-PATCH /{db}/{coll}
-DELETE /{db}/{coll}
-TRACE /{db}/{coll}
-OPTIONS /{db}/{coll}
-GET /{db}/{coll}/
-GET /{db}/{coll}/{docid}
-PUT /{db}/{coll}/{docid}
-PATCH /{db}/{coll}/{docid}
-DELETE /{db}/{coll}/{docid}
-GET /{db}/{coll}/{docid}/binary
-GET /{db}/{coll}/{docid}/_meta
-GET /{db}/{coll}/_size
-GET /{db}/{coll}/_meta
-PUT /{db}/{coll}/_meta
-PATCH /{db}/{coll}/_meta
-GET /{db}/{coll}/_indexes
-PUT /{db}/{coll}/_indexes/{name}
-DELETE /{db}/{coll}/_indexes/{name}
-GET /{db}/{coll}/_aggrs
-GET /{db}/{coll}/_aggrs/{name}
-GET /{db}/{coll}/_streams
-GET /{db}/{coll}/_streams/{name}
-ROUTES
-}
-
-restheart_list_recorded_routes() {
-    local f method route
-    local found_keploy=0
-    while IFS= read -r f; do
-        found_keploy=1
-        method=$(awk '/^    method:/{print $2; exit}' "$f")
-        route=$(awk '/^    url:/{print $2; exit}' "$f")
-        route="${route%%\?*}"
-        case "$route" in http://*|https://*) route="/${route#*://*/}" ;; esac
-        if [ -n "$method" ] && [ -n "$route" ]; then echo "$method $route"; fi
-    done < <(find keploy -type f -path '*/tests/*.yaml' 2>/dev/null) | sort -u
-    if [ "$found_keploy" = "1" ]; then return 0; fi
-
-    if [ -n "$RESTHEART_FIRED_ROUTES_FILE" ] && [ -f "$RESTHEART_FIRED_ROUTES_FILE" ]; then
-        while IFS= read -r line; do
-            method="${line%% *}"; route="${line#* }"
-            route="${route%%\?*}"
-            case "$route" in http://*|https://*) route="/${route#*://*/}" ;; esac
-            [ -n "$method" ] && [ -n "$route" ] && echo "$method $route"
-        done <"$RESTHEART_FIRED_ROUTES_FILE" | sort -u
-    fi
-}
-
+# restheart_report_coverage (real Java line coverage via JaCoCo).
+#
+# Requires the docker-compose.coverage.yml overlay — the base
+# compose is uninstrumented so keploy CI lanes (enterprise,
+# integrations) pay zero JVM-instrumentation cost. When called
+# from a base-compose run this function detects the missing
+# coverage image and exits 0 cleanly so `flow.sh coverage || true`
+# informational hooks don't break.
+#
+# Mechanics:
+#   - The overlay's Dockerfile.coverage layers JaCoCo's agent jar
+#     into the upstream restheart image; the overlay compose sets
+#     JAVA_TOOL_OPTIONS=-javaagent:.../jacocoagent.jar=output=tcpserver,...
+#     so the agent listens on port 6300 inside the container.
+#   - This function uses the coverage image (which has java +
+#     jacococli.jar) to dump execution data over TCP into
+#     /coverage/jacoco.exec, then renders a JaCoCo XML report
+#     against /opt/restheart/restheart.jar's classfiles.
+#   - The XML's <counter type="LINE" missed covered/> rows under
+#     <report> aggregate every analysed class; we sum and emit a
+#     `Covered N/M (XX.X%)` line in the helper-script's expected
+#     format.
 restheart_report_coverage() {
-    local routes_file recorded_file
-    routes_file="$(mktemp)"; recorded_file="$(mktemp)"
-    restheart_list_routes >"$routes_file"
-    restheart_list_recorded_routes >"$recorded_file"
+    local app="${RESTHEART_APP_CONTAINER:-restheart_app}"
+    local data_dir="${RESTHEART_COVERAGE_DATA_DIR:-${PWD}/coverage}"
+    local report_file="${COVERAGE_REPORT_FILE:-coverage_report.txt}"
+    local image="${RESTHEART_COVERAGE_IMAGE:-restheart-mongo:local-coverage}"
+    local jacoco_port="${RESTHEART_JACOCO_PORT:-6300}"
 
-    local total covered missing pct
-    total=$(wc -l <"$routes_file" | tr -d ' '); covered=0; missing=""
-    while IFS= read -r line; do
-        local method="${line%% *}"
-        local route="${line#* }"
-        # Replace {param} placeholders with [^/]+ for matching.
-        local pattern
-        pattern="^${method} $(printf '%s' "$route" | sed -E 's/\{[^}]+\}/[^\/]+/g')$"
-        if grep -qE "$pattern" "$recorded_file"; then
-            covered=$((covered + 1))
-        else
-            missing+="  ${method} ${route}"$'\n'
-        fi
-    done <"$routes_file"
-    if [ "$total" -gt 0 ]; then
-        pct=$(awk -v c="$covered" -v t="$total" 'BEGIN{printf "%.1f", c*100/t}')
-    else pct="0.0"; fi
+    if ! docker ps --format '{{.Names}}' 2>/dev/null | grep -q "^${app}$"; then
+        echo "INFO: ${app} not running — coverage report skipped"
+        : >"$report_file"
+        return 0
+    fi
+    if ! docker image inspect "$image" >/dev/null 2>&1; then
+        echo "INFO: coverage image ${image} not built — base image is uninstrumented (apply docker-compose.coverage.yml overlay to enable)"
+        : >"$report_file"
+        return 0
+    fi
+
+    # Locate the docker network the running container is on so the
+    # one-off jacococli container can reach :6300 via container DNS.
+    local network
+    network=$(docker inspect "$app" --format '{{range $k, $v := .NetworkSettings.Networks}}{{$k}}{{println}}{{end}}' 2>/dev/null | head -1 | tr -d ' \r\n')
+    if [ -z "$network" ]; then
+        echo "ERROR: could not resolve docker network for ${app}" >&2
+        return 1
+    fi
+
+    docker run --rm --network "$network" -v "${data_dir}:/coverage" --entrypoint java "$image" \
+        -jar /opt/jacoco/jacococli.jar dump \
+        --address "$app" --port "$jacoco_port" \
+        --destfile /coverage/jacoco.exec >/dev/null
+
+    docker run --rm -v "${data_dir}:/coverage" --entrypoint java "$image" \
+        -jar /opt/jacoco/jacococli.jar report /coverage/jacoco.exec \
+        --xml /coverage/report.xml \
+        --classfiles /opt/restheart/restheart.jar >/dev/null
+
+    # Parse the top-level <counter type="LINE" .../> rows from the
+    # JaCoCo XML. Use python3 inside the alpine helper so we don't
+    # rely on the host having lxml/xmlstarlet/etc.
+    local pct missed covered total
+    read -r missed covered <<<"$(docker run --rm -v "${data_dir}:/coverage" python:3.12-alpine python3 -c '
+import xml.etree.ElementTree as ET
+root = ET.parse("/coverage/report.xml").getroot()
+miss = sum(int(c.get("missed",0)) for c in root.findall("counter") if c.get("type") == "LINE")
+cov  = sum(int(c.get("covered",0)) for c in root.findall("counter") if c.get("type") == "LINE")
+print(miss, cov)
+')"
+    total=$((missed + covered))
+    pct=$(awk -v c="$covered" -v t="$total" 'BEGIN{if(t>0)printf "%.1f", c*100/t; else print "0.0"}')
+
     {
-        echo "================ RESTHeart API coverage ================"
+        echo "============== RESTHeart line coverage (JaCoCo) =============="
+        echo "Lines missed:  ${missed}"
+        echo "Lines covered: ${covered}"
+        echo "Lines total:   ${total}"
+        echo ""
         echo "Covered ${covered}/${total} (${pct}%)"
-        if [ -n "$missing" ]; then echo "Uncovered:"; printf '%s' "$missing"; fi
-        echo "========================================================"
-    } | tee "${COVERAGE_REPORT_FILE:-coverage_report.txt}"
-    rm -f "$routes_file" "$recorded_file"
+        echo "=============================================================="
+    } | tee "$report_file"
 }
 
 case "${1:-}" in
     bootstrap)        restheart_bootstrap "${2:-180}" ;;
     record-traffic)   restheart_record_traffic ;;
     coverage)         restheart_report_coverage ;;
-    list-routes)      restheart_list_routes ;;
     *)
-        echo "usage: $0 {bootstrap|record-traffic|coverage|list-routes}" >&2
+        echo "usage: $0 {bootstrap|record-traffic|coverage}" >&2
         exit 2 ;;
 esac

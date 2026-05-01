@@ -1,0 +1,43 @@
+# Coverage overlay image for restheart-mongo.
+#
+# Adds the JaCoCo agent (jacocoagent.jar) and CLI (jacococli.jar)
+# alongside the upstream restheart 9.2.1 image. The agent is
+# attached at JVM start via JAVA_TOOL_OPTIONS (set in
+# docker-compose.coverage.yml) so we don't have to rewrite the
+# upstream entrypoint, which is `java -jar restheart.jar` with
+# specific JVM flags.
+#
+# The agent runs in `tcpserver` mode so the workflow can dump
+# coverage data on demand without restarting the JVM —
+# important for distroless-style upstream images that don't
+# ship a shell.
+#
+# IMPORTANT: this image is only consumed by docker-compose.coverage.yml.
+# The base Dockerfile and docker-compose.yml stay uninstrumented so
+# enterprise's keploy compat lane pays no JVM-instrumentation cost
+# (jacocoagent adds ~5-10% per-call overhead through bytecode
+# rewriting, which would slow record/replay measurably).
+
+# Stage 1: pull JaCoCo zip in an alpine builder. The upstream
+# restheart image is distroless (no shell, no curl/unzip), so we
+# can't fetch JaCoCo from inside it.
+FROM alpine:3.19 AS jacoco-fetch
+ARG JACOCO_VERSION=0.8.13
+RUN apk add --no-cache curl ca-certificates unzip \
+    && curl -fsSL "https://repo1.maven.org/maven2/org/jacoco/jacoco/${JACOCO_VERSION}/jacoco-${JACOCO_VERSION}.zip" -o /tmp/jacoco.zip \
+    && mkdir -p /tmp/jacoco \
+    && unzip -j /tmp/jacoco.zip lib/jacocoagent.jar lib/jacococli.jar -d /tmp/jacoco
+
+# Stage 2: layer JaCoCo into the upstream image. We can't `RUN`
+# anything because the base image has no shell — only COPY and
+# WORKDIR work. COPY --chown sets ownership at copy time so the
+# distroless user (uid 65532) can read the agent.
+FROM softinstigate/restheart:9.2.1
+COPY --from=jacoco-fetch --chown=65532:65532 /tmp/jacoco/jacocoagent.jar /opt/jacoco/jacocoagent.jar
+COPY --from=jacoco-fetch --chown=65532:65532 /tmp/jacoco/jacococli.jar /opt/jacoco/jacococli.jar
+
+# Pre-create /coverage as an empty WORKDIR so docker has a
+# mountpoint for the bind-mount in docker-compose.coverage.yml.
+# WORKDIR doesn't require a shell.
+WORKDIR /coverage
+WORKDIR /opt/restheart

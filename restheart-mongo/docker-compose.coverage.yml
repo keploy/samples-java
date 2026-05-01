@@ -1,0 +1,31 @@
+# Coverage overlay — applied with:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.coverage.yml up -d --build
+#
+# Used ONLY by the standalone .github/workflows/restheart-mongo.yml
+# CI workflow. Keploy CI lanes (enterprise, integrations) ignore
+# this file and run the base compose unchanged, so they pay zero
+# JaCoCo-instrumentation cost.
+services:
+  restheart:
+    build:
+      context: .
+      dockerfile: Dockerfile.coverage
+    image: ${RESTHEART_COVERAGE_IMAGE:-restheart-mongo:local-coverage}
+    environment:
+      # Attach the JaCoCo agent in TCP server mode. The upstream
+      # entrypoint is `java ... -jar restheart.jar`; JAVA_TOOL_OPTIONS
+      # is read by the JVM and prepended to all java args, so the
+      # `-javaagent` flag arms before restheart.jar starts loading
+      # classes.
+      #
+      # output=tcpserver: the agent listens on port 6300 inside the
+      # container and dumps coverage data over TCP on demand. No
+      # need to stop the JVM to read coverage — the workflow
+      # connects to 6300, dumps, and the report is generated
+      # post-hoc by jacococli.
+      JAVA_TOOL_OPTIONS: "-javaagent:/opt/jacoco/jacocoagent.jar=output=tcpserver,address=0.0.0.0,port=6300,sessionid=keploy,append=false"
+    ports:
+      - "${RESTHEART_JACOCO_PORT:-6300}:6300"
+    volumes:
+      - ./coverage:/coverage
