@@ -193,5 +193,3 @@ jobs:
             | this PR | **${{ needs.build-coverage.outputs.coverage }}%** |
 
             Threshold: PR may not drop coverage by more than **${{ env.COVERAGE_THRESHOLD }}pp**. Override per-repo via the `RESTHEART_COVERAGE_THRESHOLD` actions variable.
-
-            Coverage is **Java line coverage** (JaCoCo 0.8.13) of the RESTHeart 9.x JVM under traffic — the bytecode `flow.sh::restheart_record_traffic` actually executes (REST CRUD + GraphQL + ACL + users + sessions/transactions + metrics + …). Instrumentation lives in a separate `Dockerfile.coverage` + `docker-compose.coverage.yml` overlay; the base `docker-compose.yml` consumed by keploy/integrations and keploy/enterprise CI lanes runs uninstrumented and pays zero JaCoCo cost. JaCoCo execution dumps + XML reports are attached as artifacts on each job (`coverage-build` / `coverage-release`).
