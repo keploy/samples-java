@@ -1,0 +1,197 @@
+# restheart-mongo sample CI — keploy-independent end-to-end smoke +
+# coverage gate.
+#
+# Triggers ONLY on changes under restheart-mongo/ (or this workflow
+# file). Other samples in this repo have their own orthogonal CI;
+# gating the whole repo on every restheart change would slow them
+# all down for no benefit.
+#
+# What it gates:
+#   * `release-coverage` — checks out the PR's base branch (main)
+#     and runs the sample end-to-end: docker compose up, bootstrap
+#     the admin db + collections, drive flow.sh record-traffic with
+#     the per-call audit log enabled, capture the route-coverage
+#     percentage from `flow.sh coverage`. This is the baseline.
+#   * `build-coverage` — same end-to-end against the PR's HEAD ref.
+#   * `coverage-gate` — fails the PR if `build`'s coverage drops
+#     more than COVERAGE_THRESHOLD percentage points below
+#     `release`. Default threshold is 1.0pp; override via repo
+#     variable `RESTHEART_COVERAGE_THRESHOLD` for a tighter or
+#     looser bar.
+#
+# On push to main, only `build-coverage` runs (no baseline to
+# compare against — main IS the baseline).
+#
+# Standards-aligned choices:
+#   * `paths:` filter on both push and pull_request triggers — the
+#     canonical GH Actions way to scope a workflow to one
+#     subdirectory.
+#   * Job outputs (steps.<id>.outputs.coverage → needs.<job>.outputs)
+#     to thread the captured percentage between jobs.
+#   * `concurrency:` cancel-in-progress on the same ref so a stale
+#     run doesn't waste runner minutes.
+#   * actions/upload-artifact for the human-readable
+#     coverage_report.txt — reviewers can inspect missing routes
+#     directly from the PR's "checks" tab.
+#   * marocchino/sticky-pull-request-comment for the PR-side diff
+#     comment. Pinned-by-header so successive runs update the same
+#     comment instead of fanning out.
+#   * The compare step is plain bash + python3 (no external
+#     coverage service). The sample's coverage is route-based
+#     (single percentage), so the gate is a 3-line subtraction.
+#
+# Sample is genuinely keploy-independent here: the workflow uses
+# flow.sh's $RESTHEART_FIRED_ROUTES_FILE per-call audit log as its
+# numerator source, not a keploy recording. The lane scripts in
+# keploy/integrations and keploy/enterprise consume the same
+# flow.sh, but use the keploy/test-set-*/tests/*.yaml tree as
+# their numerator (authoritative — only calls keploy actually
+# CAPTURED count). Both modes are wired into
+# `flow.sh::restheart_list_recorded_routes`.
+name: restheart-mongo sample
+
+on:
+  pull_request:
+    paths:
+      - 'restheart-mongo/**'
+      - '.github/workflows/restheart-mongo.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'restheart-mongo/**'
+      - '.github/workflows/restheart-mongo.yml'
+  workflow_dispatch: {}
+
+concurrency:
+  group: restheart-mongo-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  COVERAGE_THRESHOLD: ${{ vars.RESTHEART_COVERAGE_THRESHOLD || '1.0' }}
+
+jobs:
+  build-coverage:
+    name: build (current ref) coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      coverage: ${{ steps.measure.outputs.coverage }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: measure
+        name: Run sample end-to-end + measure coverage
+        working-directory: restheart-mongo
+        env:
+          RESTHEART_FIRED_ROUTES_FILE: ${{ runner.temp }}/fired-routes-build.log
+          RESTHEART_PHASE: ci-build
+        run: ../.github/workflows/scripts/run-and-measure.sh
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-build
+          path: restheart-mongo/coverage_report.txt
+          if-no-files-found: warn
+
+  release-coverage:
+    if: github.event_name == 'pull_request'
+    name: release (base ref) coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      coverage: ${{ steps.measure.outputs.coverage || steps.empty-baseline.outputs.coverage }}
+      sample-existed: ${{ steps.detect.outputs.sample-existed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+
+      # First-PR bootstrap escape hatch: the very PR that
+      # introduces the restheart-mongo/ sample has no baseline
+      # (restheart-mongo/ doesn't exist on the base ref). Detect
+      # that and short-circuit to coverage=0; the gate then
+      # treats build's coverage as the new baseline and trivially
+      # passes for any percentage > 0. After the introducing PR
+      # merges, every subsequent PR has a real baseline to diff
+      # against.
+      - id: detect
+        name: Detect baseline presence
+        run: |
+          if [ -d restheart-mongo ] && [ -x restheart-mongo/flow.sh ]; then
+            echo "sample-existed=true" >>"$GITHUB_OUTPUT"
+            echo "Sample exists on base ref — running full measurement."
+          else
+            echo "sample-existed=false" >>"$GITHUB_OUTPUT"
+            echo "No restheart-mongo/ on base ref — first-PR bootstrap; baseline coverage treated as 0%."
+          fi
+
+      - id: measure
+        name: Run sample end-to-end + measure coverage
+        if: steps.detect.outputs.sample-existed == 'true'
+        working-directory: restheart-mongo
+        env:
+          RESTHEART_FIRED_ROUTES_FILE: ${{ runner.temp }}/fired-routes-release.log
+          RESTHEART_PHASE: ci-release
+        run: ../.github/workflows/scripts/run-and-measure.sh
+
+      - id: empty-baseline
+        name: Emit zero baseline (first-PR bootstrap)
+        if: steps.detect.outputs.sample-existed != 'true'
+        run: echo "coverage=0.0" >>"$GITHUB_OUTPUT"
+
+      - name: Upload coverage report
+        if: always() && steps.detect.outputs.sample-existed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-release
+          path: restheart-mongo/coverage_report.txt
+          if-no-files-found: warn
+
+  coverage-gate:
+    if: github.event_name == 'pull_request'
+    name: coverage gate
+    needs: [build-coverage, release-coverage]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compare build vs release
+        env:
+          BUILD: ${{ needs.build-coverage.outputs.coverage }}
+          RELEASE: ${{ needs.release-coverage.outputs.coverage }}
+          THRESHOLD: ${{ env.COVERAGE_THRESHOLD }}
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          set -Eeuo pipefail
+          if [ -z "${BUILD:-}" ] || [ -z "${RELEASE:-}" ]; then
+            echo "::error::missing coverage outputs — build='${BUILD:-}' release='${RELEASE:-}'"
+            exit 1
+          fi
+          drop=$(python3 -c "print(round(${RELEASE} - ${BUILD}, 2))")
+          echo "Release (${BASE_REF}): ${RELEASE}%"
+          echo "Build   (this PR):     ${BUILD}%"
+          echo "Drop:                  ${drop}pp (threshold ${THRESHOLD}pp)"
+          if python3 -c "import sys; sys.exit(0 if (${RELEASE} - ${BUILD}) > ${THRESHOLD} else 1)"; then
+            echo "::error::restheart-mongo coverage dropped from ${RELEASE}% → ${BUILD}% (-${drop}pp), exceeding the ${THRESHOLD}pp threshold."
+            echo "Suggested actions:"
+            echo "  * Add curl(s) to flow.sh::restheart_record_traffic that exercise the routes you changed/touched."
+            echo "  * If the route(s) was intentionally retired, drop it from restheart-mongo/flow.sh::restheart_list_routes' SCOPE_PATHS too so it's removed from the denominator."
+            exit 1
+          fi
+          echo "OK — coverage delta within ${THRESHOLD}pp threshold."
+
+      - name: Sticky PR comment
+        if: ${{ !cancelled() }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: restheart-mongo-coverage
+          message: |
+            ### restheart-mongo sample coverage
+
+            | ref | coverage |
+            |---|---|
+            | base (`${{ github.event.pull_request.base.ref }}`) | **${{ needs.release-coverage.outputs.coverage }}%** |
+            | this PR | **${{ needs.build-coverage.outputs.coverage }}%** |
+
+            Threshold: PR may not drop coverage by more than **${{ env.COVERAGE_THRESHOLD }}pp**. Override per-repo via the `RESTHEART_COVERAGE_THRESHOLD` actions variable.
+
+            Coverage measures the RESTHeart 9.x REST surface (`/{db}/{coll}` CRUD + `_aggrs/{name}` + `_size` + `_meta` + `_indexes` + `_streams/{name}` + `/graphql` + `/graphql/{appname}` + `/{db}/{coll}.files` + `/acl` + `/users` + `/tokens` + sessions/transactions + `/ic` + `/csv` + metrics + OAuth) that `flow.sh::restheart_record_traffic` exercises against the running backend. Reports are attached as artifacts on each job ("coverage-build" / "coverage-release").
