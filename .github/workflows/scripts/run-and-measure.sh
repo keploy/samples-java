@@ -74,6 +74,18 @@ for i in $(seq 1 120); do
     sleep 2
 done
 
+if [ "$code" != "200" ] && [ "$code" != "401" ]; then
+    echo "::error::restheart did not bind on port ${RESTHEART_APP_PORT} within 240s (last code: ${code:-empty})"
+    echo "----- restheart container logs -----"
+    docker logs "${RESTHEART_APP_CONTAINER}" --tail 200 2>&1 || true
+    echo "----- mongo container logs -----"
+    docker logs "${RESTHEART_MONGO_CONTAINER}" --tail 100 2>&1 || true
+    echo "----- docker compose ps -----"
+    docker compose ps || true
+    docker compose down -v --remove-orphans || true
+    exit 1
+fi
+
 bash flow.sh bootstrap 240
 
 # Drive traffic. flow.sh::restheart_record_traffic gates on
