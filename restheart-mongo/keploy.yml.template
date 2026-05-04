@@ -1,21 +1,54 @@
 # keploy.yml template for the restheart-mongo sample.
 #
-# globalNoise covers fields whose value is non-deterministic
-# across record/replay:
+# globalNoise.global is consumed at replay-time as a `body` /
+# `header` map of field-name → regex array. Keploy's matcher
+# expects a NESTED structure (top-level keys are the response
+# section "body" / "header"; inner keys are the field names).
+# Flat dotted-keys like `body.field: []` are not unflattened by
+# the parser — they end up as outer keys "body.field" and never
+# match the body section, so the noise is silently ignored.
 #
-#   header.Date                    runtime-stamped
-#   body._etag                     RESTHeart auto-stamped on each
-#                                  document; changes per write
-#   body._oid / body._id           server-generated ObjectIds
-#                                  (when not set by client)
-#   body.lastModified              auto-now timestamp
+# Fields covered here:
+#
+#   header.Date / header.Content-Length
+#     Runtime-stamped; Content-Length is downstream-of body.client_ip
+#     on /ping (length changes when the reflected client_ip differs
+#     in byte width).
+#   body._etag / body._oid / body._id
+#     RESTHeart auto-stamped on each document; ObjectIds and ETag
+#     change per write.
+#   body.lastModified
+#     Auto-now timestamp.
+#   body.client_ip
+#     RESTHeart's /ping echoes the requesting client IP. Differs
+#     between host-driven record (loopback) and docker-bridge
+#     replay (gateway). Time-freeze can't help; this is
+#     network-derived.
+#   body.latencyMs
+#     /health/db reports a freshly measured DB ping duration; varies
+#     per request even with time freeze (the duration is computed
+#     end-start across two clock reads).
+#   header.Auth-Token / body.access_token
+#     RESTHeart's /token endpoint mints a JWT with `exp` and `jti`
+#     (random UUID) on every call. Time-freeze pins exp, but jti is
+#     a SecureRandom UUID and the HS256 signature is a function of
+#     the full payload, so tokens never match byte-for-byte across
+#     record/replay.
 #
 # Centralised here so a future RESTHeart version that adds another
 # auto-stamped field is one edit, not a fan-out across lane scripts.
 test:
   globalNoise:
     global:
-      header.Date: []
-      body._etag: []
-      body._oid: []
-      body.lastModified: []
+      header:
+        Date: []
+        Content-Length: []
+        Auth-Token: []
+      body:
+        _etag: []
+        _oid: []
+        _id: []
+        lastModified: []
+        client_ip: []
+        latencyMs: []
+        access_token: []

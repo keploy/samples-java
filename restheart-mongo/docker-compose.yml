@@ -15,11 +15,19 @@ services:
       # RHO is RESTHeart's runtime config-override syntax:
       #   key->value  pairs separated by ';'
       # We override the default mongo URL (which the upstream image
-      # points at host.docker.internal — irrelevant in compose) AND
-      # explicitly bind /http-listener/host to 0.0.0.0; without that
-      # second override the upstream image binds to localhost and is
-      # unreachable from the host port mapping.
-      RHO: '/mclient/connection-string->"mongodb://${RESTHEART_MONGO_IP:-172.36.0.10}:27017";/http-listener/host->"0.0.0.0";/core/log-level->"INFO"'
+      # points at host.docker.internal — irrelevant in compose),
+      # explicitly bind /http-listener/host to 0.0.0.0 (without it
+      # the upstream image binds localhost and is unreachable from
+      # the host port mapping), AND pin /jwtConfigProvider/key to
+      # a fixed secret. The default `key: null` makes RESTHeart
+      # generate a fresh random HS256 secret on every container
+      # start. Recorded JWT bearers carry an HS256 signature over
+      # the payload using that secret, so a fresh-container replay
+      # phase rejects the recorded bearer with 401 even though
+      # --freezeTime keeps `exp` valid. Pinning the secret keeps
+      # the bearer signature verifiable across record→replay
+      # container restarts (deterministic key, deterministic JWT).
+      RHO: '/mclient/connection-string->"mongodb://${RESTHEART_MONGO_IP:-172.36.0.10}:27017";/http-listener/host->"0.0.0.0";/core/log-level->"INFO";/jwtConfigProvider/key->"keploy-fixed-jwt-secret-for-deterministic-recordings"'
     depends_on:
       mongo:
         condition: service_healthy
