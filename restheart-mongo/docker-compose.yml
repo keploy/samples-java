@@ -27,7 +27,7 @@ services:
       # --freezeTime keeps `exp` valid. Pinning the secret keeps
       # the bearer signature verifiable across record→replay
       # container restarts (deterministic key, deterministic JWT).
-      RHO: '/mclient/connection-string->"mongodb://${RESTHEART_MONGO_IP:-172.36.0.10}:27017";/http-listener/host->"0.0.0.0";/core/log-level->"INFO";/jwtConfigProvider/key->"keploy-fixed-jwt-secret-for-deterministic-recordings"'
+      RHO: '/mclient/connection-string->"mongodb://${RESTHEART_MONGO_IP:-172.36.0.10}:27017";/http-listener/host->"0.0.0.0";/core/log-level->"INFO";/jwtConfigProvider/key->"keploy-fixed-jwt-secret-for-deterministic-recordings";/mongoAclAuthorizer/cache-enabled->false'
       # Bound RESTHeart's JVM heap. RESTHeart 9.x's default uses
       # `MaxRAMPercentage=25` of cgroup memory, which on a typical
       # Woodpecker runner cgroup (~8GB) lands ~2GB heap. With three
@@ -44,6 +44,21 @@ services:
       # 512m is comfortable for the record/replay workload (peak
       # observed at ~280MB in single-cell local runs).
       JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
+      # Note on /mongoAclAuthorizer/cache-enabled->false in RHO:
+      # RESTHeart's mongoAclAuthorizer caches ACL rules with a 5s
+      # TTL backed by Caffeine, which uses System.nanoTime() to
+      # measure expiry. When the lane runs `keploy test --freezeTime`,
+      # the LD_PRELOADed clock-shim intercepts clock_gettime/
+      # gettimeofday — and Caffeine's nanoTime ticker is also
+      # frozen — so the cache TTL never expires. flow.sh's `sleep 6`
+      # between an `acl` rule POST and the writer-permission test
+      # works at record time (the wall clock advances and the cache
+      # reloads), but at replay the cache stays loaded with whatever
+      # state it had at the first request and never picks up the
+      # newly-POSTed rule. Result: writer gets 403 at replay
+      # despite recorded 200. Disabling the cache makes ACL rules
+      # read-through from mongo on every request — small perf cost,
+      # but eliminates the time-freeze x cache-ttl interaction.
     depends_on:
       mongo:
         condition: service_healthy

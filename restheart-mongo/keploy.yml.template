@@ -44,6 +44,15 @@ test:
         Date: []
         Content-Length: []
         Auth-Token: []
+        # Etag is server-stamped per write/read on every doc and
+        # collection in RESTHeart. The body field _etag is already
+        # noised (below), but RESTHeart also exposes the same hash
+        # in the response header `Etag`, which differs per run.
+        Etag: []
+        # POST /_sessions returns a `Location: /_sessions/<uuid>`
+        # header where the UUID is server-generated per session.
+        # Each replay gets a fresh UUID; ignore the header to match.
+        Location: []
       body:
         _etag: []
         _oid: []
