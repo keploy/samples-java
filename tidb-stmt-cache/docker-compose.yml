@@ -1,14 +1,12 @@
-version: '3.8'
-
 # Minimal single-node TiDB for keploy e2e.
 #
 # Why this stack and not the full pingcap/tidb-docker-compose with PD + TiKV?
 # - The sample only exercises the SQL layer (MySQL wire protocol on :4000).
 #   Coordination / storage flakiness in a 3-container topology adds CI noise
 #   without buying us any matcher coverage.
-# - `--store=unistore` keeps everything in a single process backed by an
-#   in-memory storage engine. Boot time is ~5s vs ~30-45s for a full PD+TiKV
-#   stack. Data is volatile, which is exactly what we want for keploy CI.
+# - The default `pingcap/tidb` entrypoint already runs in unistore (single
+#   process, in-memory) mode when no PD address is supplied, which is exactly
+#   what we want for keploy CI: ~5s boot, volatile data, no extra containers.
 #
 # Pin: v8.5.x is the LTS line current at the time this sample was added.
 # Bump as new LTS lines ship; the matcher behaviour we're testing has been
@@ -16,17 +14,6 @@ version: '3.8'
 services:
   tidb:
     image: pingcap/tidb:v8.5.6
-    command:
-      - --store=unistore
-      - --path=""
-      - --host=0.0.0.0
-      - --advertise-address=tidb
-      - --log-level=error
     ports:
       - "4000:4000"   # MySQL wire protocol
       - "10080:10080" # status / readiness
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:10080/status || exit 1"]
-      interval: 2s
-      timeout: 2s
-      retries: 30
