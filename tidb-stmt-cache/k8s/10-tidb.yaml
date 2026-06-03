@@ -1,0 +1,54 @@
+# Single-node TiDB in unistore mode. No PD, no TiKV — fast boot, in-memory
+# state, identical SQL surface to a real cluster. Matches the docker-compose
+# topology so a recording captured locally and one captured in-cluster
+# share the same MySQL wire protocol behaviour.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tidb
+  namespace: tidb-pulsar-replay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tidb
+  template:
+    metadata:
+      labels:
+        app: tidb
+    spec:
+      containers:
+        - name: tidb
+          image: pingcap/tidb:v8.5.6
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: mysql
+              containerPort: 4000
+            - name: status
+              containerPort: 10080
+          readinessProbe:
+            tcpSocket:
+              port: 4000
+            initialDelaySeconds: 5
+            periodSeconds: 2
+            failureThreshold: 30
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tidb
+  namespace: tidb-pulsar-replay
+spec:
+  selector:
+    app: tidb
+  ports:
+    - name: mysql
+      port: 4000
+      targetPort: 4000
