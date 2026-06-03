@@ -8,9 +8,9 @@ against TiDB and Apache Pulsar in a single app:
 | `GET /api/kv/{v}` and `GET /api/kv/insert-select/{v}` | MySQL Connector/J prepared-statement cache + HikariCP LIFO pool → orphan `COM_STMT_EXECUTE` matcher path |
 | `POST /events/patch` | Hibernate INSERT + Pulsar `SEND` on a **partitioned** topic with default `RoundRobinPartitionRouter` → the partition-routing replay regression |
 
-Both flows share the same `HikariDataSource` bean (Flipkart's actual shape:
-`autoCommit=false`, `prepStmtCacheSize=500`, `prepStmtCacheSqlLimit=2048`,
-JPA `provider_disables_autocommit=true`).
+Both flows share the same `HikariDataSource` bean shape that drives both
+regressions: `autoCommit=false`, `prepStmtCacheSize=500`,
+`prepStmtCacheSqlLimit=2048`, JPA `provider_disables_autocommit=true`.
 
 ## Why the Pulsar partitioned topic matters
 
@@ -41,7 +41,7 @@ no recorded mock matches the live topic and replay fails with
 │   └── 30-app.yaml             carries keploy.io/record-session=true for the webhook
 ├── pom.xml
 └── src/main/java/com/example/tidbstmtcache/
-    ├── DataSourceConfig.java   Flipkart-shape HikariCP bean
+    ├── DataSourceConfig.java   HikariCP bean (autoCommit=false, …)
     ├── EventsController.java   POST /events/patch — JPA save + Pulsar send
     ├── EventEntity.java        JPA entity for the `events` table
     ├── EventRepository.java
@@ -68,10 +68,10 @@ APP_PID=$!
 curl -s -X POST http://localhost:8080/events/patch \
   -H 'Content-Type: application/json' \
   -d '{
-    "entity_id": "FMPP4037630682",
+    "entity_id": "ENTITY-1001",
     "event_name": "delivered",
     "event_timestamp": "2026-05-23T17:07:22+05:30",
-    "task_orchestrator": "FSD"
+    "task_orchestrator": "ORCH-A"
   }'
 # Expect: {"message":"Event patched"}
 
@@ -84,7 +84,7 @@ diff `bin/pulsar-admin topics partitioned-stats persistent://public/default/even
 output — partition message counts will land on different partitions
 each cold start.
 
-## Full path — k8s-proxy auto-replay (matches Flipkart prod flow)
+## Full path — k8s-proxy auto-replay
 
 The k8s-proxy controller watches the namespace for pods carrying
 `keploy.io/record-session=true` and injects the keploy-agent sidecar.
@@ -147,7 +147,7 @@ PF_PID=$!
 for i in $(seq 1 5); do
   curl -s -X POST http://localhost:8080/events/patch \
     -H 'Content-Type: application/json' \
-    -d "{\"entity_id\":\"FMPP$i\",\"event_name\":\"delivered\",\"event_timestamp\":\"2026-05-23T17:07:22+05:30\",\"task_orchestrator\":\"FSD\"}"
+    -d "{\"entity_id\":\"ENTITY-$i\",\"event_name\":\"delivered\",\"event_timestamp\":\"2026-05-23T17:07:22+05:30\",\"task_orchestrator\":\"ORCH-A\"}"
 done
 
 kill $PF_PID
@@ -191,19 +191,23 @@ kubectl -n tidb-pulsar-replay logs deploy/tidb-pulsar-app -c keploy-agent \
   `…events`, same payload), the synthetic `SEND_RECEIPT` is returned,
   the app returns HTTP 200, the testcase passes.
 
-## Reproducing the Flipkart symptom exactly
+## Replaying an existing recording
 
-The Strowger recording in `Strowger Playgro Global Shipment (1)/testset/`
-matches this sample structurally — the `POST /events/patch` body, the
-HikariCP shape, and the partitioned Pulsar topic. To run the customer's
-mocks against this app:
+If you already have a `mocks.yaml` and a `tests/` directory captured
+against a structurally similar Pulsar producer (partitioned topic, JPA
+`INSERT` before the SEND, HTTP 200 response), this sample can serve as
+the replay target:
 
-1. Replace `k8s/30-app.yaml`'s `PULSAR_TOPIC` env with the customer's
-   topic name (`persistent://toss-relayer/gsm-relayers-prod/toss_EKL-E2E-ORCHESTRATOR_gsm_ns`).
-2. Use the customer's `mocks.yaml` instead of a fresh recording.
-3. Run step 6 with the customer's test-set ID.
+1. Override `k8s/30-app.yaml`'s `PULSAR_TOPIC` env to match the topic
+   name in your recorded mocks (`persistent://<tenant>/<namespace>/<topic>`).
+2. Load the existing `mocks.yaml` into the test-set storage backend the
+   k8s-proxy install is configured for, instead of running a fresh
+   recording.
+3. Trigger the replay job with that test-set ID.
 
-Without the fix you should see the same `payload-aware mock mismatch
-for SEND (topic=…partition-7)` log line the customer reported. With the
-fix you should see the `SEND` resolve against the customer's
-`partition-5` mock and the testcase pass.
+Without the matcher fix in `keploy/enterprise`, a replay where the live
+producer round-robins to a different partition than the recording will
+log `payload-aware mock mismatch for SEND (topic=…partition-<N>)` and
+the testcase fails. With the fix, the SEND resolves against the
+recorded mock for `…partition-<M>` (same base topic, same payload) and
+the testcase passes.

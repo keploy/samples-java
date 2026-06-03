@@ -10,12 +10,11 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 
 /**
- * Mirrors the Flipkart Global-Shipment-Master event row that the
- * /events/patch endpoint persists before fanning the event out to a
- * partitioned Pulsar topic. The exact column types are deliberately
- * boring — we are not validating Hibernate type mapping here, only
- * that an INSERT + COMMIT goes through MySQL Connector/J in a way the
- * keploy MySQL parser already covers.
+ * Event row that the /events/patch endpoint persists before fanning the
+ * event out to a partitioned Pulsar topic. The exact column types are
+ * deliberately boring — we are not validating Hibernate type mapping
+ * here, only that an INSERT + COMMIT goes through MySQL Connector/J in
+ * a way the keploy MySQL parser already covers.
  */
 @Entity
 @Table(name = "events")

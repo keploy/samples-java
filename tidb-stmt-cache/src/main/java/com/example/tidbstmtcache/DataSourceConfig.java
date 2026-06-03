@@ -9,9 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
- * HikariCP pool against TiDB :4000 with the same bean shape the Flipkart
- * Global-Shipment-Master service uses in production. Two distinct keploy
- * regressions are exercised by this single sample:
+ * HikariCP pool against TiDB :4000. Two distinct keploy regressions are
+ * exercised by this single sample:
  *
  *  - Orphan COM_STMT_EXECUTE (TiDB prepared-statement cache): driven by
  *    useServerPrepStmts + cachePrepStmts + prepStmtCacheSize on the

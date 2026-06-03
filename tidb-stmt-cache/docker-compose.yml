@@ -17,9 +17,9 @@
 # reproduce because there is only one partition to route to.
 #
 # Pin: TiDB v8.5.x is the LTS line current at the time this sample was
-# added. Pulsar 4.0.3 matches the broker version typically deployed in
-# Flipkart's Strowger environment (Pulsar Server 3.x client compatibility
-# is preserved through the 4.x line).
+# added. Pulsar 4.0.3 matches the broker version the regression was
+# originally observed against (Pulsar Server 3.x client compatibility is
+# preserved through the 4.x line).
 services:
   tidb:
     image: pingcap/tidb:v8.5.6

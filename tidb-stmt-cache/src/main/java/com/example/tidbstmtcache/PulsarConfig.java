@@ -24,10 +24,10 @@ import org.springframework.context.annotation.Configuration;
  *
  * Why we do NOT pin a single partition (e.g. SinglePartition + fixed
  * messageKey): pinning would mask the bug, which is the whole reason
- * this sample exists. The point is to reproduce the Flipkart routing
- * mismatch end-to-end so the matcher loosening in
- * keploy/enterprise (baseTopic in pulsar/replayer/replayer.go) can be
- * verified against a real Java producer.
+ * this sample exists. The point is to reproduce the routing mismatch
+ * end-to-end so the matcher loosening in keploy/enterprise (baseTopic
+ * in pulsar/replayer/replayer.go) can be verified against a real Java
+ * producer.
  *
  * Why we accept a topic that may not yet exist on broker startup:
  * docker-compose's pulsar-init container runs `pulsar-admin topics

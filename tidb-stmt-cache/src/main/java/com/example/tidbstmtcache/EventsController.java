@@ -14,12 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Mirrors the Flipkart Global-Shipment-Master /events/patch endpoint:
- * persists an event row through Hibernate (TiDB) and fans it out to a
- * partitioned Pulsar topic. The request/response shapes match the
- * Strowger recording (test post-events-patch-1.yaml) so a recording
- * captured against this sample produces mocks structurally identical
- * to the customer's.
+ * POST /events/patch — persists an event row through Hibernate (TiDB)
+ * and fans it out to a partitioned Pulsar topic. The request/response
+ * shapes are intentionally generic so any recording captured against
+ * this sample can be replayed with the keploy enterprise agent.
  *
  * Why a synchronous .send() rather than sendAsync(): we want the
  * record-time mock for SEND_RECEIPT and the in-transaction COMMIT to
