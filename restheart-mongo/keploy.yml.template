@@ -61,3 +61,10 @@ test:
         client_ip: []
         latencyMs: []
         access_token: []
+        # RESTHeart's /tokens endpoint returns expires_in = seconds until
+        # the JWT `exp`, computed as (exp - now) at request time. Even under
+        # --freezeTime the recorded vs replayed value can differ by 1s when
+        # the request straddles a second boundary (observed 872 vs 871 on
+        # post-token), so the countdown must be treated as noise just like
+        # the access_token JWT itself.
+        expires_in: []
