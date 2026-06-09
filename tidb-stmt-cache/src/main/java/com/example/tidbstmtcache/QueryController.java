@@ -86,4 +86,24 @@ public class QueryController {
         out.put("readback", last);
         return out;
     }
+
+    /**
+     * Two distinct prepared queries with an IDENTICAL parameter signature
+     * (one int) issued in the SAME request — exercises the orphaned-EXECUTE
+     * cross-query matcher path.
+     *
+     * When both PREPAREs predate the record window (orphaned mocks,
+     * expectedQuery==""), a param-only match must NOT serve query B's row for
+     * query A just because the bound parameter is equal. {@code a} must echo v
+     * and {@code b} must be v+1000.
+     */
+    @GetMapping("/api/cross/{v}")
+    public Map<String, Object> cross(@PathVariable("v") int v) {
+        Integer a = jdbc.queryForObject("SELECT ? AS v", Integer.class, v);
+        Integer b = jdbc.queryForObject("SELECT ? + 1000 AS w", Integer.class, v);
+        Map<String, Object> out = new HashMap<>();
+        out.put("a", a);
+        out.put("b", b);
+        return out;
+    }
 }
