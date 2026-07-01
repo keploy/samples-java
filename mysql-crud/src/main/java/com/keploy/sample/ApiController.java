@@ -1,9 +1,15 @@
 package com.keploy.sample;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,8 +66,20 @@ public class ApiController {
     public Map<String, Object> createUser(@RequestBody Map<String, Object> body) {
         String name = String.valueOf(body.getOrDefault("name", "unknown"));
         String email = String.valueOf(body.getOrDefault("email", "unknown@example.com"));
-        jdbc.update("INSERT INTO users(name,email) VALUES(?,?)", name, email);
-        Long id = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Long.class);
+
+        // LAST_INSERT_ID() is connection-scoped; a pooled JdbcTemplate call can
+        // land on a different physical connection than the INSERT. Use
+        // generated keys from the same statement/connection instead.
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbc.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO users(name,email) VALUES(?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            return ps;
+        }, keyHolder);
+        long id = keyHolder.getKey().longValue();
+
         jdbc.update("INSERT INTO audit_log(action,detail) VALUES(?,?)", "create_user", "name=" + name);
         Integer userCount = jdbc.queryForObject("SELECT COUNT(*) FROM users", Integer.class);
         Map<String, Object> created = jdbc.queryForMap("SELECT id,name,email FROM users WHERE id=?", id);
@@ -73,16 +91,30 @@ public class ApiController {
 
     @PostMapping("/users/{id}/orders")
     public Map<String, Object> createOrder(@PathVariable long id, @RequestBody Map<String, Object> body) {
-        Object amount = body.getOrDefault("amount", 0);
-        String status = String.valueOf(body.getOrDefault("status", "PENDING"));
         Integer userExists = jdbc.queryForObject("SELECT COUNT(*) FROM users WHERE id=?", Integer.class, id);
-        jdbc.update("INSERT INTO orders(user_id,amount,status) VALUES(?,?,?)", id, amount, status);
-        Long orderId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Long.class);
+        if (userExists == null || userExists == 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user " + id + " does not exist");
+        }
+
+        BigDecimal amount = new BigDecimal(String.valueOf(body.getOrDefault("amount", 0)));
+        String status = String.valueOf(body.getOrDefault("status", "PENDING"));
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbc.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO orders(user_id,amount,status) VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, id);
+            ps.setBigDecimal(2, amount);
+            ps.setString(3, status);
+            return ps;
+        }, keyHolder);
+        long orderId = keyHolder.getKey().longValue();
+
         Map<String, Object> order = jdbc.queryForMap("SELECT id,user_id,amount,status FROM orders WHERE id=?", orderId);
         Integer orderCount = jdbc.queryForObject("SELECT COUNT(*) FROM orders WHERE user_id=?", Integer.class, id);
         jdbc.update("INSERT INTO audit_log(action,detail) VALUES(?,?)", "create_order", "user=" + id);
         Map<String, Object> r = new LinkedHashMap<>();
-        r.put("userExists", userExists != null && userExists > 0);
+        r.put("userExists", true);
         r.put("order", order);
         r.put("orderCountForUser", orderCount);
         return r;
