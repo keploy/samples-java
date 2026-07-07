@@ -26,6 +26,7 @@ This repo contains the sample for [Keploy's](https://keploy.io) Java Application
 7. [Java Dynamic Deduplication](https://github.com/keploy/samples-java/tree/main/java-dedup) - A Spring Boot sample used by CI to validate Enterprise Java dynamic dedup in native, Docker, and restricted Docker replay runs. CI uses checked-in fixtures and does not record this sample in the pipeline.
 8. [Dropwizard Dynamic Deduplication](https://github.com/keploy/samples-java/tree/main/dropwizard-dedup) - A Dropwizard/Jersey sample used by Enterprise CI to validate that Java dynamic dedup works outside Spring Boot with the runtime Java agent, checked-in HTTP fixtures, native launch, classpath launch, Docker, distroless, and restricted Docker.
 9. [Simple Java Dynamic Deduplication](https://github.com/keploy/samples-java/tree/main/simple-java-dedup) - A minimal plain-Java HTTP server used to smoke-test Java dynamic dedup on Java 8 and Java 17 in native and Docker launch modes.
+10. [MySQL CRUD](https://github.com/keploy/samples-java/tree/main/mysql-crud) - A minimal Spring Boot + JDBC CRUD app used by Enterprise CI to validate the self-hosted cloud-replay pipeline's JDBC secret-obfuscation and object-storage mock upload/download paths against a real MySQL 8 backend.
 
 ## Community Support ❤️
 
