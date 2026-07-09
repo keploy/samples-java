@@ -27,7 +27,7 @@ services:
       # --freezeTime keeps `exp` valid. Pinning the secret keeps
       # the bearer signature verifiable across record→replay
       # container restarts (deterministic key, deterministic JWT).
-      RHO: '/mclient/connection-string->"mongodb://${RESTHEART_MONGO_IP:-172.36.0.10}:27017";/http-listener/host->"0.0.0.0";/core/log-level->"INFO";/jwtConfigProvider/key->"keploy-fixed-jwt-secret-for-deterministic-recordings";/mongoAclAuthorizer/cache-enabled->false;/graphql/app-cache-enabled->false'
+      RHO: '/mclient/connection-string->"mongodb://${RESTHEART_MONGO_IP:-172.36.0.10}:27017";/http-listener/host->"0.0.0.0";/core/log-level->"INFO";/jwtConfigProvider/key->"keploy-fixed-jwt-secret-for-deterministic-recordings";/mongoAclAuthorizer/cache-enabled->false;/graphql/app-cache-enabled->false;/mongo/local-cache-enabled->false;/mongo/schema-cache-enabled->false'
       # Bound RESTHeart's JVM heap. RESTHeart 9.x's default uses
       # `MaxRAMPercentage=25` of cgroup memory, which on a typical
       # Woodpecker runner cgroup (~8GB) lands ~2GB heap. With three
@@ -75,6 +75,34 @@ services:
       # recorded response (the post-graphql-halpeople flakiness). Disabling
       # the app cache makes gql-apps read-through on every request, so the
       # mongo query stream is identical at record and replay.
+      #
+      # Note on /mongo/{local,schema}-cache-enabled->false in RHO:
+      # The SAME time-freeze x cache-ttl interaction as the ACL and GraphQL
+      # caches above, but for the mongo service's own Caffeine caches (default
+      # ttls tick on the frozen System.nanoTime()).
+      #   - local-cache (db/collection _properties metadata, 60s ttl): this is
+      #     the confirmed culprit. Every request routes/validates via the target
+      #     collection's _properties — `GET /` (get-root) reads ALL collections'
+      #     _properties, and writes/deletes (post-users, delete-users,
+      #     delete-acl-*) read the target collection's. With local-cache on, that
+      #     `find _properties` mongo stream is served from cache at record (wall
+      #     clock warm) but the frozen ttl at replay shifts WHICH per-test window
+      #     each find lands in, so keploy's strict per-test mock pool has no
+      #     matching mock -> mongo proxy closes the socket -> 500
+      #     MongoSocketReadException. Observed on keploy/enterprise pipeline 5867
+      #     (record-pr-replay-stable): 13/306 failed — get-root-1..4,
+      #     post-users-1/2, delete-users-*, delete-acl-* — a different leg each
+      #     run (COMPAT_TEST_RETRIES=3 could not absorb it).
+      #   - schema-cache (JSON schemas, 60s ttl): same frozen-ticker class; the
+      #     sample bootstraps _schemas and posts a schema (flow.sh), so a
+      #     schema-validated write can shift its `_schemas` find the same way.
+      #     Disabled proactively to close the class on a path the sample exercises.
+      # (get-collection-cache is left enabled: it only activates on ?cache
+      # requests, which flow.sh never sends, so it is inert here.)
+      # Disabling makes _properties/schema reads read-through on every request,
+      # so the mongo query stream is identical at record and replay. Read-through
+      # is always correct (only a small perf cost), so this cannot regress
+      # behaviour.
     depends_on:
       mongo:
         condition: service_healthy
