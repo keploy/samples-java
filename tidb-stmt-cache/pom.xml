@@ -15,10 +15,18 @@
     <artifactId>tidb-stmt-cache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>tidb-stmt-cache</name>
-    <description>E2E sample exercising keploy's MySQL prepared-statement orphan-EXECUTE matching against TiDB</description>
+    <description>E2E sample exercising keploy's MySQL prepared-statement orphan-EXECUTE matching against TiDB, plus Pulsar partitioned-topic routing for the round-robin replay regression</description>
 
     <properties>
         <java.version>17</java.version>
+        <!--
+            Pulsar 3.1.x is the Java client line the regression was first
+            captured against (CONNECT mocks show clientVersion=Pulsar-Java-v3.1.1).
+            Keeping the same major.minor here means the wire-format the
+            recorder sees in CI matches what keploy/enterprise has been
+            hardened against.
+        -->
+        <pulsar.client.version>3.1.1</pulsar.client.version>
     </properties>
 
     <dependencies>
@@ -31,6 +39,19 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
         <!--
+            JPA + Hibernate are added for the Pulsar/TiDB scenario: the
+            datasource bean we are replicating (autoCommit=false,
+            spring.jpa.properties.hibernate.connection.provider_disables_autocommit=true)
+            only behaves correctly when the JPA EntityManager owns the
+            transactional boundary. JdbcTemplate alone won't reproduce the
+            Hibernate-driven SET autocommit + COMMIT sequence the recorder
+            captures.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!--
             mysql-connector-j 8.x speaks the MySQL wire protocol that TiDB
             implements (TiDB :4000 is MySQL-protocol-compatible). The same
             cachePrepStmts + useServerPrepStmts flags that work against MySQL
@@ -41,6 +62,20 @@
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <!--
+            Apache Pulsar Java client. The producer this sample creates uses
+            MessageRoutingMode.RoundRobinPartition (Pulsar's default) against
+            a topic pre-created with 8 partitions. The starting-partition
+            cursor is randomised per producer instance, so the partition a
+            given SEND lands on at record time will differ from replay time
+            — which is exactly the regression keploy/enterprise's baseTopic()
+            matcher loosening handles.
+        -->
+        <dependency>
+            <groupId>org.apache.pulsar</groupId>
+            <artifactId>pulsar-client</artifactId>
+            <version>${pulsar.client.version}</version>
         </dependency>
     </dependencies>
 
