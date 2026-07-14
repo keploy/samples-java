@@ -1,0 +1,8 @@
+🐰 Keploy: 2025-06-21T11:03:47+05:30 	[31mERROR[0m	Error removing file	{"error": "remove keploy-logs.txt: The process cannot access the file because it is being used by another process."}
+🐰 Keploy: 2025-06-21T11:03:47+05:30 	[31mERROR[0m	Failed to delete Keploy Logs	{"error": "remove keploy-logs.txt: The process cannot access the file because it is being used by another process."}
+🐰 Keploy: 2025-06-21T11:03:53+05:30 	[34mINFO[0m	config file not found; proceeding with flags only
+🐰 Keploy: 2025-06-21T11:03:53+05:30 	[34mINFO[0m	Using the last directory name as appName : samples-java
+🐰 Keploy: 2025-06-21T11:03:53+05:30 	[34mINFO[0m	Generated config file based on the flags that are used
+🐰 Keploy: 2025-06-21T11:03:53+05:30 	[31mERROR[0m	failed to get service	{"command": "record", "error": "command not supported in non linux os. if you are on windows or mac, please use the dockerized version of your application"}
+🐰 Keploy: 2025-06-21T11:03:53+05:30 	[31mERROR[0m	Error removing file	{"error": "remove keploy-logs.txt: The process cannot access the file because it is being used by another process."}
+🐰 Keploy: 2025-06-21T11:03:53+05:30 	[31mERROR[0m	Failed to delete Keploy Logs	{"error": "remove keploy-logs.txt: The process cannot access the file because it is being used by another process."}
