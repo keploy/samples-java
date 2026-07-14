@@ -1,0 +1,1853 @@
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-0
+spec:
+    metadata:
+        operation: '{ OpQuery flags: [], fullCollectionName: admin.$cmd, numberToSkip: 0, numberToReturn: -1, query: {"isMaster": {"$numberInt":"1"},"helloOk": true,"client": {"driver": {"name": "mongo-java-driver|sync|spring-boot","version": "4.9.1"},"os": {"type": "Linux","name": "Linux","architecture": "aarch64","version": "6.1.0-18-cloud-arm64"},"platform": "Java/Debian/17.0.10+7-Debian-1deb12u1"}}, returnFieldsSelector:  }'
+        type: config
+    requests:
+        - header:
+            length: 311
+            requestId: 2
+            responseTo: 0
+            Opcode: 2004
+          message:
+            flags: 0
+            collection_name: admin.$cmd
+            number_to_skip: 0
+            number_to_return: -1
+            query: '{"isMaster":{"$numberInt":"1"},"helloOk":true,"client":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.9.1"},"os":{"type":"Linux","name":"Linux","architecture":"aarch64","version":"6.1.0-18-cloud-arm64"},"platform":"Java/Debian/17.0.10+7-Debian-1deb12u1"}}'
+            return_fields_selector: ""
+    responses:
+        - header:
+            length: 329
+            requestId: 4
+            responseTo: 2
+            Opcode: 1
+          message:
+            response_flags: 8
+            cursor_id: 0
+            starting_from: 0
+            number_returned: 1
+            documents:
+                - '{"helloOk":true,"ismaster":true,"topologyVersion":{"processId":{"$oid":"660403a3d51e110d440ddd8a"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1711539121248"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"2"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"21"},"readOnly":false,"ok":{"$numberDouble":"1.0"}}'
+          read_delay: 4384104
+    created: 1711539121
+    reqTimestampMock: 2024-03-27T11:32:01.245975468Z
+    resTimestampMock: 2024-03-27T11:32:01.251719156Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-1
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"hello":{"$numberInt":"1"},"$db":"admin"} }], checksum: 0 }'
+        type: config
+    requests:
+        - header:
+            length: 52
+            requestId: 4
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"hello":{"$numberInt":"1"},"$db":"admin"} }'
+            checksum: 0
+          read_delay: 10022524144
+    responses:
+        - header:
+            length: 313
+            requestId: 5
+            responseTo: 4
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"isWritablePrimary":true,"topologyVersion":{"processId":{"$oid":"660403a3d51e110d440ddd8a"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1711539131274"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"2"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"21"},"readOnly":false,"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 1220493
+    created: 1711539131
+    reqTimestampMock: 2024-03-27T11:32:11.273894278Z
+    resTimestampMock: 2024-03-27T11:32:11.277694722Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-2
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 65536, sections: [{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"topologyVersion":{"processId":{"$oid":"660403a3d51e110d440ddd8a"},"counter":{"$numberLong":"0"}},"maxAwaitTimeMS":{"$numberLong":"10000"},"$db":"admin","$readPreference":{"mode":"primaryPreferred"}} }], checksum: 0 }'
+        type: config
+    requests:
+        - header:
+            length: 197
+            requestId: 3
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 65536
+            sections:
+                - '{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"topologyVersion":{"processId":{"$oid":"660403a3d51e110d440ddd8a"},"counter":{"$numberLong":"0"}},"maxAwaitTimeMS":{"$numberLong":"10000"},"$db":"admin","$readPreference":{"mode":"primaryPreferred"}} }'
+            checksum: 0
+          read_delay: 68988976
+    responses:
+        - header:
+            length: 323
+            requestId: 6
+            responseTo: 3
+            Opcode: 2013
+          message:
+            flagBits: 2
+            sections:
+                - '{ SectionSingle msg: {"helloOk":true,"isWritablePrimary":true,"topologyVersion":{"processId":{"$oid":"660403a3d51e110d440ddd8a"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1711539131327"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"1"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"21"},"readOnly":false,"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 10009424876
+    created: 1711539131
+    reqTimestampMock: 2024-03-27T11:32:01.318702925Z
+    resTimestampMock: 2024-03-27T11:32:11.328395817Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-3
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:21 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539201
+    reqTimestampMock: 2024-03-27T11:33:21.346197074Z
+    resTimestampMock: 2024-03-27T11:33:21.36401022Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-4
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "59"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:21 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539201
+    reqTimestampMock: 2024-03-27T11:33:21.367618485Z
+    resTimestampMock: 2024-03-27T11:33:21.367822873Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-5
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"JEAr28spj7PQ5v7y63tvgQ==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"JEAr28spj7PQ5v7y63tvgQ==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 13
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"JEAr28spj7PQ5v7y63tvgQ==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"JEAr28spj7PQ5v7y63tvgQ==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 41256224
+    responses:
+        - header:
+            length: 120
+            requestId: 22
+            responseTo: 13
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"JEAr28spj7PQ5v7y63tvgQ==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 32684484
+    created: 1711539201
+    reqTimestampMock: 2024-03-27T11:33:21.913864966Z
+    resTimestampMock: 2024-03-27T11:33:21.949109567Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-6
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:40 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539220
+    reqTimestampMock: 2024-03-27T11:33:39.996475323Z
+    resTimestampMock: 2024-03-27T11:33:40.003683812Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-7
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "116"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:40 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539220
+    reqTimestampMock: 2024-03-27T11:33:40.006907845Z
+    resTimestampMock: 2024-03-27T11:33:40.007272201Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-8
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"AkBtzWYh+RUPVx1aFXqnog==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"AkBtzWYh+RUPVx1aFXqnog==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 15
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"AkBtzWYh+RUPVx1aFXqnog==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"AkBtzWYh+RUPVx1aFXqnog==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 18069326992
+    responses:
+        - header:
+            length: 120
+            requestId: 25
+            responseTo: 15
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"AkBtzWYh+RUPVx1aFXqnog==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 4560616
+    created: 1711539220
+    reqTimestampMock: 2024-03-27T11:33:40.016296052Z
+    resTimestampMock: 2024-03-27T11:33:40.021658801Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-9
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:41 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539221
+    reqTimestampMock: 2024-03-27T11:33:41.156570422Z
+    resTimestampMock: 2024-03-27T11:33:41.157092996Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-10
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "173"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:41 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539221
+    reqTimestampMock: 2024-03-27T11:33:41.16750485Z
+    resTimestampMock: 2024-03-27T11:33:41.168212103Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-11
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"Nk4MTZkjzALMblw6N1enqA==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"Nk4MTZkjzALMblw6N1enqA==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 16
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"Nk4MTZkjzALMblw6N1enqA==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"Nk4MTZkjzALMblw6N1enqA==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 1150463835
+    responses:
+        - header:
+            length: 120
+            requestId: 26
+            responseTo: 16
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"Nk4MTZkjzALMblw6N1enqA==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 1945579
+    created: 1711539221
+    reqTimestampMock: 2024-03-27T11:33:41.172039632Z
+    resTimestampMock: 2024-03-27T11:33:41.174199682Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-12
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:41 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539221
+    reqTimestampMock: 2024-03-27T11:33:41.935590269Z
+    resTimestampMock: 2024-03-27T11:33:41.935723277Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-13
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "230"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:41 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539221
+    reqTimestampMock: 2024-03-27T11:33:41.93619639Z
+    resTimestampMock: 2024-03-27T11:33:41.936533202Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-14
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"+kAEk0Z/FAB3oND68BW+qg==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"+kAEk0Z/FAB3oND68BW+qg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 18
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"+kAEk0Z/FAB3oND68BW+qg==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"+kAEk0Z/FAB3oND68BW+qg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 764130089
+    responses:
+        - header:
+            length: 120
+            requestId: 29
+            responseTo: 18
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"+kAEk0Z/FAB3oND68BW+qg==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 632831
+    created: 1711539221
+    reqTimestampMock: 2024-03-27T11:33:41.938299978Z
+    resTimestampMock: 2024-03-27T11:33:41.939100195Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-15
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:42 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539222
+    reqTimestampMock: 2024-03-27T11:33:42.638621071Z
+    resTimestampMock: 2024-03-27T11:33:42.638787748Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-16
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "287"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:42 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539222
+    reqTimestampMock: 2024-03-27T11:33:42.640052285Z
+    resTimestampMock: 2024-03-27T11:33:42.640203461Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-17
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"v0Y+ow7dIM992Ye+M39Flw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"v0Y+ow7dIM992Ye+M39Flw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 19
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"v0Y+ow7dIM992Ye+M39Flw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"v0Y+ow7dIM992Ye+M39Flw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 702774620
+    responses:
+        - header:
+            length: 120
+            requestId: 30
+            responseTo: 19
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"v0Y+ow7dIM992Ye+M39Flw==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 741671
+    created: 1711539222
+    reqTimestampMock: 2024-03-27T11:33:42.64188269Z
+    resTimestampMock: 2024-03-27T11:33:42.643036428Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-18
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:43 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539223
+    reqTimestampMock: 2024-03-27T11:33:43.313897111Z
+    resTimestampMock: 2024-03-27T11:33:43.315912402Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-19
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "344"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:43 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539223
+    reqTimestampMock: 2024-03-27T11:33:43.316566276Z
+    resTimestampMock: 2024-03-27T11:33:43.316687534Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-20
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"jUGQXmXxud2cnKVPKbsrgg==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"jUGQXmXxud2cnKVPKbsrgg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 20
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"jUGQXmXxud2cnKVPKbsrgg==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"jUGQXmXxud2cnKVPKbsrgg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 675837700
+    responses:
+        - header:
+            length: 120
+            requestId: 31
+            responseTo: 20
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"jUGQXmXxud2cnKVPKbsrgg==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 585078
+    created: 1711539223
+    reqTimestampMock: 2024-03-27T11:33:43.318967508Z
+    resTimestampMock: 2024-03-27T11:33:43.319698804Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-21
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:44 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539224
+    reqTimestampMock: 2024-03-27T11:33:44.028275076Z
+    resTimestampMock: 2024-03-27T11:33:44.029902593Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-22
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "401"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:44 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539224
+    reqTimestampMock: 2024-03-27T11:33:44.03388359Z
+    resTimestampMock: 2024-03-27T11:33:44.036511795Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-23
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"vUMsMuum70gHA5kYlWtRjg==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"vUMsMuum70gHA5kYlWtRjg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 21
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"vUMsMuum70gHA5kYlWtRjg==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"vUMsMuum70gHA5kYlWtRjg==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 722119862
+    responses:
+        - header:
+            length: 120
+            requestId: 32
+            responseTo: 21
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"vUMsMuum70gHA5kYlWtRjg==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 618872
+    created: 1711539224
+    reqTimestampMock: 2024-03-27T11:33:44.041931839Z
+    resTimestampMock: 2024-03-27T11:33:44.044397784Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-24
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:44 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539224
+    reqTimestampMock: 2024-03-27T11:33:44.814160768Z
+    resTimestampMock: 2024-03-27T11:33:44.814405033Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-25
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "458"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:44 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539224
+    reqTimestampMock: 2024-03-27T11:33:44.815397511Z
+    resTimestampMock: 2024-03-27T11:33:44.81567807Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-26
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"9E4RHuIR+gD5DuoKzyy/vw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"9E4RHuIR+gD5DuoKzyy/vw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 22
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"9E4RHuIR+gD5DuoKzyy/vw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"9E4RHuIR+gD5DuoKzyy/vw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 774566699
+    responses:
+        - header:
+            length: 120
+            requestId: 33
+            responseTo: 22
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"9E4RHuIR+gD5DuoKzyy/vw==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 22334
+    created: 1711539224
+    reqTimestampMock: 2024-03-27T11:33:44.819633441Z
+    resTimestampMock: 2024-03-27T11:33:44.819841995Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-27
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:45 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539225
+    reqTimestampMock: 2024-03-27T11:33:45.49486148Z
+    resTimestampMock: 2024-03-27T11:33:45.495015447Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-28
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "515"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:45 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539225
+    reqTimestampMock: 2024-03-27T11:33:45.495368261Z
+    resTimestampMock: 2024-03-27T11:33:45.495485977Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-29
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"30Z9GwV4ba9ObhwN4FULog==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"30Z9GwV4ba9ObhwN4FULog==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 23
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"30Z9GwV4ba9ObhwN4FULog==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"30Z9GwV4ba9ObhwN4FULog==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 676914519
+    responses:
+        - header:
+            length: 120
+            requestId: 34
+            responseTo: 23
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"30Z9GwV4ba9ObhwN4FULog==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 11543
+    created: 1711539225
+    reqTimestampMock: 2024-03-27T11:33:45.497263253Z
+    resTimestampMock: 2024-03-27T11:33:45.497610733Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-30
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:46 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539226
+    reqTimestampMock: 2024-03-27T11:33:46.253933135Z
+    resTimestampMock: 2024-03-27T11:33:46.254056851Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-31
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "572"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:46 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539226
+    reqTimestampMock: 2024-03-27T11:33:46.255307345Z
+    resTimestampMock: 2024-03-27T11:33:46.255408518Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-32
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"dkEVFrUNxMd/Oxg30fhklQ==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"dkEVFrUNxMd/Oxg30fhklQ==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 24
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"dkEVFrUNxMd/Oxg30fhklQ==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"dkEVFrUNxMd/Oxg30fhklQ==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 761095781
+    responses:
+        - header:
+            length: 120
+            requestId: 35
+            responseTo: 24
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"dkEVFrUNxMd/Oxg30fhklQ==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 10293
+    created: 1711539226
+    reqTimestampMock: 2024-03-27T11:33:46.259269549Z
+    resTimestampMock: 2024-03-27T11:33:46.261038742Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-33
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:46 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539226
+    reqTimestampMock: 2024-03-27T11:33:46.980262886Z
+    resTimestampMock: 2024-03-27T11:33:46.98072629Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-34
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "629"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:46 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539226
+    reqTimestampMock: 2024-03-27T11:33:46.981954783Z
+    resTimestampMock: 2024-03-27T11:33:46.982303721Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-35
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"b0QVb+Uc3IvmF4Zardj5jw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"b0QVb+Uc3IvmF4Zardj5jw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 25
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"b0QVb+Uc3IvmF4Zardj5jw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"b0QVb+Uc3IvmF4Zardj5jw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 725273893
+    responses:
+        - header:
+            length: 120
+            requestId: 36
+            responseTo: 25
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"b0QVb+Uc3IvmF4Zardj5jw==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 407858
+    created: 1711539226
+    reqTimestampMock: 2024-03-27T11:33:46.984828753Z
+    resTimestampMock: 2024-03-27T11:33:46.98548346Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-36
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:47 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539227
+    reqTimestampMock: 2024-03-27T11:33:47.741176908Z
+    resTimestampMock: 2024-03-27T11:33:47.741323625Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-37
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "686"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:47 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539227
+    reqTimestampMock: 2024-03-27T11:33:47.745177281Z
+    resTimestampMock: 2024-03-27T11:33:47.745388585Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-38
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"0EHXWFyI46j7v9CDz3bfnw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"0EHXWFyI46j7v9CDz3bfnw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 26
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"0EHXWFyI46j7v9CDz3bfnw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"0EHXWFyI46j7v9CDz3bfnw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 762453492
+    responses:
+        - header:
+            length: 120
+            requestId: 37
+            responseTo: 26
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"0EHXWFyI46j7v9CDz3bfnw==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 689293
+    created: 1711539227
+    reqTimestampMock: 2024-03-27T11:33:47.748031333Z
+    resTimestampMock: 2024-03-27T11:33:47.748874177Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-39
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:48 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539228
+    reqTimestampMock: 2024-03-27T11:33:48.761462557Z
+    resTimestampMock: 2024-03-27T11:33:48.761662653Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-40
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "743"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:48 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539228
+    reqTimestampMock: 2024-03-27T11:33:48.763204957Z
+    resTimestampMock: 2024-03-27T11:33:48.763435971Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-41
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"y0x7+R/pAff4ckXNXcevtw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"y0x7+R/pAff4ckXNXcevtw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 27
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"y0x7+R/pAff4ckXNXcevtw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"y0x7+R/pAff4ckXNXcevtw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 1018302360
+    responses:
+        - header:
+            length: 120
+            requestId: 38
+            responseTo: 27
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"y0x7+R/pAff4ckXNXcevtw==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 13793
+    created: 1711539228
+    reqTimestampMock: 2024-03-27T11:33:48.768126887Z
+    resTimestampMock: 2024-03-27T11:33:48.768859557Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-42
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:49 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539229
+    reqTimestampMock: 2024-03-27T11:33:49.458419864Z
+    resTimestampMock: 2024-03-27T11:33:49.458765219Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-43
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "800"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:49 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539229
+    reqTimestampMock: 2024-03-27T11:33:49.459550601Z
+    resTimestampMock: 2024-03-27T11:33:49.459953751Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-44
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"ek1fNvkJIuBs8XDJhAqDtw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"ek1fNvkJIuBs8XDJhAqDtw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 28
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"ek1fNvkJIuBs8XDJhAqDtw==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"ek1fNvkJIuBs8XDJhAqDtw==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 694021000
+    responses:
+        - header:
+            length: 120
+            requestId: 39
+            responseTo: 28
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"ek1fNvkJIuBs8XDJhAqDtw==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 33335
+    created: 1711539229
+    reqTimestampMock: 2024-03-27T11:33:49.463611686Z
+    resTimestampMock: 2024-03-27T11:33:49.463799864Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-45
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:50 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539230
+    reqTimestampMock: 2024-03-27T11:33:50.153898663Z
+    resTimestampMock: 2024-03-27T11:33:50.154037755Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-46
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "857"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:50 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539230
+    reqTimestampMock: 2024-03-27T11:33:50.154379359Z
+    resTimestampMock: 2024-03-27T11:33:50.154476199Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-47
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"m05f/mWyZrjW1WjjiidMnA==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"m05f/mWyZrjW1WjjiidMnA==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 29
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"m05f/mWyZrjW1WjjiidMnA==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"m05f/mWyZrjW1WjjiidMnA==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 696356687
+    responses:
+        - header:
+            length: 120
+            requestId: 40
+            responseTo: 29
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"m05f/mWyZrjW1WjjiidMnA==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 844385
+    created: 1711539230
+    reqTimestampMock: 2024-03-27T11:33:50.160180677Z
+    resTimestampMock: 2024-03-27T11:33:50.161418671Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-48
+spec:
+    metadata:
+        name: Http
+        operation: POST
+        type: HTTP_CLIENT
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            Content-Length: "51"
+            Content-Type: application/json
+            User-Agent: Java/17.0.10
+        body: '{"title": "Harry Potter", "author": "J.K. Rowling"}'
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 201
+        header:
+            Content-Length: "0"
+            Date: Wed, 27 Mar 2024 11:33:50 GMT
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539230
+    reqTimestampMock: 2024-03-27T11:33:50.844819597Z
+    resTimestampMock: 2024-03-27T11:33:50.845280167Z
+---
+version: api.keploy.io/v1beta1
+kind: Http
+name: mock-49
+spec:
+    metadata:
+        name: Http
+        operation: GET
+        type: HTTP_CLIENT
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /books
+        header:
+            Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+            Connection: keep-alive
+            User-Agent: Java/17.0.10
+        body: ""
+        timestamp: 0001-01-01T00:00:00Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "914"
+            Content-Type: application/json
+            Date: Wed, 27 Mar 2024 11:33:50 GMT
+        body: |
+            [{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"},{"id":"","title":"Harry Potter","author":"J.K. Rowling"}]
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+    objects: []
+    created: 1711539230
+    reqTimestampMock: 2024-03-27T11:33:50.84767444Z
+    resTimestampMock: 2024-03-27T11:33:50.847835159Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-50
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"oEv9+Qlrwd/bFHH3S8/xqQ==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"oEv9+Qlrwd/bFHH3S8/xqQ==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 379
+            requestId: 30
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"PotionsDB","ordered":true,"$db":"Keploy","lsid":{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$binary":{"base64":"oEv9+Qlrwd/bFHH3S8/xqQ==","subType":"03"}}},"u":{"_id":{"$binary":{"base64":"oEv9+Qlrwd/bFHH3S8/xqQ==","subType":"03"}},"name":"Strength Potion v2","description":"Enhances the drinker''s physical strength temporarily.","bottle":{"$numberInt":"3"},"quantity":{"$numberInt":"150"},"_class":"com.example.potionsapi.model.Potion"},"upsert":true} ] }'
+            checksum: 0
+          read_delay: 694575244
+    responses:
+        - header:
+            length: 120
+            requestId: 41
+            responseTo: 30
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"upserted":[{"index":{"$numberInt":"0"},"_id":{"$binary":{"base64":"oEv9+Qlrwd/bFHH3S8/xqQ==","subType":"03"}}}],"nModified":{"$numberInt":"0"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 75629
+    created: 1711539230
+    reqTimestampMock: 2024-03-27T11:33:50.856747086Z
+    resTimestampMock: 2024-03-27T11:33:50.857377209Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-51
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"endSessions":[{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}],"$db":"admin","$readPreference":{"mode":"primaryPreferred"}} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 141
+            requestId: 33
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"endSessions":[{"id":{"$binary":{"base64":"MrMIOb6sRT6D0lre60H8Cw==","subType":"04"}}}],"$db":"admin","$readPreference":{"mode":"primaryPreferred"}} }'
+            checksum: 0
+          read_delay: 14031687750
+    responses:
+        - header:
+            length: 38
+            requestId: 46
+            responseTo: 33
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 3176197
+    created: 1711539244
+    reqTimestampMock: 2024-03-27T11:34:04.889027748Z
+    resTimestampMock: 2024-03-27T11:34:04.894896071Z
