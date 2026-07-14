@@ -5,29 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "book")
-public class Book {
+@Table(name = "category")
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false)
+
+    @Column(nullable = false, unique = true)
     private String name;
-    private int pageCount;
-    @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
-    private Author author;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    private String description;
 
-
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Book> books;
 }
