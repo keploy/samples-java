@@ -53,8 +53,8 @@ public class ConfigWatchService {
         Map<String, Object> features = fetchBucket("app-features");
         Map<String, Object> appConfig = fetchBucket("app-config?watch=false"); // get current version
         this.appConfigVersion = intFrom(appConfig, "version", 0);
-        Object flag = features == null ? null : features.get("feature.enabled");
-        this.featuresEnabled = flag == null || Boolean.parseBoolean(String.valueOf(flag));
+        // The config bucket carries flags under a nested "keys" map (see config-stub).
+        this.featuresEnabled = boolFromKeys(features, "feature.enabled", true);
         log.info("ConfigWatchService initialized; featuresEnabled={} appConfigVersion={}",
             featuresEnabled, appConfigVersion);
 
@@ -78,12 +78,15 @@ public class ConfigWatchService {
                     int v = intFrom(resp, "version", appConfigVersion);
                     if (v > appConfigVersion) {
                         appConfigVersion = v;
-                        log.info("config watch: app-config advanced to version {}", v);
+                        // Debug, not info: the poller runs forever and the version
+                        // can advance on every poll, so info would flood normal runs.
+                        log.debug("config watch: app-config advanced to version {}", v);
                     }
                 } catch (Exception e) {
                     // At replay the async engine keep-alives when nothing is
-                    // armed; a failed poll is non-fatal to the running app.
-                    log.debug("config watch poll failed: {}", e.getMessage());
+                    // armed; a failed poll is non-fatal to the running app. Pass
+                    // the exception so a stack trace is available under DEBUG.
+                    log.debug("config watch poll failed", e);
                 }
             }
         }, "config-watch-poller");
@@ -103,8 +106,9 @@ public class ConfigWatchService {
             return rt.getForObject(url, Map.class);
         } catch (Exception e) {
             throw new IllegalStateException(
-                "ConfigWatchService: failed to fetch config bucket '" + name
-                    + "' from " + url + " — application cannot boot", e);
+                "ConfigWatchService: failed to fetch config bucket '" + name + "' from " + url
+                    + " — application cannot boot. Ensure the config service is reachable and "
+                    + "that app.config.baseUrl points at it.", e);
         }
     }
 
@@ -117,6 +121,16 @@ public class ConfigWatchService {
         } catch (NumberFormatException e) {
             return dflt;
         }
+    }
+
+    /** Reads a boolean flag from the bucket's nested "keys" map (its real shape). */
+    @SuppressWarnings("unchecked")
+    private static boolean boolFromKeys(Map<String, Object> bucket, String key, boolean dflt) {
+        if (bucket == null || !(bucket.get("keys") instanceof Map)) {
+            return dflt;
+        }
+        Object v = ((Map<String, Object>) bucket.get("keys")).get(key);
+        return v == null ? dflt : Boolean.parseBoolean(String.valueOf(v));
     }
 
     public boolean isFeaturesEnabled() {

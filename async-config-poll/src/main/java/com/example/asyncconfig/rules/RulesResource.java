@@ -17,8 +17,12 @@ import org.springframework.stereotype.Component;
 /**
  * Rule-engine endpoint: GET /rules/{useCase}. Requires the X-Tenant-Id and
  * X-Agent-Id headers and returns the ordered rules for the (useCase, tenant),
- * read from MySQL:
- * [{"use_case","tenant","rules":[{"rule_id","constraints","actions":[...],"rule_type"}]}]
+ * read from MySQL, e.g.:
+ * <pre>
+ * [{"use_case":"ORDER_FLOW","tenant":"ACME","rules":[
+ *   {"rule_id":14,"constraints":"...","rule_type":"POST","actions":[
+ *     {"basic_action":"...","action_details":"{}","sequence":1}]}]}]
+ * </pre>
  */
 @Component
 @Path("/rules")
