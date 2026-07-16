@@ -63,6 +63,11 @@ public class ConfigWatchService {
     }
 
     private void startWatchPoller() {
+        // WATCH_ONCE opens exactly ONE watch poll then stops the daemon. The
+        // httpPoll scenario uses it so the whole recording holds a single long
+        // poll (a server-timeout long-poll) rather than a stream of them; the
+        // default (unset) keeps the periodic-poller behavior.
+        final boolean watchOnce = "true".equalsIgnoreCase(System.getenv("WATCH_ONCE"));
         Thread t = new Thread(() -> {
             while (watching) {
                 try {
@@ -87,6 +92,9 @@ public class ConfigWatchService {
                     // armed; a failed poll is non-fatal to the running app. Pass
                     // the exception so a stack trace is available under DEBUG.
                     log.debug("config watch poll failed", e);
+                }
+                if (watchOnce) {
+                    break; // single long-poll connection for the httpPoll scenario
                 }
             }
         }, "config-watch-poller");

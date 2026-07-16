@@ -1,0 +1,26 @@
+# Keploy config for the async-config-poll sample — httpPoll scenario.
+#
+# Identical to keploy.yml except the async lane's type is `httpPoll` instead of
+# `http`. `httpPoll` marks the config-watch egress as a long-poll: at record
+# Keploy stamps the mock kind `HttpPoll` and captures its open-duration
+# (pollDurationMs); at replay the async engine HOLDS the poll until its resolve
+# testcase and then serves it (verdict `held`), instead of serving it as soon as
+# the request arrives. Paired with POLL_HOLD_SECONDS on the config-stub and
+# WATCH_ONCE on the app so the recording holds a single server-timeout long-poll.
+#
+# Lane "config-watch":
+#   - match.pathRegex  : only the /v1/buckets/app-config endpoint
+#   - matchQuery.watch : "true"  -> only the background watch polls (the
+#                         one-time boot "get current version" call uses
+#                         watch=false and stays an ordinary blocking mock)
+#   - volatileParams   : ["version"] -> the version query param changes every
+#                         poll, so it is treated as shape-noise, not a mismatch
+async:
+    lanes:
+        - name: config-watch
+          type: httpPoll
+          match:
+              pathRegex: "^/v1/buckets/app-config$"
+          matchQuery:
+              watch: "true"
+          volatileParams: ["version"]
