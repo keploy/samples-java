@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- async-config-poll: a Spring Boot 1.5 / Java 8 rule-engine sample that
+         demonstrates Keploy's async-egress engine.
+
+         The app serves two HTTP endpoints backed by MySQL (/health,
+         /rules/{useCase}) and, in the background, long-polls a central config
+         service for version changes (GET /v1/buckets/app-config?watch=true).
+         That watch poll fires from a daemon thread on the app's own schedule —
+         async relative to the ingress testcases — so Keploy records and
+         replays it through the async-egress engine (lane "config-watch"). -->
+
+    <groupId>com.example</groupId>
+    <artifactId>async-config-poll</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.22.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <start-class>com.example.asyncconfig.Application</start-class>
+    </properties>
+
+    <dependencies>
+        <!-- Jersey / JAX-RS REST layer. The jersey starter pulls
+             spring-boot-starter-web (Tomcat); exclude Tomcat and run on
+             embedded Jetty instead. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jersey</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+        </dependency>
+
+        <!-- MySQL primary datastore (rules are read from here). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>async-config-poll</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

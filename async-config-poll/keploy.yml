@@ -1,0 +1,22 @@
+# Keploy config for the async-config-poll sample.
+#
+# The only non-default section is `async.lanes`. It declares the config-service
+# watch long-poll as async egress, so Keploy's async-egress engine records and
+# replays it independently of the ingress testcase ordering.
+#
+# Lane "config-watch":
+#   - match.pathRegex  : only the /v1/buckets/app-config endpoint
+#   - matchQuery.watch : "true"  -> only the background watch polls (the
+#                         one-time boot "get current version" call uses
+#                         watch=false and stays an ordinary blocking mock)
+#   - volatileParams   : ["version"] -> the version query param changes every
+#                         poll, so it is treated as shape-noise, not a mismatch
+async:
+    lanes:
+        - name: config-watch
+          type: http
+          match:
+              pathRegex: "^/v1/buckets/app-config$"
+          matchQuery:
+              watch: "true"
+          volatileParams: ["version"]
