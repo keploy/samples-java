@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/ruledb?useSSL=false
+    username: app
+    password: app
+    # driver auto-detected: com.mysql.jdbc.Driver (Connector/J 5.1.x, managed by SB 1.5).
+    # Keep the pool tiny with no validation queries so MySQL traffic is lean and
+    # deterministic — important for a clean Keploy record/replay.
+    tomcat:
+      initial-size: 1
+      max-active: 2
+      max-idle: 1
+      min-idle: 1
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: false
+
+app:
+  config:
+    # The config service the app boot-fetches from and then watches.
+    baseUrl: http://127.0.0.1:9100
+    # Background watch long-poll interval. Lower it (e.g. WATCH_INTERVAL_MS=150)
+    # to make a poll land in the middle of a testcase during replay.
+    watchIntervalMs: ${WATCH_INTERVAL_MS:700}
+  rules:
+    # Artificial delay on GET /rules/{useCase}; widen it (RULES_DELAY_MS) so a
+    # fast watch poll can land while a testcase is still executing.
+    delayMs: ${RULES_DELAY_MS:0}
+
+logging:
+  level:
+    root: INFO
