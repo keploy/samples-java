@@ -1,0 +1,23 @@
+# Override ConfigMap used when DB_BACKEND=mysql is passed to deploy_kind.sh.
+#
+# Applied INSTEAD OF k8s/configmap.yaml so the customer360 pod picks
+# SPRING_PROFILES_ACTIVE=mysql via envFrom. The ConfigMap name is kept
+# identical (`customer360-config`) so the Deployment manifest does not
+# need any overlay-style patching.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: customer360-config
+  namespace: sap-demo
+  labels:
+    app.kubernetes.io/name: customer360
+    app.kubernetes.io/component: integration-service
+data:
+  SPRING_PROFILES_ACTIVE: "mysql"
+  SAP_API_BASE_URL: "https://sandbox.api.sap.com/s4hanacloud"
+  SERVER_PORT: "8080"
+  JAVA_OPTS: "-XX:MaxRAMPercentage=75 -XX:+ExitOnOutOfMemoryError"
+  # The Deployment also pins SPRING_DATASOURCE_URL (via env:). When the
+  # MySQL backend is selected that env is overridden through the
+  # DB_BACKEND=mysql branch of deploy_kind.sh, so the mysql Service DNS
+  # name is used rather than postgres.
