@@ -58,8 +58,24 @@ public class ConfigWatchService {
         log.info("ConfigWatchService initialized; featuresEnabled={} appConfigVersion={}",
             featuresEnabled, appConfigVersion);
 
-        // (2) Background watch long-poll.
-        startWatchPoller();
+        // (2) Config watch. BLOCK_BOOT_ON_WATCH (replay-only) makes boot BLOCK
+        // synchronously on a watch=true long-poll — the Flipkart shape. With the
+        // old anchor-hold async engine this poll is parked at replay (its
+        // delivery anchored past the reachable window), so the app never becomes
+        // ready = boot deadlock; the value-epoch engine serves the startup epoch
+        // immediately so boot proceeds. When unset (the record path), the watch
+        // runs on a background daemon and does not block boot.
+        if ("true".equalsIgnoreCase(System.getenv("BLOCK_BOOT_ON_WATCH"))) {
+            String url = baseUrl + "/v1/buckets/app-config?watch=true&version=" + appConfigVersion;
+            log.info("BLOCK_BOOT_ON_WATCH: blocking boot on synchronous config watch {}", url);
+            @SuppressWarnings("unchecked")
+            Map<String, Object> resp = rt.getForObject(url, Map.class);
+            log.info("BLOCK_BOOT_ON_WATCH: synchronous config watch returned (version now {}); boot continues",
+                intFrom(resp, "version", appConfigVersion));
+        } else {
+            // Background watch long-poll (record path).
+            startWatchPoller();
+        }
     }
 
     private void startWatchPoller() {
