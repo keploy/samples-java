@@ -1,0 +1,37 @@
+# Pinned so the Compose network is always product-catalog_default, whatever the
+# clone directory is called — Keploy is passed that exact name via -n.
+name: product-catalog
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: catalog-postgres
+    environment:
+      POSTGRES_DB: catalog
+      POSTGRES_USER: catalog
+      POSTGRES_PASSWORD: catalog
+    ports:
+      - "5432:5432"
+    volumes:
+      - catalog-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U catalog -d catalog"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    container_name: catalog-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/catalog
+      SPRING_DATASOURCE_USERNAME: catalog
+      SPRING_DATASOURCE_PASSWORD: catalog
+    ports:
+      - "8080:8080"
+
+volumes:
+  catalog-pgdata:

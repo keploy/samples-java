@@ -1,0 +1,10 @@
+preScript: ""
+postScript: ""
+appCommand: ""
+template: {}
+metadata:
+    description: full CRUD across categories + filters + 404 + 400 validation
+    name: products-crud
+mockRegistry:
+    mock: 9ad0466a7385cfa1465bf1f65c95f2a5eef7be7984aea8dd598619ab35a6871c
+    app: product-catalog
