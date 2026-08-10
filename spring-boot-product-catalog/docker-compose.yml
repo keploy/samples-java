@@ -33,9 +33,12 @@ services:
     ports:
       - "8080:8080"
     healthcheck:
-      # Uses the curl installed in the runtime image + the Actuator health endpoint.
+      # Uses the curl installed in the runtime image + Actuator's readiness probe.
       # Makes `docker compose up --wait` block until the app is actually ready, not just running.
-      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/actuator/health || exit 1"]
+      # Deliberately the readiness probe (not /actuator/health): the aggregate health endpoint
+      # runs the JDBC `db` indicator on every poll, which Keploy would record as extra Postgres
+      # mocks during `keploy record`. The readiness group doesn't touch the DB, so capture stays clean.
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/actuator/health/readiness || exit 1"]
       interval: 5s
       timeout: 3s
       retries: 12
