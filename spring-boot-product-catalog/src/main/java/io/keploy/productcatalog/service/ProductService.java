@@ -35,9 +35,9 @@ public class ProductService {
     @Transactional(readOnly = true)
     public Product findById(Long id) {
         return repository.findById(id)
-                // REGRESSION (demo): reworded the 404 message — looks harmless, but it changes the
-                // API contract. Recorded GET/PUT/DELETE 404 tests catch the body.message diff on replay.
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+                // The message wording is part of the recorded 404 contract — the GET/PUT/DELETE
+                // not-found tests assert body.message verbatim, so keep the "Product <id> not found" form.
+                .orElseThrow(() -> new ResourceNotFoundException("Product " + id + " not found"));
     }
 
     @Transactional
