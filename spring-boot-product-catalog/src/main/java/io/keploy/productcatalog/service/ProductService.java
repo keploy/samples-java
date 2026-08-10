@@ -75,16 +75,17 @@ public class ProductService {
      */
     @Transactional
     public Product adjustStock(Long id, int delta) {
-        Product product = findById(id);
-        int current = product.getStockQuantity() != null ? product.getStockQuantity() : 0;
-        int updated = current + delta;
-        if (updated < 0) {
+        Product product = findById(id);   // 404 if the product doesn't exist
+        int rows = repository.applyStockDelta(id, delta);
+        if (rows == 0) {
+            // The product exists (checked above), so a 0-row update means the DB-side guard
+            // rejected the change: applying the delta would drive stock below zero.
+            int current = product.getStockQuantity() != null ? product.getStockQuantity() : 0;
             throw new InsufficientStockException(
                     "Cannot adjust stock of product " + id + " by " + delta
                             + ": only " + current + " in stock");
         }
-        product.setStockQuantity(updated);
-        return repository.save(product);
+        return findById(id);   // re-read the persisted state (the update cleared the context)
     }
 
     /**

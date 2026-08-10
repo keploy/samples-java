@@ -32,6 +32,14 @@ services:
       SPRING_DATASOURCE_PASSWORD: catalog
     ports:
       - "8080:8080"
+    healthcheck:
+      # Uses the curl installed in the runtime image + the Actuator health endpoint.
+      # Makes `docker compose up --wait` block until the app is actually ready, not just running.
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/actuator/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 15s
 
 volumes:
   catalog-pgdata:

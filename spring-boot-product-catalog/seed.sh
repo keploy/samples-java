@@ -38,6 +38,7 @@ echo "==> Waiting for app at $BASE ..."
 for i in $(seq 1 60); do
   if curl -fsS "$BASE/api/products" >/dev/null 2>&1; then echo "app is up"; break; fi
   sleep 2
+  [ "$i" = 60 ] && { echo "app never became ready at $BASE after ~120s" >&2; exit 1; }
 done
 
 echo "==> PHASE 1: create a catalog across multiple categories"
@@ -107,4 +108,14 @@ expect "negative stock"    -X POST "$BASE/api/products" -H 'Content-Type: applic
 expect "multi-field fail"  -X POST "$BASE/api/products" -H 'Content-Type: application/json' -d '{"name":"","price":-1}'
 expect "invalid PUT"       -X PUT "$BASE/api/products/$KB" -H 'Content-Type: application/json' -d '{"name":"","price":-9,"stockQuantity":-1}'
 
-echo "==> seed traffic complete — created ${#CREATED[@]} products, exercised CRUD + filters + 404 + 400"
+echo "==> PHASE 9: inventory summary + stock adjustments"
+echo "  GET /api/products/summary (default threshold):"; curl -fsS "$BASE/api/products/summary"; echo
+echo "  GET /api/products/summary?lowStockThreshold=15:"; curl -fsS "$BASE/api/products/summary?lowStockThreshold=15"; echo
+echo "  PATCH stock $KB -5 (ship units):"
+curl -fsS -X PATCH "$BASE/api/products/$KB/stock" -H 'Content-Type: application/json' -d '{"delta":-5}'; echo
+echo "  PATCH stock $KB +100 (restock):"
+curl -fsS -X PATCH "$BASE/api/products/$KB/stock" -H 'Content-Type: application/json' -d '{"delta":100}'; echo
+expect "stock over-decrement 409" -X PATCH "$BASE/api/products/$KB/stock" -H 'Content-Type: application/json' -d '{"delta":-99999}'
+expect "stock on missing 404"     -X PATCH "$BASE/api/products/99999/stock" -H 'Content-Type: application/json' -d '{"delta":1}'
+
+echo "==> seed traffic complete — created ${#CREATED[@]} products, exercised CRUD + filters + summary + stock + 404 + 400"
