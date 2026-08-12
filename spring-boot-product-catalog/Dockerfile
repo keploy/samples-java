@@ -16,9 +16,11 @@ RUN ./mvnw -B -q -DskipTests clean package
 # ---- Run stage: slim JRE image ----
 FROM eclipse-temurin:21-jre
 WORKDIR /app
-# curl is used by the docker-compose healthcheck.
+# curl is used by the docker-compose healthcheck. Also create a non-root user to run the JVM.
 RUN apt-get update && apt-get install -y --no-install-recommends curl \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && addgroup --system spring && adduser --system --ingroup spring spring
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
+USER spring:spring
 ENTRYPOINT ["java", "-jar", "app.jar"]

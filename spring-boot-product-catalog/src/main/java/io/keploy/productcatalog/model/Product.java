@@ -101,11 +101,9 @@ public class Product {
         this.category = category;
     }
 
+    // Read-only: createdAt is assigned once by @PrePersist and the column is updatable = false,
+    // so there is intentionally no setter — a set would be silently dropped on the next save().
     public Instant getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
     }
 }

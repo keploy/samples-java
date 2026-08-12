@@ -17,9 +17,16 @@ CREATED=()   # ids of products created, in order
 # create '<json>'  -> prints response, appends new id to CREATED
 create() {
   local json="$1" body id
-  body=$(curl -fsS -X POST "$BASE/api/products" -H 'Content-Type: application/json' -d "$json")
+  if ! body=$(curl -fsS -X POST "$BASE/api/products" -H 'Content-Type: application/json' -d "$json"); then
+    echo "  ERROR: create request failed for: $json" >&2
+    exit 1
+  fi
   echo "  created: $body"
   id=$(printf '%s' "$body" | id_of)
+  if [ -z "$id" ]; then
+    echo "  ERROR: no id in create response: $body" >&2
+    exit 1
+  fi
   CREATED+=("$id")
 }
 
