@@ -5,12 +5,14 @@
 # Keploy suite is broad: ~50 test cases covering the full CRUD lifecycle across several
 # categories, filtering, and a wide range of 400 (validation) and 404 (not-found) paths.
 # Ids returned by POST are chained into later GET/PUT/DELETE calls so the suite is coherent.
-set -uo pipefail
+set -euo pipefail
 
 BASE="${BASE:-http://localhost:8080}"
 
 # --- helpers -----------------------------------------------------------------
-id_of() { grep -o '"id":[0-9]*' | head -1 | cut -d: -f2; }
+# grep -m1 stops after the first match and exits 0 (no SIGPIPE from a downstream `head`),
+# so it stays well-behaved under `set -e` + `pipefail`.
+id_of() { grep -m1 -o '"id":[0-9]*' | cut -d: -f2; }
 
 CREATED=()   # ids of products created, in order
 
@@ -22,7 +24,7 @@ create() {
     exit 1
   fi
   echo "  created: $body"
-  id=$(printf '%s' "$body" | id_of)
+  id=$(printf '%s' "$body" | id_of || true)
   if [ -z "$id" ]; then
     echo "  ERROR: no id in create response: $body" >&2
     exit 1
