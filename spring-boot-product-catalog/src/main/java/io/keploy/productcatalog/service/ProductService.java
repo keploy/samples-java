@@ -78,8 +78,13 @@ public class ProductService {
         Product product = findById(id);   // 404 if the product doesn't exist
         int rows = repository.applyStockDelta(id, delta);
         if (rows == 0) {
-            // The product exists (checked above), so a 0-row update means the DB-side guard
-            // rejected the change: applying the delta would drive stock below zero.
+            // 0 rows can mean two things. Re-check existence: if the product was deleted between
+            // the findById above and this update (a concurrent DELETE), it's a 404, not a 409.
+            if (!repository.existsById(id)) {
+                throw new ResourceNotFoundException("Product " + id + " not found");
+            }
+            // Otherwise it still exists, so the DB-side guard rejected the change: applying the
+            // delta would drive stock below zero.
             int current = product.getStockQuantity() != null ? product.getStockQuantity() : 0;
             throw new InsufficientStockException(
                     "Cannot adjust stock of product " + id + " by " + delta

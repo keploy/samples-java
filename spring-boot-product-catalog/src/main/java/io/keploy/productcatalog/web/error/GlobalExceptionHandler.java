@@ -6,6 +6,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -33,6 +34,17 @@ public class GlobalExceptionHandler {
         body.put("error", "Conflict");
         body.put("message", ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<Map<String, Object>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        // A non-numeric path variable (e.g. /api/products/abc) would otherwise fall through to
+        // Spring's default ProblemDetail, breaking the uniform {status, error, message} shape.
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("status", HttpStatus.BAD_REQUEST.value());
+        body.put("error", "Bad Request");
+        body.put("message", "Invalid value '" + ex.getValue() + "' for parameter '" + ex.getName() + "'");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
