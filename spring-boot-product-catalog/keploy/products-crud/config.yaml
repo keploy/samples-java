@@ -3,8 +3,8 @@ postScript: ""
 appCommand: ""
 template: {}
 metadata:
-    description: full CRUD across categories + filters + 404 + 400 validation
+    description: full CRUD + filters + summary + stock + 404 + 400 validation
     name: products-crud
 mockRegistry:
-    mock: 9ad0466a7385cfa1465bf1f65c95f2a5eef7be7984aea8dd598619ab35a6871c
-    app: product-catalog
+    mock: 2517f87149abc3ccafc3d8762d703d85cc9f2f4d83e9b4fe43c7a2aed1f513e5
+    app: spring-boot-product-catalog

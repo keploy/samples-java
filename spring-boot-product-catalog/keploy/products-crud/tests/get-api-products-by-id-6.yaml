@@ -14,28 +14,28 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: ""
-    timestamp: 2026-08-05T09:47:52.310882131Z
+    timestamp: 2026-08-13T09:45:59.618740179Z
   resp:
     status_code: 200
     header:
       Content-Length: "168"
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:52 GMT
-    body: '{"id":6,"name":"Laptop Stand","description":"aluminium, adjustable","price":34.95,"stockQuantity":80,"category":"accessories","createdAt":"2026-08-05T09:47:51.954173Z"}'
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
+    body: '{"id":6,"name":"Laptop Stand","description":"aluminium, adjustable","price":34.95,"stockQuantity":80,"category":"accessories","createdAt":"2026-08-13T09:45:59.376546Z"}'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:52.317869589Z
+    timestamp: 2026-08-13T09:45:59.626343763Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923272
+  created: 1786614359
   app_port: 8080
 curl: |
   curl --request GET \
     --url http://localhost:8080/api/products/6 \
-    --header 'User-Agent: curl/8.7.1' \
     --header 'Accept: */*' \
     --header 'Host: localhost:8080' \
+    --header 'User-Agent: curl/8.7.1' \

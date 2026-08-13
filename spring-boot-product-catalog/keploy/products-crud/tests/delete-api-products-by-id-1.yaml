@@ -14,21 +14,21 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: ""
-    timestamp: 2026-08-05T09:47:53.698135506Z
+    timestamp: 2026-08-13T09:46:00.006322596Z
   resp:
     status_code: 204
     header:
-      Date: Wed, 05 Aug 2026 09:47:53 GMT
+      Date: Thu, 13 Aug 2026 09:46:00 GMT
     body: ""
     status_message: No Content
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:53.710849131Z
+    timestamp: 2026-08-13T09:46:00.016106721Z
   objects: []
   assertions:
     noise:
       header.Date: []
-  created: 1785923273
+  created: 1786614360
   app_port: 8080
 curl: |
   curl --request DELETE \

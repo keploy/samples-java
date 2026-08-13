@@ -16,30 +16,30 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: '{"name":"Mechanical Keyboard v2","description":"75% layout, RGB","price":149.99,"stockQuantity":35,"category":"peripherals"}'
-    timestamp: 2026-08-05T09:47:53.529595548Z
+    timestamp: 2026-08-13T09:45:59.911332221Z
   resp:
     status_code: 200
     header:
       Content-Length: "173"
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:53 GMT
-    body: '{"id":1,"name":"Mechanical Keyboard v2","description":"75% layout, RGB","price":149.99,"stockQuantity":35,"category":"peripherals","createdAt":"2026-08-05T09:47:51.765227Z"}'
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
+    body: '{"id":1,"name":"Mechanical Keyboard v2","description":"75% layout, RGB","price":149.99,"stockQuantity":35,"category":"peripherals","createdAt":"2026-08-13T09:45:59.230084Z"}'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:53.561551006Z
+    timestamp: 2026-08-13T09:45:59.923781471Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923273
+  created: 1786614359
   app_port: 8080
 curl: |-
   curl --request PUT \
     --url http://localhost:8080/api/products/1 \
-    --header 'Host: localhost:8080' \
-    --header 'User-Agent: curl/8.7.1' \
     --header 'Accept: */*' \
     --header 'Content-Type: application/json' \
+    --header 'Host: localhost:8080' \
+    --header 'User-Agent: curl/8.7.1' \
     --data "{\"name\":\"Mechanical Keyboard v2\",\"description\":\"75% layout, RGB\",\"price\":149.99,\"stockQuantity\":35,\"category\":\"peripherals\"}"

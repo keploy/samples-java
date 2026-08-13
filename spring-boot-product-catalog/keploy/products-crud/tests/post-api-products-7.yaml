@@ -16,24 +16,24 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: '{"name":"Noise-Cancelling Headphones","description":"over-ear, BT 5.3","price":199.99,"stockQuantity":60,"category":"audio"}'
-    timestamp: 2026-08-05T09:47:51.980774881Z
+    timestamp: 2026-08-13T09:45:59.397159513Z
   resp:
     status_code: 201
     header:
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:51 GMT
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
       Location: http://localhost:8080/api/products/7
-    body: '{"id":7,"name":"Noise-Cancelling Headphones","description":"over-ear, BT 5.3","price":199.99,"stockQuantity":60,"category":"audio","createdAt":"2026-08-05T09:47:51.983117881Z"}'
+    body: '{"id":7,"name":"Noise-Cancelling Headphones","description":"over-ear, BT 5.3","price":199.99,"stockQuantity":60,"category":"audio","createdAt":"2026-08-13T09:45:59.399209471Z"}'
     status_message: Created
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:51.988569464Z
+    timestamp: 2026-08-13T09:45:59.403686679Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923271
+  created: 1786614359
   app_port: 8080
 curl: |-
   curl --request POST \

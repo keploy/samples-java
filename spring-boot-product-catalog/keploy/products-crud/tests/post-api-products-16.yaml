@@ -16,28 +16,28 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: '{"name":"Bad","price":0,"stockQuantity":5,"category":"x"}'
-    timestamp: 2026-08-05T09:47:54.150084507Z
+    timestamp: 2026-08-13T09:46:00.246215763Z
   resp:
     status_code: 400
     header:
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:54 GMT
+      Date: Thu, 13 Aug 2026 09:46:00 GMT
     body: '{"status":400,"error":"Bad Request","message":"Validation failed","fieldErrors":{"price":"price must be greater than 0"}}'
     status_message: Bad Request
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:54.180859632Z
+    timestamp: 2026-08-13T09:46:00.250559763Z
   objects: []
   assertions:
     noise:
       header.Date: []
-  created: 1785923274
+  created: 1786614360
   app_port: 8080
 curl: |-
   curl --request POST \
     --url http://localhost:8080/api/products \
-    --header 'Content-Type: application/json' \
     --header 'Host: localhost:8080' \
     --header 'User-Agent: curl/8.7.1' \
     --header 'Accept: */*' \
+    --header 'Content-Type: application/json' \
     --data "{\"name\":\"Bad\",\"price\":0,\"stockQuantity\":5,\"category\":\"x\"}"

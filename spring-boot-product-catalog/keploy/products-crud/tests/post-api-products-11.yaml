@@ -16,30 +16,30 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: '{"name":"USB Microphone","description":"cardioid, plug-and-play","price":89.00,"stockQuantity":35,"category":"audio"}'
-    timestamp: 2026-08-05T09:47:52.096539714Z
+    timestamp: 2026-08-13T09:45:59.478350721Z
   resp:
     status_code: 201
     header:
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:52 GMT
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
       Location: http://localhost:8080/api/products/11
-    body: '{"id":11,"name":"USB Microphone","description":"cardioid, plug-and-play","price":89.00,"stockQuantity":35,"category":"audio","createdAt":"2026-08-05T09:47:52.098892339Z"}'
+    body: '{"id":11,"name":"USB Microphone","description":"cardioid, plug-and-play","price":89.00,"stockQuantity":35,"category":"audio","createdAt":"2026-08-13T09:45:59.480029138Z"}'
     status_message: Created
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:52.103579839Z
+    timestamp: 2026-08-13T09:45:59.483107179Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923272
+  created: 1786614359
   app_port: 8080
 curl: |-
   curl --request POST \
     --url http://localhost:8080/api/products \
-    --header 'Host: localhost:8080' \
-    --header 'User-Agent: curl/8.7.1' \
     --header 'Accept: */*' \
     --header 'Content-Type: application/json' \
+    --header 'Host: localhost:8080' \
+    --header 'User-Agent: curl/8.7.1' \
     --data "{\"name\":\"USB Microphone\",\"description\":\"cardioid, plug-and-play\",\"price\":89.00,\"stockQuantity\":35,\"category\":\"audio\"}"

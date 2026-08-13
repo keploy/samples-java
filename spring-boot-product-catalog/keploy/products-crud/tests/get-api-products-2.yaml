@@ -14,23 +14,23 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: ""
-    timestamp: 2026-08-05T09:47:51.521124089Z
+    timestamp: 2026-08-13T09:45:59.134663804Z
   resp:
     status_code: 200
     header:
       Content-Length: "2"
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:51 GMT
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
     body: '[]'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:51.53549213Z
+    timestamp: 2026-08-13T09:45:59.141810971Z
   objects: []
   assertions:
     noise:
       header.Date: []
-  created: 1785923271
+  created: 1786614359
   app_port: 8080
 curl: |
   curl --request GET \

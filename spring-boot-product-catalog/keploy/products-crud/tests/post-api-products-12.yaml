@@ -16,30 +16,30 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: '{"name":"14-inch Laptop","description":"16GB RAM, 512GB SSD","price":1099.00,"stockQuantity":15,"category":"computers"}'
-    timestamp: 2026-08-05T09:47:52.122036589Z
+    timestamp: 2026-08-13T09:45:59.496611138Z
   resp:
     status_code: 201
     header:
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:52 GMT
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
       Location: http://localhost:8080/api/products/12
-    body: '{"id":12,"name":"14-inch Laptop","description":"16GB RAM, 512GB SSD","price":1099.00,"stockQuantity":15,"category":"computers","createdAt":"2026-08-05T09:47:52.124395089Z"}'
+    body: '{"id":12,"name":"14-inch Laptop","description":"16GB RAM, 512GB SSD","price":1099.00,"stockQuantity":15,"category":"computers","createdAt":"2026-08-13T09:45:59.498330804Z"}'
     status_message: Created
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:52.128115672Z
+    timestamp: 2026-08-13T09:45:59.501281888Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923272
+  created: 1786614359
   app_port: 8080
 curl: |-
   curl --request POST \
     --url http://localhost:8080/api/products \
+    --header 'Accept: */*' \
     --header 'Content-Type: application/json' \
     --header 'Host: localhost:8080' \
     --header 'User-Agent: curl/8.7.1' \
-    --header 'Accept: */*' \
     --data "{\"name\":\"14-inch Laptop\",\"description\":\"16GB RAM, 512GB SSD\",\"price\":1099.00,\"stockQuantity\":15,\"category\":\"computers\"}"

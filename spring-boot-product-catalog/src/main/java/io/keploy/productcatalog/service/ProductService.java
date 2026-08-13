@@ -6,6 +6,7 @@ import io.keploy.productcatalog.web.dto.InventorySummaryResponse;
 import io.keploy.productcatalog.web.dto.ProductRequest;
 import io.keploy.productcatalog.web.error.InsufficientStockException;
 import io.keploy.productcatalog.web.error.ResourceNotFoundException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,9 +28,9 @@ public class ProductService {
     @Transactional(readOnly = true)
     public List<Product> findAll(String category) {
         if (category != null && !category.isBlank()) {
-            return repository.findByCategoryIgnoreCase(category);
+            return repository.findByCategoryIgnoreCaseOrderByIdAsc(category);
         }
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     @Transactional(readOnly = true)
@@ -100,7 +101,7 @@ public class ProductService {
      */
     @Transactional(readOnly = true)
     public InventorySummaryResponse getInventorySummary(int lowStockThreshold) {
-        List<Product> products = repository.findAll();
+        List<Product> products = repository.findAll(Sort.by(Sort.Direction.ASC, "id"));
 
         long totalStockUnits = 0L;
         BigDecimal totalInventoryValue = BigDecimal.ZERO;

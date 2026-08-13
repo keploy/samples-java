@@ -16,28 +16,28 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: ""
-    timestamp: 2026-08-05T09:47:53.391164006Z
+    timestamp: 2026-08-13T09:45:59.837360388Z
   resp:
     status_code: 200
     header:
       Content-Length: "343"
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:53 GMT
-    body: '[{"id":7,"name":"Noise-Cancelling Headphones","description":"over-ear, BT 5.3","price":199.99,"stockQuantity":60,"category":"audio","createdAt":"2026-08-05T09:47:51.983118Z"},{"id":11,"name":"USB Microphone","description":"cardioid, plug-and-play","price":89.00,"stockQuantity":35,"category":"audio","createdAt":"2026-08-05T09:47:52.098892Z"}]'
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
+    body: '[{"id":7,"name":"Noise-Cancelling Headphones","description":"over-ear, BT 5.3","price":199.99,"stockQuantity":60,"category":"audio","createdAt":"2026-08-13T09:45:59.399209Z"},{"id":11,"name":"USB Microphone","description":"cardioid, plug-and-play","price":89.00,"stockQuantity":35,"category":"audio","createdAt":"2026-08-13T09:45:59.480029Z"}]'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:53.404990215Z
+    timestamp: 2026-08-13T09:45:59.845592638Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923273
+  created: 1786614359
   app_port: 8080
 curl: |
   curl --request GET \
     --url http://localhost:8080/api/products?category=audio \
+    --header 'Accept: */*' \
     --header 'Host: localhost:8080' \
     --header 'User-Agent: curl/8.7.1' \
-    --header 'Accept: */*' \

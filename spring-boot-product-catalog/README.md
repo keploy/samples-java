@@ -12,8 +12,8 @@ regression suite that needs no database at all.
 
 The recorded suite committed under `keploy/products-crud/` contains:
 
-- **57 test cases** covering the full CRUD lifecycle, category filtering, and 404/400 edge cases
-- **190 Postgres mocks**, so the database is stubbed on replay and the tests run anywhere
+- **63 test cases** covering the full CRUD lifecycle, category filtering, the inventory summary, stock adjustments, and 404/400/409 edge cases
+- **214 Postgres mocks**, so the database is stubbed on replay and the tests run anywhere
 - **Zero hand-written assertions** — the recorded responses *are* the assertions
 - **Auto-detected noise** — Keploy marks non-deterministic fields (`createdAt`, the `Date` header) itself
 
@@ -84,10 +84,9 @@ A product has `name` (required, ≤120 chars), `description` (optional, ≤1000 
 failures return `400` with a structured `fieldErrors` map, which is what produces the
 recorded 400 traffic.
 
-> The committed test set covers CRUD, category filters, and the 404/400 paths. It was
-> recorded before `/summary` and `/{id}/stock` were added, so those two endpoints are not
-> in it yet. The curl walkthrough below now exercises them, so a fresh re-record (or a
-> `./seed.sh` run) picks them up.
+> The committed test set covers all seven endpoints — full CRUD, category filters, the
+> inventory `/summary` rollup, `/{id}/stock` adjustments (including the `409` over-decrement),
+> and the `404`/`400` paths. Re-running `keploy record` with `./seed.sh` regenerates it.
 
 ## Capture the testcases
 
@@ -193,7 +192,7 @@ curl --location --request POST 'http://localhost:8080/api/products' \
 
 Or skip the manual calls and run the bundled traffic generator, which drives the whole
 workload — 12 products across 6 categories, every read path, updates, deletes, and the
-404/400 cases — in one shot. This is exactly what produced the committed 57-case suite:
+404/400 cases — in one shot. This is exactly what produced the committed 63-case suite:
 
 ```bash
 ./seed.sh
@@ -219,7 +218,7 @@ keploy test -c "docker compose up" \
 Expected:
 
 ```
-  "products-crud"   Total: 57   Passed: 57   Failed: 0
+  "products-crud"   Total: 63   Passed: 63   Failed: 0
 ```
 
 This will run the testcases and generate the report in the `keploy/reports` folder.
@@ -251,12 +250,14 @@ keploy/
 └── products-crud/
     ├── config.yaml       # test-set metadata (name, description, mock hash)
     ├── mappings.yaml     # which mocks belong to which test case
-    ├── mocks.yaml        # 190 PostgresV3 mocks + 2 DNS
+    ├── mocks.yaml        # 214 PostgresV3 mocks + 2 DNS
     └── tests/
-        ├── post-api-products-*.yaml        # 12 creates + 8 validation 400s
-        ├── get-api-products-*.yaml         # list + category filters + post-delete lists
-        ├── get-api-products-by-id-*.yaml   # reads + 404s
-        ├── put-api-products-by-id-*.yaml   # updates + invalid + 404
+        ├── post-api-products-*.yaml               # 12 creates + 8 validation 400s
+        ├── get-api-products-*.yaml                # list + category filters + post-delete lists
+        ├── get-api-products-by-id-*.yaml          # reads + 404s
+        ├── get-api-products-summary-*.yaml        # inventory rollup (default + threshold)
+        ├── put-api-products-by-id-*.yaml          # updates + invalid + 404
+        ├── patch-api-products-by-id-stock-*.yaml  # stock adjust + 409 over-decrement + 404
         └── delete-api-products-by-id-*.yaml
 ```
 
@@ -296,5 +297,5 @@ spec:
 | `docker-compose.yml` | App + Postgres, for running and recording |
 | `docker-compose.keploy.yml` | App only, no database — for the dependency-free replay |
 | `keploy.yml` | Keploy config: Compose command, container/network names, noise rules |
-| `keploy/products-crud/` | The recorded test set: 57 test cases + mocks |
+| `keploy/products-crud/` | The recorded test set: 63 test cases + mocks |
 | `seed.sh` | Traffic generator used during `keploy record` |

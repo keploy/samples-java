@@ -16,22 +16,22 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: '{"name":"Bad","price":10.00,"stockQuantity":-3,"category":"x"}'
-    timestamp: 2026-08-05T09:47:54.859669382Z
+    timestamp: 2026-08-13T09:46:00.32082993Z
   resp:
     status_code: 400
     header:
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:54 GMT
+      Date: Thu, 13 Aug 2026 09:46:00 GMT
     body: '{"status":400,"error":"Bad Request","message":"Validation failed","fieldErrors":{"stockQuantity":"stockQuantity cannot be negative"}}'
     status_message: Bad Request
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:54.873243215Z
+    timestamp: 2026-08-13T09:46:00.324059388Z
   objects: []
   assertions:
     noise:
       header.Date: []
-  created: 1785923274
+  created: 1786614360
   app_port: 8080
 curl: |-
   curl --request POST \

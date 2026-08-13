@@ -16,30 +16,30 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: '{"name":"Noise-Cancelling Headphones Pro","description":"over-ear, BT 5.3, ANC+","price":249.99,"stockQuantity":50,"category":"audio"}'
-    timestamp: 2026-08-05T09:47:53.65540834Z
+    timestamp: 2026-08-13T09:45:59.975931638Z
   resp:
     status_code: 200
     header:
       Content-Length: "183"
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:53 GMT
-    body: '{"id":7,"name":"Noise-Cancelling Headphones Pro","description":"over-ear, BT 5.3, ANC+","price":249.99,"stockQuantity":50,"category":"audio","createdAt":"2026-08-05T09:47:51.983118Z"}'
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
+    body: '{"id":7,"name":"Noise-Cancelling Headphones Pro","description":"over-ear, BT 5.3, ANC+","price":249.99,"stockQuantity":50,"category":"audio","createdAt":"2026-08-13T09:45:59.399209Z"}'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:53.663728173Z
+    timestamp: 2026-08-13T09:45:59.982355638Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923273
+  created: 1786614359
   app_port: 8080
 curl: |-
   curl --request PUT \
     --url http://localhost:8080/api/products/7 \
-    --header 'Content-Type: application/json' \
-    --header 'Host: localhost:8080' \
     --header 'User-Agent: curl/8.7.1' \
     --header 'Accept: */*' \
+    --header 'Content-Type: application/json' \
+    --header 'Host: localhost:8080' \
     --data "{\"name\":\"Noise-Cancelling Headphones Pro\",\"description\":\"over-ear, BT 5.3, ANC+\",\"price\":249.99,\"stockQuantity\":50,\"category\":\"audio\"}"

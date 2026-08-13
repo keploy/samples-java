@@ -14,28 +14,28 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: ""
-    timestamp: 2026-08-05T09:47:53.746177298Z
+    timestamp: 2026-08-13T09:46:00.047595096Z
   resp:
     status_code: 200
     header:
       Content-Length: "1688"
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:53 GMT
-    body: '[{"id":2,"name":"USB-C Hub","description":"7-in-1 aluminium","price":39.50,"stockQuantity":100,"category":"peripherals","createdAt":"2026-08-05T09:47:51.846144Z"},{"id":5,"name":"34-inch Ultrawide Monitor","description":"curved, 144Hz","price":599.00,"stockQuantity":12,"category":"monitors","createdAt":"2026-08-05T09:47:51.926871Z"},{"id":6,"name":"Laptop Stand","description":"aluminium, adjustable","price":34.95,"stockQuantity":80,"category":"accessories","createdAt":"2026-08-05T09:47:51.954173Z"},{"id":8,"name":"1080p Webcam","description":"auto-focus","price":59.00,"stockQuantity":45,"category":"peripherals","createdAt":"2026-08-05T09:47:52.009984Z"},{"id":9,"name":"External SSD 1TB","description":"USB 3.2 Gen2","price":109.99,"stockQuantity":70,"category":"storage","createdAt":"2026-08-05T09:47:52.036490Z"},{"id":11,"name":"USB Microphone","description":"cardioid, plug-and-play","price":89.00,"stockQuantity":35,"category":"audio","createdAt":"2026-08-05T09:47:52.098892Z"},{"id":12,"name":"14-inch Laptop","description":"16GB RAM, 512GB SSD","price":1099.00,"stockQuantity":15,"category":"computers","createdAt":"2026-08-05T09:47:52.124395Z"},{"id":1,"name":"Mechanical Keyboard v2","description":"75% layout, RGB","price":149.99,"stockQuantity":35,"category":"peripherals","createdAt":"2026-08-05T09:47:51.765227Z"},{"id":4,"name":"27-inch 4K Monitor","description":"IPS, 60Hz, HDR400","price":299.00,"stockQuantity":30,"category":"monitors","createdAt":"2026-08-05T09:47:51.899020Z"},{"id":7,"name":"Noise-Cancelling Headphones Pro","description":"over-ear, BT 5.3, ANC+","price":249.99,"stockQuantity":50,"category":"audio","createdAt":"2026-08-05T09:47:51.983118Z"}]'
+      Date: Thu, 13 Aug 2026 09:46:00 GMT
+    body: '[{"id":1,"name":"Mechanical Keyboard v2","description":"75% layout, RGB","price":149.99,"stockQuantity":35,"category":"peripherals","createdAt":"2026-08-13T09:45:59.230084Z"},{"id":2,"name":"USB-C Hub","description":"7-in-1 aluminium","price":39.50,"stockQuantity":100,"category":"peripherals","createdAt":"2026-08-13T09:45:59.284298Z"},{"id":4,"name":"27-inch 4K Monitor","description":"IPS, 60Hz, HDR400","price":299.00,"stockQuantity":30,"category":"monitors","createdAt":"2026-08-13T09:45:59.329465Z"},{"id":5,"name":"34-inch Ultrawide Monitor","description":"curved, 144Hz","price":599.00,"stockQuantity":12,"category":"monitors","createdAt":"2026-08-13T09:45:59.354492Z"},{"id":6,"name":"Laptop Stand","description":"aluminium, adjustable","price":34.95,"stockQuantity":80,"category":"accessories","createdAt":"2026-08-13T09:45:59.376546Z"},{"id":7,"name":"Noise-Cancelling Headphones Pro","description":"over-ear, BT 5.3, ANC+","price":249.99,"stockQuantity":50,"category":"audio","createdAt":"2026-08-13T09:45:59.399209Z"},{"id":8,"name":"1080p Webcam","description":"auto-focus","price":59.00,"stockQuantity":45,"category":"peripherals","createdAt":"2026-08-13T09:45:59.420404Z"},{"id":9,"name":"External SSD 1TB","description":"USB 3.2 Gen2","price":109.99,"stockQuantity":70,"category":"storage","createdAt":"2026-08-13T09:45:59.441796Z"},{"id":11,"name":"USB Microphone","description":"cardioid, plug-and-play","price":89.00,"stockQuantity":35,"category":"audio","createdAt":"2026-08-13T09:45:59.480029Z"},{"id":12,"name":"14-inch Laptop","description":"16GB RAM, 512GB SSD","price":1099.00,"stockQuantity":15,"category":"computers","createdAt":"2026-08-13T09:45:59.498331Z"}]'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:53.753919215Z
+    timestamp: 2026-08-13T09:46:00.054597513Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923273
+  created: 1786614360
   app_port: 8080
 curl: |
   curl --request GET \
     --url http://localhost:8080/api/products \
+    --header 'User-Agent: curl/8.7.1' \
     --header 'Accept: */*' \
     --header 'Host: localhost:8080' \
-    --header 'User-Agent: curl/8.7.1' \

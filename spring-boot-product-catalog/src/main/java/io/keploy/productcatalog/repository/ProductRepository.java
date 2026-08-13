@@ -12,7 +12,9 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    List<Product> findByCategoryIgnoreCase(String category);
+    // OrderById keeps the recorded list/filter responses deterministic, so a re-record
+    // reproduces the same row order instead of relying on Postgres' unspecified heap order.
+    List<Product> findByCategoryIgnoreCaseOrderByIdAsc(String category);
 
     /**
      * Atomically applies a relative change to a product's stock in a single guarded UPDATE.

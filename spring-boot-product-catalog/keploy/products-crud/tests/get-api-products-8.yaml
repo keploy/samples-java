@@ -16,28 +16,28 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: ""
-    timestamp: 2026-08-05T09:47:53.434172256Z
+    timestamp: 2026-08-13T09:45:59.858410888Z
   resp:
     status_code: 200
     header:
       Content-Length: "162"
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:53 GMT
-    body: '[{"id":9,"name":"External SSD 1TB","description":"USB 3.2 Gen2","price":109.99,"stockQuantity":70,"category":"storage","createdAt":"2026-08-05T09:47:52.036490Z"}]'
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
+    body: '[{"id":9,"name":"External SSD 1TB","description":"USB 3.2 Gen2","price":109.99,"stockQuantity":70,"category":"storage","createdAt":"2026-08-13T09:45:59.441796Z"}]'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:53.447671381Z
+    timestamp: 2026-08-13T09:45:59.86475443Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923273
+  created: 1786614359
   app_port: 8080
 curl: |
   curl --request GET \
     --url http://localhost:8080/api/products?category=storage \
-    --header 'Host: localhost:8080' \
     --header 'User-Agent: curl/8.7.1' \
     --header 'Accept: */*' \
+    --header 'Host: localhost:8080' \

@@ -14,24 +14,24 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: ""
-    timestamp: 2026-08-05T09:47:53.677868673Z
+    timestamp: 2026-08-13T09:45:59.992347055Z
   resp:
     status_code: 200
     header:
       Content-Length: "183"
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:53 GMT
-    body: '{"id":7,"name":"Noise-Cancelling Headphones Pro","description":"over-ear, BT 5.3, ANC+","price":249.99,"stockQuantity":50,"category":"audio","createdAt":"2026-08-05T09:47:51.983118Z"}'
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
+    body: '{"id":7,"name":"Noise-Cancelling Headphones Pro","description":"over-ear, BT 5.3, ANC+","price":249.99,"stockQuantity":50,"category":"audio","createdAt":"2026-08-13T09:45:59.399209Z"}'
     status_message: OK
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:53.682846923Z
+    timestamp: 2026-08-13T09:45:59.996277763Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923273
+  created: 1786614359
   app_port: 8080
 curl: |
   curl --request GET \

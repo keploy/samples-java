@@ -16,30 +16,30 @@ spec:
       Host: localhost:8080
       User-Agent: curl/8.7.1
     body: '{"name":"27-inch 4K Monitor","description":"IPS, 60Hz","price":329.00,"stockQuantity":25,"category":"monitors"}'
-    timestamp: 2026-08-05T09:47:51.896657797Z
+    timestamp: 2026-08-13T09:45:59.327379846Z
   resp:
     status_code: 201
     header:
       Content-Type: application/json
-      Date: Wed, 05 Aug 2026 09:47:51 GMT
+      Date: Thu, 13 Aug 2026 09:45:59 GMT
       Location: http://localhost:8080/api/products/4
-    body: '{"id":4,"name":"27-inch 4K Monitor","description":"IPS, 60Hz","price":329.00,"stockQuantity":25,"category":"monitors","createdAt":"2026-08-05T09:47:51.899020172Z"}'
+    body: '{"id":4,"name":"27-inch 4K Monitor","description":"IPS, 60Hz","price":329.00,"stockQuantity":25,"category":"monitors","createdAt":"2026-08-13T09:45:59.329465221Z"}'
     status_message: Created
     proto_major: 0
     proto_minor: 0
-    timestamp: 2026-08-05T09:47:51.905879172Z
+    timestamp: 2026-08-13T09:45:59.333671013Z
   objects: []
   assertions:
     noise:
       body.createdAt: []
       header.Date: []
-  created: 1785923271
+  created: 1786614359
   app_port: 8080
 curl: |-
   curl --request POST \
     --url http://localhost:8080/api/products \
-    --header 'Host: localhost:8080' \
-    --header 'User-Agent: curl/8.7.1' \
     --header 'Accept: */*' \
     --header 'Content-Type: application/json' \
+    --header 'Host: localhost:8080' \
+    --header 'User-Agent: curl/8.7.1' \
     --data "{\"name\":\"27-inch 4K Monitor\",\"description\":\"IPS, 60Hz\",\"price\":329.00,\"stockQuantity\":25,\"category\":\"monitors\"}"
