@@ -2,8 +2,9 @@
 # Traffic generator for Keploy recording.
 #
 # Drives the Product Catalog API through a rich, realistic workload so the recorded
-# Keploy suite is broad: ~50 test cases covering the full CRUD lifecycle across several
-# categories, filtering, and a wide range of 400 (validation) and 404 (not-found) paths.
+# Keploy suite is broad: ~60+ test cases covering the full CRUD lifecycle across several
+# categories, filtering, the inventory summary, stock adjustments, and a wide range of
+# 400 (validation), 404 (not-found), and 409 (insufficient-stock) paths.
 # Ids returned by POST are chained into later GET/PUT/DELETE calls so the suite is coherent.
 set -euo pipefail
 

@@ -41,7 +41,7 @@ test:
     apiTimeout: 5
     skipCoverage: false
     coverageReportPath: ""
-    ignoreOrdering: true
+    ignoreOrdering: false
     language: ""
     removeUnusedMocks: false
     preserveFailedMocks: false
