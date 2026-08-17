@@ -72,6 +72,51 @@ public class QueryController {
      * cascade into "Connection closing due to no matching mock found" and
      * tear down the TCP connection.
      */
+    /**
+     * Selects FLOAT / DOUBLE / BIGINT UNSIGNED columns over the OMS
+     * datasource, which runs with useServerPrepStmts=true.
+     *
+     * The {@code id >= ?} predicate is load-bearing, not filler: without
+     * a bound parameter JdbcTemplate issues a plain Statement, which
+     * Connector/J sends as COM_QUERY and MySQL answers with a *text*
+     * result set — every value a length-encoded string, which is not the
+     * code path this fixture exists to cover. The parameter forces a
+     * server-side prepared statement, so the rows come back as a
+     * binary-protocol result set carrying raw IEEE-754 bytes.
+     *
+     * This is the read path for keploy/keploy#4426: keploy decoded the
+     * FLOAT and DOUBLE wire bytes as a numeric cast instead of an
+     * IEEE-754 reinterpret, so a column holding 9.99 was recorded as
+     * 1.0926057e+09 / 4.621813488089437e+18. The corruption happened at
+     * record time, so it survived re-recording and replay asserted
+     * against a value the database never returned.
+     *
+     * big_u covers the neighbouring defect: a BIGINT UNSIGNED above
+     * MaxInt64 has no lossless float64 form, so any mock format that
+     * routes it through one collapses distinct rows onto one number.
+     */
+    @GetMapping("/api/oms/numerics")
+    public List<Map<String, Object>> numerics() {
+        return omsJdbc.queryForList(
+                "SELECT id, label, price_f, ratio_d, big_u FROM numeric_fidelity "
+                        + "WHERE id >= ? ORDER BY id",
+                0);
+    }
+
+    /**
+     * Binds a FLOAT parameter, exercising the COM_STMT_EXECUTE decode
+     * path rather than the result-set one. The bound value is a float32
+     * on the wire and comes back out of the mock file as a float64, so
+     * keploy's parameter matcher has to compare the two at float32
+     * precision — widening instead means a correctly recorded FLOAT
+     * parameter never matches itself and replay finds no mock.
+     */
+    @GetMapping("/api/oms/float-param/{v}")
+    public List<Map<String, Object>> floatParam(@PathVariable("v") float v) {
+        return omsJdbc.queryForList(
+                "SELECT id, label, price_f FROM numeric_fidelity WHERE price_f = ? ORDER BY id", v);
+    }
+
     @GetMapping("/api/oms/stmt-reset/{n}")
     public List<Integer> stmtReset(@PathVariable("n") int n) {
         return omsJdbc.execute((java.sql.Connection conn) -> {
