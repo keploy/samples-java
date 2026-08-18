@@ -97,7 +97,7 @@ keploy record -c "docker compose up" \
   --cmd-type docker-compose \
   --container-name catalog-app \
   -n product-catalog_default \
-  --metadata "name=products-crud,description=full CRUD + filters + 404 + 400"
+  --metadata "name=products-crud,description=full CRUD + filters + summary + stock + 404 + 400 validation"
 ```
 
 ### Generate testcases
