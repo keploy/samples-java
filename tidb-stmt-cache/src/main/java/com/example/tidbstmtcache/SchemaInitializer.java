@@ -30,5 +30,14 @@ public class SchemaInitializer implements CommandLineRunner {
                 "id INT PRIMARY KEY AUTO_INCREMENT, " +
                 "v INT NOT NULL" +
                 ")");
+
+        // Streamed-BLOB fixture for keploy/keploy#4262. Writing this column
+        // through PreparedStatement.setBinaryStream is what makes Connector/J
+        // pipeline COM_STMT_RESET -> COM_STMT_SEND_LONG_DATA ->
+        // COM_STMT_EXECUTE without reading a response in between.
+        jdbc.execute("CREATE TABLE IF NOT EXISTS blob_stream (" +
+                "id INT PRIMARY KEY AUTO_INCREMENT, " +
+                "payload BLOB NOT NULL" +
+                ")");
     }
 }
