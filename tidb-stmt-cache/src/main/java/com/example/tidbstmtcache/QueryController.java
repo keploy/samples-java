@@ -43,6 +43,56 @@ public class QueryController {
     }
 
     /**
+     * Streamed-BLOB write on a server-side prepared statement — the sequence
+     * behind keploy/keploy#4262.
+     *
+     * PreparedStatement.setBinaryStream makes Connector/J 8.x send the value
+     * out-of-band and pipeline three commands per re-execution without reading
+     * a response between them:
+     *
+     *   COM_STMT_RESET  ->  COM_STMT_SEND_LONG_DATA  ->  COM_STMT_EXECUTE
+     *
+     * RESET and EXECUTE are each answered with an OK; SEND_LONG_DATA is not
+     * answered at all. A recorder that assumes one response per command pairs
+     * EXECUTE's OK with the wrong request and drops the other, so at replay the
+     * live EXECUTE has no mock and Connector/J fails with
+     * "Can not read response from server".
+     *
+     * Re-executing on a cached statement is what forces the RESET, so this must
+     * be driven more than once on the same connection to reproduce.
+     */
+    @GetMapping("/api/blob/{size}")
+    public Map<String, Object> writeBlob(@PathVariable("size") int size) {
+        byte[] payload = new byte[Math.max(1, Math.min(size, 64 * 1024))];
+        for (int i = 0; i < payload.length; i++) {
+            payload[i] = (byte) (i % 251);
+        }
+
+        Integer id = jdbc.execute((java.sql.Connection conn) -> {
+            try (java.sql.PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO blob_stream (payload) VALUES (?)",
+                    java.sql.Statement.RETURN_GENERATED_KEYS)) {
+                // setBinaryStream, not setBytes: the stream setter is what
+                // triggers COM_STMT_SEND_LONG_DATA.
+                ps.setBinaryStream(1, new java.io.ByteArrayInputStream(payload), payload.length);
+                ps.executeUpdate();
+                try (java.sql.ResultSet keys = ps.getGeneratedKeys()) {
+                    return keys.next() ? keys.getInt(1) : -1;
+                }
+            }
+        });
+
+        Integer stored = jdbc.queryForObject(
+                "SELECT LENGTH(payload) FROM blob_stream WHERE id = ?", Integer.class, id);
+
+        Map<String, Object> out = new HashMap<>();
+        out.put("id", id);
+        out.put("sent", payload.length);
+        out.put("stored", stored);
+        return out;
+    }
+
+    /**
      * Lightweight liveness probe. Plain query, no prepared statement --
      * used by the CI script's wait_for_app loop so app readiness is not
      * coupled to TiDB prep-cache behaviour.
