@@ -25,7 +25,7 @@ mvn clean install
 
 ### 3. Set Up Docker Containers
 
-#### PostgreSQL Container
+#### MySQL Container
 
 1. Pull the MySQL Docker Image:
 
