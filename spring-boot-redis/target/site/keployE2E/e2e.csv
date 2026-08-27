@@ -1,0 +1,4 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+JaCoCo Coverage Report,com.example.redis.controller,ProductController,2,37,1,1,1,9,1,6,0,6
+JaCoCo Coverage Report,com.example.redis.model,Product,0,24,0,0,0,7,0,7,0,7
+JaCoCo Coverage Report,com.example.redis,SpringBootRedisApplication,0,8,0,0,0,3,0,2,0,2
