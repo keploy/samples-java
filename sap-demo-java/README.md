@@ -3,8 +3,9 @@
 Spring Boot 3 / Java 21 reference service that builds a **Customer 360 view**
 on the fly by fanning out to SAP S/4HANA Business Partner OData endpoints
 and merging the result with locally stored CRM annotations (tags + notes)
-from Postgres. Used inside the Keploy project as the canonical regression
-fixture for the SAP fan-out path and the v3 HTTPS + Postgres parsers.
+from a **configurable SQL backend (Postgres or MySQL 8)**. Used inside the
+Keploy project as the canonical regression fixture for the SAP fan-out
+path and the v3 HTTPS + Postgres/MySQL parsers.
 
 ---
 
@@ -35,14 +36,14 @@ flowchart LR
   Agg -->|sync| SapPartner[SAP OData<br/>A_BusinessPartner]
   Agg -->|async| SapAddr[SAP OData<br/>to_BusinessPartnerAddress]
   Agg -->|async| SapRole[SAP OData<br/>to_BusinessPartnerRole]
-  Agg -->|async| PgTags[(Postgres<br/>customer_tag)]
-  Agg -->|async| PgNotes[(Postgres<br/>customer_note)]
+  Agg -->|async| DbTags[(SQL<br/>customer_tag)]
+  Agg -->|async| DbNotes[(SQL<br/>customer_note)]
 
   SapPartner -.->|HTTP/1.1 + TLS<br/>keep-alive| SAPAPI[SAP Sandbox]
   SapAddr -.-> SAPAPI
   SapRole -.-> SAPAPI
-  PgTags -.->|JDBC + TLS| PG[(Postgres 16)]
-  PgNotes -.-> PG
+  DbTags -.->|JDBC| DB[(Postgres 16 &#124; MySQL 8)]
+  DbNotes -.-> DB
 ```
 
 A few things to notice about this shape:
@@ -98,7 +99,7 @@ Keploy's interception layer in a single flow.
 ## Requirements
 
 - Java 21 + Maven 3.9+
-- Docker (Postgres 16 is brought up as a sidecar via `docker compose`)
+- Docker (Postgres 16 or MySQL 8 is brought up as a sidecar via `docker compose`)
 - A Keploy binary if you want to record / replay (any v3.3.x or newer is fine)
 - An SAP API sandbox key — grab one for free from the SAP Business
   Accelerator Hub:
@@ -112,7 +113,8 @@ Keploy's interception layer in a single flow.
 ```bash
 cd sap-demo-java
 
-# 1. Bring up Postgres in the background (or use ./deploy_kind.sh for k8s)
+# 1. Bring up the default datasource (Postgres 16) in the background
+#    (or use ./deploy_kind.sh for k8s)
 docker compose up -d postgres
 
 # 2. Point the app at the SAP sandbox
@@ -129,6 +131,72 @@ The service listens on `:8080`. Smoke-test it:
 curl -s http://localhost:8080/actuator/health | jq .
 curl -s http://localhost:8080/api/v1/customers/202/360 | jq .
 ```
+
+To run against MySQL 8 instead (same commands, different profile):
+
+```bash
+SPRING_PROFILES_ACTIVE=mysql docker compose --profile mysql up -d mysql customer360
+```
+
+See [Database backends](#database-backends) below for details.
+
+---
+
+## Database backends
+
+The local store (`customer_tag`, `customer_note`, `audit_event`) runs on
+either **Postgres 16** (default) or **MySQL 8**. Selection is a runtime
+decision — no rebuild, no code change, just a Spring profile toggle.
+
+| Aspect                 | Postgres (default)                              | MySQL 8                                              |
+|------------------------|-------------------------------------------------|------------------------------------------------------|
+| Spring profile         | `postgres`                                      | `mysql`                                              |
+| Driver                 | `org.postgresql.Driver`                         | `com.mysql.cj.jdbc.Driver`                           |
+| Hibernate dialect      | `PostgreSQLDialect`                             | `MySQLDialect`                                       |
+| Flyway location        | `classpath:db/migration/postgres`               | `classpath:db/migration/mysql`                       |
+| Profile YAML           | `src/main/resources/application-postgres.yml`   | `src/main/resources/application-mysql.yml`           |
+| Default JDBC URL       | `jdbc:postgresql://localhost:5432/customer360`  | `jdbc:mysql://localhost:3306/customer360?...`        |
+| Docker compose service | `postgres` (no profile tag — starts by default) | `mysql` (compose profile `mysql`, opt-in)            |
+| k8s manifests          | `k8s/postgres.yaml` + `k8s/configmap.yaml`      | `k8s/mysql.yaml` + `k8s/configmap-mysql.yaml`        |
+
+### Switching backends
+
+Local (Docker Compose):
+
+```bash
+# Default — Postgres
+docker compose up -d postgres customer360
+
+# MySQL
+SPRING_PROFILES_ACTIVE=mysql \
+  docker compose --profile mysql up -d mysql customer360
+```
+
+Kubernetes (`deploy_kind.sh`):
+
+```bash
+# Default — Postgres
+./deploy_kind.sh apply
+
+# MySQL
+DB_BACKEND=mysql ./deploy_kind.sh apply
+```
+
+The profile override env vars are standard Spring Boot — you can also
+run the fat jar directly:
+
+```bash
+SPRING_PROFILES_ACTIVE=mysql \
+SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/customer360?useSSL=false\&allowPublicKeyRetrieval=true\&serverTimezone=UTC \
+  java -jar target/customer360.jar
+```
+
+The Flyway migrations in `src/main/resources/db/migration/postgres/` and
+`.../mysql/` are functionally identical schemas with dialect-specific
+DDL (`BIGSERIAL` vs `BIGINT AUTO_INCREMENT`, `TIMESTAMPTZ` vs
+`TIMESTAMP`, `NOW()` vs `CURRENT_TIMESTAMP`, etc.). Hibernate's
+`jdbc.time_zone=UTC` keeps write timestamps identical across the two
+backends.
 
 ---
 
@@ -233,9 +301,11 @@ Classic Spring Boot layering, with one custom wrinkle for the fan-out:
   `application.yml`).
 - **Persistence** — `repository/CustomerTagRepository.java` and
   `CustomerNoteRepository.java` (Spring Data JPA), plus
-  `AuditEventRepository`. Schema is Flyway-migrated
-  (`src/main/resources/db/migration/V1__init_schema.sql`); pool is
-  HikariCP with `maximum-pool-size=10`.
+  `AuditEventRepository`. Schema is Flyway-migrated; each supported
+  backend has its own migration tree
+  (`src/main/resources/db/migration/postgres/V1__init_schema.sql` and
+  `.../mysql/V1__init_schema.sql`). Pool is HikariCP with
+  `maximum-pool-size=10`.
 - **Correlation** — inbound `CorrelationIdFilter` seeds the MDC;
   outbound `CorrelationIdInterceptor` propagates the ID on every SAP call.
 
@@ -262,13 +332,16 @@ Classic Spring Boot layering, with one custom wrinkle for the fan-out:
 
 | Path | Purpose |
 |---|---|
-| `pom.xml` | Spring Boot 3, Java 21, Resilience4j, Flyway, HikariCP, SpringDoc |
+| `pom.xml` | Spring Boot 3, Java 21, Resilience4j, Flyway, HikariCP, SpringDoc, Postgres + MySQL drivers |
 | `src/main/java/com/keploy/sapdemo/customer360/...` | Application source (see *Architecture* above) |
-| `src/main/resources/application.yml` | Externalised config |
-| `src/main/resources/db/migration/V1__init_schema.sql` | Flyway schema: `customer_tag`, `customer_note`, `audit_event` |
-| `docker-compose.yml` | Local Postgres 16 sidecar |
+| `src/main/resources/application.yml` | Externalised config (shared) |
+| `src/main/resources/application-postgres.yml` | Postgres-specific datasource + Flyway location |
+| `src/main/resources/application-mysql.yml` | MySQL-specific datasource + Flyway location |
+| `src/main/resources/db/migration/postgres/V1__init_schema.sql` | Flyway schema (Postgres dialect) |
+| `src/main/resources/db/migration/mysql/V1__init_schema.sql` | Flyway schema (MySQL 8 dialect) |
+| `docker-compose.yml` | Local Postgres 16 sidecar (default) + MySQL 8 sidecar (compose profile `mysql`) |
 | `Dockerfile` | Multi-stage, non-root Spring Boot layered image |
-| `k8s/*.yaml` | Namespace / ConfigMap / Secret / Deployment / Service / Ingress |
+| `k8s/*.yaml` | Namespace / ConfigMap(s) / Secret / Deployment / Service / Ingress / `postgres.yaml` / `mysql.yaml` |
 | `deploy_kind.sh` | One-shot kind cluster + build + load + apply |
 | `run_flow.sh` | 20-request exerciser used during `keploy record` |
 | `demo_script.sh` | Record / replay / offline-test harness |

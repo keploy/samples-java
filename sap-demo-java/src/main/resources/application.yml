@@ -6,13 +6,21 @@ spring:
     serialization:
       write-dates-as-timestamps: false
 
-  # --- Postgres / JPA ----------------------------------------------------
-  # The app persists tags, notes, and an audit log locally. In a RISE/BTP
-  # landscape this would be a hyperscaler-hosted Postgres or SAP HANA Cloud;
-  # for the demo we use stock Postgres, which Keploy's OSS core can record
-  # and replay at the wire-protocol level.
+  # ----------------------------------------------------------------------
+  # Datasource backend is profile-selected.
+  # Default is Postgres (application-postgres.yml); set
+  #   SPRING_PROFILES_ACTIVE=mysql
+  # to swap to MySQL 8 (application-mysql.yml). Both profiles honour the
+  # standard SPRING_DATASOURCE_URL / _USERNAME / _PASSWORD env overrides.
+  # ----------------------------------------------------------------------
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:postgres}
+
+  # --- Connection pool + JPA (shared across DB profiles) ----------------
+  # Driver class, JDBC URL template, Hibernate dialect and Flyway location
+  # come from the profile-specific YAML (application-postgres.yml or
+  # application-mysql.yml). Everything below is portable.
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/customer360}
     username: ${SPRING_DATASOURCE_USERNAME:customer360}
     password: ${SPRING_DATASOURCE_PASSWORD:customer360}
     hikari:
@@ -32,7 +40,6 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
-    locations: classpath:db/migration
 
   # --- Cache -----------------------------------------------------------
   # Caffeine-backed caches for SAP master data. Typical BTP-extension

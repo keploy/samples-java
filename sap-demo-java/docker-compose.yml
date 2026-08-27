@@ -1,6 +1,18 @@
 # Local-only runner — convenient for quick iteration without kind.
-# Starts Postgres + the Spring Boot app; the app waits for Postgres via
-# depends_on/healthcheck.
+#
+# Two datasource backends are supported:
+#
+#   Postgres (default):
+#     docker compose up -d postgres customer360
+#
+#   MySQL 8 (compose profile "mysql"):
+#     SPRING_PROFILES_ACTIVE=mysql \
+#     docker compose --profile mysql up -d mysql customer360
+#
+# The Postgres service has no `profiles:` tag, so it starts on any
+# `docker compose up` without arguments — backwards-compatible with the
+# pre-existing flow. The MySQL service is tagged `profiles: [mysql]` so
+# it only boots when explicitly requested.
 #
 # For the demo, prefer ./deploy_kind.sh (matches production topology).
 services:
@@ -22,23 +34,59 @@ services:
       timeout: 3s
       retries: 10
 
+  mysql:
+    image: mysql:8.0
+    container_name: customer360-mysql
+    profiles: ["mysql"]
+    environment:
+      MYSQL_DATABASE: customer360
+      MYSQL_USER: customer360
+      MYSQL_PASSWORD: customer360
+      MYSQL_ROOT_PASSWORD: customer360-root
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=caching_sha2_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    healthcheck:
+      test:
+        - CMD
+        - mysqladmin
+        - ping
+        - -h
+        - localhost
+        - -u
+        - customer360
+        - -pcustomer360
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
   customer360:
     build: .
     container_name: customer360
     image: customer360:local
-    depends_on:
-      postgres:
-        condition: service_healthy
+    # No depends_on block here — compose wires the right DB based on the
+    # profile. When the default compose profile runs, only `postgres` is
+    # reachable; when `--profile mysql` is used, only `mysql` is up.
     env_file:
       - .env
     environment:
-      SPRING_PROFILES_ACTIVE: default
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/customer360
-      SPRING_DATASOURCE_USERNAME: customer360
-      SPRING_DATASOURCE_PASSWORD: customer360
+      # Selects Spring profile; default keeps backwards compatibility.
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-postgres}
+      # The default below assumes the Postgres service. When running with
+      # --profile mysql the host command should override with:
+      #   SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/customer360?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://postgres:5432/customer360}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME:-customer360}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-customer360}
     ports:
       - "8080:8080"
     restart: unless-stopped
 
 volumes:
   pgdata:
+  mysqldata:
