@@ -106,6 +106,18 @@ public class OwnerRestController implements OwnersApi {
 
     @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
     @Override
+    public ResponseEntity<OwnerDto> addOwnernm(OwnerFieldsDto ownerFieldsDto) {
+        HttpHeaders headers = new HttpHeaders();
+        Owner owner = ownerMapper.toOwner(ownerFieldsDto);
+        this.clinicService.saveOwner(owner);
+        OwnerDto ownerDto = ownerMapper.toOwnerDto(owner);
+        headers.setLocation(UriComponentsBuilder.newInstance()
+            .path("/api/ownersnm/{id}").buildAndExpand(owner.getId()).toUri());
+        return new ResponseEntity<>(ownerDto, headers, HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+    @Override
     public ResponseEntity<OwnerDto> updateOwner(Integer ownerId, OwnerFieldsDto ownerFieldsDto) {
         Owner currentOwner = this.clinicService.findOwnerById(ownerId);
         if (currentOwner == null) {
