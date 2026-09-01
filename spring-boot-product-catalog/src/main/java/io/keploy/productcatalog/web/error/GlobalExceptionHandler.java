@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
-import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -111,14 +110,6 @@ public class GlobalExceptionHandler {
         body.put("error", "Not Found");
         body.put("message", "No resource found for path '" + ex.getResourcePath() + "'");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
-    }
-
-    @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
-    public ResponseEntity<Void> handleNotAcceptable(HttpMediaTypeNotAcceptableException ex) {
-        // Thrown while writing a response body the client's Accept header can't take (e.g. an error
-        // hit with Accept: application/xml). This MUST be body-less — the body is exactly what can't
-        // be negotiated — otherwise it recurses and the catch-all below would mislabel it as a 500.
-        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
     }
 
     @ExceptionHandler(Exception.class)
