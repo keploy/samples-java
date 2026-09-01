@@ -1,0 +1,10 @@
+preScript: ""
+postScript: ""
+appCommand: ""
+template: {}
+metadata:
+    description: full CRUD + filters + summary + stock + 404 + 400 validation
+    name: products-crud
+mockRegistry:
+    mock: 2517f87149abc3ccafc3d8762d703d85cc9f2f4d83e9b4fe43c7a2aed1f513e5
+    app: spring-boot-product-catalog
