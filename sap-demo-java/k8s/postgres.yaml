@@ -88,12 +88,21 @@ spec:
               cpu: "500m"
               memory: "256Mi"
           readinessProbe:
+            # Readiness means "can serve clients", so probe over TCP.
+            # Without -h, pg_isready uses the Unix socket, which the
+            # temporary post-initdb server (listen_addresses='') already
+            # answers -- marking the pod Ready while no TCP listener exists
+            # and letting dependents connect to a refused port.
             exec:
-              command: ["pg_isready", "-U", "customer360", "-d", "customer360"]
+              command: ["pg_isready", "-h", "127.0.0.1", "-U", "customer360", "-d", "customer360"]
             periodSeconds: 5
             timeoutSeconds: 3
             failureThreshold: 5
           livenessProbe:
+            # Deliberately the socket probe, unlike readiness above: liveness
+            # asks "is the process alive", and a failure restarts the pod. A
+            # TCP probe here would restart-loop a pod whose initdb outruns
+            # initialDelaySeconds + failureThreshold * periodSeconds.
             exec:
               command: ["pg_isready", "-U", "customer360", "-d", "customer360"]
             initialDelaySeconds: 15
