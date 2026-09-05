@@ -3,75 +3,96 @@ package com.example.tidbstmtcache;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
- * Single HikariCP pool against TiDB :4000 with MySQL Connector/J flags
- * that force the orphan-EXECUTE scenario this sample is designed around:
+ * HikariCP pool against TiDB :4000. Two distinct keploy regressions are
+ * exercised by this single sample:
  *
- *   useServerPrepStmts=true   -- server-side prepared statements (stmtIDs)
- *   cachePrepStmts=true       -- per-Connection client-side PS cache
- *   prepStmtCacheSize >= 1    -- the cache must actually retain entries
+ *  - Orphan COM_STMT_EXECUTE (TiDB prepared-statement cache): driven by
+ *    useServerPrepStmts + cachePrepStmts + prepStmtCacheSize on the
+ *    JDBC URL and HikariCP's LIFO pool — see the existing /api/kv/* and
+ *    /api/kv/insert-select/* endpoints.
  *
- * Pool sizing > 1 with HikariCP's LIFO eviction means sequential HTTP
- * requests to /api/kv/{i} often land on the same physical connection.
- * On a cache hit, Connector/J skips COM_STMT_PREPARE and emits only
- * COM_STMT_EXECUTE using the cached server-side stmtID. The recorder's
- * mock for that second EXECUTE is the orphan case keploy/keploy@b2e68adb
- * is designed to handle (recordedPrepByConn miss -> expectedQuery="" ->
- * param-alone fallback).
+ *  - Pulsar partitioned-topic SEND round-robin (this file's setAutoCommit
+ *    pairing with Hibernate provider_disables_autocommit=true) — driven
+ *    by JPA persisting Event rows before publishing to a partitioned
+ *    Pulsar topic; the partition the client routes to differs between
+ *    record and replay, which is what keploy/enterprise's baseTopic()
+ *    matcher loosening addresses.
  *
- * TiDB is preferred over MySQL here because TiDB's prepared-statement
- * cache semantics diverge subtly from MySQL across COM_RESET_CONNECTION,
- * which is what surfaced this matcher bug downstream. MySQL 8 alone is
- * unlikely to reproduce the orphan condition reliably in one record cycle.
+ * Why autoCommit(false) is wired here and not just left to the driver
+ * default: with Hibernate's provider_disables_autocommit=true, the
+ * provider expects autocommit to already be off when it acquires a
+ * connection. If autocommit defaults to on, Hibernate will issue a
+ * redundant SET autocommit=0 on every connection acquisition, which
+ * shows up as extra MySQL traffic in the recording and makes the mock
+ * stream noisier than it has to be.
  */
 @Configuration
 public class DataSourceConfig {
 
-    @Value("${datasource.tidb.jdbc-url}")
-    private String jdbcUrl;
+    @Value("${keploy.datasource.jdbc-url}")
+    private String dbUrl;
 
-    @Value("${datasource.tidb.username}")
-    private String username;
+    @Value("${keploy.datasource.username}")
+    private String dbUsername;
 
-    @Value("${datasource.tidb.password}")
-    private String password;
+    @Value("${keploy.datasource.password}")
+    private String dbPassword;
 
-    @Value("${datasource.tidb.driver-class-name}")
-    private String driverClass;
+    @Value("${keploy.datasource.driver-class-name}")
+    private String driverClassName;
+
+    @Value("${keploy.datasource.pool-name}")
+    private String poolName;
+
+    @Value("${keploy.datasource.minimum-idle}")
+    private int minimumIdle;
+
+    @Value("${keploy.datasource.maximum-pool-size}")
+    private int maximumPoolSize;
+
+    @Value("${keploy.datasource.idle-timeout}")
+    private long idleTimeout;
+
+    @Value("${keploy.datasource.max-lifetime}")
+    private long maxLifetime;
+
+    @Value("${keploy.datasource.connection-timeout}")
+    private long connectionTimeout;
+
+    @Value("${keploy.datasource.connection-test-query}")
+    private String connectionTestQuery;
+
+    @Value("${keploy.datasource.validation-timeout}")
+    private long validationTimeout;
 
     @Bean(destroyMethod = "close")
-    public HikariDataSource tidbDataSource() {
+    public HikariDataSource dataSource() {
+        String resolvedPassword = dbPassword;
         HikariConfig config = new HikariConfig();
-        config.setPoolName("tidb-dataSource");
-        config.setUsername(username);
-        config.setPassword(password);
-        config.setJdbcUrl(jdbcUrl);
-        config.setDriverClassName(driverClass);
-
-        // Small pool: enough to be realistic (not 1), small enough that
-        // sequential curls reliably hit the same physical connection and
-        // therefore the same Connector/J prepared-statement cache.
-        config.setMaximumPoolSize(3);
-        config.setMinimumIdle(1);
-
-        // Keep connections alive long enough to span the whole record
-        // window so HikariCP doesn't churn the pool mid-test and flush
-        // the prep cache out from under us.
-        config.setKeepaliveTime(30_000);
-        config.setIdleTimeout(60_000);
-        config.setMaxLifetime(7_200_000);
-        config.setConnectionTimeout(10_000);
-        config.setValidationTimeout(5_000);
-
+        config.setJdbcUrl(dbUrl);
+        config.setUsername(dbUsername);
+        config.setPassword(resolvedPassword);
+        config.setDriverClassName(driverClassName);
+        config.setPoolName(poolName);
+        config.setMinimumIdle(minimumIdle);
+        config.setMaximumPoolSize(maximumPoolSize);
+        config.setIdleTimeout(idleTimeout);
+        config.setMaxLifetime(maxLifetime);
+        config.setConnectionTimeout(connectionTimeout);
+        config.setConnectionTestQuery(connectionTestQuery);
+        config.setValidationTimeout(validationTimeout);
+        config.setAutoCommit(false);
         return new HikariDataSource(config);
     }
 
     @Bean
-    public JdbcTemplate tidbJdbcTemplate(HikariDataSource tidbDataSource) {
-        return new JdbcTemplate(tidbDataSource);
+    public JdbcTemplate jdbcTemplate(HikariDataSource dataSource) {
+        return new JdbcTemplate(dataSource);
     }
 }

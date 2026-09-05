@@ -1,4 +1,4 @@
-# Minimal single-node TiDB for keploy e2e.
+# Minimal TiDB + Apache Pulsar stack for keploy e2e.
 #
 # Why this stack and not the full pingcap/tidb-docker-compose with PD + TiKV?
 # - The sample only exercises the SQL layer (MySQL wire protocol on :4000).
@@ -8,12 +8,55 @@
 #   process, in-memory) mode when no PD address is supplied, which is exactly
 #   what we want for keploy CI: ~5s boot, volatile data, no extra containers.
 #
-# Pin: v8.5.x is the LTS line current at the time this sample was added.
-# Bump as new LTS lines ship; the matcher behaviour we're testing has been
-# stable across TiDB versions because it depends on the MySQL wire protocol.
+# Pulsar runs in standalone mode (one broker + embedded bookkeeper + zk).
+# The pulsar-init sidecar exists for a single purpose: create the events
+# topic as PARTITIONED with 8 partitions BEFORE the app boots its Java
+# producer. Without that, the Java client would auto-create a
+# non-partitioned topic on first SEND, and the bug we are testing
+# (RoundRobinPartition cursor divergence across record/replay) would not
+# reproduce because there is only one partition to route to.
+#
+# Pin: TiDB v8.5.x is the LTS line current at the time this sample was
+# added. Pulsar 4.0.3 matches the broker version the regression was
+# originally observed against (Pulsar Server 3.x client compatibility is
+# preserved through the 4.x line).
 services:
   tidb:
     image: pingcap/tidb:v8.5.6
     ports:
       - "4000:4000"   # MySQL wire protocol
       - "10080:10080" # status / readiness
+
+  pulsar:
+    image: apachepulsar/pulsar:4.0.3
+    command: bin/pulsar standalone
+    ports:
+      - "6650:6650"   # binary protocol — Java client connects here
+      - "8080:8080"   # admin REST
+    healthcheck:
+      test: ["CMD", "bin/pulsar-admin", "brokers", "healthcheck"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  # One-shot container that waits for the broker to be healthy, then
+  # pre-creates the events topic as partitioned. Exits 0 on success; the
+  # app does NOT depend_on it explicitly because Pulsar Java client
+  # resolves topic metadata lazily on first SEND, so as long as
+  # pulsar-init has finished before /events/patch is first hit, we are
+  # safe. In practice the lookup time exceeds Spring Boot startup time,
+  # so this ordering holds.
+  pulsar-init:
+    image: apachepulsar/pulsar:4.0.3
+    depends_on:
+      pulsar:
+        condition: service_healthy
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        bin/pulsar-admin --admin-url http://pulsar:8080 \
+          topics create-partitioned-topic \
+          persistent://public/default/events --partitions 8
+    restart: "no"
