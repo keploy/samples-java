@@ -1,6 +1,7 @@
 package com.keploy.sample;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -118,6 +119,36 @@ public class ApiController {
         r.put("order", order);
         r.put("orderCountForUser", orderCount);
         return r;
+    }
+
+    // Deterministic secret-bearing response, used only by Keploy's
+    // secret-protection e2e (the enterprise selfhosted-cloud-replay lane).
+    // Returns a DETECTED secret in both the body (account.password) and a
+    // response header (Token), each next to a BENIGN, NON-superset sibling
+    // (account.username; the ordinary X-Request-Id header). Recording this with
+    // secret protection enabled makes ObfuscateTestCase run on an HTTP response,
+    // so the pipeline can assert the secret was redacted (not persisted in
+    // plaintext), the benign sibling survived, and replay still passes.
+    //
+    // The sibling is deliberately NOT a path-superset of the secret (e.g. NOT
+    // password/password_hint): the #2482 fix fails CLOSED and emits no noise for
+    // a secret whose path a sibling contains, which would leave the scrambled
+    // value un-noised and make replay mismatch. That over-broad case is covered
+    // by the unit tests against the real matcher, not here. Values are fixed
+    // constants so the CI assertion can grep for them; this endpoint stores
+    // nothing and touches no table.
+    @GetMapping("/users/{id}/credentials")
+    public ResponseEntity<Map<String, Object>> credentials(@PathVariable long id) {
+        Map<String, Object> account = new LinkedHashMap<>();
+        account.put("username", "benign-sibling-survives");         // benign sibling -> must survive
+        account.put("password", "aX7bK9pQ2mZ4rT6vY1nC3hD5fG8jS0lW"); // detected secret -> obfuscated
+        Map<String, Object> r = new LinkedHashMap<>();
+        r.put("account", account);
+        r.put("userId", id);
+        return ResponseEntity.ok()
+                .header("Token", "aX7bK9pQ2mZ4rT6vY1nC3hD5fG8jS0lW") // detected secret header -> obfuscated
+                .header("X-Request-Id", "req-12345")                 // benign header
+                .body(r);
     }
 
     @GetMapping("/stats")
