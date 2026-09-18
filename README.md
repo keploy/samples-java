@@ -27,6 +27,7 @@ This repo contains the sample for [Keploy's](https://keploy.io) Java Application
 8. [Dropwizard Dynamic Deduplication](https://github.com/keploy/samples-java/tree/main/dropwizard-dedup) - A Dropwizard/Jersey sample used by Enterprise CI to validate that Java dynamic dedup works outside Spring Boot with the runtime Java agent, checked-in HTTP fixtures, native launch, classpath launch, Docker, distroless, and restricted Docker.
 9. [Simple Java Dynamic Deduplication](https://github.com/keploy/samples-java/tree/main/simple-java-dedup) - A minimal plain-Java HTTP server used to smoke-test Java dynamic dedup on Java 8 and Java 17 in native and Docker launch modes.
 10. [MySQL CRUD](https://github.com/keploy/samples-java/tree/main/mysql-crud) - A minimal Spring Boot + JDBC CRUD app used by Enterprise CI to validate the self-hosted cloud-replay pipeline's JDBC secret-obfuscation and object-storage mock upload/download paths against a real MySQL 8 backend.
+11. [Springboot Product Catalog](https://github.com/keploy/samples-java/tree/main/spring-boot-product-catalog) - A Spring Boot + PostgreSQL product-catalog REST API shipping a committed 57-case Keploy test set and 190 Postgres mocks. Includes an app-only docker-compose with no database service at all, so the whole suite replays green with Postgres absent.
 
 ## Community Support ❤️
 

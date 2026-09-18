@@ -1,0 +1,17 @@
+# App-only compose for the Keploy replay demo — NOTICE: there is NO postgres service here.
+# Keploy serves every database call from the mocks it recorded, so the Spring Boot app
+# boots and passes its whole test suite with the database entirely absent.
+name: product-catalog
+
+services:
+  app:
+    build: .
+    container_name: catalog-app
+    environment:
+      # Still points at "postgres" — but nothing is running there. Keploy intercepts the
+      # connection and replays the recorded Postgres traffic instead.
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/catalog
+      SPRING_DATASOURCE_USERNAME: catalog
+      SPRING_DATASOURCE_PASSWORD: catalog
+    ports:
+      - "8080:8080"
