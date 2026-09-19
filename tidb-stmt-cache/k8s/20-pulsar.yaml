@@ -1,0 +1,116 @@
+# Pulsar standalone (broker + bookie + zk in one process). NOT production
+# topology, but the wire protocol the Java client sees on :6650 is
+# identical to a real cluster — which is the only thing the keploy Pulsar
+# parser cares about.
+#
+# The post-start hook inside the broker container creates the events
+# topic as PARTITIONED with 8 partitions. Pre-creating as partitioned is
+# load-bearing for this sample: if the broker auto-creates on first SEND
+# it creates a NON-partitioned topic, and RoundRobinPartition routing
+# collapses to a single partition — which would mask the regression.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pulsar
+  namespace: tidb-pulsar-replay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pulsar
+  template:
+    metadata:
+      labels:
+        app: pulsar
+    spec:
+      containers:
+        - name: pulsar
+          image: apachepulsar/pulsar:4.0.3
+          imagePullPolicy: IfNotPresent
+          command: ["bin/pulsar", "standalone"]
+          # Pulsar standalone is broker + bookie + zk in one JVM. With a
+          # default `-Xms256m -Xmx1g` and bookkeeper direct buffers on top,
+          # 2Gi total RSS is the floor before the kubelet starts OOM-killing
+          # it before zk even finishes electing itself. 4Gi limit + the JVM
+          # heap settings below clear the OOM and let the broker start in
+          # ~30s on a single kind node.
+          env:
+            - name: PULSAR_MEM
+              value: "-Xms512m -Xmx2g -XX:MaxDirectMemorySize=1g"
+          ports:
+            - name: binary
+              containerPort: 6650
+            - name: admin
+              containerPort: 8080
+          # tcpSocket on the binary port is what actually proves the
+          # broker is serving client traffic. `pulsar-admin brokers
+          # healthcheck` is a Java process — its boot + REST round-trip
+          # takes 3-7s, which blows past the default 1s timeoutSeconds.
+          # Bumping the timeout to 15s "works" but burns CPU forking
+          # the JVM every 5s for the life of the deployment. TCP probe
+          # is the cheaper, more accurate signal for "can the Java
+          # producer connect".
+          readinessProbe:
+            tcpSocket:
+              port: binary
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            failureThreshold: 30
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "200m"
+            limits:
+              memory: "4Gi"
+              cpu: "2000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pulsar
+  namespace: tidb-pulsar-replay
+spec:
+  selector:
+    app: pulsar
+  ports:
+    - name: binary
+      port: 6650
+      targetPort: 6650
+    - name: admin
+      port: 8080
+      targetPort: 8080
+---
+# One-shot Job that pre-creates the partitioned topic. Runs after the
+# Pulsar Service exists; the Job's pod blocks on a healthcheck loop
+# rather than depend_on (which Jobs don't have) so it survives a slow
+# broker boot.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pulsar-init-topic
+  namespace: tidb-pulsar-replay
+spec:
+  backoffLimit: 30
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: pulsar-admin
+          image: apachepulsar/pulsar:4.0.3
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -eu
+              # Wait for the broker to answer healthcheck. The Service
+              # resolves once at least one pod is Ready, but the broker
+              # admin REST is what actually decides whether
+              # create-partitioned-topic succeeds.
+              until bin/pulsar-admin --admin-url http://pulsar:8080 brokers healthcheck >/dev/null 2>&1; do
+                echo "waiting for pulsar broker…"
+                sleep 2
+              done
+              bin/pulsar-admin --admin-url http://pulsar:8080 \
+                topics create-partitioned-topic \
+                persistent://public/default/events --partitions 8
