@@ -5,9 +5,15 @@
 # Usage:
 #   ./deploy_kind.sh [--cluster NAME | -c NAME] [SUBCOMMAND]
 #   KIND_CLUSTER=NAME ./deploy_kind.sh [SUBCOMMAND]
+#   DB_BACKEND=mysql ./deploy_kind.sh apply    # MySQL 8 instead of Postgres
 #
 # The cluster name defaults to "sap-demo". Override via flag or env var to
 # target an existing cluster (e.g. one that hosts the Keploy k8s-proxy).
+#
+# DB_BACKEND selects the datasource backend applied into the cluster:
+#   postgres (default) — applies k8s/postgres.yaml + k8s/configmap.yaml
+#   mysql              — applies k8s/mysql.yaml + k8s/configmap-mysql.yaml
+#                        and patches the Deployment env onto the mysql svc
 #
 # Subcommands:
 #   (none) / all  — full pipeline: cluster + build + load + apply + wait
@@ -33,6 +39,16 @@ cd "$(dirname "$0")"
 CLUSTER_NAME="${KIND_CLUSTER:-sap-demo}"
 IMAGE_TAG="customer360:local"
 NS="sap-demo"
+# Datasource backend: "postgres" (default) or "mysql". Override via env
+# before calling: DB_BACKEND=mysql ./deploy_kind.sh apply
+DB_BACKEND="${DB_BACKEND:-postgres}"
+case "${DB_BACKEND}" in
+  postgres|mysql) : ;;
+  *)
+    printf "error: DB_BACKEND must be 'postgres' or 'mysql' (got '%s')\n" "${DB_BACKEND}" >&2
+    exit 2
+    ;;
+esac
 
 # --- flag parsing -----------------------------------------------------------
 # Accepts --cluster NAME / -c NAME anywhere in the arg list.
@@ -257,14 +273,41 @@ apply_manifests() {
   ensure_secret
   ensure_image_in_cluster
   ensure_ingress_controller
-  say "applying k8s manifests into context kind-${CLUSTER_NAME}"
+  say "applying k8s manifests into context kind-${CLUSTER_NAME} (DB_BACKEND=${DB_BACKEND})"
   kubectl apply -f k8s/namespace.yaml
-  kubectl apply -f k8s/postgres.yaml
-  say "waiting for Postgres rollout"
-  kubectl -n "${NS}" rollout status deployment/postgres --timeout=120s
-  kubectl apply -f k8s/configmap.yaml
+  if [ "${DB_BACKEND}" = "mysql" ]; then
+    kubectl apply -f k8s/mysql.yaml
+    say "waiting for MySQL rollout"
+    kubectl -n "${NS}" rollout status deployment/mysql --timeout=180s
+    kubectl apply -f k8s/configmap-mysql.yaml
+  else
+    kubectl apply -f k8s/postgres.yaml
+    say "waiting for Postgres rollout"
+    kubectl -n "${NS}" rollout status deployment/postgres --timeout=120s
+    kubectl apply -f k8s/configmap.yaml
+  fi
   kubectl apply -f k8s/secret.yaml
   kubectl apply -f k8s/deployment.yaml
+  # When MySQL is active, overlay two changes on the applied Deployment:
+  #   1. Swap the wait-for-postgres initContainer for a wait-for-mysql
+  #      probe (otherwise it would spin forever against a non-existent
+  #      postgres Service).
+  #   2. Re-point SPRING_DATASOURCE_URL at the mysql Service DNS name.
+  # Both are JSON-patched in-place so the base Deployment manifest can
+  # stay Postgres-shaped (no breaking change for existing users).
+  if [ "${DB_BACKEND}" = "mysql" ]; then
+    say "patching Deployment initContainer + env for MySQL backend"
+    kubectl -n "${NS}" patch deployment customer360 --type=json -p='[
+      {"op":"replace","path":"/spec/template/spec/initContainers/0","value":{
+        "name":"wait-for-mysql",
+        "image":"mysql:8.0",
+        "imagePullPolicy":"IfNotPresent",
+        "command":["sh","-c","echo waiting for mysql.sap-demo.svc.cluster.local:3306; until mysqladmin ping -h mysql -u customer360 -pcustomer360 --silent >/dev/null 2>&1; do sleep 2; done; echo mysql ready"]
+      }}
+    ]'
+    kubectl -n "${NS}" set env deployment/customer360 \
+      SPRING_DATASOURCE_URL="jdbc:mysql://mysql.sap-demo.svc.cluster.local:3306/customer360?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+  fi
   kubectl apply -f k8s/service.yaml
   # Retry the Ingress apply a couple of times — the admission webhook can
   # briefly 503 right after the controller comes up.
