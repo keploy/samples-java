@@ -54,25 +54,32 @@ restheart_answers() {
 }
 
 # restheart_wait_for_app: waits until RESTHeart answers, for as long as its
-# container ($RESTHEART_APP_CONTAINER) runs. No deadline: how long a JVM
-# takes to start depends on the host, and a deadline that a loaded runner
-# outlasts fails a healthy app (60 s here did, under keploy record on a busy
-# CI host). A container that has exited, or is not there, ends the wait at
-# once and fails it, with its last log lines; one that runs and never
+# container ($RESTHEART_APP_CONTAINER) is created, running or restarting. No
+# deadline: how long a JVM takes to start depends on the host, and a deadline
+# that a loaded runner outlasts fails a healthy app (60 s here did, under
+# keploy record on a busy CI host). A container that has exited, or is not
+# there, ends the wait at once and fails it, with its last log lines; a docker
+# that does not answer is no verdict either way; one that runs and never
 # answers is left to the caller's own bound (a CI step's timeout). A lane
 # that waits for the app itself first finds it answering at the first probe.
 restheart_wait_for_app() {
-    local state
+    local state rc
     while ! restheart_answers; do
-        state=$(docker inspect -f '{{.State.Status}}' "$RESTHEART_APP_CONTAINER" 2>/dev/null || true)
-        case "$state" in
-            running) ;;
-            *)
+        rc=0
+        state=$(docker inspect -f '{{.State.Status}}' "$RESTHEART_APP_CONTAINER" 2>&1) || rc=$?
+        case "$rc:$state" in
+            # Not answering yet, but on its way: created, starting, restarting.
+            0:created | 0:running | 0:restarting) ;;
+            # Gone: it exited, died, or is not there.
+            0:* | *"No such"*)
                 # It may have answered, and gone, since the probe.
                 restheart_answers && return 0
-                echo "restheart_wait_for_app: RESTHeart does not answer on ${base}/ and its container ${RESTHEART_APP_CONTAINER} is ${state:-not there}" >&2
+                [ "$rc" = 0 ] || state="not there"
+                echo "restheart_wait_for_app: RESTHeart does not answer on ${base}/ and its container ${RESTHEART_APP_CONTAINER} is ${state}" >&2
                 docker logs --tail 50 "$RESTHEART_APP_CONTAINER" >&2 2>&1 || true
                 return 1 ;;
+            # docker did not answer (a daemon slow under load): not a verdict.
+            *) ;;
         esac
         sleep 1
     done

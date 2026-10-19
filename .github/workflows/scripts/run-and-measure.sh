@@ -41,7 +41,7 @@ COMPOSE=(docker compose -f docker-compose.yml -f docker-compose.coverage.yml)
 # container runs (no count of tries: a slow runner is waited for), and
 # fails at once when the container has exited.
 if ! bash flow.sh bootstrap; then
-    echo "::error::restheart did not come up on port ${RESTHEART_APP_PORT} (above)"
+    echo "::error::flow.sh bootstrap failed (above): RESTHeart did not come up on port ${RESTHEART_APP_PORT}, or seeding it failed"
     echo "----- restheart container logs -----"
     docker logs "${RESTHEART_APP_CONTAINER}" --tail 200 2>&1 || true
     echo "----- mongo container logs -----"
