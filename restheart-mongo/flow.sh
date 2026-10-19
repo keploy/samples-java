@@ -63,11 +63,15 @@ restheart_answers() {
 # answers is left to the caller's own bound (a CI step's timeout). A lane
 # that waits for the app itself first finds it answering at the first probe.
 restheart_wait_for_app() {
-    local state rc
+    local state rc said=""
     while ! restheart_answers; do
         rc=0
         state=$(docker inspect -f '{{.State.Status}}' "$RESTHEART_APP_CONTAINER" 2>&1) || rc=$?
         case "$rc:$state" in
+            # No docker to ask (not installed, not executable): no wait can end.
+            126:* | 127:*)
+                echo "restheart_wait_for_app: cannot run docker (exit $rc): $state" >&2
+                return 1 ;;
             # Not answering yet, but on its way: created, starting, restarting.
             0:created | 0:running | 0:restarting) ;;
             # Gone: it exited, died, or is not there.
@@ -78,8 +82,11 @@ restheart_wait_for_app() {
                 echo "restheart_wait_for_app: RESTHeart does not answer on ${base}/ and its container ${RESTHEART_APP_CONTAINER} is ${state}" >&2
                 docker logs --tail 50 "$RESTHEART_APP_CONTAINER" >&2 2>&1 || true
                 return 1 ;;
-            # docker did not answer (a daemon slow under load): not a verdict.
-            *) ;;
+            # docker did not answer (a daemon slow under load, a socket it
+            # may not open): not a verdict, said once.
+            *)
+                [ -n "$said" ] || echo "restheart_wait_for_app: docker inspect failed (exit $rc), still waiting: $state" >&2
+                said=1 ;;
         esac
         sleep 1
     done
