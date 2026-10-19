@@ -44,26 +44,42 @@ log_fired() {
     printf '%s %s\n' "$1" "$2" >>"$RESTHEART_FIRED_ROUTES_FILE"
 }
 
+# restheart_answers: RESTHeart answers HTTP on its root: 200, or 401 (it
+# is up and asks for credentials). A published port is not that: docker's
+# proxy listens on it as soon as the container starts.
+restheart_answers() {
+    local code
+    code=$(curl -sS -m 5 -o /dev/null -w '%{http_code}' "${base}/" 2>/dev/null || true)
+    [ "$code" = "200" ] || [ "$code" = "401" ]
+}
+
+# restheart_wait_for_app: waits until RESTHeart answers, for as long as its
+# container ($RESTHEART_APP_CONTAINER) runs. No deadline: how long a JVM
+# takes to start depends on the host, and a deadline that a loaded runner
+# outlasts fails a healthy app (60 s here did, under keploy record on a busy
+# CI host). A container that has exited, or is not there, ends the wait at
+# once and fails it, with its last log lines; one that runs and never
+# answers is left to the caller's own bound (a CI step's timeout). A lane
+# that waits for the app itself first finds it answering at the first probe.
 restheart_wait_for_app() {
-    local timeout=${1:-180}
-    local start_ts code
-    start_ts=$(date +%s)
-    while true; do
-        code=$(curl -sS -o /dev/null -w '%{http_code}' "${base}/" 2>/dev/null || echo "")
-        # 401 (auth required on root) is a SUCCESS signal — it
-        # means RESTHeart is up and responding to HTTP.
-        if [ "$code" = "200" ] || [ "$code" = "401" ]; then return 0; fi
-        if [ $(( $(date +%s) - start_ts )) -ge "$timeout" ]; then
-            echo "restheart_wait_for_app: timed out (last code: ${code:-<empty>})" >&2
-            return 1
-        fi
-        sleep 2
+    local state
+    while ! restheart_answers; do
+        state=$(docker inspect -f '{{.State.Status}}' "$RESTHEART_APP_CONTAINER" 2>/dev/null || true)
+        case "$state" in
+            running) ;;
+            *)
+                # It may have answered, and gone, since the probe.
+                restheart_answers && return 0
+                echo "restheart_wait_for_app: RESTHeart does not answer on ${base}/ and its container ${RESTHEART_APP_CONTAINER} is ${state:-not there}" >&2
+                docker logs --tail 50 "$RESTHEART_APP_CONTAINER" >&2 2>&1 || true
+                return 1 ;;
+        esac
+        sleep 1
     done
 }
 
 restheart_bootstrap() {
-    local timeout=${1:-180}
-    restheart_wait_for_app "$timeout"
+    restheart_wait_for_app
 
     # Seed the collections record-traffic depends on. Each PUT is
     # idempotent (201 first time, 200 on subsequent runs) and
@@ -78,8 +94,7 @@ restheart_bootstrap() {
 }
 
 restheart_record_traffic() {
-    restheart_wait_for_app 60
-    sleep 5
+    restheart_wait_for_app
 
     local encoded_doc_keys='%7B%22_id%22:1,%22name%22:1,%22age%22:1%7D'
     local encoded_filter='%7B%22_id%22:%22jane%22%7D'
@@ -1315,7 +1330,9 @@ print(miss, cov)
 }
 
 case "${1:-}" in
-    bootstrap)        restheart_bootstrap "${2:-180}" ;;
+    # A second argument (the seconds a caller once gave the wait) is
+    # accepted and not used: the wait is on the app, not on a clock.
+    bootstrap)        restheart_bootstrap ;;
     record-traffic)   restheart_record_traffic ;;
     coverage)         restheart_report_coverage ;;
     *)

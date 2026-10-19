@@ -37,16 +37,11 @@ COMPOSE=(docker compose -f docker-compose.yml -f docker-compose.coverage.yml)
 
 "${COMPOSE[@]}" up -d --build
 
-# Both 200 and 401 are success signals.
-for i in $(seq 1 120); do
-    code=$(curl -sS -o /dev/null -w '%{http_code}' \
-        "http://127.0.0.1:${RESTHEART_APP_PORT}/" 2>/dev/null || echo "")
-    if [ "$code" = "200" ] || [ "$code" = "401" ]; then break; fi
-    sleep 2
-done
-
-if [ "$code" != "200" ] && [ "$code" != "401" ]; then
-    echo "::error::restheart did not bind on port ${RESTHEART_APP_PORT} within 240s (last code: ${code:-empty})"
+# flow.sh bootstrap waits for RESTHeart to answer for as long as its
+# container runs (no count of tries: a slow runner is waited for), and
+# fails at once when the container has exited.
+if ! bash flow.sh bootstrap; then
+    echo "::error::restheart did not come up on port ${RESTHEART_APP_PORT} (above)"
     echo "----- restheart container logs -----"
     docker logs "${RESTHEART_APP_CONTAINER}" --tail 200 2>&1 || true
     echo "----- mongo container logs -----"
@@ -54,8 +49,6 @@ if [ "$code" != "200" ] && [ "$code" != "401" ]; then
     "${COMPOSE[@]}" down -v --remove-orphans || true
     exit 1
 fi
-
-bash flow.sh bootstrap 240
 bash flow.sh record-traffic
 
 # JaCoCo TCP-dump + report (no JVM stop needed).
