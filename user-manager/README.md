@@ -13,7 +13,7 @@ A sample User-Manager app to test Keploy integration capabilities using [SpringB
 Based on your OS and preference(Docker/Native), you setup Keploy using One-click installation method:-
 
 ```sh
-curl -O https://raw.githubusercontent.com/keploy/keploy/main/keploy.sh && source keploy.sh
+source /dev/stdin <<<"$(curl -fsSL https://raw.githubusercontent.com/keploy/keploy/main/keploy.sh || echo 'echo Keploy installer download failed >&2; return 1')"
 ```
 
 ## Setup Employee-Manager App

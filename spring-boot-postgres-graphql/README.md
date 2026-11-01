@@ -37,7 +37,7 @@ Follow the steps to start the application:
 
 - Depending on your OS and preference (Docker/Native), you can set up Keploy using the one-click installation method:
    ```bash
-   curl -O https://raw.githubusercontent.com/keploy/keploy/main/keploy.sh && source keploy.sh
+   source /dev/stdin <<<"$(curl -fsSL https://raw.githubusercontent.com/keploy/keploy/main/keploy.sh || echo 'echo Keploy installer download failed >&2; return 1')"
    ```
 
 ## Setup DB
