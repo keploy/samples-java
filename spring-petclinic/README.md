@@ -6,7 +6,7 @@ This project has two parts - the frontend and backend, since Keploy is a backend
 First, you need to install Keploy. For that you can use the command below:
 
 ```
-curl -O https://raw.githubusercontent.com/keploy/keploy/main/keploy.sh && source keploy.sh
+source /dev/stdin <<<"$(curl -fsSL https://raw.githubusercontent.com/keploy/keploy/main/keploy.sh || echo 'echo Keploy installer download failed >&2; return 1')"
 ```
 
 ## Setup the frontend
