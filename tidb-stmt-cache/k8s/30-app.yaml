@@ -1,0 +1,77 @@
+# The Spring Boot app under test. Two things make this manifest specific
+# to keploy auto-replay:
+#
+#  1. metadata.labels.keploy.io/record-session   The opt-in label the
+#     k8s-proxy static webhook (charts/k8s-proxy/templates/static-webhook.yaml)
+#     selects on. With this label present, the webhook injects the
+#     keploy-agent sidecar, mounts the TLS-share emptyDir, and rewrites
+#     egress so MySQL/Pulsar traffic flows through the agent's proxy
+#     listener at :16789.
+#
+#  2. spec.template.spec.containers[0].env points app config at the
+#     in-cluster TiDB and Pulsar Services. JDBC URL keeps the same
+#     prepStmtCacheSize=500&prepStmtCacheSqlLimit=2048 params from
+#     application.properties so the in-cluster recording matches the
+#     local docker-compose recording structurally.
+#
+# Image: the app image is built locally (`mvn -DskipTests package &&
+# docker build -t tidb-pulsar-app:dev .`) and loaded into the cluster
+# via `kind load docker-image tidb-pulsar-app:dev` for kind, or pushed
+# to your registry for a real cluster.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tidb-pulsar-app
+  namespace: tidb-pulsar-replay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tidb-pulsar-app
+  template:
+    metadata:
+      labels:
+        app: tidb-pulsar-app
+        keploy.io/record-session: "true"
+    spec:
+      containers:
+        - name: app
+          image: tidb-pulsar-app:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: KEPLOY_DATASOURCE_JDBC_URL
+              value: "jdbc:mysql://tidb:4000/test?useSSL=false&allowPublicKeyRetrieval=true&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=500&prepStmtCacheSqlLimit=2048"
+            - name: PULSAR_BROKER_URL
+              value: "pulsar://pulsar:6650"
+            - name: PULSAR_TOPIC
+              value: "persistent://public/default/events"
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 3
+            failureThreshold: 20
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tidb-pulsar-app
+  namespace: tidb-pulsar-replay
+spec:
+  selector:
+    app: tidb-pulsar-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
