@@ -34,7 +34,7 @@ restheart-mongo/
 
 The sample is keploy-independent: `docker compose up && bash flow.sh bootstrap && bash flow.sh record-traffic` runs end-to-end against bare RESTHeart. Lane scripts wrap that exact same path inside `keploy record` / `keploy test`.
 
-* `bootstrap` — wait for RESTHeart to start serving and PUT the seed collections (`items`, `people`, `places`, `halpeople`, `relpeople`, `gql-apps`, `acl`, `_schemas`, `avatars.files`, `range_files.files`, `imported_csv`) so subsequent record-traffic calls have something to find.
+* `bootstrap` — wait for RESTHeart to answer (for as long as its container runs: no deadline) and PUT the seed collections (`items`, `people`, `places`, `halpeople`, `relpeople`, `gql-apps`, `acl`, `_schemas`, `avatars.files`, `range_files.files`, `imported_csv`) so subsequent record-traffic calls have something to find.
 * `record-traffic` — drive the full RESTHeart REST surface listed above. Every call is fault-tolerant (`|| true`) so a single transient 4xx never aborts the run. keploy is the assertion layer.
 * `coverage` — emits real Java line coverage via JaCoCo when the `docker-compose.coverage.yml` overlay is applied; otherwise a no-op (the base image is uninstrumented so this prints an info message and exits 0).
 
@@ -44,7 +44,7 @@ The sample is keploy-independent: `docker compose up && bash flow.sh bootstrap &
 
 ```sh
 docker compose up -d
-bash flow.sh bootstrap 240
+bash flow.sh bootstrap
 bash flow.sh record-traffic
 docker compose down -v
 ```
@@ -58,7 +58,7 @@ The base image is uninstrumented. Apply the coverage overlay to attach the JaCoC
 ```sh
 mkdir -p coverage
 docker compose -f docker-compose.yml -f docker-compose.coverage.yml up -d --build
-bash flow.sh bootstrap 240
+bash flow.sh bootstrap
 bash flow.sh record-traffic
 bash flow.sh coverage
 docker compose -f docker-compose.yml -f docker-compose.coverage.yml down -v
