@@ -1,8 +1,39 @@
 type Query {
     getBookByName(name: String): Book
+    getBookById(id: ID!): Book
     getAllBooks: [Book]
     getAuthorById(id: Int): Author
     getAllAuthors: [Author]
+    getAllCategories: [Category]
+    getCategoryById(id: ID!): Category
+    searchBooks(title: String!): [Book]
+}
+
+type Mutation {
+    addBook(book: BookInput!): Book
+    updateBook(id: ID!, book: BookInput!): Book
+    deleteBook(id: ID!): Boolean
+    addAuthor(author: AuthorInput!): Author
+    updateAuthor(id: ID!, author: AuthorInput!): Author
+    deleteAuthor(id: ID!): Boolean
+    addCategory(category: CategoryInput!): Category
+}
+
+input BookInput {
+    name: String!
+    pageCount: Int!
+    authorId: Int!
+    categoryId: Int
+}
+
+input AuthorInput {
+    firstName: String!
+    lastName: String!
+}
+
+input CategoryInput {
+    name: String!
+    description: String
 }
 
 type Book {
@@ -10,10 +41,20 @@ type Book {
     name: String
     pageCount: Int
     author: Author
+    category: Category
 }
 
 type Author {
     id: ID
     firstName: String
     lastName: String
+    bookCount: Int
+    books: [Book]
+}
+
+type Category {
+    id: ID
+    name: String
+    description: String
+    books: [Book]
 }
