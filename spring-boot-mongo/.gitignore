@@ -215,3 +215,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Maven Wrapper downloaded jar ###
+.mvn/wrapper/maven-wrapper.jar
+
