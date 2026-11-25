@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tidb-pulsar-replay
+  labels:
+    # k8s-proxy's static webhook only mutates pods in namespaces that
+    # match the configured watch list (see chart values
+    # webhook.namespaceLabel + watchNamespace). The default label key is
+    # `kubernetes.io/metadata.name`, auto-stamped by the
+    # NamespaceDefaultLabelName admission plugin, so we just rely on
+    # the controller's chart to point at this namespace. If you flip
+    # the chart to a custom label key, add it here.
+    kubernetes.io/metadata.name: tidb-pulsar-replay
