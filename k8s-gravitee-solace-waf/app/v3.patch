@@ -1,0 +1,11 @@
+--- a/src/main/java/io/keploy/demo/orders/OrderEvents.java
++++ b/src/main/java/io/keploy/demo/orders/OrderEvents.java
+@@ -21,7 +21,7 @@
+         e.put("items", items);
+         e.put("totalAmount", total);
+         e.put("currency", currency);
+-        e.put("channel", channel);
++        e.put("channel", channel.toUpperCase());
+         e.put("paymentId", paymentId);
+         return e;
+     }

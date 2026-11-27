@@ -1,0 +1,41 @@
+--- a/src/main/java/io/keploy/demo/orders/OrderEvents.java
++++ b/src/main/java/io/keploy/demo/orders/OrderEvents.java
+@@ -7,7 +7,7 @@
+ 
+ /** Builds the OrderCreated event published to Solace. */
+ final class OrderEvents {
+-    static final String EVENT_VERSION = "1";
++    static final String EVENT_VERSION = "2";
+ 
+     private OrderEvents() {}
+ 
+@@ -19,7 +19,7 @@
+         e.put("orderId", orderId);
+         e.put("customerId", customerId);
+         e.put("items", items);
+-        e.put("totalAmount", total);
++        e.put("amount", total);
+         e.put("currency", currency);
+         e.put("channel", channel);
+         e.put("paymentId", paymentId);
+--- a/src/main/java/io/keploy/demo/orders/InventoryClient.java
++++ b/src/main/java/io/keploy/demo/orders/InventoryClient.java
+@@ -44,7 +44,7 @@
+     Result reserve(String orderId, List<Map<String, Object>> items, String correlationId) throws Exception {
+         Map<String, Object> payload = new LinkedHashMap<>();
+         payload.put("orderId", orderId);
+-        payload.put("warehouse", "EU-WEST-1");
++        payload.put("fulfillmentCenter", "EU-WEST-1");
+         payload.put("items", items);
+         String body = mapper.writeValueAsString(payload);
+ 
+--- a/src/main/java/io/keploy/demo/orders/OrderRepository.java
++++ b/src/main/java/io/keploy/demo/orders/OrderRepository.java
+@@ -60,6 +60,6 @@
+     }
+ 
+     int cancel(String orderId) {
+-        return jdbc.update("UPDATE orders SET status = 'CANCELLED' WHERE order_id = ?", orderId);
++        return jdbc.update("UPDATE orders SET status = 'CANCELLED', note = 'cancelled-v2' WHERE order_id = ?", orderId);
+     }
+ }

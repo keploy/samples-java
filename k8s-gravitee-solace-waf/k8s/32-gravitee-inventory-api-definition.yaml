@@ -1,0 +1,87 @@
+# Second Gravitee API: /inventory -> inventory-api.orders:8081/inventory.
+# Used OUTBOUND by orders-api so Gravitee also appears as a recorded dependency interaction,
+# with Transform-Headers adding X-Gateway / X-Upstream-Api / X-Api-Plan on request and
+# X-Served-By: gravitee-inventory (plus X-Gravitee-Transaction-Id) on response.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inventory-api-definition
+  namespace: gateway
+  labels:
+    managed-by: gravitee.io
+    gio-type: apidefinitions.gravitee.io
+data:
+  environmentId: DEFAULT
+  apiDefinitionVersion: "2.0.0"
+  definition: |
+    {
+      "id": "6f1c2a3b-0000-4000-8000-0000000000a2",
+      "name": "Inventory API",
+      "version": "1.0",
+      "gravitee": "2.0.0",
+      "flow_mode": "DEFAULT",
+      "execution_mode": "v4-emulation-engine",
+      "proxy": {
+        "virtual_hosts": [ { "path": "/inventory" } ],
+        "strip_context_path": false,
+        "preserve_host": false,
+        "groups": [ {
+          "name": "inventory-backend",
+          "endpoints": [ {
+            "name": "inventory-api",
+            "target": "http://inventory-api.orders.svc.cluster.local:8081/inventory",
+            "weight": 1, "backup": false, "type": "http"
+          } ],
+          "load_balancing": { "type": "ROUND_ROBIN" },
+          "http": { "connectTimeout": 5000, "readTimeout": 10000, "keepAlive": true, "pipelining": false, "maxConcurrentConnections": 100, "useCompression": false, "followRedirects": false }
+        } ]
+      },
+      "plans": [ {
+        "id": "6f1c2a3b-0000-4000-8000-0000000000b2",
+        "name": "Keyless",
+        "security": "KEY_LESS",
+        "status": "PUBLISHED",
+        "api": "6f1c2a3b-0000-4000-8000-0000000000a2",
+        "flows": [],
+        "paths": {}
+      } ],
+      "flows": [ {
+        "name": "inventory-gateway-headers",
+        "path-operator": { "path": "/", "operator": "STARTS_WITH" },
+        "condition": "",
+        "methods": [],
+        "enabled": true,
+        "pre": [ {
+          "name": "Transform Headers",
+          "description": "Stamp internal gateway headers on outbound orders-api -> inventory-api calls",
+          "enabled": true,
+          "policy": "transform-headers",
+          "configuration": {
+            "scope": "REQUEST",
+            "addHeaders": [
+              { "name": "X-Gateway", "value": "gravitee-apim-4.9" },
+              { "name": "X-Upstream-Api", "value": "inventory-api" },
+              { "name": "X-Api-Plan", "value": "internal-api-key" }
+            ],
+            "removeHeaders": [ "X-Internal-Debug" ]
+          }
+        } ],
+        "post": [ {
+          "name": "Transform Headers",
+          "description": "Tag inventory responses with Gravitee headers",
+          "enabled": true,
+          "policy": "transform-headers",
+          "configuration": {
+            "scope": "RESPONSE",
+            "addHeaders": [
+              { "name": "X-Served-By", "value": "gravitee-inventory" },
+              { "name": "X-Gateway-Api", "value": "Inventory API" }
+            ]
+          }
+        } ]
+      } ],
+      "properties": [],
+      "resources": [],
+      "path_mappings": {},
+      "response_templates": {}
+    }

@@ -1,0 +1,44 @@
+# Solace PubSub+ Standard (single node). SEMP / Broker Manager UI on :8080 (admin/admin),
+# native SMF v3 messaging on :55555.
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: solace, namespace: messaging, labels: {app: solace}}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector: {matchLabels: {app: solace}}
+  template:
+    metadata: {labels: {app: solace}}
+    spec:
+      containers:
+        - name: solace
+          image: solace/solace-pubsub-standard:10.26.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: username_admin_globalaccesslevel, value: admin}
+            - {name: username_admin_password, value: admin}
+            - {name: system_scaling_maxconnectioncount, value: "100"}
+          ports:
+            - {name: semp, containerPort: 8080}
+            - {name: smf, containerPort: 55555}
+          readinessProbe:
+            tcpSocket: {port: 55555}
+            initialDelaySeconds: 20
+            periodSeconds: 5
+          resources:
+            requests: {cpu: 500m, memory: 1Gi}
+            limits: {memory: 3Gi}
+          volumeMounts:
+            - {name: dshm, mountPath: /dev/shm}
+      volumes:
+        - name: dshm
+          emptyDir: {medium: Memory, sizeLimit: 1Gi}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: solace, namespace: messaging}
+spec:
+  selector: {app: solace}
+  ports:
+    - {name: semp, port: 8080, targetPort: 8080}
+    - {name: smf, port: 55555, targetPort: 55555}
