@@ -1,0 +1,34 @@
+# inventory-api: internal stock reservation service, called by orders-api THROUGH Gravitee (/inventory/reserve).
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: inventory-api, namespace: orders, labels: {app: inventory-api}}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: inventory-api}}
+  template:
+    metadata: {labels: {app: inventory-api}}
+    spec:
+      containers:
+        - name: inventory-api
+          image: inventory-api:1.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: PORT, value: "8081"}
+            - {name: INVENTORY_API_KEY, value: "orders-internal-key-v1"}
+          ports:
+            - {name: http, containerPort: 8081}
+          readinessProbe:
+            httpGet: {path: /health, port: 8081}
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          resources:
+            requests: {cpu: 50m, memory: 64Mi}
+            limits: {memory: 256Mi}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: inventory-api, namespace: orders}
+spec:
+  selector: {app: inventory-api}
+  ports:
+    - {name: http, port: 8081, targetPort: 8081}

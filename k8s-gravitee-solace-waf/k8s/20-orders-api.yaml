@@ -1,0 +1,53 @@
+# orders-api: Spring Boot 3.3 / Java 21.
+# Dependencies:
+#   - PostgreSQL (data/postgres:5432) for order persistence (INSERT/SELECT/UPDATE)
+#   - Redis (data/redis:6379) for POST idempotency (SET NX EX) and GET cache
+#   - Gravitee APIM -> inventory-api (gateway/gravitee-gateway:82/inventory/reserve)
+#   - ModSecurity / OWASP CRS WAF -> payments-api (ingress-nginx-controller:80, Host: payments.partner.local)
+#   - Solace PubSub+ native SMF v3 (messaging/solace:55555): publish orders/created + subscribe/consume orders/cancelled
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: orders-api, namespace: orders, labels: {app: orders-api}}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: orders-api}}
+  template:
+    metadata: {labels: {app: orders-api}}
+    spec:
+      containers:
+        - name: orders-api
+          image: orders-api:1.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: SPRING_DATASOURCE_URL, value: "jdbc:postgresql://postgres.data.svc.cluster.local:5432/orders?sslmode=disable&prepareThreshold=0"}
+            - {name: SPRING_DATASOURCE_USERNAME, value: "orders"}
+            - {name: SPRING_DATASOURCE_PASSWORD, value: "orderspass"}
+            - {name: REDIS_HOST, value: "redis.data.svc.cluster.local"}
+            - {name: REDIS_PORT, value: "6379"}
+            - {name: INVENTORY_URL, value: "http://gravitee-gateway.gateway.svc.cluster.local:82/inventory/reserve"}
+            - {name: INVENTORY_API_KEY, value: "orders-internal-key-v1"}
+            - {name: PAYMENTS_URL, value: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/payments/authorize"}
+            - {name: PAYMENTS_HOST_HEADER, value: "payments.partner.local"}
+            - {name: SOLACE_SMF_HOST, value: "tcp://solace.messaging.svc.cluster.local:55555"}
+            - {name: SOLACE_SMF_VPN, value: "default"}
+            - {name: SOLACE_SMF_USERNAME, value: "default"}
+            - {name: SOLACE_SMF_PASSWORD, value: ""}
+            - {name: ORDERS_TOPIC, value: "orders/created"}
+            - {name: ORDERS_CANCEL_TOPIC, value: "orders/cancelled"}
+          ports:
+            - {name: http, containerPort: 8080}
+          readinessProbe:
+            httpGet: {path: /health, port: 8080}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 250m, memory: 384Mi}
+            limits: {memory: 1Gi}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: orders-api, namespace: orders}
+spec:
+  selector: {app: orders-api}
+  ports:
+    - {name: http, port: 8080, targetPort: 8080}

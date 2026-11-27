@@ -1,0 +1,33 @@
+# payments-api: partner payment authorization service, called by orders-api THROUGH the ModSecurity / OWASP CRS WAF Ingress.
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: payments-api, namespace: orders, labels: {app: payments-api}}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: payments-api}}
+  template:
+    metadata: {labels: {app: payments-api}}
+    spec:
+      containers:
+        - name: payments-api
+          image: payments-api:1.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: PORT, value: "8082"}
+          ports:
+            - {name: http, containerPort: 8082}
+          readinessProbe:
+            httpGet: {path: /health, port: 8082}
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          resources:
+            requests: {cpu: 50m, memory: 64Mi}
+            limits: {memory: 256Mi}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: payments-api, namespace: orders}
+spec:
+  selector: {app: payments-api}
+  ports:
+    - {name: http, port: 8082, targetPort: 8082}

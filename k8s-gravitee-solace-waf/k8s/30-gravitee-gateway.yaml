@@ -1,0 +1,62 @@
+# Gravitee APIM Gateway 4.9, DB-less: no MongoDB/JDBC (management.type=none). The API definition
+# comes from a Kubernetes ConfigMap (labels managed-by=gravitee.io, gio-type=apidefinitions.gravitee.io),
+# the same format the Gravitee Kubernetes Operator writes, watched by the gateway's kubernetes sync.
+apiVersion: v1
+kind: ServiceAccount
+metadata: {name: gravitee-gateway, namespace: gateway}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: {name: gravitee-gateway, namespace: gateway}
+rules:
+  - apiGroups: [""]
+    resources: [configmaps, secrets]
+    verbs: [get, list, watch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: {name: gravitee-gateway, namespace: gateway}
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: Role, name: gravitee-gateway}
+subjects:
+  - {kind: ServiceAccount, name: gravitee-gateway, namespace: gateway}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: gravitee-gateway, namespace: gateway, labels: {app: gravitee-gateway}}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: gravitee-gateway}}
+  template:
+    metadata: {labels: {app: gravitee-gateway}}
+    spec:
+      serviceAccountName: gravitee-gateway
+      containers:
+        - name: gateway
+          image: graviteeio/apim-gateway:4.9.42
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: gravitee_management_type, value: "none"}
+            - {name: gravitee_ratelimit_type, value: "none"}
+            - {name: gravitee_services_sync_repository_enabled, value: "false"}
+            - {name: gravitee_services_sync_kubernetes_enabled, value: "true"}
+            - {name: gravitee_reporters_elasticsearch_enabled, value: "false"}
+            - {name: gravitee_services_heartbeat_enabled, value: "false"}
+            - {name: GIO_MIN_MEM, value: "256m"}
+            - {name: GIO_MAX_MEM, value: "512m"}
+          ports:
+            - {name: http, containerPort: 8082}
+          readinessProbe:
+            tcpSocket: {port: 8082}
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          resources:
+            requests: {cpu: 250m, memory: 512Mi}
+            limits: {memory: 1Gi}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: gravitee-gateway, namespace: gateway}
+spec:
+  selector: {app: gravitee-gateway}
+  ports:
+    - {name: http, port: 82, targetPort: 8082}

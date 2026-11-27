@@ -1,0 +1,15 @@
+# Edge: client -> ingress-nginx (ModSecurity / OWASP CRS, blocking) -> Gravitee gateway.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: edge
+  namespace: gateway
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /orders
+            pathType: Prefix
+            backend:
+              service: {name: gravitee-gateway, port: {number: 82}}

@@ -1,0 +1,12 @@
+--- a/src/main/java/io/keploy/demo/orders/OrderController.java
++++ b/src/main/java/io/keploy/demo/orders/OrderController.java
+@@ -208,7 +208,8 @@
+         log.info("cancelled order {} via {} (reason={}, updated={})", id, via, reason, updated);
+         Map<String, Object> resp = new LinkedHashMap<>();
+         resp.put("orderId", id);
+-        resp.put("status", "CANCELLED");
++        // 2.2 (intended): a cancelled order now waits for its refund to settle.
++        resp.put("status", "REFUND_PENDING");
+         resp.put("reason", reason);
+         resp.put("consumedVia", via);
+         resp.put("updated", updated);

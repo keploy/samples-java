@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata: {name: messaging}
+---
+apiVersion: v1
+kind: Namespace
+metadata: {name: orders}
+---
+apiVersion: v1
+kind: Namespace
+metadata: {name: gateway}
+---
+apiVersion: v1
+kind: Namespace
+metadata: {name: data}

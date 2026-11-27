@@ -1,0 +1,30 @@
+# WAF: ingress-nginx's ModSecurity v3 + OWASP Core Rule Set, in BLOCKING mode (SecRuleEngine On).
+# Applied over the stock ingress-nginx ConfigMap; protects BOTH:
+#   1. Inbound /orders -> Gravitee -> orders-api (OWASP CRS PL1, anomaly threshold 5)
+#   2. Outbound payments.partner.local -> payments-api (stricter partner PCI WAF: CRS PL2, threshold 3)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+data:
+  enable-modsecurity: "true"
+  enable-owasp-modsecurity-crs: "true"
+  # The snippet replaces the stock modsecurity.conf, so include it first (its JSON/XML body
+  # processors, rule 200001, make the CRS inspect JSON bodies), then switch to blocking.
+  modsecurity-snippet: |
+    Include /etc/nginx/modsecurity/modsecurity.conf
+    SecRuleEngine On
+    SecRequestBodyAccess On
+    SecAuditEngine RelevantOnly
+    SecAuditLogParts ABIJDEFHZ
+    SecAuditLogType Serial
+    SecAuditLog /dev/stdout
+    SecAuditLogFormat JSON
+    SecRule REQUEST_HEADERS:Host "@streq payments.partner.local" "id:100900,phase:1,pass,nolog,t:none,setvar:tx.blocking_paranoia_level=2,setvar:tx.inbound_anomaly_score_threshold=3"
+  log-format-escape-json: "true"

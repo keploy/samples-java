@@ -1,0 +1,68 @@
+# PostgreSQL 16 (official image) as the order store for orders-api.
+# Schema and two seed orders (ORD-SEED-1001, ORD-SEED-1002) are loaded on first boot.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init
+  namespace: data
+data:
+  01-init.sql: |
+    CREATE TABLE IF NOT EXISTS orders (
+      order_id      TEXT PRIMARY KEY,
+      status        TEXT NOT NULL,
+      customer_id   TEXT NOT NULL,
+      reference     TEXT NOT NULL UNIQUE,
+      items_json    TEXT NOT NULL,
+      total_amount  NUMERIC(12,2) NOT NULL,
+      currency      TEXT NOT NULL,
+      channel       TEXT NOT NULL,
+      payment_id    TEXT NOT NULL,
+      note          TEXT NOT NULL DEFAULT 'standard'
+    );
+    INSERT INTO orders (order_id, status, customer_id, reference, items_json, total_amount, currency, channel, payment_id, note)
+    VALUES
+      ('ORD-SEED-1001', 'CREATED', 'C-0901', 'PO-2026-0001', '[{"sku":"SKU-LAPTOP-14","quantity":1,"unitPrice":1299.00}]', 1299.00, 'EUR', 'web', 'PAY-SEED-1001', 'seed order'),
+      ('ORD-SEED-1002', 'CREATED', 'C-0902', 'PO-2026-0002', '[{"sku":"SKU-MONITOR-27","quantity":2,"unitPrice":349.99}]', 699.98, 'GBP', 'web', 'PAY-SEED-1002', 'seed order')
+    ON CONFLICT (order_id) DO NOTHING;
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: postgres, namespace: data, labels: {app: postgres}}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector: {matchLabels: {app: postgres}}
+  template:
+    metadata: {labels: {app: postgres}}
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16.16-alpine
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: POSTGRES_DB, value: orders}
+            - {name: POSTGRES_USER, value: orders}
+            - {name: POSTGRES_PASSWORD, value: orderspass}
+            - {name: POSTGRES_INITDB_ARGS, value: "--auth-host=md5"}
+          ports:
+            - {name: pg, containerPort: 5432}
+          readinessProbe:
+            exec: {command: ["pg_isready", "-U", "orders", "-d", "orders"]}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests: {cpu: 100m, memory: 128Mi}
+            limits: {memory: 512Mi}
+          volumeMounts:
+            - {name: init, mountPath: /docker-entrypoint-initdb.d}
+      volumes:
+        - name: init
+          configMap: {name: postgres-init}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: postgres, namespace: data}
+spec:
+  selector: {app: postgres}
+  ports:
+    - {name: pg, port: 5432, targetPort: 5432}

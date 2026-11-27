@@ -1,0 +1,16 @@
+# Outbound WAF-fronted partner API: orders-api -> ingress-nginx (ModSecurity / OWASP CRS PL2) -> payments-api.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: payments-waf
+  namespace: orders
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: payments.partner.local
+      http:
+        paths:
+          - path: /payments
+            pathType: Prefix
+            backend:
+              service: {name: payments-api, port: {number: 8082}}
